@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   fetchMyAssessments,
-  getReportPdfUrl,
   isLoggedIn,
   type AssessmentSummary,
 } from "@/lib/api";
@@ -155,14 +154,12 @@ export default function DashboardPage() {
                   </Link>
                 )}
                 {a.completed && (
-                  <a
-                    href={getReportPdfUrl(a.id)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href={`/report/${a.id}/preview`}
                     className="text-sm font-medium text-emerald-600 hover:text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-lg transition-colors"
                   >
-                    Download PDF
-                  </a>
+                    Preview PDF
+                  </Link>
                 )}
                 {!a.completed && (
                   <Link

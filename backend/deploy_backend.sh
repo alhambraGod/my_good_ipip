@@ -45,10 +45,17 @@ fi
 echo "[INFO] Activating conda env '${ENV_NAME}'..."
 conda activate "$ENV_NAME"
 
+# Resolve conda env bin directory for reliable execution
+CONDA_BIN="$(conda info --base)/envs/${ENV_NAME}/bin"
+if [ ! -d "$CONDA_BIN" ]; then
+    echo "[ERROR] Conda env bin not found at $CONDA_BIN"
+    exit 1
+fi
+
 # --- Install dependencies ---
 cd "$SCRIPT_DIR"
 echo "[INFO] Installing Python dependencies..."
-pip install -r requirements.txt
+"$CONDA_BIN/pip" install -r requirements.txt
 
 # --- Generate .env from central config ---
 echo "[INFO] Loading env from $ENV_FILE"
@@ -70,8 +77,8 @@ echo ""
 
 if [ "$APP_ENV" = "dev" ]; then
     echo "[INFO] Dev mode: hot reload ENABLED"
-    uvicorn main:app --host 0.0.0.0 --port 3001 --reload
+    "$CONDA_BIN/uvicorn" main:app --host 0.0.0.0 --port 3001 --reload
 else
     echo "[INFO] $APP_ENV mode: hot reload DISABLED (restart to apply changes)"
-    uvicorn main:app --host 0.0.0.0 --port 3001 --workers 2
+    "$CONDA_BIN/uvicorn" main:app --host 0.0.0.0 --port 3001 --workers 2
 fi

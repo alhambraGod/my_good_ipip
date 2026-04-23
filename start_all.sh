@@ -42,13 +42,20 @@ fi
 
 conda activate "$ENV_NAME"
 
+# Resolve conda env bin directory for reliable execution
+CONDA_BIN="$(conda info --base)/envs/${ENV_NAME}/bin"
+if [ ! -d "$CONDA_BIN" ]; then
+    echo "[ERROR] Conda env bin not found at $CONDA_BIN"
+    exit 1
+fi
+
 # WeasyPrint system library path (macOS Homebrew)
 if [ -d "/opt/homebrew/lib" ]; then
     export DYLD_LIBRARY_PATH="/opt/homebrew/lib:${DYLD_LIBRARY_PATH:-}"
 fi
 
 cd "$ROOT_DIR/backend"
-pip install -q -r requirements.txt
+"$CONDA_BIN/pip" install -q -r requirements.txt
 
 # Generate backend .env from central config
 grep -v '^#' "$ENV_FILE" | grep -v '^$' | grep -v '^NEXT_PUBLIC_' > "$ROOT_DIR/backend/.env"
@@ -57,10 +64,10 @@ echo "[INFO] Generated backend/.env for [$APP_ENV]"
 # Start backend in background
 if [ "$APP_ENV" = "dev" ]; then
     echo "[INFO] Backend starting with hot reload..."
-    uvicorn main:app --host 0.0.0.0 --port 3001 --reload &
+    "$CONDA_BIN/uvicorn" main:app --host 0.0.0.0 --port 3001 --reload &
 else
     echo "[INFO] Backend starting without hot reload (restart to apply changes)..."
-    uvicorn main:app --host 0.0.0.0 --port 3001 --workers 2 &
+    "$CONDA_BIN/uvicorn" main:app --host 0.0.0.0 --port 3001 --workers 2 &
 fi
 BACKEND_PID=$!
 
