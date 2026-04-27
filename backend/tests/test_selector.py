@@ -24,13 +24,13 @@ def test_select_45_includes_all_static_24_riasec():
 
 def test_select_45_has_16_dynamic_picks():
     qs = select_45_questions(demographic_answers={"DEM_STAGE": "student"}, seed="test-seed-4")
-    interest_picks = [q for q in qs if q.id.startswith("INT_") or q.id.startswith("IPIP_")]
+    interest_picks = [q for q in qs if q.id.startswith("INT_")]
     assert len(interest_picks) == 16
 
 
 def test_select_45_ocean_coverage():
     qs = select_45_questions(demographic_answers={"DEM_STAGE": "founder"}, seed="test-seed-5")
-    interest_picks = [q for q in qs if q.id.startswith("INT_") or q.id.startswith("IPIP_")]
+    interest_picks = [q for q in qs if q.id.startswith("INT_")]
     by_dim: dict[str, int] = {}
     for q in interest_picks:
         by_dim[q.dimension] = by_dim.get(q.dimension, 0) + 1
@@ -52,8 +52,23 @@ def test_demographic_first_then_interleaved():
     # Last 40 should NOT be all RIASEC then all interest — must be interleaved
     last_40 = qs[5:]
     riasec_idx = [i for i, q in enumerate(last_40) if q.id.startswith("RIASEC_")]
-    interest_idx = [i for i, q in enumerate(last_40) if q.id.startswith("INT_") or q.id.startswith("IPIP_")]
+    interest_idx = [i for i, q in enumerate(last_40) if q.id.startswith("INT_")]
     assert riasec_idx, "must have RIASEC items in last 40"
     assert interest_idx, "must have interest items in last 40"
     # Interleaved means at least one interest item appears before some RIASEC item AND vice versa
     assert max(riasec_idx) > min(interest_idx), "RIASEC and interest items should be interleaved"
+
+
+def test_select_45_ocean_dims_dispersed_not_clustered():
+    """Different seeds should produce different OCEAN orders within the interest block.
+
+    Guards against accidentally removing the per-seed shuffle of the interest block
+    (which prevents Neuroticism items always landing at end-of-test).
+    """
+    a = select_45_questions(demographic_answers={"DEM_STAGE": "experienced"}, seed="seed-A")
+    b = select_45_questions(demographic_answers={"DEM_STAGE": "experienced"}, seed="seed-B")
+
+    a_dims = [q.dimension for q in a if q.id.startswith("INT_")]
+    b_dims = [q.dimension for q in b if q.id.startswith("INT_")]
+
+    assert a_dims != b_dims, "different seeds must produce different INT-dim orders (OCEAN dispersion)"

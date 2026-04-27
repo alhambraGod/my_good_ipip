@@ -25,7 +25,14 @@ def _weighted_sample_for_dim(
     profile_tags: list[str],
     rng: random.Random,
 ) -> list[Question]:
-    """Pick `n` items from `pool` matching dimension `dim`, weighted by profile-tag overlap."""
+    """Pick `n` items from `pool` matching dimension `dim`, weighted by profile-tag overlap.
+
+    Strategy: rank-based with rng tiebreaker (deterministic top-N), NOT softmax-style
+    probabilistic. A 1-tag-match item always beats a 0-tag-match item; ties broken
+    randomly per the seeded RNG. To switch to probabilistic weighting (where high-match
+    is more likely but low-match is still possible), use weighted sampling without
+    replacement instead.
+    """
     candidates = [q for q in pool if q.dimension == dim]
     if len(candidates) < n:
         raise ValueError(f"Pool has only {len(candidates)} items for dimension {dim}, need {n}")
@@ -68,24 +75,27 @@ def derive_interleaved_order(
     """Interleave RIASEC and interest blocks so users don't see homogeneous chunks.
 
     Pattern: RRRII repeating — alternates 3 RIASEC + 2 interest matching the 24:16 ratio.
-    Within each block, original order is preserved.
+    RIASEC block keeps its R-I-A-S-E-C type order (locked by Task 4 invariant).
+    Interest block is shuffled per seed to prevent OCEAN clustering by test position
+    (Neuroticism items would otherwise always land at the back, risking late-test
+    fatigue bias on emotionally-heavy self-report).
     """
-    # The seed argument is reserved for future per-user shuffle within blocks (currently unused).
-    _ = seed
+    rng = random.Random(f"{seed}::interleave")
+    block_interest = list(block_interest)
+    rng.shuffle(block_interest)
 
     riasec_iter = iter(block_riasec)
     interest_iter = iter(block_interest)
 
+    r_count = i_count = 0
     pattern: list[str] = []
-    while len(pattern) < (len(block_riasec) + len(block_interest)):
-        if pattern.count("R") < len(block_riasec):
-            for _ in range(3):
-                if pattern.count("R") < len(block_riasec):
-                    pattern.append("R")
-        if pattern.count("I") < len(block_interest):
-            for _ in range(2):
-                if pattern.count("I") < len(block_interest):
-                    pattern.append("I")
+    while r_count < len(block_riasec) or i_count < len(block_interest):
+        for _ in range(min(3, len(block_riasec) - r_count)):
+            pattern.append("R")
+            r_count += 1
+        for _ in range(min(2, len(block_interest) - i_count)):
+            pattern.append("I")
+            i_count += 1
 
     interleaved: list[Question] = []
     for kind in pattern:
