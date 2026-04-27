@@ -8,7 +8,7 @@ from pathlib import Path
 
 from questions.models import Instrument, Question, ResponseType
 
-RIASEC_TYPES = ["R", "I", "A", "S", "E", "C"]
+RIASEC_TYPES: tuple[str, ...] = ("R", "I", "A", "S", "E", "C")
 
 _HERE = Path(__file__).resolve().parent
 _BANK_PATH = _HERE.parent.parent / "docs" / "Holland_RIASEC_60_questionbank.json"
@@ -27,7 +27,7 @@ def load_riasec_questions() -> list[Question]:
                 text_en=it["text_en"],
                 instrument=Instrument.RIASEC,
                 dimension=it["type"],
-                reverse=(it.get("keyed", "+") == "-"),
+                reverse=(it.get("keyed", "+") == "-"),  # Holland items conventionally all "+"; default is defensive
                 response_type=ResponseType.LIKERT_5,
                 role="core",
                 tags=["holland", "career"],

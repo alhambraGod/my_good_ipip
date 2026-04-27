@@ -8,7 +8,7 @@ from pathlib import Path
 
 from questions.models import Instrument, Question, ResponseType
 
-OCEAN_DOMAINS = ["openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism"]
+OCEAN_DOMAINS: tuple[str, ...] = ("openness", "conscientiousness", "extraversion", "agreeableness", "neuroticism")
 DOMAIN_LETTER_TO_NAME = {"O": "openness", "C": "conscientiousness", "E": "extraversion", "A": "agreeableness", "N": "neuroticism"}
 
 _HERE = Path(__file__).resolve().parent
@@ -28,7 +28,7 @@ def load_ipip_questions() -> list[Question]:
                 text_en=it["text_en"],
                 instrument=Instrument.IPIP,
                 dimension=DOMAIN_LETTER_TO_NAME[it["domain"]],
-                reverse=(it.get("keyed", "+") == "-"),
+                reverse=(it["keyed"] == "-"),  # explicit KeyError if upstream bank loses the field
                 response_type=ResponseType.LIKERT_5,
                 facet=it["facet"],
                 role="core",

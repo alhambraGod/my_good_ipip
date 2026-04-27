@@ -1,6 +1,7 @@
 """tests/test_question_loaders.py"""
-import pytest
-from questions.models import Question, Instrument, ResponseType
+from questions.holland_riasec import RIASEC_TYPES, load_riasec_questions
+from questions.ipip_neo import OCEAN_DOMAINS, load_ipip_questions
+from questions.models import Instrument, Question, ResponseType
 
 
 def test_question_construction():
@@ -17,9 +18,6 @@ def test_question_construction():
     assert q.weight == 1.0  # default
 
 
-from questions.holland_riasec import load_riasec_questions, RIASEC_TYPES
-
-
 def test_load_riasec_60():
     qs = load_riasec_questions()
     assert len(qs) == 60, f"expected 60 RIASEC items, got {len(qs)}"
@@ -34,9 +32,6 @@ def test_load_riasec_60():
     # ID format: RIASEC_<raw_json_id> e.g. RIASEC_R01
     for q in qs:
         assert q.id.startswith("RIASEC_"), f"id {q.id} should start with RIASEC_"
-
-
-from questions.ipip_neo import load_ipip_questions, OCEAN_DOMAINS
 
 
 def test_load_ipip_120():
