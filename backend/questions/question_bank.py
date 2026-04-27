@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import warnings
 
-from questions.ipip_neo import OCEAN_DOMAINS as DIMENSIONS  # re-export
+from questions.ipip_neo import OCEAN_DOMAINS as DIMENSIONS, load_ipip_questions  # re-export
 
 _DEPRECATION_NOTICE = (
     "questions.question_bank.* is deprecated. "
@@ -38,7 +38,7 @@ def get_question_map() -> dict[str, dict]:
 def get_question_by_ids(ids: list[str]) -> list[dict]:
     """DEPRECATED. Resolves IDs against the legacy IPIP pool."""
     warnings.warn(_DEPRECATION_NOTICE, DeprecationWarning, stacklevel=2)
-    qmap = get_question_map()
+    qmap = {q["id"]: q for q in _build_legacy_dict_pool()}
     return [qmap[qid] for qid in ids if qid in qmap]
 
 
@@ -53,9 +53,16 @@ def _build_legacy_dict_pool() -> list[dict]:
 
     Legacy shape per item:
       {"id", "text", "dimension", "reverse", "facet", "scenes", "role", "difficulty", "tags", "language"}
-    """
-    from questions.ipip_neo import load_ipip_questions
 
+    SEMANTIC DRIFT — v2 fields that no longer carry their original meaning:
+      - id: v2 used "O1"/"C21"; v3 returns "IPIP_N1_1"/"IPIP_O6_4". Stored v2 IDs WILL NOT resolve.
+      - role: v2 had {core, scene, reverse}; v3 always "core". scene/reverse selection logic in
+              personalization.py silently no-ops via fallback.
+      - scenes: v2 had per-item tags; v3 returns []. Scene-weighted sorting no-ops.
+      - tags: v2 was per-item; v3 returns uniform ["ipip", "ocean"]. Tag weighting no-ops.
+
+    This is intentional for Phase 1. Phase 3 rewrites both callers to use the new package directly.
+    """
     out: list[dict] = []
     for q in load_ipip_questions():
         out.append({
