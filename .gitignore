@@ -101,3 +101,6 @@ temp/
 
 # Misc
 .turbo/
+
+# Brainstorming companion
+.superpowers/

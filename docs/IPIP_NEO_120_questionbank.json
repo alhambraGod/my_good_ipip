@@ -1,0 +1,2025 @@
+{
+  "metadata": {
+    "name": "IPIP-NEO-120",
+    "full_name_en": "International Personality Item Pool — NEO 120-Item Version",
+    "full_name_zh": "国际人格项目量表 — 大五人格120题版",
+    "version": "1.0",
+    "source": "IPIP (ipip.ori.org) — Public Domain",
+    "item_count": 120,
+    "domains_count": 5,
+    "facets_per_domain": 6,
+    "items_per_facet": 4,
+    "scale_type": "likert_5",
+    "scale_options": [
+      {
+        "value": 1,
+        "label_zh": "完全不符合",
+        "label_en": "Very Inaccurate"
+      },
+      {
+        "value": 2,
+        "label_zh": "比较不符合",
+        "label_en": "Moderately Inaccurate"
+      },
+      {
+        "value": 3,
+        "label_zh": "不确定",
+        "label_en": "Neither Accurate Nor Inaccurate"
+      },
+      {
+        "value": 4,
+        "label_zh": "比较符合",
+        "label_en": "Moderately Accurate"
+      },
+      {
+        "value": 5,
+        "label_zh": "完全符合",
+        "label_en": "Very Accurate"
+      }
+    ],
+    "scoring_note": "For '+' keyed items, score = raw value (1-5). For '-' keyed items (reverse), score = 6 - raw value. Sum all item scores per facet (range 4-20), sum all facet scores per domain (range 24-120).",
+    "domains": {
+      "N": {
+        "name_en": "Neuroticism",
+        "name_zh": "神经质（情绪不稳定性）",
+        "description_zh": "衡量情绪不稳定、焦虑、脆弱的倾向。高分者容易体验负面情绪；低分者情绪稳定、抗压性强。",
+        "facets": {
+          "N1": {
+            "name_en": "Anxiety",
+            "name_zh": "焦虑"
+          },
+          "N2": {
+            "name_en": "Anger",
+            "name_zh": "愤怒"
+          },
+          "N3": {
+            "name_en": "Depression",
+            "name_zh": "抑郁"
+          },
+          "N4": {
+            "name_en": "Self-Consciousness",
+            "name_zh": "自我意识"
+          },
+          "N5": {
+            "name_en": "Immoderation",
+            "name_zh": "冲动"
+          },
+          "N6": {
+            "name_en": "Vulnerability",
+            "name_zh": "脆弱性"
+          }
+        }
+      },
+      "E": {
+        "name_en": "Extraversion",
+        "name_zh": "外倾性",
+        "description_zh": "衡量社交活跃度和从外部世界获取能量的倾向。高分者外向、热情；低分者内向、享受独处。",
+        "facets": {
+          "E1": {
+            "name_en": "Friendliness",
+            "name_zh": "友善性"
+          },
+          "E2": {
+            "name_en": "Gregariousness",
+            "name_zh": "群体性"
+          },
+          "E3": {
+            "name_en": "Assertiveness",
+            "name_zh": "自信果断"
+          },
+          "E4": {
+            "name_en": "Activity Level",
+            "name_zh": "活跃性"
+          },
+          "E5": {
+            "name_en": "Excitement-Seeking",
+            "name_zh": "寻求刺激"
+          },
+          "E6": {
+            "name_en": "Cheerfulness",
+            "name_zh": "积极情绪"
+          }
+        }
+      },
+      "O": {
+        "name_en": "Openness to Experience",
+        "name_zh": "开放性",
+        "description_zh": "衡量对新体验、抽象思维和创造力的开放程度。高分者好奇、富于想象；低分者务实、偏好常规。",
+        "facets": {
+          "O1": {
+            "name_en": "Imagination",
+            "name_zh": "想象力"
+          },
+          "O2": {
+            "name_en": "Artistic Interests",
+            "name_zh": "艺术兴趣"
+          },
+          "O3": {
+            "name_en": "Emotionality",
+            "name_zh": "情感体验"
+          },
+          "O4": {
+            "name_en": "Adventurousness",
+            "name_zh": "探索性"
+          },
+          "O5": {
+            "name_en": "Intellect",
+            "name_zh": "智识"
+          },
+          "O6": {
+            "name_en": "Liberalism",
+            "name_zh": "思想开放"
+          }
+        }
+      },
+      "A": {
+        "name_en": "Agreeableness",
+        "name_zh": "宜人性",
+        "description_zh": "衡量与他人合作、体谅他人的倾向。高分者信任、利他；低分者竞争性强、直接。",
+        "facets": {
+          "A1": {
+            "name_en": "Trust",
+            "name_zh": "信任"
+          },
+          "A2": {
+            "name_en": "Morality",
+            "name_zh": "道德感"
+          },
+          "A3": {
+            "name_en": "Altruism",
+            "name_zh": "利他性"
+          },
+          "A4": {
+            "name_en": "Cooperation",
+            "name_zh": "合作性"
+          },
+          "A5": {
+            "name_en": "Modesty",
+            "name_zh": "谦逊"
+          },
+          "A6": {
+            "name_en": "Sympathy",
+            "name_zh": "同理心"
+          }
+        }
+      },
+      "C": {
+        "name_en": "Conscientiousness",
+        "name_zh": "尽责性",
+        "description_zh": "衡量自律、有计划、追求成就的倾向。高分者自律、可靠；低分者灵活、自发性强。预测工作绩效最强的单一维度。",
+        "facets": {
+          "C1": {
+            "name_en": "Self-Efficacy",
+            "name_zh": "自我效能"
+          },
+          "C2": {
+            "name_en": "Orderliness",
+            "name_zh": "条理性"
+          },
+          "C3": {
+            "name_en": "Dutifulness",
+            "name_zh": "尽职性"
+          },
+          "C4": {
+            "name_en": "Achievement-Striving",
+            "name_zh": "成就追求"
+          },
+          "C5": {
+            "name_en": "Self-Discipline",
+            "name_zh": "自律性"
+          },
+          "C6": {
+            "name_en": "Cautiousness",
+            "name_zh": "谨慎性"
+          }
+        }
+      }
+    },
+    "scoring": {
+      "reverse_score_formula": "reversed_score = 6 - raw_score",
+      "reverse_items": [
+        "N1_4",
+        "N2_4",
+        "N3_4",
+        "N4_4",
+        "N5_3",
+        "N5_4",
+        "N6_4",
+        "E1_4",
+        "E2_3",
+        "E2_4",
+        "E3_4",
+        "E4_3",
+        "E4_4",
+        "E5_4",
+        "E6_4",
+        "O1_4",
+        "O2_3",
+        "O2_4",
+        "O3_3",
+        "O3_4",
+        "O4_3",
+        "O4_4",
+        "O5_3",
+        "O5_4",
+        "O6_3",
+        "O6_4",
+        "A1_3",
+        "A1_4",
+        "A2_3",
+        "A2_4",
+        "A3_3",
+        "A3_4",
+        "A4_3",
+        "A4_4",
+        "A5_3",
+        "A5_4",
+        "A6_3",
+        "A6_4",
+        "C1_4",
+        "C2_3",
+        "C2_4",
+        "C3_4",
+        "C4_4",
+        "C5_3",
+        "C5_4",
+        "C6_3",
+        "C6_4"
+      ],
+      "domain_items": {
+        "N": [
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4",
+          "N2_1",
+          "N2_2",
+          "N2_3",
+          "N2_4",
+          "N3_1",
+          "N3_2",
+          "N3_3",
+          "N3_4",
+          "N4_1",
+          "N4_2",
+          "N4_3",
+          "N4_4",
+          "N5_1",
+          "N5_2",
+          "N5_3",
+          "N5_4",
+          "N6_1",
+          "N6_2",
+          "N6_3",
+          "N6_4"
+        ],
+        "E": [
+          "E1_1",
+          "E1_2",
+          "E1_3",
+          "E1_4",
+          "E2_1",
+          "E2_2",
+          "E2_3",
+          "E2_4",
+          "E3_1",
+          "E3_2",
+          "E3_3",
+          "E3_4",
+          "E4_1",
+          "E4_2",
+          "E4_3",
+          "E4_4",
+          "E5_1",
+          "E5_2",
+          "E5_3",
+          "E5_4",
+          "E6_1",
+          "E6_2",
+          "E6_3",
+          "E6_4"
+        ],
+        "O": [
+          "O1_1",
+          "O1_2",
+          "O1_3",
+          "O1_4",
+          "O2_1",
+          "O2_2",
+          "O2_3",
+          "O2_4",
+          "O3_1",
+          "O3_2",
+          "O3_3",
+          "O3_4",
+          "O4_1",
+          "O4_2",
+          "O4_3",
+          "O4_4",
+          "O5_1",
+          "O5_2",
+          "O5_3",
+          "O5_4",
+          "O6_1",
+          "O6_2",
+          "O6_3",
+          "O6_4"
+        ],
+        "A": [
+          "A1_1",
+          "A1_2",
+          "A1_3",
+          "A1_4",
+          "A2_1",
+          "A2_2",
+          "A2_3",
+          "A2_4",
+          "A3_1",
+          "A3_2",
+          "A3_3",
+          "A3_4",
+          "A4_1",
+          "A4_2",
+          "A4_3",
+          "A4_4",
+          "A5_1",
+          "A5_2",
+          "A5_3",
+          "A5_4",
+          "A6_1",
+          "A6_2",
+          "A6_3",
+          "A6_4"
+        ],
+        "C": [
+          "C1_1",
+          "C1_2",
+          "C1_3",
+          "C1_4",
+          "C2_1",
+          "C2_2",
+          "C2_3",
+          "C2_4",
+          "C3_1",
+          "C3_2",
+          "C3_3",
+          "C3_4",
+          "C4_1",
+          "C4_2",
+          "C4_3",
+          "C4_4",
+          "C5_1",
+          "C5_2",
+          "C5_3",
+          "C5_4",
+          "C6_1",
+          "C6_2",
+          "C6_3",
+          "C6_4"
+        ]
+      },
+      "facet_items": {
+        "N1": [
+          "N1_1",
+          "N1_2",
+          "N1_3",
+          "N1_4"
+        ],
+        "N2": [
+          "N2_1",
+          "N2_2",
+          "N2_3",
+          "N2_4"
+        ],
+        "N3": [
+          "N3_1",
+          "N3_2",
+          "N3_3",
+          "N3_4"
+        ],
+        "N4": [
+          "N4_1",
+          "N4_2",
+          "N4_3",
+          "N4_4"
+        ],
+        "N5": [
+          "N5_1",
+          "N5_2",
+          "N5_3",
+          "N5_4"
+        ],
+        "N6": [
+          "N6_1",
+          "N6_2",
+          "N6_3",
+          "N6_4"
+        ],
+        "E1": [
+          "E1_1",
+          "E1_2",
+          "E1_3",
+          "E1_4"
+        ],
+        "E2": [
+          "E2_1",
+          "E2_2",
+          "E2_3",
+          "E2_4"
+        ],
+        "E3": [
+          "E3_1",
+          "E3_2",
+          "E3_3",
+          "E3_4"
+        ],
+        "E4": [
+          "E4_1",
+          "E4_2",
+          "E4_3",
+          "E4_4"
+        ],
+        "E5": [
+          "E5_1",
+          "E5_2",
+          "E5_3",
+          "E5_4"
+        ],
+        "E6": [
+          "E6_1",
+          "E6_2",
+          "E6_3",
+          "E6_4"
+        ],
+        "O1": [
+          "O1_1",
+          "O1_2",
+          "O1_3",
+          "O1_4"
+        ],
+        "O2": [
+          "O2_1",
+          "O2_2",
+          "O2_3",
+          "O2_4"
+        ],
+        "O3": [
+          "O3_1",
+          "O3_2",
+          "O3_3",
+          "O3_4"
+        ],
+        "O4": [
+          "O4_1",
+          "O4_2",
+          "O4_3",
+          "O4_4"
+        ],
+        "O5": [
+          "O5_1",
+          "O5_2",
+          "O5_3",
+          "O5_4"
+        ],
+        "O6": [
+          "O6_1",
+          "O6_2",
+          "O6_3",
+          "O6_4"
+        ],
+        "A1": [
+          "A1_1",
+          "A1_2",
+          "A1_3",
+          "A1_4"
+        ],
+        "A2": [
+          "A2_1",
+          "A2_2",
+          "A2_3",
+          "A2_4"
+        ],
+        "A3": [
+          "A3_1",
+          "A3_2",
+          "A3_3",
+          "A3_4"
+        ],
+        "A4": [
+          "A4_1",
+          "A4_2",
+          "A4_3",
+          "A4_4"
+        ],
+        "A5": [
+          "A5_1",
+          "A5_2",
+          "A5_3",
+          "A5_4"
+        ],
+        "A6": [
+          "A6_1",
+          "A6_2",
+          "A6_3",
+          "A6_4"
+        ],
+        "C1": [
+          "C1_1",
+          "C1_2",
+          "C1_3",
+          "C1_4"
+        ],
+        "C2": [
+          "C2_1",
+          "C2_2",
+          "C2_3",
+          "C2_4"
+        ],
+        "C3": [
+          "C3_1",
+          "C3_2",
+          "C3_3",
+          "C3_4"
+        ],
+        "C4": [
+          "C4_1",
+          "C4_2",
+          "C4_3",
+          "C4_4"
+        ],
+        "C5": [
+          "C5_1",
+          "C5_2",
+          "C5_3",
+          "C5_4"
+        ],
+        "C6": [
+          "C6_1",
+          "C6_2",
+          "C6_3",
+          "C6_4"
+        ]
+      },
+      "domain_score_range": {
+        "min": 24,
+        "max": 120
+      },
+      "facet_score_range": {
+        "min": 4,
+        "max": 20
+      },
+      "interpretation": {
+        "percentile_note": "Raw domain scores should be converted to percentiles using normative data for the target population. High score (>60th percentile) = trait present; Low score (<40th percentile) = opposite pole.",
+        "career_relevance": {
+          "C": "Strongest single predictor of job performance across occupations.",
+          "E": "Predicts success in sales, management, and social roles.",
+          "O": "Predicts creativity-dependent roles; inversely related to conventional roles.",
+          "A": "Predicts teamwork and service-oriented performance.",
+          "N": "Inverse predictor for high-stress roles; lower N = better stress resilience."
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "id": "N1_1",
+      "order": 1,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N1",
+      "facet_name_zh": "焦虑",
+      "facet_name_en": "Anxiety",
+      "text_zh": "我经常为各种事情感到担忧。",
+      "text_en": "I worry about things.",
+      "keyed": "+"
+    },
+    {
+      "id": "N1_2",
+      "order": 2,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N1",
+      "facet_name_zh": "焦虑",
+      "facet_name_en": "Anxiety",
+      "text_zh": "我总是预设最坏的结果。",
+      "text_en": "I fear for the worst.",
+      "keyed": "+"
+    },
+    {
+      "id": "N1_3",
+      "order": 3,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N1",
+      "facet_name_zh": "焦虑",
+      "facet_name_en": "Anxiety",
+      "text_zh": "我对很多事情充满疑虑。",
+      "text_en": "I am filled with doubts about things.",
+      "keyed": "+"
+    },
+    {
+      "id": "N1_4",
+      "order": 4,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N1",
+      "facet_name_zh": "焦虑",
+      "facet_name_en": "Anxiety",
+      "text_zh": "我大多数时候都感到放松。",
+      "text_en": "I am relaxed most of the time.",
+      "keyed": "-"
+    },
+    {
+      "id": "N2_1",
+      "order": 5,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N2",
+      "facet_name_zh": "愤怒",
+      "facet_name_en": "Anger",
+      "text_zh": "我很容易感到烦躁。",
+      "text_en": "I get irritated easily.",
+      "keyed": "+"
+    },
+    {
+      "id": "N2_2",
+      "order": 6,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N2",
+      "facet_name_zh": "愤怒",
+      "facet_name_en": "Anger",
+      "text_zh": "我很容易发怒。",
+      "text_en": "I get angry easily.",
+      "keyed": "+"
+    },
+    {
+      "id": "N2_3",
+      "order": 7,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N2",
+      "facet_name_zh": "愤怒",
+      "facet_name_en": "Anger",
+      "text_zh": "我时常会失去耐性。",
+      "text_en": "I lose my temper.",
+      "keyed": "+"
+    },
+    {
+      "id": "N2_4",
+      "order": 8,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N2",
+      "facet_name_zh": "愤怒",
+      "facet_name_en": "Anger",
+      "text_zh": "我很少感到烦躁不安。",
+      "text_en": "I rarely get irritated.",
+      "keyed": "-"
+    },
+    {
+      "id": "N3_1",
+      "order": 9,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N3",
+      "facet_name_zh": "抑郁",
+      "facet_name_en": "Depression",
+      "text_zh": "我经常感到情绪低落。",
+      "text_en": "I often feel blue.",
+      "keyed": "+"
+    },
+    {
+      "id": "N3_2",
+      "order": 10,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N3",
+      "facet_name_zh": "抑郁",
+      "facet_name_en": "Depression",
+      "text_zh": "我有时会感到绝望。",
+      "text_en": "I feel desperate.",
+      "keyed": "+"
+    },
+    {
+      "id": "N3_3",
+      "order": 11,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N3",
+      "facet_name_zh": "抑郁",
+      "facet_name_en": "Depression",
+      "text_zh": "我有时很难集中精力做事。",
+      "text_en": "I find it difficult to get on with my work.",
+      "keyed": "+"
+    },
+    {
+      "id": "N3_4",
+      "order": 12,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N3",
+      "facet_name_zh": "抑郁",
+      "facet_name_en": "Depression",
+      "text_zh": "我对自己感到满意。",
+      "text_en": "I feel comfortable with myself.",
+      "keyed": "-"
+    },
+    {
+      "id": "N4_1",
+      "order": 13,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N4",
+      "facet_name_zh": "自我意识",
+      "facet_name_en": "Self-Consciousness",
+      "text_zh": "我很容易感到尴尬。",
+      "text_en": "I am easily embarrassed.",
+      "keyed": "+"
+    },
+    {
+      "id": "N4_2",
+      "order": 14,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N4",
+      "facet_name_zh": "自我意识",
+      "facet_name_en": "Self-Consciousness",
+      "text_zh": "我觉得主动接触他人很困难。",
+      "text_en": "I find it difficult to approach others.",
+      "keyed": "+"
+    },
+    {
+      "id": "N4_3",
+      "order": 15,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N4",
+      "facet_name_zh": "自我意识",
+      "facet_name_en": "Self-Consciousness",
+      "text_zh": "我害怕成为别人关注的焦点。",
+      "text_en": "I am afraid of drawing attention to myself.",
+      "keyed": "+"
+    },
+    {
+      "id": "N4_4",
+      "order": 16,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N4",
+      "facet_name_zh": "自我意识",
+      "facet_name_en": "Self-Consciousness",
+      "text_zh": "复杂的社交场合不会让我感到困扰。",
+      "text_en": "I am not bothered by difficult social situations.",
+      "keyed": "-"
+    },
+    {
+      "id": "N5_1",
+      "order": 17,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N5",
+      "facet_name_zh": "冲动",
+      "facet_name_en": "Immoderation",
+      "text_zh": "我有时会暴饮暴食或过度消费。",
+      "text_en": "I overindulge in food, shopping, or other pleasures.",
+      "keyed": "+"
+    },
+    {
+      "id": "N5_2",
+      "order": 18,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N5",
+      "facet_name_zh": "冲动",
+      "facet_name_en": "Immoderation",
+      "text_zh": "我难以抵制自己的欲望。",
+      "text_en": "I have trouble resisting my cravings.",
+      "keyed": "+"
+    },
+    {
+      "id": "N5_3",
+      "order": 19,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N5",
+      "facet_name_zh": "冲动",
+      "facet_name_en": "Immoderation",
+      "text_zh": "我能轻松抵制诱惑。",
+      "text_en": "I easily resist temptations.",
+      "keyed": "-"
+    },
+    {
+      "id": "N5_4",
+      "order": 20,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N5",
+      "facet_name_zh": "冲动",
+      "facet_name_en": "Immoderation",
+      "text_zh": "我不会超出自己的承受范围消费。",
+      "text_en": "I do not spend more than I can afford.",
+      "keyed": "-"
+    },
+    {
+      "id": "N6_1",
+      "order": 21,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N6",
+      "facet_name_zh": "脆弱性",
+      "facet_name_en": "Vulnerability",
+      "text_zh": "我很容易感到慌乱。",
+      "text_en": "I panic easily.",
+      "keyed": "+"
+    },
+    {
+      "id": "N6_2",
+      "order": 22,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N6",
+      "facet_name_zh": "脆弱性",
+      "facet_name_en": "Vulnerability",
+      "text_zh": "我容易被各种事情压垮。",
+      "text_en": "I become overwhelmed by events.",
+      "keyed": "+"
+    },
+    {
+      "id": "N6_3",
+      "order": 23,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N6",
+      "facet_name_zh": "脆弱性",
+      "facet_name_en": "Vulnerability",
+      "text_zh": "我有时觉得自己无法应对各种事情。",
+      "text_en": "I feel that I'm unable to deal with things.",
+      "keyed": "+"
+    },
+    {
+      "id": "N6_4",
+      "order": 24,
+      "domain": "N",
+      "domain_name_zh": "神经质（情绪不稳定性）",
+      "facet": "N6",
+      "facet_name_zh": "脆弱性",
+      "facet_name_en": "Vulnerability",
+      "text_zh": "在压力下我能保持冷静。",
+      "text_en": "I remain calm under pressure.",
+      "keyed": "-"
+    },
+    {
+      "id": "E1_1",
+      "order": 25,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E1",
+      "facet_name_zh": "友善性",
+      "facet_name_en": "Friendliness",
+      "text_zh": "我很容易交到朋友。",
+      "text_en": "I make friends easily.",
+      "keyed": "+"
+    },
+    {
+      "id": "E1_2",
+      "order": 26,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E1",
+      "facet_name_zh": "友善性",
+      "facet_name_en": "Friendliness",
+      "text_zh": "我能很快与他人建立亲近感。",
+      "text_en": "I warm up quickly to others.",
+      "keyed": "+"
+    },
+    {
+      "id": "E1_3",
+      "order": 27,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E1",
+      "facet_name_zh": "友善性",
+      "facet_name_en": "Friendliness",
+      "text_zh": "身处人群中我感到自在。",
+      "text_en": "I feel comfortable around people.",
+      "keyed": "+"
+    },
+    {
+      "id": "E1_4",
+      "order": 28,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E1",
+      "facet_name_zh": "友善性",
+      "facet_name_en": "Friendliness",
+      "text_zh": "我不容易被他人了解。",
+      "text_en": "I am hard to get to know.",
+      "keyed": "-"
+    },
+    {
+      "id": "E2_1",
+      "order": 29,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E2",
+      "facet_name_zh": "群体性",
+      "facet_name_en": "Gregariousness",
+      "text_zh": "我喜欢热闹的大型聚会。",
+      "text_en": "I love large parties.",
+      "keyed": "+"
+    },
+    {
+      "id": "E2_2",
+      "order": 30,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E2",
+      "facet_name_zh": "群体性",
+      "facet_name_en": "Gregariousness",
+      "text_zh": "我喜欢身处喧闹热烈的人群中。",
+      "text_en": "I enjoy being part of a loud, rowdy crowd.",
+      "keyed": "+"
+    },
+    {
+      "id": "E2_3",
+      "order": 31,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E2",
+      "facet_name_zh": "群体性",
+      "facet_name_en": "Gregariousness",
+      "text_zh": "我更喜欢独处。",
+      "text_en": "I prefer to be alone.",
+      "keyed": "-"
+    },
+    {
+      "id": "E2_4",
+      "order": 32,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E2",
+      "facet_name_zh": "群体性",
+      "facet_name_en": "Gregariousness",
+      "text_zh": "我会主动回避嘈杂的人群。",
+      "text_en": "I avoid crowds.",
+      "keyed": "-"
+    },
+    {
+      "id": "E3_1",
+      "order": 33,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E3",
+      "facet_name_zh": "自信果断",
+      "facet_name_en": "Assertiveness",
+      "text_zh": "我习惯掌控局面。",
+      "text_en": "I take charge.",
+      "keyed": "+"
+    },
+    {
+      "id": "E3_2",
+      "order": 34,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E3",
+      "facet_name_zh": "自信果断",
+      "facet_name_en": "Assertiveness",
+      "text_zh": "我性格坚定，敢于表达立场。",
+      "text_en": "I have a strong personality.",
+      "keyed": "+"
+    },
+    {
+      "id": "E3_3",
+      "order": 35,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E3",
+      "facet_name_zh": "自信果断",
+      "facet_name_en": "Assertiveness",
+      "text_zh": "我知道如何吸引他人的注意。",
+      "text_en": "I know how to captivate people.",
+      "keyed": "+"
+    },
+    {
+      "id": "E3_4",
+      "order": 36,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E3",
+      "facet_name_zh": "自信果断",
+      "facet_name_en": "Assertiveness",
+      "text_zh": "我倾向于等待他人带头。",
+      "text_en": "I wait for others to lead the way.",
+      "keyed": "-"
+    },
+    {
+      "id": "E4_1",
+      "order": 37,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E4",
+      "facet_name_zh": "活跃性",
+      "facet_name_en": "Activity Level",
+      "text_zh": "我总是充满活力，忙个不停。",
+      "text_en": "I am always busy.",
+      "keyed": "+"
+    },
+    {
+      "id": "E4_2",
+      "order": 38,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E4",
+      "facet_name_zh": "活跃性",
+      "facet_name_en": "Activity Level",
+      "text_zh": "我总是精力旺盛、积极行动。",
+      "text_en": "I am always on the go.",
+      "keyed": "+"
+    },
+    {
+      "id": "E4_3",
+      "order": 39,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E4",
+      "facet_name_zh": "活跃性",
+      "facet_name_en": "Activity Level",
+      "text_zh": "我喜欢轻松悠闲地生活。",
+      "text_en": "I like to take it easy.",
+      "keyed": "-"
+    },
+    {
+      "id": "E4_4",
+      "order": 40,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E4",
+      "facet_name_zh": "活跃性",
+      "facet_name_en": "Activity Level",
+      "text_zh": "我向往慢节奏的生活方式。",
+      "text_en": "I like a leisurely lifestyle.",
+      "keyed": "-"
+    },
+    {
+      "id": "E5_1",
+      "order": 41,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E5",
+      "facet_name_zh": "寻求刺激",
+      "facet_name_en": "Excitement-Seeking",
+      "text_zh": "我热爱刺激感。",
+      "text_en": "I love excitement.",
+      "keyed": "+"
+    },
+    {
+      "id": "E5_2",
+      "order": 42,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E5",
+      "facet_name_zh": "寻求刺激",
+      "facet_name_en": "Excitement-Seeking",
+      "text_zh": "我喜欢寻求冒险。",
+      "text_en": "I seek adventure.",
+      "keyed": "+"
+    },
+    {
+      "id": "E5_3",
+      "order": 43,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E5",
+      "facet_name_zh": "寻求刺激",
+      "facet_name_en": "Excitement-Seeking",
+      "text_zh": "我有时喜欢冒险行事。",
+      "text_en": "I enjoy taking risks.",
+      "keyed": "+"
+    },
+    {
+      "id": "E5_4",
+      "order": 44,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E5",
+      "facet_name_zh": "寻求刺激",
+      "facet_name_en": "Excitement-Seeking",
+      "text_zh": "我不喜欢成为众人关注的焦点。",
+      "text_en": "I dislike being the center of attention.",
+      "keyed": "-"
+    },
+    {
+      "id": "E6_1",
+      "order": 45,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E6",
+      "facet_name_zh": "积极情绪",
+      "facet_name_en": "Cheerfulness",
+      "text_zh": "我给人一种充满活力的感觉。",
+      "text_en": "I radiate joy.",
+      "keyed": "+"
+    },
+    {
+      "id": "E6_2",
+      "order": 46,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E6",
+      "facet_name_zh": "积极情绪",
+      "facet_name_en": "Cheerfulness",
+      "text_zh": "我总能找到令人开心的事。",
+      "text_en": "I always find something to laugh about.",
+      "keyed": "+"
+    },
+    {
+      "id": "E6_3",
+      "order": 47,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E6",
+      "facet_name_zh": "积极情绪",
+      "facet_name_en": "Cheerfulness",
+      "text_zh": "我经常心情愉快。",
+      "text_en": "I am often in a good mood.",
+      "keyed": "+"
+    },
+    {
+      "id": "E6_4",
+      "order": 48,
+      "domain": "E",
+      "domain_name_zh": "外倾性",
+      "facet": "E6",
+      "facet_name_zh": "积极情绪",
+      "facet_name_en": "Cheerfulness",
+      "text_zh": "我很少开玩笑。",
+      "text_en": "I seldom joke around.",
+      "keyed": "-"
+    },
+    {
+      "id": "O1_1",
+      "order": 49,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O1",
+      "facet_name_zh": "想象力",
+      "facet_name_en": "Imagination",
+      "text_zh": "我有丰富的想象力。",
+      "text_en": "I have a vivid imagination.",
+      "keyed": "+"
+    },
+    {
+      "id": "O1_2",
+      "order": 50,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O1",
+      "facet_name_zh": "想象力",
+      "facet_name_en": "Imagination",
+      "text_zh": "我喜欢天马行空地幻想。",
+      "text_en": "I enjoy wild flights of fantasy.",
+      "keyed": "+"
+    },
+    {
+      "id": "O1_3",
+      "order": 51,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O1",
+      "facet_name_zh": "想象力",
+      "facet_name_en": "Imagination",
+      "text_zh": "我词汇量丰富，善于语言表达。",
+      "text_en": "I have a rich vocabulary.",
+      "keyed": "+"
+    },
+    {
+      "id": "O1_4",
+      "order": 52,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O1",
+      "facet_name_zh": "想象力",
+      "facet_name_en": "Imagination",
+      "text_zh": "我难以理解抽象概念。",
+      "text_en": "I have difficulty understanding abstract ideas.",
+      "keyed": "-"
+    },
+    {
+      "id": "O2_1",
+      "order": 53,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O2",
+      "facet_name_zh": "艺术兴趣",
+      "facet_name_en": "Artistic Interests",
+      "text_zh": "我认为艺术非常重要。",
+      "text_en": "I believe in the importance of art.",
+      "keyed": "+"
+    },
+    {
+      "id": "O2_2",
+      "order": 54,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O2",
+      "facet_name_zh": "艺术兴趣",
+      "facet_name_en": "Artistic Interests",
+      "text_zh": "我能在别人注意不到的地方发现美。",
+      "text_en": "I see beauty in things that others might not notice.",
+      "keyed": "+"
+    },
+    {
+      "id": "O2_3",
+      "order": 55,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O2",
+      "facet_name_zh": "艺术兴趣",
+      "facet_name_en": "Artistic Interests",
+      "text_zh": "我不喜欢艺术。",
+      "text_en": "I do not like art.",
+      "keyed": "-"
+    },
+    {
+      "id": "O2_4",
+      "order": 56,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O2",
+      "facet_name_zh": "艺术兴趣",
+      "facet_name_en": "Artistic Interests",
+      "text_zh": "我不喜欢参观艺术博物馆。",
+      "text_en": "I do not enjoy going to art museums.",
+      "keyed": "-"
+    },
+    {
+      "id": "O3_1",
+      "order": 57,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O3",
+      "facet_name_zh": "情感体验",
+      "facet_name_en": "Emotionality",
+      "text_zh": "我能强烈地感受到自己的情绪。",
+      "text_en": "I experience my emotions intensely.",
+      "keyed": "+"
+    },
+    {
+      "id": "O3_2",
+      "order": 58,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O3",
+      "facet_name_zh": "情感体验",
+      "facet_name_en": "Emotionality",
+      "text_zh": "我能深切感受到他人的情绪。",
+      "text_en": "I feel others' emotions.",
+      "keyed": "+"
+    },
+    {
+      "id": "O3_3",
+      "order": 59,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O3",
+      "facet_name_zh": "情感体验",
+      "facet_name_en": "Emotionality",
+      "text_zh": "我的情绪不容易受到影响。",
+      "text_en": "I am not easily affected by my emotions.",
+      "keyed": "-"
+    },
+    {
+      "id": "O3_4",
+      "order": 60,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O3",
+      "facet_name_zh": "情感体验",
+      "facet_name_en": "Emotionality",
+      "text_zh": "我很少注意到自己的情绪反应。",
+      "text_en": "I rarely notice my emotional reactions.",
+      "keyed": "-"
+    },
+    {
+      "id": "O4_1",
+      "order": 61,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O4",
+      "facet_name_zh": "探索性",
+      "facet_name_en": "Adventurousness",
+      "text_zh": "比起一成不变，我更喜欢多样化。",
+      "text_en": "I prefer variety to routine.",
+      "keyed": "+"
+    },
+    {
+      "id": "O4_2",
+      "order": 62,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O4",
+      "facet_name_zh": "探索性",
+      "facet_name_en": "Adventurousness",
+      "text_zh": "我喜欢去陌生的地方探索。",
+      "text_en": "I like to visit new places.",
+      "keyed": "+"
+    },
+    {
+      "id": "O4_3",
+      "order": 63,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O4",
+      "facet_name_zh": "探索性",
+      "facet_name_en": "Adventurousness",
+      "text_zh": "我倾向于坚持自己熟悉的事物。",
+      "text_en": "I prefer to stick with things that I know.",
+      "keyed": "-"
+    },
+    {
+      "id": "O4_4",
+      "order": 64,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O4",
+      "facet_name_zh": "探索性",
+      "facet_name_en": "Adventurousness",
+      "text_zh": "我不喜欢变化。",
+      "text_en": "I dislike changes.",
+      "keyed": "-"
+    },
+    {
+      "id": "O5_1",
+      "order": 65,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O5",
+      "facet_name_zh": "智识",
+      "facet_name_en": "Intellect",
+      "text_zh": "我理解事物的速度很快。",
+      "text_en": "I am quick to understand things.",
+      "keyed": "+"
+    },
+    {
+      "id": "O5_2",
+      "order": 66,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O5",
+      "facet_name_zh": "智识",
+      "facet_name_en": "Intellect",
+      "text_zh": "我喜欢花时间对事物进行深思。",
+      "text_en": "I spend time reflecting on things.",
+      "keyed": "+"
+    },
+    {
+      "id": "O5_3",
+      "order": 67,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O5",
+      "facet_name_zh": "智识",
+      "facet_name_en": "Intellect",
+      "text_zh": "我会回避哲学性的讨论。",
+      "text_en": "I avoid philosophical discussions.",
+      "keyed": "-"
+    },
+    {
+      "id": "O5_4",
+      "order": 68,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O5",
+      "facet_name_zh": "智识",
+      "facet_name_en": "Intellect",
+      "text_zh": "我尽量回避思想复杂的人。",
+      "text_en": "I try to avoid complex people.",
+      "keyed": "-"
+    },
+    {
+      "id": "O6_1",
+      "order": 69,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O6",
+      "facet_name_zh": "思想开放",
+      "facet_name_en": "Liberalism",
+      "text_zh": "我倾向于支持开放进步的观点。",
+      "text_en": "I tend to support liberal political views.",
+      "keyed": "+"
+    },
+    {
+      "id": "O6_2",
+      "order": 70,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O6",
+      "facet_name_zh": "思想开放",
+      "facet_name_en": "Liberalism",
+      "text_zh": "我认为没有绝对的对与错。",
+      "text_en": "I believe that there is no absolute right and wrong.",
+      "keyed": "+"
+    },
+    {
+      "id": "O6_3",
+      "order": 71,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O6",
+      "facet_name_zh": "思想开放",
+      "facet_name_en": "Liberalism",
+      "text_zh": "我倾向于持传统保守的立场。",
+      "text_en": "I tend to support conservative political views.",
+      "keyed": "-"
+    },
+    {
+      "id": "O6_4",
+      "order": 72,
+      "domain": "O",
+      "domain_name_zh": "开放性",
+      "facet": "O6",
+      "facet_name_zh": "思想开放",
+      "facet_name_en": "Liberalism",
+      "text_zh": "我相信做事只有一种正确方式。",
+      "text_en": "I believe in one right way.",
+      "keyed": "-"
+    },
+    {
+      "id": "A1_1",
+      "order": 73,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A1",
+      "facet_name_zh": "信任",
+      "facet_name_en": "Trust",
+      "text_zh": "我相信他人的诚意。",
+      "text_en": "I trust others.",
+      "keyed": "+"
+    },
+    {
+      "id": "A1_2",
+      "order": 74,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A1",
+      "facet_name_zh": "信任",
+      "facet_name_en": "Trust",
+      "text_zh": "我相信他人通常出于好意。",
+      "text_en": "I believe that others have good intentions.",
+      "keyed": "+"
+    },
+    {
+      "id": "A1_3",
+      "order": 75,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A1",
+      "facet_name_zh": "信任",
+      "facet_name_en": "Trust",
+      "text_zh": "我不信任他人。",
+      "text_en": "I distrust people.",
+      "keyed": "-"
+    },
+    {
+      "id": "A1_4",
+      "order": 76,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A1",
+      "facet_name_zh": "信任",
+      "facet_name_en": "Trust",
+      "text_zh": "我常常怀疑他人有隐藏的动机。",
+      "text_en": "I suspect hidden motives in others.",
+      "keyed": "-"
+    },
+    {
+      "id": "A2_1",
+      "order": 77,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A2",
+      "facet_name_zh": "道德感",
+      "facet_name_en": "Morality",
+      "text_zh": "我不会在任何情况下欺骗或作弊。",
+      "text_en": "I would never cheat on my taxes.",
+      "keyed": "+"
+    },
+    {
+      "id": "A2_2",
+      "order": 78,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A2",
+      "facet_name_zh": "道德感",
+      "facet_name_en": "Morality",
+      "text_zh": "我严格遵守规则。",
+      "text_en": "I stick to the rules.",
+      "keyed": "+"
+    },
+    {
+      "id": "A2_3",
+      "order": 79,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A2",
+      "facet_name_zh": "道德感",
+      "facet_name_en": "Morality",
+      "text_zh": "我有时会利用他人来达到自己的目的。",
+      "text_en": "I use others for my own ends.",
+      "keyed": "-"
+    },
+    {
+      "id": "A2_4",
+      "order": 80,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A2",
+      "facet_name_zh": "道德感",
+      "facet_name_en": "Morality",
+      "text_zh": "我知道如何绕过规则行事。",
+      "text_en": "I know how to get around the rules.",
+      "keyed": "-"
+    },
+    {
+      "id": "A3_1",
+      "order": 81,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A3",
+      "facet_name_zh": "利他性",
+      "facet_name_en": "Altruism",
+      "text_zh": "我能让他人感到被接纳和欢迎。",
+      "text_en": "I make people feel welcome.",
+      "keyed": "+"
+    },
+    {
+      "id": "A3_2",
+      "order": 82,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A3",
+      "facet_name_zh": "利他性",
+      "facet_name_en": "Altruism",
+      "text_zh": "我能预判他人的需求。",
+      "text_en": "I anticipate the needs of others.",
+      "keyed": "+"
+    },
+    {
+      "id": "A3_3",
+      "order": 83,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A3",
+      "facet_name_zh": "利他性",
+      "facet_name_en": "Altruism",
+      "text_zh": "我没有时间关心他人。",
+      "text_en": "I take no time for others.",
+      "keyed": "-"
+    },
+    {
+      "id": "A3_4",
+      "order": 84,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A3",
+      "facet_name_zh": "利他性",
+      "facet_name_en": "Altruism",
+      "text_zh": "我对他人的感受漠不关心。",
+      "text_en": "I am indifferent to the feelings of others.",
+      "keyed": "-"
+    },
+    {
+      "id": "A4_1",
+      "order": 85,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A4",
+      "facet_name_zh": "合作性",
+      "facet_name_en": "Cooperation",
+      "text_zh": "我很容易满足，不挑剔。",
+      "text_en": "I am easy to satisfy.",
+      "keyed": "+"
+    },
+    {
+      "id": "A4_2",
+      "order": 86,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A4",
+      "facet_name_zh": "合作性",
+      "facet_name_en": "Cooperation",
+      "text_zh": "我愿意做出妥协。",
+      "text_en": "I am willing to compromise.",
+      "keyed": "+"
+    },
+    {
+      "id": "A4_3",
+      "order": 87,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A4",
+      "facet_name_zh": "合作性",
+      "facet_name_en": "Cooperation",
+      "text_zh": "我要求成为关注的中心。",
+      "text_en": "I demand to be the center of interest.",
+      "keyed": "-"
+    },
+    {
+      "id": "A4_4",
+      "order": 88,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A4",
+      "facet_name_zh": "合作性",
+      "facet_name_en": "Cooperation",
+      "text_zh": "我坚持让别人按我的方式做事。",
+      "text_en": "I insist that others do things my way.",
+      "keyed": "-"
+    },
+    {
+      "id": "A5_1",
+      "order": 89,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A5",
+      "facet_name_zh": "谦逊",
+      "facet_name_en": "Modesty",
+      "text_zh": "我不喜欢炫耀自己。",
+      "text_en": "I dislike showing off.",
+      "keyed": "+"
+    },
+    {
+      "id": "A5_2",
+      "order": 90,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A5",
+      "facet_name_zh": "谦逊",
+      "facet_name_en": "Modesty",
+      "text_zh": "我对自己的期望很低调。",
+      "text_en": "I ask for very little.",
+      "keyed": "+"
+    },
+    {
+      "id": "A5_3",
+      "order": 91,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A5",
+      "facet_name_zh": "谦逊",
+      "facet_name_en": "Modesty",
+      "text_zh": "我对自己评价很高。",
+      "text_en": "I think highly of myself.",
+      "keyed": "-"
+    },
+    {
+      "id": "A5_4",
+      "order": 92,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A5",
+      "facet_name_zh": "谦逊",
+      "facet_name_en": "Modesty",
+      "text_zh": "我喜欢炫耀自己的优点。",
+      "text_en": "I boast about my virtues.",
+      "keyed": "-"
+    },
+    {
+      "id": "A6_1",
+      "order": 93,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A6",
+      "facet_name_zh": "同理心",
+      "facet_name_en": "Sympathy",
+      "text_zh": "我能对他人的感受产生共鸣。",
+      "text_en": "I sympathize with others' feelings.",
+      "keyed": "+"
+    },
+    {
+      "id": "A6_2",
+      "order": 94,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A6",
+      "facet_name_zh": "同理心",
+      "facet_name_en": "Sympathy",
+      "text_zh": "他人的悲伤会让我感同身受。",
+      "text_en": "I suffer from others' sorrows.",
+      "keyed": "+"
+    },
+    {
+      "id": "A6_3",
+      "order": 95,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A6",
+      "facet_name_zh": "同理心",
+      "facet_name_en": "Sympathy",
+      "text_zh": "我对他人的问题不感兴趣。",
+      "text_en": "I am not interested in other people's problems.",
+      "keyed": "-"
+    },
+    {
+      "id": "A6_4",
+      "order": 96,
+      "domain": "A",
+      "domain_name_zh": "宜人性",
+      "facet": "A6",
+      "facet_name_zh": "同理心",
+      "facet_name_en": "Sympathy",
+      "text_zh": "我尽量不去想那些需要帮助的人。",
+      "text_en": "I try not to think about the needy.",
+      "keyed": "-"
+    },
+    {
+      "id": "C1_1",
+      "order": 97,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C1",
+      "facet_name_zh": "自我效能",
+      "facet_name_en": "Self-Efficacy",
+      "text_zh": "我能成功完成分配给我的任务。",
+      "text_en": "I complete tasks successfully.",
+      "keyed": "+"
+    },
+    {
+      "id": "C1_2",
+      "order": 98,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C1",
+      "facet_name_zh": "自我效能",
+      "facet_name_en": "Self-Efficacy",
+      "text_zh": "我知道如何把事情做好。",
+      "text_en": "I know how to get things done.",
+      "keyed": "+"
+    },
+    {
+      "id": "C1_3",
+      "order": 99,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C1",
+      "facet_name_zh": "自我效能",
+      "facet_name_en": "Self-Efficacy",
+      "text_zh": "我能想出好的解决方案。",
+      "text_en": "I come up with good solutions.",
+      "keyed": "+"
+    },
+    {
+      "id": "C1_4",
+      "order": 100,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C1",
+      "facet_name_zh": "自我效能",
+      "facet_name_en": "Self-Efficacy",
+      "text_zh": "我有时会误判情况。",
+      "text_en": "I misjudge situations.",
+      "keyed": "-"
+    },
+    {
+      "id": "C2_1",
+      "order": 101,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C2",
+      "facet_name_zh": "条理性",
+      "facet_name_en": "Orderliness",
+      "text_zh": "我喜欢有条不紊。",
+      "text_en": "I like order.",
+      "keyed": "+"
+    },
+    {
+      "id": "C2_2",
+      "order": 102,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C2",
+      "facet_name_zh": "条理性",
+      "facet_name_en": "Orderliness",
+      "text_zh": "我会保持物品的整洁有序。",
+      "text_en": "I keep things neat and tidy.",
+      "keyed": "+"
+    },
+    {
+      "id": "C2_3",
+      "order": 103,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C2",
+      "facet_name_zh": "条理性",
+      "facet_name_en": "Orderliness",
+      "text_zh": "我的空间经常乱糟糟的。",
+      "text_en": "I leave a mess in my room.",
+      "keyed": "-"
+    },
+    {
+      "id": "C2_4",
+      "order": 104,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C2",
+      "facet_name_zh": "条理性",
+      "facet_name_en": "Orderliness",
+      "text_zh": "我经常忘记把东西放回原处。",
+      "text_en": "I often forget to put things back in their proper place.",
+      "keyed": "-"
+    },
+    {
+      "id": "C3_1",
+      "order": 105,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C3",
+      "facet_name_zh": "尽职性",
+      "facet_name_en": "Dutifulness",
+      "text_zh": "我严格遵守规则和要求。",
+      "text_en": "I follow the rules.",
+      "keyed": "+"
+    },
+    {
+      "id": "C3_2",
+      "order": 106,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C3",
+      "facet_name_zh": "尽职性",
+      "facet_name_en": "Dutifulness",
+      "text_zh": "我注重细节。",
+      "text_en": "I pay attention to details.",
+      "keyed": "+"
+    },
+    {
+      "id": "C3_3",
+      "order": 107,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C3",
+      "facet_name_zh": "尽职性",
+      "facet_name_en": "Dutifulness",
+      "text_zh": "我说话诚实。",
+      "text_en": "I tell the truth.",
+      "keyed": "+"
+    },
+    {
+      "id": "C3_4",
+      "order": 108,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C3",
+      "facet_name_zh": "尽职性",
+      "facet_name_en": "Dutifulness",
+      "text_zh": "我很难严格遵守各项规定。",
+      "text_en": "I find it hard to stay within the rules.",
+      "keyed": "-"
+    },
+    {
+      "id": "C4_1",
+      "order": 109,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C4",
+      "facet_name_zh": "成就追求",
+      "facet_name_en": "Achievement-Striving",
+      "text_zh": "我努力工作。",
+      "text_en": "I work hard.",
+      "keyed": "+"
+    },
+    {
+      "id": "C4_2",
+      "order": 110,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C4",
+      "facet_name_zh": "成就追求",
+      "facet_name_en": "Achievement-Striving",
+      "text_zh": "我追求卓越。",
+      "text_en": "I strive for excellence.",
+      "keyed": "+"
+    },
+    {
+      "id": "C4_3",
+      "order": 111,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C4",
+      "facet_name_zh": "成就追求",
+      "facet_name_en": "Achievement-Striving",
+      "text_zh": "我是一个追求高成就的人。",
+      "text_en": "I am a high achiever.",
+      "keyed": "+"
+    },
+    {
+      "id": "C4_4",
+      "order": 112,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C4",
+      "facet_name_zh": "成就追求",
+      "facet_name_en": "Achievement-Striving",
+      "text_zh": "我只做刚好够用的工作。",
+      "text_en": "I just do enough work to get by.",
+      "keyed": "-"
+    },
+    {
+      "id": "C5_1",
+      "order": 113,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C5",
+      "facet_name_zh": "自律性",
+      "facet_name_en": "Self-Discipline",
+      "text_zh": "我会立刻处理需要完成的事务。",
+      "text_en": "I get chores done right away.",
+      "keyed": "+"
+    },
+    {
+      "id": "C5_2",
+      "order": 114,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C5",
+      "facet_name_zh": "自律性",
+      "facet_name_en": "Self-Discipline",
+      "text_zh": "我会立即开始着手任务。",
+      "text_en": "I start tasks right away.",
+      "keyed": "+"
+    },
+    {
+      "id": "C5_3",
+      "order": 115,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C5",
+      "facet_name_zh": "自律性",
+      "facet_name_en": "Self-Discipline",
+      "text_zh": "我很难开始一项任务。",
+      "text_en": "I have difficulty starting tasks.",
+      "keyed": "-"
+    },
+    {
+      "id": "C5_4",
+      "order": 116,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C5",
+      "facet_name_zh": "自律性",
+      "facet_name_en": "Self-Discipline",
+      "text_zh": "我经常推迟做决定。",
+      "text_en": "I postpone decisions.",
+      "keyed": "-"
+    },
+    {
+      "id": "C6_1",
+      "order": 117,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C6",
+      "facet_name_zh": "谨慎性",
+      "facet_name_en": "Cautiousness",
+      "text_zh": "我说话前会仔细思考。",
+      "text_en": "I think before I speak.",
+      "keyed": "+"
+    },
+    {
+      "id": "C6_2",
+      "order": 118,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C6",
+      "facet_name_zh": "谨慎性",
+      "facet_name_en": "Cautiousness",
+      "text_zh": "我会权衡利弊再行动。",
+      "text_en": "I weigh the pros and cons.",
+      "keyed": "+"
+    },
+    {
+      "id": "C6_3",
+      "order": 119,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C6",
+      "facet_name_zh": "谨慎性",
+      "facet_name_en": "Cautiousness",
+      "text_zh": "我经常不经思考就行动。",
+      "text_en": "I act without thinking.",
+      "keyed": "-"
+    },
+    {
+      "id": "C6_4",
+      "order": 120,
+      "domain": "C",
+      "domain_name_zh": "尽责性",
+      "facet": "C6",
+      "facet_name_zh": "谨慎性",
+      "facet_name_en": "Cautiousness",
+      "text_zh": "我有时会做出草率的决定。",
+      "text_en": "I make rash decisions.",
+      "keyed": "-"
+    }
+  ]
+}

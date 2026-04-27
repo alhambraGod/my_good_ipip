@@ -1,0 +1,1019 @@
+{
+  "metadata": {
+    "name": "Holland-RIASEC-60",
+    "full_name_en": "Holland Career Interest Inventory — 60-Item Version",
+    "full_name_zh": "Holland职业兴趣量表 — 60题版",
+    "version": "1.0",
+    "source": "Based on Holland (1959, 1997) RIASEC Theory — Items adapted from IPIP Vocational Preference Inventory",
+    "item_count": 60,
+    "types_count": 6,
+    "items_per_type": 10,
+    "scale_type": "likert_5",
+    "scale_options": [
+      {
+        "value": 1,
+        "label_zh": "非常不感兴趣",
+        "label_en": "Strongly Dislike"
+      },
+      {
+        "value": 2,
+        "label_zh": "比较不感兴趣",
+        "label_en": "Dislike"
+      },
+      {
+        "value": 3,
+        "label_zh": "中立",
+        "label_en": "Neutral"
+      },
+      {
+        "value": 4,
+        "label_zh": "比较感兴趣",
+        "label_en": "Like"
+      },
+      {
+        "value": 5,
+        "label_zh": "非常感兴趣",
+        "label_en": "Strongly Like"
+      }
+    ],
+    "instruction_zh": "对于以下每项活动或职业，请选择你的感兴趣程度。不必考虑你是否有相关技能或经验，只需根据你的直觉反应作答。",
+    "instruction_en": "For each activity or occupation below, indicate your level of interest. Do not consider whether you have the skills or experience — simply respond based on your gut feeling.",
+    "scoring_note": "All items are forward keyed (+). Sum scores for each type (range 10-50). The three types with highest scores form your Holland Code (e.g., ISA, SEC). Match your code against occupational databases (e.g., O*NET).",
+    "types": {
+      "R": {
+        "name_en": "Realistic",
+        "name_zh": "现实型",
+        "description_zh": "喜欢动手操作、使用工具和机械，偏好具体而非抽象的任务。",
+        "core_traits_zh": [
+          "动手能力强",
+          "务实",
+          "喜欢机械/技术",
+          "重视有形成果"
+        ],
+        "typical_careers_zh": [
+          "工程师",
+          "技师",
+          "建筑师",
+          "农业",
+          "军事"
+        ],
+        "hexagon_adjacent": [
+          "I",
+          "C"
+        ]
+      },
+      "I": {
+        "name_en": "Investigative",
+        "name_zh": "研究型",
+        "description_zh": "喜欢分析、思考和解决复杂问题，具有强烈的学术和科学取向。",
+        "core_traits_zh": [
+          "好奇心强",
+          "分析性思维",
+          "独立工作",
+          "喜欢研究"
+        ],
+        "typical_careers_zh": [
+          "科学家",
+          "研究员",
+          "数据分析师",
+          "医生",
+          "程序员"
+        ],
+        "hexagon_adjacent": [
+          "R",
+          "A"
+        ]
+      },
+      "A": {
+        "name_en": "Artistic",
+        "name_zh": "艺术型",
+        "description_zh": "喜欢创造性表达，偏爱非结构化、自由的工作环境。",
+        "core_traits_zh": [
+          "创造力强",
+          "表达欲强",
+          "审美敏感",
+          "不喜欢规则束缚"
+        ],
+        "typical_careers_zh": [
+          "设计师",
+          "作家",
+          "音乐家",
+          "演员",
+          "摄影师"
+        ],
+        "hexagon_adjacent": [
+          "I",
+          "S"
+        ]
+      },
+      "S": {
+        "name_en": "Social",
+        "name_zh": "社会型",
+        "description_zh": "喜欢与人互动，关注帮助、教育和关怀他人。",
+        "core_traits_zh": [
+          "善于沟通",
+          "有同理心",
+          "喜欢帮助他人",
+          "关注人际关系"
+        ],
+        "typical_careers_zh": [
+          "教师",
+          "咨询师",
+          "社工",
+          "护士",
+          "HR"
+        ],
+        "hexagon_adjacent": [
+          "A",
+          "E"
+        ]
+      },
+      "E": {
+        "name_en": "Enterprising",
+        "name_zh": "企业型",
+        "description_zh": "喜欢领导、说服和影响他人，目标导向，追求经济和社会地位。",
+        "core_traits_zh": [
+          "领导力强",
+          "有说服力",
+          "目标导向",
+          "喜欢竞争"
+        ],
+        "typical_careers_zh": [
+          "管理者",
+          "销售",
+          "律师",
+          "创业者",
+          "政治家"
+        ],
+        "hexagon_adjacent": [
+          "S",
+          "C"
+        ]
+      },
+      "C": {
+        "name_en": "Conventional",
+        "name_zh": "常规型",
+        "description_zh": "喜欢有序、结构化的工作，注重细节和规则，偏好明确的任务。",
+        "core_traits_zh": [
+          "注重细节",
+          "有条理",
+          "规则意识强",
+          "可靠稳定"
+        ],
+        "typical_careers_zh": [
+          "会计",
+          "行政",
+          "数据分析",
+          "审计",
+          "银行"
+        ],
+        "hexagon_adjacent": [
+          "E",
+          "R"
+        ]
+      }
+    },
+    "hexagon_model": {
+      "description_zh": "六种类型按六边形排列，相邻类型相关性高，对角类型相关性低（甚至负相关）。",
+      "order": [
+        "R",
+        "I",
+        "A",
+        "S",
+        "E",
+        "C"
+      ],
+      "opposite_pairs": [
+        [
+          "R",
+          "S"
+        ],
+        [
+          "I",
+          "E"
+        ],
+        [
+          "A",
+          "C"
+        ]
+      ]
+    },
+    "onet_integration": {
+      "note_zh": "每个职业在O*NET数据库中都有对应的Holland Code。将用户得分最高的三个类型组合成三字母码（如ISA），与O*NET职业数据库匹配，可得到最适合的职业列表。",
+      "database_url": "https://www.onetonline.org/"
+    },
+    "scoring": {
+      "all_items_forward_keyed": true,
+      "type_items": {
+        "R": [
+          "R01",
+          "R02",
+          "R03",
+          "R04",
+          "R05",
+          "R06",
+          "R07",
+          "R08",
+          "R09",
+          "R10"
+        ],
+        "I": [
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "I05",
+          "I06",
+          "I07",
+          "I08",
+          "I09",
+          "I10"
+        ],
+        "A": [
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "A05",
+          "A06",
+          "A07",
+          "A08",
+          "A09",
+          "A10"
+        ],
+        "S": [
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06",
+          "S07",
+          "S08",
+          "S09",
+          "S10"
+        ],
+        "E": [
+          "E01",
+          "E02",
+          "E03",
+          "E04",
+          "E05",
+          "E06",
+          "E07",
+          "E08",
+          "E09",
+          "E10"
+        ],
+        "C": [
+          "C01",
+          "C02",
+          "C03",
+          "C04",
+          "C05",
+          "C06",
+          "C07",
+          "C08",
+          "C09",
+          "C10"
+        ]
+      },
+      "categories": {
+        "activities": [
+          "R01",
+          "R02",
+          "R03",
+          "R04",
+          "I01",
+          "I02",
+          "I03",
+          "I04",
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "S01",
+          "S02",
+          "S03",
+          "S04",
+          "E01",
+          "E02",
+          "E03",
+          "E04",
+          "C01",
+          "C02",
+          "C03",
+          "C04"
+        ],
+        "competencies": [
+          "R05",
+          "R06",
+          "R07",
+          "I05",
+          "I06",
+          "I07",
+          "A05",
+          "A06",
+          "A07",
+          "S05",
+          "S06",
+          "S07",
+          "E05",
+          "E06",
+          "E07",
+          "C05",
+          "C06",
+          "C07"
+        ],
+        "occupations": [
+          "R08",
+          "R09",
+          "R10",
+          "I08",
+          "I09",
+          "I10",
+          "A08",
+          "A09",
+          "A10",
+          "S08",
+          "S09",
+          "S10",
+          "E08",
+          "E09",
+          "E10",
+          "C08",
+          "C09",
+          "C10"
+        ]
+      },
+      "type_score_range": {
+        "min": 10,
+        "max": 50
+      },
+      "holland_code_derivation": "Sort all 6 type scores descending. Holland Code = top 3 type letters (e.g., ISA, SEC, RIC).",
+      "career_matching": "Match the 3-letter Holland Code against O*NET occupational codes at onetonline.org for career recommendations."
+    }
+  },
+  "items": [
+    {
+      "id": "R01",
+      "order": 1,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "activities",
+      "text_zh": "修理机械设备和解决技术故障。",
+      "text_en": "Fix mechanical problems and repair equipment.",
+      "keyed": "+"
+    },
+    {
+      "id": "R02",
+      "order": 2,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "activities",
+      "text_zh": "使用手工工具或电动工具制作物品。",
+      "text_en": "Build things with my hands using tools.",
+      "keyed": "+"
+    },
+    {
+      "id": "R03",
+      "order": 3,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "activities",
+      "text_zh": "在户外工作，例如农业、建筑或勘探。",
+      "text_en": "Work outdoors in agriculture, construction, or surveying.",
+      "keyed": "+"
+    },
+    {
+      "id": "R04",
+      "order": 4,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "activities",
+      "text_zh": "操作和维护机械或工程设备。",
+      "text_en": "Operate and maintain machinery or engineering equipment.",
+      "keyed": "+"
+    },
+    {
+      "id": "R05",
+      "order": 5,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "competencies",
+      "text_zh": "我擅长识别和修复机械或电气故障。",
+      "text_en": "I am skilled at identifying and fixing mechanical or electrical faults.",
+      "keyed": "+"
+    },
+    {
+      "id": "R06",
+      "order": 6,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "competencies",
+      "text_zh": "我能够准确阅读技术图纸或蓝图。",
+      "text_en": "I can accurately read technical drawings or blueprints.",
+      "keyed": "+"
+    },
+    {
+      "id": "R07",
+      "order": 7,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "competencies",
+      "text_zh": "我动手能力强，擅长实际操作任务。",
+      "text_en": "I am skilled at hands-on, practical tasks.",
+      "keyed": "+"
+    },
+    {
+      "id": "R08",
+      "order": 8,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "occupations",
+      "text_zh": "成为一名机械工程师或技术员。",
+      "text_en": "Become a mechanical engineer or technician.",
+      "keyed": "+"
+    },
+    {
+      "id": "R09",
+      "order": 9,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "occupations",
+      "text_zh": "从事建筑、施工或工程相关工作。",
+      "text_en": "Work in construction, civil engineering, or carpentry.",
+      "keyed": "+"
+    },
+    {
+      "id": "R10",
+      "order": 10,
+      "type": "R",
+      "type_name_zh": "现实型",
+      "type_name_en": "Realistic",
+      "category": "occupations",
+      "text_zh": "担任电工、水暖工等技术行业从业者。",
+      "text_en": "Work as an electrician, plumber, or skilled tradesperson.",
+      "keyed": "+"
+    },
+    {
+      "id": "I01",
+      "order": 11,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "activities",
+      "text_zh": "开展科学实验或研究项目。",
+      "text_en": "Conduct scientific experiments or research projects.",
+      "keyed": "+"
+    },
+    {
+      "id": "I02",
+      "order": 12,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "activities",
+      "text_zh": "分析数据以发现规律或得出结论。",
+      "text_en": "Analyze data to find patterns or draw conclusions.",
+      "keyed": "+"
+    },
+    {
+      "id": "I03",
+      "order": 13,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "activities",
+      "text_zh": "深入研究某一领域的复杂理论或问题。",
+      "text_en": "Study complex theories or problems in depth.",
+      "keyed": "+"
+    },
+    {
+      "id": "I04",
+      "order": 14,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "activities",
+      "text_zh": "阅读科学文献或学术论文。",
+      "text_en": "Read scientific literature or academic papers.",
+      "keyed": "+"
+    },
+    {
+      "id": "I05",
+      "order": 15,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "competencies",
+      "text_zh": "我擅长解决复杂的数学或逻辑问题。",
+      "text_en": "I am good at solving complex mathematical or logical problems.",
+      "keyed": "+"
+    },
+    {
+      "id": "I06",
+      "order": 16,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "competencies",
+      "text_zh": "我能够独立深入地研究一个课题。",
+      "text_en": "I can independently investigate a topic in depth.",
+      "keyed": "+"
+    },
+    {
+      "id": "I07",
+      "order": 17,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "competencies",
+      "text_zh": "我具有强烈的批判性思维能力。",
+      "text_en": "I have strong critical thinking skills.",
+      "keyed": "+"
+    },
+    {
+      "id": "I08",
+      "order": 18,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "occupations",
+      "text_zh": "成为科学家、研究员或学者。",
+      "text_en": "Become a scientist, researcher, or academic.",
+      "keyed": "+"
+    },
+    {
+      "id": "I09",
+      "order": 19,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "occupations",
+      "text_zh": "从事数据科学、统计学或人工智能工作。",
+      "text_en": "Work in data science, statistics, or artificial intelligence.",
+      "keyed": "+"
+    },
+    {
+      "id": "I10",
+      "order": 20,
+      "type": "I",
+      "type_name_zh": "研究型",
+      "type_name_en": "Investigative",
+      "category": "occupations",
+      "text_zh": "担任医生、药剂师或医学研究人员。",
+      "text_en": "Work as a doctor, pharmacist, or medical researcher.",
+      "keyed": "+"
+    },
+    {
+      "id": "A01",
+      "order": 21,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "activities",
+      "text_zh": "创作艺术、音乐、写作或其他创意作品。",
+      "text_en": "Create art, music, writing, or other creative work.",
+      "keyed": "+"
+    },
+    {
+      "id": "A02",
+      "order": 22,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "activities",
+      "text_zh": "通过视觉设计或插图表达自己的想法。",
+      "text_en": "Express my ideas through visual design or illustration.",
+      "keyed": "+"
+    },
+    {
+      "id": "A03",
+      "order": 23,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "activities",
+      "text_zh": "在没有严格规定的自由环境中工作。",
+      "text_en": "Work in a free, unstructured environment.",
+      "keyed": "+"
+    },
+    {
+      "id": "A04",
+      "order": 24,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "activities",
+      "text_zh": "在舞台上或镜头前表演、展示。",
+      "text_en": "Perform on stage or in front of a camera.",
+      "keyed": "+"
+    },
+    {
+      "id": "A05",
+      "order": 25,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "competencies",
+      "text_zh": "我具有较强的创意和原创性想法。",
+      "text_en": "I have a strong ability to generate creative, original ideas.",
+      "keyed": "+"
+    },
+    {
+      "id": "A06",
+      "order": 26,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "competencies",
+      "text_zh": "我对美学、设计或艺术表达有深厚的感知力。",
+      "text_en": "I have a strong aesthetic sense for design or art.",
+      "keyed": "+"
+    },
+    {
+      "id": "A07",
+      "order": 27,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "competencies",
+      "text_zh": "我能流畅地通过文字、图像或声音传达情感。",
+      "text_en": "I can effectively convey emotions through words, images, or sound.",
+      "keyed": "+"
+    },
+    {
+      "id": "A08",
+      "order": 28,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "occupations",
+      "text_zh": "成为平面设计师、UI/UX设计师或艺术总监。",
+      "text_en": "Become a graphic designer, UI/UX designer, or art director.",
+      "keyed": "+"
+    },
+    {
+      "id": "A09",
+      "order": 29,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "occupations",
+      "text_zh": "从事写作、新闻、内容创作或出版工作。",
+      "text_en": "Work in writing, journalism, content creation, or publishing.",
+      "keyed": "+"
+    },
+    {
+      "id": "A10",
+      "order": 30,
+      "type": "A",
+      "type_name_zh": "艺术型",
+      "type_name_en": "Artistic",
+      "category": "occupations",
+      "text_zh": "担任音乐人、演员或其他表演艺术职业。",
+      "text_en": "Work as a musician, actor, or other performing artist.",
+      "keyed": "+"
+    },
+    {
+      "id": "S01",
+      "order": 31,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "activities",
+      "text_zh": "帮助他人解决个人或职业上的问题。",
+      "text_en": "Help people solve their personal or professional problems.",
+      "keyed": "+"
+    },
+    {
+      "id": "S02",
+      "order": 32,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "activities",
+      "text_zh": "教学、培训或辅导他人学习新知识。",
+      "text_en": "Teach, train, or coach others to learn new skills.",
+      "keyed": "+"
+    },
+    {
+      "id": "S03",
+      "order": 33,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "activities",
+      "text_zh": "在社区服务、志愿活动中贡献时间。",
+      "text_en": "Volunteer or participate in community service activities.",
+      "keyed": "+"
+    },
+    {
+      "id": "S04",
+      "order": 34,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "activities",
+      "text_zh": "倾听他人的烦恼并提供情感支持。",
+      "text_en": "Listen to people's concerns and provide emotional support.",
+      "keyed": "+"
+    },
+    {
+      "id": "S05",
+      "order": 35,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "competencies",
+      "text_zh": "我善于与各种性格的人建立良好的关系。",
+      "text_en": "I am good at building relationships with people from diverse backgrounds.",
+      "keyed": "+"
+    },
+    {
+      "id": "S06",
+      "order": 36,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "competencies",
+      "text_zh": "我具有较强的同理心，能理解他人的感受。",
+      "text_en": "I have strong empathy and can understand others' feelings.",
+      "keyed": "+"
+    },
+    {
+      "id": "S07",
+      "order": 37,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "competencies",
+      "text_zh": "我擅长引导群体讨论或调解冲突。",
+      "text_en": "I am skilled at facilitating group discussions or mediating conflicts.",
+      "keyed": "+"
+    },
+    {
+      "id": "S08",
+      "order": 38,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "occupations",
+      "text_zh": "成为心理咨询师、社会工作者或治疗师。",
+      "text_en": "Become a counselor, social worker, or therapist.",
+      "keyed": "+"
+    },
+    {
+      "id": "S09",
+      "order": 39,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "occupations",
+      "text_zh": "从事教育、学生辅导或职业指导工作。",
+      "text_en": "Work in education, student counseling, or career guidance.",
+      "keyed": "+"
+    },
+    {
+      "id": "S10",
+      "order": 40,
+      "type": "S",
+      "type_name_zh": "社会型",
+      "type_name_en": "Social",
+      "category": "occupations",
+      "text_zh": "担任护士、医疗辅助人员或健康教育工作者。",
+      "text_en": "Work as a nurse, healthcare aide, or health educator.",
+      "keyed": "+"
+    },
+    {
+      "id": "E01",
+      "order": 41,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "activities",
+      "text_zh": "带领团队实现一个具有挑战性的目标。",
+      "text_en": "Lead a team toward a challenging goal.",
+      "keyed": "+"
+    },
+    {
+      "id": "E02",
+      "order": 42,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "activities",
+      "text_zh": "谈判、签订合同或商业交易。",
+      "text_en": "Negotiate deals, contracts, or business transactions.",
+      "keyed": "+"
+    },
+    {
+      "id": "E03",
+      "order": 43,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "activities",
+      "text_zh": "创办或经营自己的企业。",
+      "text_en": "Start or manage my own business.",
+      "keyed": "+"
+    },
+    {
+      "id": "E04",
+      "order": 44,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "activities",
+      "text_zh": "发表演讲、做产品演示或公众说服。",
+      "text_en": "Give speeches, presentations, or persuasive pitches.",
+      "keyed": "+"
+    },
+    {
+      "id": "E05",
+      "order": 45,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "competencies",
+      "text_zh": "我擅长说服他人接受我的观点或提案。",
+      "text_en": "I am good at persuading others to accept my ideas.",
+      "keyed": "+"
+    },
+    {
+      "id": "E06",
+      "order": 46,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "competencies",
+      "text_zh": "我具备较强的领导力，善于带领团队行动。",
+      "text_en": "I have strong leadership skills and can motivate a team.",
+      "keyed": "+"
+    },
+    {
+      "id": "E07",
+      "order": 47,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "competencies",
+      "text_zh": "我能在竞争激烈的环境中保持动力。",
+      "text_en": "I can stay motivated in highly competitive environments.",
+      "keyed": "+"
+    },
+    {
+      "id": "E08",
+      "order": 48,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "occupations",
+      "text_zh": "成为企业管理者、CEO或高级主管。",
+      "text_en": "Become a business manager, CEO, or senior executive.",
+      "keyed": "+"
+    },
+    {
+      "id": "E09",
+      "order": 49,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "occupations",
+      "text_zh": "从事销售、市场营销或商务拓展工作。",
+      "text_en": "Work in sales, marketing, or business development.",
+      "keyed": "+"
+    },
+    {
+      "id": "E10",
+      "order": 50,
+      "type": "E",
+      "type_name_zh": "企业型",
+      "type_name_en": "Enterprising",
+      "category": "occupations",
+      "text_zh": "担任律师、政治顾问或公共政策制定者。",
+      "text_en": "Work as a lawyer, political advisor, or policy maker.",
+      "keyed": "+"
+    },
+    {
+      "id": "C01",
+      "order": 51,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "activities",
+      "text_zh": "整理和维护详细的记录、档案或数据库。",
+      "text_en": "Organize and maintain detailed records, files, or databases.",
+      "keyed": "+"
+    },
+    {
+      "id": "C02",
+      "order": 52,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "activities",
+      "text_zh": "处理财务数据、预算或会计事务。",
+      "text_en": "Process financial data, budgets, or accounting tasks.",
+      "keyed": "+"
+    },
+    {
+      "id": "C03",
+      "order": 53,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "activities",
+      "text_zh": "按照明确定义的步骤和程序完成任务。",
+      "text_en": "Complete tasks following clearly defined steps and procedures.",
+      "keyed": "+"
+    },
+    {
+      "id": "C04",
+      "order": 54,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "activities",
+      "text_zh": "仔细核查工作成果以确保准确无误。",
+      "text_en": "Carefully check work to ensure it is accurate and error-free.",
+      "keyed": "+"
+    },
+    {
+      "id": "C05",
+      "order": 55,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "competencies",
+      "text_zh": "我注重细节，工作精确，不容易出错。",
+      "text_en": "I am detail-oriented and rarely make errors in my work.",
+      "keyed": "+"
+    },
+    {
+      "id": "C06",
+      "order": 56,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "competencies",
+      "text_zh": "我能高效地管理时间，按时完成任务。",
+      "text_en": "I manage my time efficiently and consistently meet deadlines.",
+      "keyed": "+"
+    },
+    {
+      "id": "C07",
+      "order": 57,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "competencies",
+      "text_zh": "我擅长使用办公软件和数据处理工具。",
+      "text_en": "I am proficient with office software and data management tools.",
+      "keyed": "+"
+    },
+    {
+      "id": "C08",
+      "order": 58,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "occupations",
+      "text_zh": "成为会计师、审计师或财务分析师。",
+      "text_en": "Become an accountant, auditor, or financial analyst.",
+      "keyed": "+"
+    },
+    {
+      "id": "C09",
+      "order": 59,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "occupations",
+      "text_zh": "从事行政管理、办公协调或项目管理工作。",
+      "text_en": "Work in office management, administrative coordination, or project management.",
+      "keyed": "+"
+    },
+    {
+      "id": "C10",
+      "order": 60,
+      "type": "C",
+      "type_name_zh": "常规型",
+      "type_name_en": "Conventional",
+      "category": "occupations",
+      "text_zh": "担任数据录入员、统计分析师或合规专员。",
+      "text_en": "Work as a data analyst, statistician, or compliance officer.",
+      "keyed": "+"
+    }
+  ]
+}
