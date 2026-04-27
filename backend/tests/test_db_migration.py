@@ -52,13 +52,22 @@ def test_legacy_columns_still_present():
 
 def test_assessment_default_question_set_version():
     """New assessments should default to v3_45_hybrid."""
-    init_db()
-    a = Assessment()
-    # SQLAlchemy doesn't apply defaults until insert; test the column default
     assert Assessment.__table__.c.question_set_version.default.arg == "v3_45_hybrid"
 
 
 def test_assessment_default_payment_status():
     """New assessments default to payment_status='pending'."""
-    init_db()
     assert Assessment.__table__.c.payment_status.default.arg == "pending"
+
+
+def test_indexed_columns_have_indexes():
+    """Verify that columns marked index=True actually have indexes after init_db()."""
+    init_db()
+    inspector = inspect(engine)
+    indexed: set[str] = set()
+    for ix in inspector.get_indexes("assessments"):
+        # Each index covers a list of column names; we only care about single-column indexes here.
+        if len(ix["column_names"]) == 1:
+            indexed.add(ix["column_names"][0])
+    for col in ("archetype_cell", "share_code", "profile_session_token"):
+        assert col in indexed, f"missing index on {col} (column should be indexed via index=True or migration helper)"

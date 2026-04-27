@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 from config import settings
@@ -6,6 +6,12 @@ from config import settings
 engine = create_engine(settings.DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+
+@event.listens_for(engine, "connect")
+def _sqlite_enable_fk(dbapi_conn, _):
+    """SQLite doesn't enable FK enforcement by default; do it per connection."""
+    dbapi_conn.execute("PRAGMA foreign_keys = ON")
 
 
 def get_db():
@@ -51,14 +57,35 @@ def _ensure_assessment_columns() -> None:
             if col not in existing:
                 conn.execute(text(ddl))
 
-        # Idempotent unique index for share_code (only if not already present)
-        existing_indexes = conn.execute(text("PRAGMA index_list(assessments)"))
-        index_names = {row[1] for row in existing_indexes}
-        if "ix_assessments_share_code" not in index_names:
+
+def _ensure_assessment_indexes() -> None:
+    """Create indexes on existing tables if they don't exist (upgrade path).
+
+    `Base.metadata.create_all` only creates indexes for FRESH tables;
+    pre-existing tables that gain a new `index=True` column don't get the
+    index retro-fitted. We do that explicitly here.
+    """
+    indexes_sql = {
+        "ix_assessments_archetype_cell": "CREATE INDEX ix_assessments_archetype_cell ON assessments(archetype_cell)",
+        "ix_assessments_profile_session_token": "CREATE INDEX ix_assessments_profile_session_token ON assessments(profile_session_token)",
+        "ix_assessments_share_code": "CREATE UNIQUE INDEX ix_assessments_share_code ON assessments(share_code)",
+    }
+
+    with engine.begin() as conn:
+        existing_indexes = {row[1] for row in conn.execute(text("PRAGMA index_list(assessments)"))}
+        for name, ddl in indexes_sql.items():
+            if name in existing_indexes:
+                continue
             try:
-                conn.execute(text("CREATE UNIQUE INDEX ix_assessments_share_code ON assessments(share_code)"))
-            except Exception:
-                pass  # may fail if existing duplicate NULLs in old data; safe to skip until v3 data lands
+                conn.execute(text(ddl))
+            except Exception as e:
+                # SQLite allows multiple NULLs in UNIQUE indexes, so duplicate-NULL is NOT a real risk;
+                # the only realistic failures here are concurrent migrations or a real bug.
+                # Log and continue rather than abort startup.
+                import logging
+                logging.getLogger(__name__).warning(
+                    "Index creation failed for %s (will retry next startup): %s", name, e,
+                )
 
 
 def _ensure_user_profile_columns() -> None:
@@ -83,3 +110,4 @@ def init_db():
     Base.metadata.create_all(bind=engine)
     _ensure_assessment_columns()
     _ensure_user_profile_columns()
+    _ensure_assessment_indexes()

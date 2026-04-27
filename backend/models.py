@@ -86,7 +86,7 @@ class ShortLink(Base):
     __tablename__ = "short_links"
 
     code = Column(String(8), primary_key=True)
-    assessment_id = Column(String, ForeignKey("assessments.id"), nullable=False)
+    assessment_id = Column(String, ForeignKey("assessments.id", ondelete="CASCADE"), nullable=False)
     target_url = Column(String, nullable=False)
     clicks = Column(Integer, default=0)
     created_at = Column(DateTime, default=now_utc)
