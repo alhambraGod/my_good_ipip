@@ -1,4 +1,6 @@
 """tests/test_riasec_static_24.py — verify the curated 24 RIASEC subset."""
+import pytest
+
 from questions.holland_riasec import RIASEC_TYPES, load_riasec_questions
 from questions.riasec_static_24 import get_riasec_static_24
 
@@ -34,3 +36,24 @@ def test_static_24_unique_ids():
     selected = get_riasec_static_24()
     ids = [q.id for q in selected]
     assert len(ids) == len(set(ids)), f"duplicate IDs detected: {ids}"
+
+
+def test_static_24_grouped_by_riasec_order():
+    """Lock the R-I-A-S-E-C ordering — Task 5 selector relies on this implicit contract."""
+    selected = get_riasec_static_24()
+    dims_in_order = [q.dimension for q in selected]
+    assert dims_in_order == ["R"]*4 + ["I"]*4 + ["A"]*4 + ["S"]*4 + ["E"]*4 + ["C"]*4
+
+
+def test_static_24_raises_on_missing_curated_id(monkeypatch):
+    """Defensive check: if a curated ID disappears from the 60-bank, raise loudly."""
+    from questions import riasec_static_24
+
+    riasec_static_24.get_riasec_static_24.cache_clear()
+    monkeypatch.setitem(
+        riasec_static_24.STATIC_24_ITEM_IDS, "R",
+        ("RIASEC_R01", "RIASEC_R03", "RIASEC_R05", "RIASEC_R99"),
+    )
+    with pytest.raises(ValueError, match="RIASEC_R99"):
+        riasec_static_24.get_riasec_static_24()
+    riasec_static_24.get_riasec_static_24.cache_clear()
