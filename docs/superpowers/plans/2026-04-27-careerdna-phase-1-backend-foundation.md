@@ -53,25 +53,28 @@ python_files = test_*.py
 python_classes = Test*
 python_functions = test_*
 asyncio_mode = auto
+asyncio_default_fixture_loop_scope = function
 ```
 
 - [ ] **Step 4: Create conftest.py**
+
+`backend/tests/conftest.py`:
 
 ```python
 """Shared pytest fixtures."""
 import os
 import sys
-import pytest
+
+# Module-level: runs at conftest load, BEFORE any test module imports.
+# Use setdefault so `DATABASE_URL=... pytest` overrides still work.
+os.environ.setdefault("APP_ENV", "test")
+os.environ.setdefault("DATABASE_URL", "sqlite:///:memory:")
+os.environ.setdefault("PAYMENT_MODE", "mock")
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-@pytest.fixture(scope="session", autouse=True)
-def _set_test_env():
-    os.environ["APP_ENV"] = "test"
-    os.environ["DATABASE_URL"] = "sqlite:///:memory:"
-    os.environ["PAYMENT_MODE"] = "mock"
-    yield
 ```
+
+**Why module-level (not session-scoped fixture):** pytest collects/imports test modules BEFORE running session-scoped fixtures. If env vars are set in a fixture, any test module that does `from database import engine` or `from config import settings` at module scope reads stale env vars. Module-level `setdefault` runs at conftest import time — earliest possible.
 
 - [ ] **Step 5: Write smoke test**
 
@@ -226,6 +229,8 @@ Run: `pytest tests/test_question_loaders.py::test_load_riasec_60 -v` — Expecte
 
 - [ ] **Step 6: Implement `backend/questions/holland_riasec.py`**
 
+The actual JSON shape (verified): `{"metadata": {...}, "items": [{"id": "R01", "type": "R", "text_en": "...", "keyed": "+", ...}, ...]}`. Each item already has a unique `id` field like `R01`...`C10`. We add a `RIASEC_` prefix in code for global namespacing across instruments.
+
 ```python
 """Holland RIASEC 60-item question loader (from docs/Holland_RIASEC_60_questionbank.json)."""
 
@@ -248,16 +253,15 @@ def load_riasec_questions() -> list[Question]:
     with open(_BANK_PATH, encoding="utf-8") as f:
         bank = json.load(f)
 
-    items = bank["items"]
     questions: list[Question] = []
-    for it in items:
+    for it in bank["items"]:
         questions.append(
             Question(
-                id=f"RIASEC_{it['type']}_{it['item_index']:02d}",
+                id=f"RIASEC_{it['id']}",  # e.g. "RIASEC_R01"
                 text_en=it["text_en"],
                 instrument=Instrument.RIASEC,
                 dimension=it["type"],
-                reverse=False,
+                reverse=(it.get("keyed", "+") == "-"),  # Holland items are normally all "+", but defensive
                 response_type=ResponseType.LIKERT_5,
                 role="core",
                 tags=["holland", "career"],
@@ -273,13 +277,7 @@ def get_riasec_by_id(question_id: str) -> Question | None:
     return None
 ```
 
-**Note:** This depends on `docs/Holland_RIASEC_60_questionbank.json` having `items` array with `type`, `item_index`, `text_en` fields. Verify the JSON shape:
-
-```bash
-cd backend && python -c "import json; b = json.load(open('../docs/Holland_RIASEC_60_questionbank.json')); print(list(b.keys())); print(b['items'][0] if 'items' in b else 'NO_ITEMS_KEY')"
-```
-
-If the JSON shape differs (e.g., grouped by type instead of flat items array), adjust the loader's parsing logic to match. Read the JSON top-level keys first and write a small parsing branch as needed. The test above (`len == 60`, `10 per type`, all RIASEC) will validate correctness regardless.
+**ID format:** `RIASEC_R01`...`RIASEC_C10` (prefix + raw JSON id, no extra zero-padding logic since JSON ids already have it).
 
 - [ ] **Step 7: Run RIASEC loader test**
 
@@ -315,6 +313,8 @@ Run: expect FAIL.
 
 - [ ] **Step 9: Implement `backend/questions/ipip_neo.py`**
 
+The actual JSON shape (verified): items have `id` (e.g. `N1_1`), `domain` ("N"/"E"/"O"/"A"/"C"), `facet` ("N1"), `text_en`, `keyed` ("+"/"-").
+
 ```python
 """IPIP-NEO 120-item question loader (from docs/IPIP_NEO_120_questionbank.json)."""
 
@@ -338,16 +338,14 @@ def load_ipip_questions() -> list[Question]:
     with open(_BANK_PATH, encoding="utf-8") as f:
         bank = json.load(f)
 
-    items = bank["items"]
     questions: list[Question] = []
-    for it in items:
-        domain_letter = it["domain"]
+    for it in bank["items"]:
         questions.append(
             Question(
-                id=f"IPIP_{it['facet']}_{it['item_index']:02d}",
+                id=f"IPIP_{it['id']}",  # e.g. "IPIP_N1_1"
                 text_en=it["text_en"],
                 instrument=Instrument.IPIP,
-                dimension=DOMAIN_LETTER_TO_NAME[domain_letter],
+                dimension=DOMAIN_LETTER_TO_NAME[it["domain"]],
                 reverse=(it.get("keyed", "+") == "-"),
                 response_type=ResponseType.LIKERT_5,
                 facet=it["facet"],
@@ -358,13 +356,7 @@ def load_ipip_questions() -> list[Question]:
     return questions
 ```
 
-Verify JSON shape similarly:
-
-```bash
-cd backend && python -c "import json; b = json.load(open('../docs/IPIP_NEO_120_questionbank.json')); print(list(b.keys())); print(b['items'][0] if 'items' in b else 'NO_ITEMS_KEY')"
-```
-
-Adjust loader if field names differ.
+**ID format:** `IPIP_N1_1`...`IPIP_O6_4` (prefix + raw JSON id).
 
 - [ ] **Step 10: Run IPIP loader test**
 
@@ -703,16 +695,16 @@ from functools import lru_cache
 from questions.holland_riasec import load_riasec_questions
 from questions.models import Question
 
-# Item indices per type, hand-selected from the 10-item-per-type RIASEC bank.
-# Indices are 1-based and map to `item_index` field in the JSON bank.
+# Item ids correspond to `RIASEC_<JSON_id>` from holland_riasec loader.
+# JSON ids are like "R01"..."C10" (10 per type), so loader-produced ids are "RIASEC_R01"..."RIASEC_C10".
 # This list is the SOURCE OF TRUTH — adjust here when curators refine choices.
 STATIC_24_ITEM_IDS: dict[str, list[str]] = {
-    "R": ["RIASEC_R_01", "RIASEC_R_03", "RIASEC_R_05", "RIASEC_R_08"],
-    "I": ["RIASEC_I_01", "RIASEC_I_03", "RIASEC_I_06", "RIASEC_I_09"],
-    "A": ["RIASEC_A_01", "RIASEC_A_04", "RIASEC_A_06", "RIASEC_A_09"],
-    "S": ["RIASEC_S_01", "RIASEC_S_03", "RIASEC_S_06", "RIASEC_S_08"],
-    "E": ["RIASEC_E_01", "RIASEC_E_03", "RIASEC_E_06", "RIASEC_E_09"],
-    "C": ["RIASEC_C_01", "RIASEC_C_03", "RIASEC_C_06", "RIASEC_C_09"],
+    "R": ["RIASEC_R01", "RIASEC_R03", "RIASEC_R05", "RIASEC_R08"],
+    "I": ["RIASEC_I01", "RIASEC_I03", "RIASEC_I06", "RIASEC_I09"],
+    "A": ["RIASEC_A01", "RIASEC_A04", "RIASEC_A06", "RIASEC_A09"],
+    "S": ["RIASEC_S01", "RIASEC_S03", "RIASEC_S06", "RIASEC_S08"],
+    "E": ["RIASEC_E01", "RIASEC_E03", "RIASEC_E06", "RIASEC_E09"],
+    "C": ["RIASEC_C01", "RIASEC_C03", "RIASEC_C06", "RIASEC_C09"],
 }
 
 
@@ -958,14 +950,14 @@ from services.scoring.holland_code import compute_holland_code
 
 
 def test_compute_riasec_all_max():
-    answers = {f"RIASEC_{t}_{i:02d}": 5 for t in ["R", "I", "A", "S", "E", "C"] for i in (1, 3, 6, 9)}
+    answers = {f"RIASEC_{t}{i:02d}": 5 for t in ["R", "I", "A", "S", "E", "C"] for i in (1, 3, 6, 9)}
     scores = compute_riasec_scores(answers)
     for t in ["R", "I", "A", "S", "E", "C"]:
         assert scores[t] == 20, f"{t} should be 20, got {scores[t]}"
 
 
 def test_compute_riasec_partial():
-    answers = {"RIASEC_I_01": 5, "RIASEC_I_03": 5, "RIASEC_I_06": 4, "RIASEC_I_09": 4}
+    answers = {"RIASEC_I01": 5, "RIASEC_I03": 5, "RIASEC_I06": 4, "RIASEC_I09": 4}
     scores = compute_riasec_scores(answers)
     assert scores["I"] == 18  # 5+5+4+4
     assert scores["R"] == 0   # not answered
@@ -1358,9 +1350,7 @@ git commit -m "feat(backend): add 24-cell archetype derivation + MAST 0.06% trig
 - [ ] **Step 1: Write failing test**
 
 ```python
-"""tests/test_db_migration.py"""
-import os
-os.environ["DATABASE_URL"] = "sqlite:///:memory:"
+"""tests/test_db_migration.py — DATABASE_URL is set to in-memory by conftest module-level setup."""
 
 from sqlalchemy import inspect
 
@@ -1801,14 +1791,25 @@ After all 9 tasks complete, the following must hold:
 
 ---
 
-## Execution Handoff
+## Phase 1 — COMPLETED 2026-04-28
 
-Plan complete and saved to `docs/superpowers/plans/2026-04-27-careerdna-phase-1-backend-foundation.md`.
+All 9 tasks delivered via subagent-driven development with TDD + 2-stage review (spec compliance + code quality) per task.
 
-**Two execution options:**
+**Final state:**
+- 60 backend tests passing (smoke 2 + loaders 3 + demographic/interest 6 + static-24 6 + selector 8 + scoring 8 + archetype 15 + db migration 6 + full pipeline 3 + question_bank shim 3)
+- 19 implementation/polish commits (9 `feat:` + 10 `chore:`) on `main`
+- New packages: `backend/questions/` (8 modules), `backend/services/scoring/` (4 modules)
+- Renamed: `backend/services/scoring.py` → `scoring_legacy.py`
+- Compat shim: `backend/questions/question_bank.py` (DeprecationWarning + IPIP-NEO 120 adapter)
+- DB schema: 15 new v3 columns on `assessments` + new `ShortLink` table + SQLite FK enforcement + CASCADE delete
+- All 8 acceptance criteria verified by final code reviewer
 
-1. **Subagent-Driven (recommended)** — I dispatch a fresh subagent per task, review between tasks, fast iteration. Each subagent gets just one task's context.
+**Phase 1 commit range:** `8d72816` (Task 1) → `fc347c3` (Task 9 polish)
 
-2. **Inline Execution** — Execute tasks in this session using executing-plans skill, batch execution with checkpoints for review.
+**Known follow-ups** (deferred to later phases, none blocking):
+- Phase 3 prerequisite: `/api/assessment/questions` endpoint payload silently changed shape (now 120 IPIP items vs legacy 40). Frontend rollout must coordinate.
+- Phase 3: persisted v2 IDs (`O1`/`C21`) won't resolve through new shim — migration helper or invalidation needed if any v2 records exist in prod DB.
+- Phase 2 input: `STATIC_24_ITEM_IDS` is the curation entry point; preserve the 2-activities + 1-competency + 1-occupation split.
+- Spec drift: `docs/superpowers/specs/2026-04-27-careerdna-india-redesign-design.md` §4.1 shows `ocean_scores={"O": 72, ...}`; impl uses full-name keys + dual columns (`ocean_scores` raw + `ocean_percentiles`). Spec to be updated in next plan iteration.
 
-**Which approach?**
+**Next**: Phase 2 plan (24 cell content + 40 careers + IBTI Hinglish copy) — separate writing-plans pass.
