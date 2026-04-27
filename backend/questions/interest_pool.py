@@ -1,17 +1,19 @@
-"""Indian-flavored IPIP-NEO 16-item interest pool — 30+ candidates, dynamic-selected at runtime.
+"""Indian-flavored IPIP-NEO interest pool — 30+ candidate items.
 
-Each item is double-coded:
+The L1.5 selector (questions.selector) picks 16 of these at runtime, weighted
+by demographic-derived profile tags. Each item is double-coded:
   - dimension: maps to one OCEAN domain (for scoring)
   - tags: profile-tag affinities (for selector weighting)
 
-Wording adopts IBTI-style Hinglish accents while preserving IPIP semantic intent."""
+Wording adopts IBTI-style Hinglish accents while preserving IPIP semantic intent.
+"""
 
 from questions.models import Instrument, Question, ResponseType
 
 
-def _q(id: str, text: str, dim: str, reverse: bool, tags: list[str]) -> Question:
+def _q(qid: str, text: str, dim: str, reverse: bool, tags: list[str]) -> Question:
     return Question(
-        id=id,
+        id=qid,
         text_en=text,
         instrument=Instrument.INTEREST,
         dimension=dim,

@@ -85,7 +85,7 @@ _STAGE_TAGS = {
 
 _PRESSURE_TAGS = {
     "career": ["career-uncertainty"],
-    "family": ["family-pressure", "Sharma-ji-syndrome"],
+    "family": ["family-pressure", "sharma-ji-syndrome"],
     "money": ["EMI", "money", "financial-stress"],
     "self_doubt": ["self-doubt", "imposter"],
     "curious": [],
