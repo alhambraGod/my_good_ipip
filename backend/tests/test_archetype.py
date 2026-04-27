@@ -77,3 +77,48 @@ def test_valid_cells_24_distribution():
         by_main[cell[0]] = by_main.get(cell[0], 0) + 1
     for t in ["R", "I", "A", "S", "E", "C"]:
         assert by_main[t] == 4, f"main type {t} should have 4 sub-types, got {by_main.get(t, 0)}"
+
+
+def test_valid_cells_exact_set():
+    """Lock the exact 24 cells against accidental changes to opposite-pair rules."""
+    expected = {
+        "RI", "RA", "RE", "RC",
+        "IR", "IA", "IS", "IC",
+        "AR", "AI", "AS", "AE",
+        "SI", "SA", "SE", "SC",
+        "ER", "EA", "ES", "EC",
+        "CR", "CI", "CS", "CE",
+    }
+    assert set(VALID_CELLS_24) == expected
+
+
+def test_derive_cell_fallback_to_score_scan():
+    """If holland_code's 2nd and 3rd letters are both invalid (impossible under
+    compute_holland_code, but possible with manually-constructed input), fall back
+    to scanning all RIASEC types by score for the highest valid sub.
+    """
+    # Construct a degenerate input: main=R, 2nd=S (forbidden), 3rd=R (self).
+    # The fallback must scan riasec_scores and pick the highest valid: I=15.
+    cell = derive_archetype_cell(
+        riasec_scores={"R": 20, "S": 18, "I": 15, "C": 10, "A": 5, "E": 2},
+        holland_code="RSR",  # malformed but exercises fallback
+    )
+    assert cell == "RI"
+
+
+def test_mast_trigger_at_exact_thresholds():
+    """MAST gates use ≥/≤ semantics — exactly at threshold should still trigger."""
+    ocean_pct = {"openness": 90, "conscientiousness": 70, "extraversion": 85, "agreeableness": 85, "neuroticism": 15}
+    riasec_scores = {"R": 8, "I": 8, "A": 8, "S": 8, "E": 8, "C": 8}
+    assert check_mast_trigger(ocean_pct, riasec_scores) is True
+
+
+def test_mast_trigger_just_below_thresholds():
+    """One unit below any threshold blocks the trigger."""
+    base_ocean = {"openness": 90, "conscientiousness": 70, "extraversion": 85, "agreeableness": 85, "neuroticism": 15}
+    base_riasec = {"R": 8, "I": 8, "A": 8, "S": 8, "E": 8, "C": 8}
+    assert not check_mast_trigger({**base_ocean, "openness": 89}, base_riasec)
+    assert not check_mast_trigger({**base_ocean, "extraversion": 84}, base_riasec)
+    assert not check_mast_trigger({**base_ocean, "agreeableness": 84}, base_riasec)
+    assert not check_mast_trigger({**base_ocean, "neuroticism": 16}, base_riasec)
+    assert not check_mast_trigger(base_ocean, {**base_riasec, "C": 7})
