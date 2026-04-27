@@ -25,7 +25,8 @@ from schemas import (
 )
 from services.jwt_service import get_optional_user
 from services.personalization import select_personalized_questions
-from services.scoring import calculate_percentiles, calculate_scores, validate_answer_set
+# TODO(phase-3): replace with new services.scoring package after router refactor
+from services.scoring_legacy import calculate_percentiles, calculate_scores, validate_answer_set
 
 router = APIRouter(prefix="/api/assessment", tags=["assessment"])
 
