@@ -6,10 +6,12 @@ both are factored into a domain's average score.
 
 from __future__ import annotations
 
+import functools
 from collections import defaultdict
 
 from questions.interest_pool import INTEREST_POOL
 from questions.ipip_neo import OCEAN_DOMAINS, load_ipip_questions
+from questions.models import Question
 
 # Approximate IPIP-NEO percentile lookup (kept from legacy scoring; later replaced by IRT calibration).
 PERCENTILE_TABLE: dict[tuple[float, float], int] = {
@@ -39,12 +41,18 @@ def score_to_percentile(score: float) -> int:
     return 50
 
 
-def _build_question_index() -> dict:
-    """Combined index of {id: Question} for all OCEAN-scoring items (IPIP + INTEREST_POOL)."""
-    index: dict = {}
+@functools.cache
+def _build_question_index() -> dict[str, Question]:
+    """Combined index of {id: Question} for all OCEAN-scoring items (IPIP + INTEREST_POOL).
+
+    Cached so we don't rebuild on every compute_ocean_scores call.
+    """
+    index: dict[str, Question] = {}
     for q in load_ipip_questions():
         index[q.id] = q
     for q in INTEREST_POOL:
+        if q.id in index:
+            raise ValueError(f"Duplicate question ID across IPIP and INTEREST pools: {q.id}")
         index[q.id] = q
     return index
 

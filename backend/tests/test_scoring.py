@@ -19,12 +19,12 @@ def test_compute_riasec_partial():
 
 
 def test_compute_ocean_with_reverse():
-    """Forward-keyed items with all 3s yield 60.0; reverse-keyed flip 1↔5, 2↔4."""
+    """Reverse-keyed items must flip 1↔5, so forward=5 + reverse=1 both contribute as 5."""
     from questions.ipip_neo import load_ipip_questions
-    ipip = {q.id: q for q in load_ipip_questions()}
-    answers = {q.id: 3 for q in ipip.values() if q.dimension == "openness"}
+    ipip = [q for q in load_ipip_questions() if q.dimension == "openness"]
+    answers = {q.id: (1 if q.reverse else 5) for q in ipip}
     scores = compute_ocean_scores(answers)
-    assert scores["openness"] == 60.0  # mean = 3.0 * 20 = 60.0
+    assert scores["openness"] == 100.0  # all flips agree on max
 
 
 def test_score_to_percentile_boundaries():
@@ -48,14 +48,28 @@ def test_holland_code_tiebreak_alphabetical():
 
 def test_compute_ocean_includes_interest_pool():
     """OCEAN scoring should consider INTEREST_POOL items in addition to IPIP_NEO 120."""
-    from questions.interest_pool import INTEREST_POOL
-    ext_items = [q for q in INTEREST_POOL if q.dimension == "extraversion"]
-    answers = {q.id: 5 for q in ext_items[:3]}
+    answers = {
+        "INT_E_01": 5,  # forward-keyed extraversion
+        "INT_E_03": 5,  # forward-keyed extraversion
+        "INT_E_06": 5,  # forward-keyed extraversion
+    }
     scores = compute_ocean_scores(answers)
-    # 3 items at 5 each, but reverse-keyed items will flip
-    assert scores["extraversion"] > 50.0  # forward items contribute high; even with some reverse, expect > mid
+    # 3 forward-keyed items at 5 → mean 5.0 → score 100.0
+    assert scores["extraversion"] == 100.0
 
 
-# `compute_ocean_percentiles` is exported at the package level; it is verified end-to-end in Task 7
-# (archetype derivation tests). The import above keeps the public-API surface visible here.
-_ = compute_ocean_percentiles
+def test_compute_ocean_percentiles_maps_all_dims():
+    pct = compute_ocean_percentiles({
+        "openness": 95.0,
+        "conscientiousness": 50.0,
+        "extraversion": 25.0,
+        "agreeableness": 70.0,
+        "neuroticism": 15.0,
+    })
+    assert pct["openness"] == 99
+    # 25.0 falls in (20.0, 30.0) bucket → percentile = 8
+    assert pct["extraversion"] == 8
+    assert pct["conscientiousness"] == 58
+    assert 75 <= pct["agreeableness"] <= 88
+    # 15.0 falls in (0.0, 20.0) bucket → percentile = 2
+    assert pct["neuroticism"] == 2

@@ -1,4 +1,9 @@
-"""Big Five scoring engine with percentile mapping."""
+"""DEPRECATED Big Five scoring engine — kept until Phase 3 router refactor.
+
+For new code, use `services.scoring.{riasec,ocean,holland_code}` instead.
+The single remaining caller is `routers/assessment.py`; after Phase 3 refactor
+this module can be deleted.
+"""
 
 from questions.question_bank import get_question_map
 
