@@ -701,11 +701,11 @@
     "career_id": "customer_success_manager",
     "name_en": "Customer Success Manager",
     "name_hi": "Customer Success Prabandhak / कस्टमर सक्सेस प्रबंधक",
-    "tagline_en": "Renewals are won post-sale",
+    "tagline_en": "Renewals are won post-sale — Indian SaaS retention is the metric Razorpay, Freshworks, and Postman fundraise on right now.",
     "why_match": {
-      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches customer_success_manager",
-      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches customer_success_manager",
-      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches customer_success_manager"
+      "CS": "Customer-steward DNA is the SaaS retention engine. Your instinct to systematise warmth at scale — onboarding playbooks, QBR templates, churn-risk dashboards — is what gets a B2B account from pilot to multi-year contract without you ever raising your voice.",
+      "ES": "Charismatic-closer wiring matters as much in renewal as in net-new. Indian B2B clients renew because they trust you, not because the integration is irreplaceable; your ability to read a CRO's mood from a Slack one-liner is the moat between 80% and 120% net revenue retention.",
+      "SC": "The all-knowing-aunty operating system is the actual job description. You'll remember which client's PM hates JIRA, which CFO is being transferred to Singapore, which CIO's daughter is at Ashoka — and you'll quietly route that intelligence into the renewal conversation six months early."
     },
     "indian_companies": [
       "Freshworks",
@@ -770,9 +770,11 @@
     "career_id": "data_scientist",
     "name_en": "Data Scientist",
     "name_hi": "Aankde Vigyani / डेटा साइंटिस्ट",
-    "tagline_en": "Turn chaos into signal",
+    "tagline_en": "Turn chaos into signal — Indian fintech and consumer-internet run on this, and the salary curve keeps bending up.",
     "why_match": {
-      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches data_scientist"
+      "IA": "Your pattern-recognition obsession plus tolerance for ambiguous data is the actual job description. Where others see noise, you see the model — and you'll defend that thesis through three-hour stakeholder reviews while quietly noting the sixteen edge cases nobody else thought to ask about.",
+      "IC": "Your numerical brain plus structured-pipeline mindset is the moat in a field flooded by self-taught generalists. Comfort with notebooks AND data contracts is what gets you from analyst to ML engineer faster than peers who treat 'rigor' as an optional setting.",
+      "IR": "Your engineering-first instinct — load the data, profile it, automate it — makes you the rare data scientist who ships production code, not just notebooks. That's a 2x multiplier in Indian product companies where the line between DS and MLE keeps blurring."
     },
     "indian_companies": [
       "Razorpay",
@@ -1768,9 +1770,11 @@
     "career_id": "policy_analyst",
     "name_en": "Policy Analyst",
     "name_hi": "Niti Vishleshak / नीति विश्लेषक",
-    "tagline_en": "Evidence shapes nation-building",
+    "tagline_en": "Evidence shapes nation-building — Delhi's think-tank corridor is small, underpaid, and disproportionately influential on a billion lives.",
     "why_match": {
-      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches policy_analyst"
+      "IA": "Your 3 AM chai-philosopher brain is exactly what NITI Aayog briefs are written by — five competing hypotheses, one footnote-heavy memo, the patience to map second-order effects across a state of 80 million people. Where others see noise, you see the policy lever.",
+      "CE": "Sarkari-babu archetype is the unglamorous half of the job — knowing which file moves through which desk, which IAS officer reads which think-tank, which language a parliamentary standing committee actually responds to. Process literacy is what turns research into law.",
+      "IS": "Field-research policy work is empirical anthropology with stakes. Your empathic-investigator instinct lets you sit in a Bihar district hospital, listen to the ANM, and hear what a Lutyens-Delhi consultant would have missed entirely. That's what makes the policy memo land."
     },
     "indian_companies": [
       "NITI Aayog",
@@ -2160,11 +2164,11 @@
     "career_id": "sales_manager",
     "name_en": "Sales Manager",
     "name_hi": "Bikri Prabandhak / बिक्री प्रबंधक",
-    "tagline_en": "Close the deal, then the next one",
+    "tagline_en": "Close the deal, then the next — Indian B2B and consumer floors still compress careers fastest, if you can carry quota year on year.",
     "why_match": {
-      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches sales_manager",
-      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches sales_manager",
-      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches sales_manager"
+      "ER": "Your hustle-founder operating mode — ship-the-pitch-yourself, follow-up-while-eating-dosa — translates straight to a quota carrier. Indian sales floors reward the rep who can chase, qualify, and close the same lead inside one quarter, and you're wired to do exactly that.",
+      "ES": "Charismatic-closer DNA is the actual product on a B2B sales floor — clients buy you first, the SaaS later. Your ability to remember a prospect's daughter's college and weave it into a Diwali check-in is what bumps a 4-Cr ARR rep into a 10-Cr one.",
+      "SE": "Best sales managers grow other sales managers. Your Marwari-mentor instinct — coach the rookie before HR notices — is what turns a personal quota into a regional book that compounds for ten years, and that's the actual senior-sales-leader career path."
     },
     "indian_companies": [
       "Salesforce India",
@@ -2195,11 +2199,11 @@
     "career_id": "school_teacher",
     "name_en": "School Teacher",
     "name_hi": "Adhyapak / अध्यापक",
-    "tagline_en": "Shape the next generation, daily",
+    "tagline_en": "Shape the next generation, daily — yes, the salary is the trade, but impact compounds across forty years and four hundred students.",
     "why_match": {
-      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches school_teacher",
-      "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches school_teacher",
-      "SI": "PLACEHOLDER — Phase 2.5 will articulate why SI matches school_teacher"
+      "CS": "Indian classrooms run on systems — attendance, syllabus, parent updates, internal exams, board prep. Your customer-steward instinct for warm process and audit-quality records is what keeps a 45-student section from descending into chaos in week three of the academic year.",
+      "IS": "You study children the way a researcher studies a system — patiently, empirically, without losing the warmth that makes them open up. That's the difference between a teacher students forget by Class 12 and the one whose name they still drop in their wedding speech.",
+      "SI": "Mentor-by-asking-better-questions is the long arc. In a culture where parents and tuition centres shout, your reflective Socratic style is the one Sharma ji's beta will quietly remember when he's choosing his stream — and your career compounds in alumni gratitude, not paychecks."
     },
     "indian_companies": [
       "DPS schools",
@@ -2227,10 +2231,11 @@
     "career_id": "screenwriter",
     "name_en": "Screenwriter",
     "name_hi": "Patkatha Lekhak / पटकथा लेखक",
-    "tagline_en": "Stories that earn their runtime",
+    "tagline_en": "Stories that earn their runtime — Bollywood is one boom, OTT is the other, and writers' rooms are India's quiet new gold rush.",
     "why_match": {
-      "AI": "PLACEHOLDER — Phase 2.5 will articulate why AI matches screenwriter",
-      "AS": "PLACEHOLDER — Phase 2.5 will articulate why AS matches screenwriter"
+      "AI": "The auteur in you writes from a thesis, not a trend report. That's what separates a Netflix India spec script that gets passed around from one that gets greenlit — you're not chasing the algorithm, you're building the show somebody will still talk about three years on.",
+      "AS": "Your Bollywood-storyteller wiring reads the room before the room reads you. Whether it's a ₹100-crore commercial drama or a Mumbai-set indie, you can calibrate emotional beats to a multiplex audience without flattening the characters into types.",
+      "AE": "Streaming and studio Bollywood both pay for taste-as-strategy. Your ability to hold a creative vision AND a budget conversation in the same head is what gets you out of the writers' room and into showrunner territory in five years instead of fifteen."
     },
     "indian_companies": [
       "Tiger Baby Films",
@@ -2393,10 +2398,11 @@
     "career_id": "startup_founder",
     "name_en": "Startup Founder",
     "name_hi": "Startup Sansthapak / स्टार्टअप संस्थापक",
-    "tagline_en": "Conviction, capital, customers",
+    "tagline_en": "Conviction, capital, customers — Bangalore and Bombay still mint founders weekly, and the first ten teammates are the real Series A.",
     "why_match": {
-      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches startup_founder",
-      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches startup_founder"
+      "EC": "Your Marwari-mindset portfolio brain is the rare founder asset most YC-style profiles lack. You'll run the SaaS startup AND angel-cheque a friend's seed round AND keep a small commercial unit on the side — three engines compounding while pure-hustle peers go all-in on one bet.",
+      "ER": "Your hustle-founder DNA is the entire job description in year one — ship the MVP yourself, sell to the first ten customers, hire the eleventh person who'll do it better than you. Bangalore's Indiranagar coffee meetings are won by operators who've already shipped, not deck artists.",
+      "ES": "Founders sell every day — to customers, to candidates, to investors, to co-founders' spouses. Your charismatic-closer wiring is what gets a Tier-2 MBA founder a Peak XV term sheet over a Tier-1 IIT founder with a worse story; in Indian fundraising, conviction shows up in the room or it doesn't."
     },
     "indian_companies": [
       "Y Combinator alumni",
@@ -2427,9 +2433,11 @@
     "career_id": "strategy_consultant",
     "name_en": "Strategy Consultant",
     "name_hi": "Ranniti Salahkar / रणनीति सलाहकार",
-    "tagline_en": "Frameworks for the unframable",
+    "tagline_en": "Frameworks for the unframable — Tier-1 MBA pipelines exit here, and partner track is real if you survive years one through three.",
     "why_match": {
-      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches strategy_consultant"
+      "IA": "The job is overthinking, monetised. Your tendency to map a problem until 3 AM is exactly what McKinsey-style stakeholder meetings reward — five hypothesis trees, one synthesis slide, and the calm authority that lets a CXO trust your structure over their gut.",
+      "AI": "Strategy decks are short stories with bullet points. Your auteur instinct for narrative arc and original framing is what separates the consultant who repackages two-by-twos from the one whose memo gets quoted in the boardroom six months later.",
+      "EC": "Top-tier consultants think in portfolios — three workstreams, four clients, six career bets. Your Marwari-style multi-business mental model means you'll naturally graduate from analyst to engagement manager to partner without losing track of any line item."
     },
     "indian_companies": [
       "McKinsey India",
