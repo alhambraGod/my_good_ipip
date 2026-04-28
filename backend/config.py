@@ -42,6 +42,13 @@ class Settings(BaseSettings):
     META_APP_SECRET: str = ""
     META_REDIRECT_URI: str = "http://localhost:3000/auth/whatsapp/callback"
 
+    RAZORPAY_KEY_ID: str = ""
+    RAZORPAY_KEY_SECRET: str = ""
+    RAZORPAY_WEBHOOK_SECRET: str = ""
+    PROMO_MAX_REDEMPTIONS: int = 1000
+    PRICE_FULL_INR: int = 99
+    PRICE_PROMO_INR: int = 49
+
     @property
     def is_dev(self) -> bool:
         return self.APP_ENV == "dev"
