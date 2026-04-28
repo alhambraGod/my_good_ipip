@@ -22,7 +22,7 @@ _COPY_POOL: dict[int, tuple[str, ...]] = {
     20: (
         "Halfway. Even Sharma ji's beta started here.",
         "20 questions in. You're more disciplined than your last EMI day.",
-        "Halfway through. 25 minutes from now you'll know your IBTI.",
+        "Halfway through. 25 minutes from now you'll know your career archetype.",
         "20 down. Take a breath. The good part is starting.",
     ),
     30: (

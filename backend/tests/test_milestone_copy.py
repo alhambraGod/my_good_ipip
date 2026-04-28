@@ -57,4 +57,4 @@ def test_each_milestone_has_pool_of_at_least_three():
     from services.milestone_copy import _COPY_POOL
     for m in MILESTONE_THRESHOLDS:
         assert m in _COPY_POOL, f"milestone {m} missing from _COPY_POOL"
-        assert len(_COPY_POOL[m]) >= 3, f"milestone {m} has only {len(_COPY_POOL[m])} copy lines; need >=3 for variety"
+        assert 4 <= len(_COPY_POOL[m]) <= 6, f"milestone {m} has {len(_COPY_POOL[m])} copy lines; need 4-6 per spec §3.6"
