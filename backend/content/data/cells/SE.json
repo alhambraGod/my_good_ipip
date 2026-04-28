@@ -3,22 +3,22 @@
   "label_en": "The Marwari Mentor",
   "label_hi": "Salah-Kar",
   "slogan_en": "You don't run the business. You raise the people who do.",
-  "rarity_pct": 5.5,
-  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Social-dominant + Enterprising-supporting; people-leader whose KPI is the next generation of operators they grow. This 80-120 word core insight will describe the SE archetype (The Marwari Mentor) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
-  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the SE cell (The Marwari Mentor). Theme: Social-dominant + Enterprising-supporting; people-leader whose KPI is the next generation of operators they grow. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably SE, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype.",
+  "rarity_pct": 5.1,
+  "core_insight_en": "Every team you've ever joined had a 'before you' and an 'after you.' You don't lead by command — you lead by lifting. You spot the kid in the corner with the spark before HR notices, and three years later that kid is running a department. People say 'Sharma uncle changed my life.' For most people, that's a compliment. For you, it's a job description.",
+  "deep_description_en": "You're the senior who never actually says 'I'm your boss.' You say 'tell me what you're working on' and three years later that junior is running their own team — and they still text you on Diwali. In the Indian workplace, two kinds of senior people exist: the manager who happens to mentor (mentoring is a side-effect of competence) and the mentor who happens to manage (managing is just the legible cover for what you actually do). You're firmly the second kind. Your KPI says 'team output' but your real metric is who-leveled-up under your watch. The Marwari Mentor archetype isn't about caste or community — it's about an operating system imported from the joint family: build the next generation, and your own wealth, reach, and reputation compound through them, sometimes for thirty years. The modern version is everywhere. The HR business partner who flags high-potential talent before formal reviews. The edtech sales leader who has produced three other sales leaders. The school principal who turned out forty founders in twenty years. The startup VP whose direct reports keep getting promoted out from under them and whose Slack DMs are 60% 'thank you bhaiya' messages from people who left two companies ago. Joint-family India trained you for this — chacha-ji wasn't a boss, he was a guide; uncles asked questions until you found the answer yourself. You imported that into the office and it scales beautifully. Where IA thinks alone in their head, you always think with somebody in mind — usually three different people in three different stages of growth at once. The trap is brutal and quiet: SE types accumulate 'mentor capital' — alumni who become founders, juniors who become VPs, students who DM you a decade later asking for advice on a term sheet — but mentor capital doesn't show up on appraisal forms. Sharma uncle has been at the same level for eight years because he keeps choosing to lift instead of climb, and the org keeps quietly accepting that trade. Don't be Sharma uncle. The fix is two-fold: write down what you teach, because your verbal generosity has zero compounding and written legacy is the difference between SE and SE-with-leverage; and take the visible promotion when it's offered, because you cannot help your people from a less senior seat, however cozy that seat feels. Sales management, HR partnerships, education leadership, NGO program leadership, executive coaching — these aren't fallback careers; they're the rare roles where the thing you can't stop doing is literally the job description. Build mentor capital deliberately. Charge for it eventually. And don't let lifting others quietly substitute for shipping your own visible work.",
   "strengths_en": [
-    "Empathic listening that surfaces unspoken needs",
-    "Coaching tone that grows others without micromanaging",
-    "Trust-building across cultural and generational gaps",
-    "Patient explanation under emotional intensity",
-    "Long-arc relationship maintenance over quick wins"
+    "Reading individual potential before HR or formal metrics catch it",
+    "Coaching mid-conflict colleagues into resolution without taking sides",
+    "Building loyalty depth that survives org changes and salary jumps",
+    "Translating commercial pressure into language that motivates without burning out the team",
+    "Making juniors feel invested-in, which compounds into voluntary discretionary effort"
   ],
   "growth_tips_en": [
-    "Set sustainable boundaries so you can give without depleting reserves",
-    "Practice naming hard truths so support doesn't slide into avoidance",
-    "Track outcomes alongside relationships to keep work measurable",
-    "Take quarterly silent time to recharge from emotional labor",
-    "Develop a saying-no script that protects your highest-impact relationships"
+    "Schedule weekly 'mentor-yourself' time that's not negotiable, even when juniors are struggling",
+    "Write down what you teach — your verbal generosity has no leverage; written generosity scales",
+    "Set explicit boundaries on after-hours coaching; mentor capital lasts longer when you're not exhausted",
+    "Find one peer (not junior) to actively challenge you; SE types under-receive feedback because everyone defers",
+    "Take the visible promotion when offered — your 'I'd rather support' instinct quietly costs you and the people you mentor"
   ],
   "career_directions": [
     "sales_manager",
@@ -29,11 +29,14 @@
     "ngo_program_director"
   ],
   "share_lines_en": [
-    "I'm SE. The org chart is just my favorite people in different boxes.",
-    "I'm SE. 5.5% rare. I will remember your kid's exam date better than mine."
+    "I'm SE. Half my team is now my competitor and I'm fine with that.",
+    "Got SE — apparently I'm the friend who teaches everyone everything and forgets to teach myself anything. Fair.",
+    "I'm SE. My LinkedIn DMs are 60% 'thank you uncle' messages from people I taught Excel in 2018."
   ],
   "ocean_modifiers": {
-    "high_extraversion": "Your extraversion is the room-warmer; pair it with quiet 1:1 time so the deeper coaching happens.",
-    "high_agreeableness": "Your agreeableness is the trust layer; pair it with hard-call practice so feedback lands clean."
+    "high_agreeableness": "Your warmth IS the operating system — but make sure the boundaries are fenced; otherwise you become the org's emotional support animal and start resenting it quietly.",
+    "high_neuroticism": "When you carry team stress, externalize it: vent to one peer outside the team, weekly. SE types absorb without venting and that ends in burnout, often dressed up as 'I just need a holiday.'",
+    "high_extraversion": "Lean into 'in-person mentor' moments — your superpower needs facetime; remote-only setups starve the mentoring loop you depend on, so block calendar time for offsites and corridor chats.",
+    "high_conscientiousness": "Use your discipline to build a written knowledge base — your verbal teaching has no compounding; written teaching is the difference between SE and SE-with-leverage."
   }
 }

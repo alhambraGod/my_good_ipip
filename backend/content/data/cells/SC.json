@@ -2,23 +2,23 @@
   "cell": "SC",
   "label_en": "The All-Knowing Aunty",
   "label_hi": "Sab-Jaanne-Wali Aunty",
-  "slogan_en": "You remember every birthday, every spat, and exactly who owes what.",
-  "rarity_pct": 6.2,
-  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Social-dominant + Conventional-supporting; community memory and stewardship engine — the institutional knowledge keeper. This 80-120 word core insight will describe the SC archetype (The All-Knowing Aunty) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
-  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the SC cell (The All-Knowing Aunty). Theme: Social-dominant + Conventional-supporting; community memory and stewardship engine — the institutional knowledge keeper. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably SC, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype.",
+  "slogan_en": "You know everyone's salary. Your parents don't. Yet.",
+  "rarity_pct": 6.1,
+  "core_insight_en": "You know everyone's salary. Their parents don't. Yet. You can recall who married whom in 2014, which cousin's beta got into Stanford, which colleague's marriage is on the rocks before HR gets a whiff. The Indian middle class runs on aunty-class operating systems and you ARE the operating system — the WhatsApp matriarch, the family network's pre-Internet Google, the kind of person whose phone has eight hundred contacts. You can place anyone's job, kid, and last vacation within thirty seconds. People underestimate how much economic value lives in that map.",
+  "deep_description_en": "Indian aunty culture gets reduced to a meme — interfering, gossipy, judgmental, asking when you'll get married — and that meme is, frankly, the cheap version. You're the expensive version. You're the actually-essential community infrastructure that keeps a 200-person extended family network from collapsing into anonymity. You remember birthdays. You remember which cousin's beta needs an internship and which uncle has a friend at HUL who could make it happen. You remember the Sharmas haven't spoken to the Guptas since 2009, and you tactfully seat them four tables apart at the wedding. You're not a gossip; you're a community-scale information system, and the difference is what you do with the data. Gossip-aunty broadcasts. Matriarch-aunty curates, protects, and quietly routes information toward useful destinations. India runs on this kind of woman, and most of the country has never thought to put a price on her labour. You're the pre-Internet Google for the family network, the WhatsApp group's actual brain, the reason every gathering happens at all. The modern career version of you is sitting in plain sight: HR business partner who knows every team's emotional weather before standup; customer success manager whose retention is forty percent above benchmark because you actually remember each client's daughter's college; community manager who turns Discord into a real network; alumni engagement lead who can pull a hundred grads together for a fundraiser in three days. In Indian markets — where networks beat resumes, where 'who do you know' beats 'what do you know' — your encyclopedic recall plus active maintenance is a quietly nuclear commercial asset. The trap, of course, is being 'on' all the time: every WhatsApp ping, every wedding, every funeral, every kid's first job, every breakup — and slowly burning out into resentment dressed up as 'I just need a vacation.' The other trap is letting the gossip instinct dominate the matriarch instinct; once you start broadcasting more than curating, you become the joke version of yourself. The fix is structural. Build a digital CRM (your memory is excellent, but your kids inherit nothing if you die without writing it down). Offer advice 1 in 5 times instead of 4 in 5 — ask better questions instead, mostly. Claim a domain — HR, partnerships, alumni, community management, customer success — where 'aunty mode' is literally the job description, then charge for it. And schedule alone-time deliberately, because being available to the entire network 24/7 isn't virtue, it's slow self-erasure with extra steps. Six percent of Indians are exactly this dramatic, exactly this useful, exactly this tired. Recognize the value, write it down, build leverage, and stop apologizing for being the reason the whole thing actually works.",
   "strengths_en": [
-    "Empathic listening that surfaces unspoken needs",
-    "Coaching tone that grows others without micromanaging",
-    "Trust-building across cultural and generational gaps",
-    "Patient explanation under emotional intensity",
-    "Long-arc relationship maintenance over quick wins"
+    "Encyclopedic recall of names, roles, relationships, and timelines — 5+ years deep",
+    "Network depth + active maintenance — you don't lose touch even when life gets busy",
+    "Reading the room across generational, regional, and class lines effortlessly",
+    "Conflict de-escalation through 'I know everyone' soft power before HR has to formalize",
+    "Community-scale information synthesis — you can predict who'll quit before they update LinkedIn"
   ],
   "growth_tips_en": [
-    "Set sustainable boundaries so you can give without depleting reserves",
-    "Practice naming hard truths so support doesn't slide into avoidance",
-    "Track outcomes alongside relationships to keep work measurable",
-    "Take quarterly silent time to recharge from emotional labor",
-    "Develop a saying-no script that protects your highest-impact relationships"
+    "Channel the gossip instinct into structured writing — newsletters, internal reports, community digests",
+    "Build a digital CRM for your network; your memory is good but won't last forever, and your kids inherit nothing",
+    "Resist unsolicited advice — offer it 1 in 5 times; the other 4, ask better questions instead",
+    "Find a domain (HR, partnerships, alumni, community) where 'aunty mode' is the actual job description",
+    "Schedule alone-time deliberately; you'll burn out from being 'always on' for the network"
   ],
   "career_directions": [
     "hr_business_partner",
@@ -29,11 +29,14 @@
     "wedding_planner"
   ],
   "share_lines_en": [
-    "I'm SC. The org runs on my Google Sheet of who-owes-what.",
-    "I'm SC. 6.2% rare. The wedding ran smoothly because I was in the WhatsApp group."
+    "I'm SC. I know your salary. Your parents don't. Yet.",
+    "Got SC. So apparently 6.1% of Indians are *the WhatsApp group*. Show me the others. → [link]",
+    "I'm SC. Three weddings, one funeral, and a startup launch this week. I'm tired but I'm winning."
   ],
   "ocean_modifiers": {
-    "high_agreeableness": "Your agreeableness is the glue; protect against absorbing other people's emotional debt.",
-    "high_conscientiousness": "Your conscientiousness keeps the social fabric intact; automate the trackable bits so the relational bits get your attention."
+    "high_extraversion": "Extraversion is the fuel — you can hold attention across a 40-person table and remember every name. Channel it into interview-heavy roles (recruiting, business development, fundraising); soloist research roles will starve you in three months.",
+    "high_agreeableness": "Your warmth is the lubricant that makes the network actually function. The trap: you'll absorb other people's emotional debt and call it 'helping.' Practice declining requests as daily reps; the network respects boundaries from people who actually have them.",
+    "high_conscientiousness": "Conscientiousness is what separates matriarch-aunty from gossip-aunty: you actually follow up, send the introduction email, remember the date. Use it to build a real CRM; verbal memory is glorious but it doesn't compound, and your kids inherit nothing without it written down.",
+    "low_openness": "Low-O SCs are deeply rooted in tradition, ritual, and continuity — strengths in HR, alumni work, customer success, community management. The risk: you'll under-rate emerging communication forms (Discord, Substack, niche Slack groups). Force yourself onto one new platform a year; that's where the next decade's networks are."
   }
 }

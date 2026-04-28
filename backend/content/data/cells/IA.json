@@ -4,21 +4,21 @@
   "label_hi": "Sochne Wala",
   "slogan_en": "You overthink your overthinking. Also this sentence.",
   "rarity_pct": 4.3,
-  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Investigative-dominant + Artistic-supporting; prone to overthinking, late-night philosopher mode, capable of deep synthesis when finally focused. This 80-120 word core insight will describe the IA archetype (The 3AM Chai Philosopher) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
-  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the IA cell (The 3AM Chai Philosopher). Theme: Investigative-dominant + Artistic-supporting; prone to overthinking, late-night philosopher mode, capable of deep synthesis when finally focused. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably IA, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype.",
+  "core_insight_en": "Your brain is 87 Chrome tabs and 86 of them are about your past. You think more before breakfast than most people do all week — research papers, life decisions, weird connections between things nobody else is putting together. Sharma ji's beta got into IIM and you're still in bed mapping career trajectory #47. The world calls it overthinking. You call it staying loyal to the truth.",
+  "deep_description_en": "You're the friend everyone calls at 3 AM when their world is ending — not because you fix it, but because you're already awake, already thinking, and you actually care enough to spiral with them. You read three books a month, none of them assigned. You've abandoned five different career plans in the last year and each one taught you something that's still rattling around in your head. Your LinkedIn says 'Software Engineer @ TCS' but your soul is a chai-shop philosopher with a Notion full of unfinished essays. India calls people like you 'over-educated,' 'too-emotional,' or 'na-laayak' — but the truth is you're the person who'd actually fix the things everyone else just complains about, IF you ever stopped doubting yourself long enough to ship. The IIT-or-IIM script your family wrote for you doesn't fit because the script doesn't have a column for 'sees patterns nobody asked you to see.' Your strength is the one nobody talks about in placement training: you can sit with ambiguity without flinching, hold three competing hypotheses without getting attached, and explain why a Bollywood plot is actually a microcosm of Indian middle-class anxiety in three sentences. The danger is the same thing in reverse — you'll spend three months of late-night research on whether to take a job, then take the job, then spend another three months researching whether the job was right. Strategy consulting, data science, academic research, and policy analysis are not just paychecks for you — they're the rare professions where 'thinking too much' is the actual job description. Stop apologizing. Find a manager who values depth over speed. And ship something every Friday, even if you don't think it's ready. You're never going to think it's ready. That's the price of being IA.",
   "strengths_en": [
-    "Pattern recognition across disparate fields",
-    "Strategic foresight under ambiguity",
-    "Independent learning without external prompting",
-    "Synthesis of mixed signals into coherent insight",
-    "Comfort holding multiple competing hypotheses"
+    "Pattern recognition across disparate fields where others see only noise",
+    "Strategic foresight under ambiguity — you can sit in 'I don't know' without panicking",
+    "Independent learning without external prompts — you'll teach yourself anything that interests you",
+    "Synthesis of mixed signals into a coherent thesis nobody else saw coming",
+    "Holding multiple competing hypotheses simultaneously without forcing premature closure"
   ],
   "growth_tips_en": [
-    "Set strict timeboxes for analysis to avoid analysis paralysis",
-    "Ship 70%-ready outputs and iterate, instead of polishing in private",
-    "Use peer rubber-ducking to externalize the overthink loop",
-    "Adopt a daily one-thing-shipped ritual to build momentum",
-    "Externalize anxiety to a journal to reclaim cognitive bandwidth"
+    "Set strict 30-minute timeboxes for any analysis; commit to a decision when timer rings",
+    "Ship 70%-ready writing publicly each Friday — your bar is too high for first drafts",
+    "Use peer rubber-ducking: schedule weekly 15-minute calls to externalize the overthink loop",
+    "Adopt a daily 'one tangible thing shipped' ritual to break analysis-paralysis cycles",
+    "Externalize anxiety to a structured journal so it stops occupying foreground cognition"
   ],
   "career_directions": [
     "data_scientist",
@@ -30,12 +30,14 @@
   ],
   "share_lines_en": [
     "I'm IA. My personality is just Stack Overflow with trust issues.",
-    "I'm IA. I overthink my overthinking. Also this sentence.",
-    "I'm IA. 4.3% rare. I'd celebrate but I'm too busy doubting myself."
+    "Got IA in this test. So apparently 4.3% of Indians are exactly this dramatic at 3 AM. Worth a try → [link]",
+    "I'm IA. I overthink my overthinking. I overthought writing this caption."
   ],
   "ocean_modifiers": {
-    "high_conscientiousness": "Your high conscientiousness pulls IA toward rigorous execution rather than pure theory.",
-    "high_neuroticism": "Under stress, you need to externalize the loop — write it down or talk it out.",
-    "high_openness": "Your novelty-seeking can pull you across fields; consider a meta-discipline as your home base."
+    "high_conscientiousness": "Your high conscientiousness pulls IA toward rigorous execution rather than pure theory — you'll actually finish the research paper, not just plan it for two months.",
+    "high_neuroticism": "Under stress, you need to externalize the loop — write it down, talk it out, anything to stop your brain from running the same rehearsal at 3 AM.",
+    "high_openness": "Your novelty-seeking can pull you across too many fields; consider committing to a 'meta-discipline' as your home base, then range freely.",
+    "high_extraversion": "If you've got high extraversion mixed with IA, you're a teacher in disguise — you can translate complex ideas to non-experts in a way most analysts can't.",
+    "low_agreeableness": "Low-A IAs make brutal critics; channel this into editing/peer-review work rather than client-facing roles where the same instinct burns bridges."
   }
 }

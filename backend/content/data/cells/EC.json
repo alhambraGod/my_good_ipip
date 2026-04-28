@@ -2,23 +2,23 @@
   "cell": "EC",
   "label_en": "The Marwari Mindset",
   "label_hi": "Vyapari Akal",
-  "slogan_en": "You see arbitrage where others see Tuesday.",
-  "rarity_pct": 4.8,
-  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Enterprising-dominant + Conventional-supporting; commercial mind that turns disciplined unit economics into compounding wealth. This 80-120 word core insight will describe the EC archetype (The Marwari Mindset) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
-  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the EC cell (The Marwari Mindset). Theme: Enterprising-dominant + Conventional-supporting; commercial mind that turns disciplined unit economics into compounding wealth. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably EC, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype.",
+  "slogan_en": "You think in margins even during a wedding.",
+  "rarity_pct": 3.1,
+  "core_insight_en": "You think in margins even during a wedding. While others dance to the baraat, you're calculating the catering markup and noting which uncle has serious capital to deploy. You don't see relationships — you see networks; you don't see jobs — you see ROIC; you don't see cities — you see arbitrage. Your great-grandfather built a wholesale rice business. Your grandfather added jute. Your father added a steel-trading line. You added a Bangalore SaaS company and a 6% angel cheque in your roommate's startup. Three generations of compounding, hidden in one Excel tab nobody outside the family ever sees.",
+  "deep_description_en": "Most founders see one bet. You see seven. Your default operating mode isn't 'how do I win this market' — it's 'what's the risk-adjusted return across the portfolio of bets my family is running, and where does this one fit in the portfolio?' Three hundred years of bania trading psychology — Marwari, Agarwal, Gujarati, Sindhi, the spreadsheet-headed merchant communities of north and west India — wired you to think in compounding curves where most people think in monthly salaries. Your great-grandfather built a wholesale rice business. Your grandfather added jute. Your father added a steel trading line. You added a Bangalore SaaS company AND a quietly written 6% cheque in your roommate's seed round. None of the family ever fully cashed out; cash sat in trust, got redeployed every three years, the spreadsheet never closed. You inherited a balance sheet AND an instruction set: 'never bet the house, always have three businesses running at once, optimize for survival before glory, treat capital like sons — disciplined and many.' The modern version is sitting in Whitefield, Indiranagar, BKC, and Banjara Hills: the Marwari startup founder who runs a mid-stage SaaS company AND angel-invests in five companies a year, owns one small commercial unit, and still has a side cheque parked with the family wholesale arm in Kolkata. The pure hustle founder (ER) bets everything on one play and lives or dies by it. You, the EC, would never. Where ER thrives in chaos, you thrive in compound interest. This is your superpower in three places: capital allocation across volatile environments, multi-business mental models that survive downturns competitors don't, and family offices that need someone with both Excel skill and generational patience. It is your weakness in three other places: creative work (you will optimize the soul out of it), deep-tech R&D (the payoff curve is too convex for your risk model), and any role where 'optimal' is the wrong question to be asking at all. The big trap is the obvious one — you start optimizing your relationships the same way you optimize your portfolio. Friendships aren't variable cost. Spouses aren't acquisition targets. Children aren't a 25-year IRR play, even though the math kind of works. The subtler trap is the attention-economy mismatch: a generation of peers posting deal screenshots, you compounding quietly, and the invisibility starting to feel like losing even when you're winning. Trust the curve. Find a public outlet — newsletter, podcast, angel thesis — that shows your work without making you behave like a hype-merchant. Hire creative talent and physically restrain yourself from micromanaging their P&L. And remember: your great-grandfather's compounding only worked because he never confused compounding with hoarding.",
   "strengths_en": [
-    "Conviction-led decisions under partial data",
-    "Persuasive framing that aligns diverse stakeholders",
-    "High energy across long sales and leadership cycles",
-    "Risk-tolerant bet-sizing on people and ideas",
-    "Charismatic recovery from setbacks and rejections"
+    "Capital allocation across volatile environments without panic-selling",
+    "Multi-business mental model (portfolio thinking, not single bet)",
+    "Generational time horizon — comfortable with 10-year compounding payoffs",
+    "Risk-adjusted decision making that survives downturns competitors don't",
+    "Detail-orientation under scale: you can run 4 P&Ls and still spot the line item that's off"
   ],
   "growth_tips_en": [
-    "Slow down to listen before pitching when stakes feel highest",
-    "Pair with a detail-oriented operator to ground big visions in execution",
-    "Run post-mortems on losses to convert charisma into compounding wisdom",
-    "Schedule structured reflection time to balance constant action mode",
-    "Commit to a weekly numbers ritual so storytelling stays tied to data"
+    "Don't optimize all your relationships like spreadsheets — friendships and family aren't variable-cost",
+    "Hire creative talent and resist the urge to micromanage their P&L; they need slack you don't",
+    "Take six weeks off — your business won't collapse and you'll be a better owner for the distance",
+    "Invest in technical advisors before you understand the field, not after you've made the wrong bet",
+    "Rotate between 'operator mode' and 'investor mode' deliberately — most EC types collapse one into the other"
   ],
   "career_directions": [
     "startup_founder",
@@ -29,11 +29,14 @@
     "wealth_advisor"
   ],
   "share_lines_en": [
-    "I'm EC. I priced your idea before you finished pitching.",
-    "I'm EC. 4.8% rare. The only person at the wedding asking about the venue's margin."
+    "I'm EC. I don't have hobbies. I have portfolios.",
+    "Got EC. Three friends took this test and I'm now mentally calculating the founder odds. They got 'sensitive artist'. Tragic.",
+    "I'm EC. Excel pivot tables are my love language. Don't @ me."
   ],
   "ocean_modifiers": {
-    "high_conscientiousness": "Your conscientiousness keeps the deal terms honest when charisma alone could close it.",
-    "low_neuroticism": "Lower neuroticism lets you sit on positions; pair with a board that pushes you to take chips off when warranted."
+    "high_conscientiousness": "This is your default mode — disciplined cash management, line-item rigor, no expense uncategorized. Channel it into hiring auditors and compliance officers BEFORE you're forced to; EC types over-trust their own systems and that's exactly when fraud finds the gap.",
+    "low_agreeableness": "Low-A ECs are the cold-eyed capital allocators PE firms hire at 30 and partners by 38 — your unwillingness to be charmed is an asset. The risk: you'll alienate co-founders who needed warmth, not just cap-table fairness. Hire a soft #2.",
+    "high_extraversion": "With high extraversion, you're an unusual EC — the founder who can both run the spreadsheet AND walk into a room of LPs and have them pre-committed by dessert. Lean in; visible-EC types raise larger rounds at lower dilution because LPs read your mix as rare and bankable.",
+    "low_openness": "Low-openness ECs make excellent operators of mature businesses — utilities, family-office holdings, mid-stage acquisitions, regulated finance. The cost is that you'll under-invest in adjacent innovation; pair with one high-O advisor and let them push you into uncomfortable bets every other year."
   }
 }
