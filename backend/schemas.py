@@ -137,3 +137,106 @@ class EmailRegisterRequest(BaseModel):
 class EmailLoginRequest(BaseModel):
     email: str
     password: str
+
+
+# ============================================================================
+# Phase 3 v3 schemas (5-demographic + 40-dynamic flow)
+# ============================================================================
+
+
+class DemographicAnswerSubmission(BaseModel):
+    """5 demographic answers from Q1-5."""
+    DEM_STAGE: str
+    DEM_AGE: str
+    DEM_GENDER: str
+    DEM_CITY_TIER: str
+    DEM_TOP_PRESSURE: str
+
+
+class V3AssessmentStartRequest(BaseModel):
+    demographic: DemographicAnswerSubmission
+
+
+class V3QuestionOut(BaseModel):
+    """Public-facing question shape (no scoring metadata)."""
+    id: str
+    text: str
+    instrument: Literal["riasec", "ipip", "demographic", "interest"]
+    response_type: Literal["likert_5", "single_choice", "multi_choice"]
+    options: list[dict] | None = None
+
+
+class V3AssessmentStartResponse(BaseModel):
+    assessment_id: str
+    questions: list[V3QuestionOut]
+    seed: str
+
+
+class V3AnswerSubmission(BaseModel):
+    assessment_id: str
+    answers: dict[str, int | str]
+
+
+class V3AssessmentResultResponse(BaseModel):
+    """Free 5-screen result data (no OCEAN, partial career details)."""
+    assessment_id: str
+    cell_id: str
+    cell_label_en: str
+    cell_label_hi: str
+    slogan_en: str
+    rarity_pct: float
+    core_insight_en: str
+    holland_code: str
+    riasec_scores: dict[str, int]
+    holland_radar: dict[str, int]
+    careers_preview: list[dict]
+    share_code: str
+    share_url: str
+    is_paid: bool
+    is_mast_trigger: bool
+
+
+class V3ReportResponse(BaseModel):
+    """Full paid report (Phase 4 result page Screen 5+ unlocks this)."""
+    assessment_id: str
+    cell_id: str
+    cell_label_en: str
+    cell_label_hi: str
+    slogan_en: str
+    deep_description_en: str
+    strengths_en: list[str]
+    growth_tips_en: list[str]
+    ocean_scores: dict[str, float]
+    ocean_percentiles: dict[str, int]
+    holland_code: str
+    riasec_scores: dict[str, int]
+    rarity_pct: float
+    is_mast_trigger: bool
+    careers: list[dict]
+    pdf_path: str | None
+
+
+class V3PaymentIntentRequest(BaseModel):
+    assessment_id: str
+
+
+class V3PaymentIntentResponse(BaseModel):
+    assessment_id: str
+    provider: Literal["mock", "razorpay", "wechat", "stripe"]
+    payment_url: str
+    amount_inr: int
+    promo_active: bool
+
+
+class V3FacebookCallbackRequest(BaseModel):
+    code: str
+
+
+class V3MilestoneRequest(BaseModel):
+    milestone: int
+    seed: str
+
+
+class V3MilestoneResponse(BaseModel):
+    milestone: int
+    copy: str
