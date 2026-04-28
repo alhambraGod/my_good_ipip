@@ -6,6 +6,51 @@
   --color-primary: #6366f1;
   --color-primary-dark: #4f46e5;
   --color-accent: #8b5cf6;
+
+  --color-saffron-50: #FFF8EE;
+  --color-saffron-100: #FFE8C7;
+  --color-saffron-200: #FFD58F;
+  --color-saffron-300: #FFC04A;
+  --color-saffron-400: #FFA61F;
+  --color-saffron-500: #FF9933;
+  --color-saffron-600: #E47A1A;
+  --color-saffron-700: #B45309;
+  --color-saffron-800: #8C3F0A;
+  --color-saffron-900: #5C2A07;
+
+  --color-india-green-50: #F0F9F1;
+  --color-india-green-100: #DAF1DD;
+  --color-india-green-200: #C8E6C9;
+  --color-india-green-300: #A0D4A8;
+  --color-india-green-400: #5FB66B;
+  --color-india-green-500: #138808;
+  --color-india-green-600: #0F6E07;
+  --color-india-green-700: #0A5305;
+  --color-india-green-800: #064004;
+  --color-india-green-900: #042B02;
+
+  --color-cream: #FFFAF0;
+  --color-navy-text: #1A202C;
+}
+
+@layer utilities {
+  .bg-india-hero {
+    background: linear-gradient(
+      140deg,
+      var(--color-saffron-500) 0%,
+      var(--color-saffron-200) 30%,
+      var(--color-cream) 55%,
+      var(--color-india-green-200) 75%,
+      var(--color-india-green-500) 100%
+    );
+  }
+
+  .bg-india-radial {
+    background:
+      radial-gradient(circle at 20% 20%, var(--color-saffron-200) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, var(--color-india-green-200) 0%, transparent 40%),
+      var(--color-cream);
+  }
 }
 
 body {
