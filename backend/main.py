@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from config import settings
 from database import init_db
-from routers import assessment, assessment_v3, auth, payment, report
+from routers import assessment, assessment_v3, auth, payment, payment_v3, report
 
 app = FastAPI(
     title="MindIQ API",
@@ -25,6 +25,7 @@ app.include_router(assessment.router)
 app.include_router(assessment_v3.router)
 app.include_router(auth.router)
 app.include_router(payment.router)
+app.include_router(payment_v3.router)
 app.include_router(report.router)
 
 
