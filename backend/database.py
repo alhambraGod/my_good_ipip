@@ -1,9 +1,17 @@
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from config import settings
 
-engine = create_engine(settings.DATABASE_URL, connect_args={"check_same_thread": False})
+# StaticPool for :memory: lets all threads (test-thread + TestClient handler-thread)
+# share the same in-memory SQLite DB. Default SingletonThreadPool would give each
+# thread its own empty DB. No-op for file-based SQLite in dev/stage/prod.
+_engine_kwargs: dict = {"connect_args": {"check_same_thread": False}}
+if settings.DATABASE_URL.endswith(":memory:"):
+    _engine_kwargs["poolclass"] = StaticPool
+
+engine = create_engine(settings.DATABASE_URL, **_engine_kwargs)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
