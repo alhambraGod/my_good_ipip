@@ -14,6 +14,8 @@ from typing import Mapping
 
 from content.models import CareerEntry
 
+__all__ = ["LIBRARY_PATH", "load_career_library", "get_career", "get_careers_for_cell", "clear_cache"]
+
 _HERE = Path(__file__).resolve().parent
 LIBRARY_PATH = _HERE / "data" / "careers" / "library.json"
 
@@ -50,3 +52,8 @@ def get_careers_for_cell(cell_id: str) -> list[CareerEntry]:
 
     cell = get_cell_content(cell_id)
     return [get_career(cid) for cid in cell.career_directions]
+
+
+def clear_cache() -> None:
+    """Clear the career library cache (admin-script use, hot reload after content edits)."""
+    _library_cache.cache_clear()

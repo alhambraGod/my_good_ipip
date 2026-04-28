@@ -24,6 +24,14 @@ from content.careers import load_career_library
 from content.cells import load_all_cells
 from services.scoring.archetype import VALID_CELLS_24
 
+__all__ = [
+    "find_orphan_career_references",
+    "find_unknown_cells_in_why_match",
+    "find_cells_with_zero_careers",
+    "find_dormant_why_match_entries",
+    "validate_content_integrity",
+]
+
 
 def find_orphan_career_references() -> list[tuple[str, str]]:
     """Return [(cell_id, career_id)] tuples where career_id is not in the library.

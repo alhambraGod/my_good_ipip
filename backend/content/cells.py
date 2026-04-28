@@ -19,6 +19,8 @@ from typing import Mapping
 from content.models import CellContent
 from services.scoring.archetype import VALID_CELLS_24
 
+__all__ = ["CELLS_DIR", "load_all_cells", "get_cell_content", "render_share_line", "clear_cache"]
+
 _HERE = Path(__file__).resolve().parent
 CELLS_DIR = _HERE / "data" / "cells"
 
@@ -57,3 +59,17 @@ def get_cell_content(cell_id: str) -> CellContent:
     if cell_id not in cells:
         raise KeyError(f"unknown cell: {cell_id!r}; must be one of {VALID_CELLS_24}")
     return cells[cell_id]
+
+
+def render_share_line(line: str, share_url: str) -> str:
+    """Substitute [link] token in a share copy line with the actual share URL.
+
+    Designed for backend share-card generation + frontend pre-rendered share text.
+    Idempotent: if [link] is absent, returns line unchanged.
+    """
+    return line.replace("[link]", share_url)
+
+
+def clear_cache() -> None:
+    """Clear the cells cache (admin-script use, hot reload after content edits)."""
+    _cells_cache.cache_clear()

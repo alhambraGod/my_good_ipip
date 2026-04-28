@@ -7,6 +7,8 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
 
+__all__ = ["CellId", "CellContent", "CareerEntry", "OceanModifiers", "SalaryRange"]
+
 CellId = Annotated[str, StringConstraints(pattern=r"^[RIASEC]{2}$")]
 
 # A salary string must either be a sentinel ("Variable" / "N/A") or contain at least
@@ -111,7 +113,7 @@ class CareerEntry(BaseModel):
     name_en: str
     name_hi: str
     tagline_en: str = Field(max_length=140)
-    why_match: dict[CellId, str]
+    why_match: dict[CellId, str] = Field(min_length=1)
     indian_companies: list[str] = Field(min_length=2, max_length=8)
     salary_inr: SalaryRange
     education_path: list[str]

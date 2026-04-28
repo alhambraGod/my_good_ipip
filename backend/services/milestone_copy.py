@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import random
 
+__all__ = ["MILESTONE_THRESHOLDS", "get_milestone_at", "get_copy_for_milestone"]
+
 MILESTONE_THRESHOLDS: tuple[int, ...] = (10, 20, 30, 40)
 
 _COPY_POOL: dict[int, tuple[str, ...]] = {

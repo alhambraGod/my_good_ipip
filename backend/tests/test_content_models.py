@@ -96,3 +96,23 @@ def test_why_match_rejects_invalid_cell_id():
             salary_inr=SalaryRange(entry="6L", mid="12L", senior="30L"),
             education_path=["x"], city_distribution=["x"],
         )
+
+
+def test_why_match_rejects_empty_dict():
+    """Empty why_match should fail validation (Phase 3 follow-up; prevents broken Path A render)."""
+    with pytest.raises(ValidationError):
+        CareerEntry(
+            career_id="data_scientist",
+            name_en="Data Scientist", name_hi="x",
+            tagline_en="x" * 30,
+            why_match={},  # empty — should fail with min_length=1
+            indian_companies=["x", "y"],
+            salary_inr=SalaryRange(entry="6L", mid="12L", senior="30L"),
+            education_path=["x"], city_distribution=["x"],
+        )
+
+
+def test_render_share_line_substitutes_link():
+    from content.cells import render_share_line
+    assert render_share_line("Try it → [link]", "https://x.in/abc") == "Try it → https://x.in/abc"
+    assert render_share_line("No token here", "https://x.in/abc") == "No token here"  # idempotent
