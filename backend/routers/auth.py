@@ -22,9 +22,11 @@ from schemas import (
 )
 from services.jwt_service import create_token
 from services.oauth_service import (
+    build_facebook_authorize_url,
     build_google_authorize_url,
     build_twitter_authorize_url,
     build_whatsapp_authorize_url,
+    exchange_facebook_code,
     exchange_google_code,
     exchange_twitter_code,
     exchange_whatsapp_code,
@@ -245,6 +247,38 @@ def telegram_callback(payload: TelegramCallbackRequest, db: Session = Depends(ge
     )
 
     return _auth_response(profile, "telegram")
+
+
+# ---------------------------------------------------------------------------
+# Facebook OAuth
+# ---------------------------------------------------------------------------
+
+
+@router.get("/facebook/start", response_model=OAuthStartResponse)
+def facebook_start():
+    try:
+        return OAuthStartResponse(auth_url=build_facebook_authorize_url())
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/facebook/callback", response_model=AuthResponse)
+async def facebook_callback(payload: OAuthFinishRequest, db: Session = Depends(get_db)):
+    try:
+        identity = await exchange_facebook_code(payload.code)
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"Facebook OAuth failed: {exc}") from exc
+
+    profile = _upsert_profile(
+        provider="facebook",
+        external_id=identity["external_id"],
+        handle=identity.get("handle"),
+        public_data=identity.get("public", {}),
+        db=db,
+        email=identity.get("email"),
+    )
+
+    return _auth_response(profile, "facebook")
 
 
 # ---------------------------------------------------------------------------

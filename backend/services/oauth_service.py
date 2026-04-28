@@ -275,3 +275,55 @@ async def exchange_whatsapp_code(code: str) -> dict:
             "picture": user_data.get("picture", {}).get("data", {}).get("url") if isinstance(user_data.get("picture"), dict) else None,
         },
     }
+
+
+# ---------------------------------------------------------------------------
+# Facebook OAuth (Meta)
+# ---------------------------------------------------------------------------
+
+
+def build_facebook_authorize_url() -> str:
+    """Construct Facebook OAuth authorize URL."""
+    if not settings.FACEBOOK_APP_ID:
+        raise ValueError("FACEBOOK_APP_ID not configured")
+    redirect_uri = f"{settings.FRONTEND_URL}/auth/facebook/callback"
+    params = {
+        "client_id": settings.FACEBOOK_APP_ID,
+        "redirect_uri": redirect_uri,
+        "scope": "email,public_profile",
+        "response_type": "code",
+    }
+    return f"https://www.facebook.com/v18.0/dialog/oauth?{urlencode(params)}"
+
+
+async def exchange_facebook_code(code: str) -> dict:
+    """Exchange Facebook OAuth code for user identity."""
+    if not settings.FACEBOOK_APP_ID or not settings.FACEBOOK_APP_SECRET:
+        raise ValueError("Facebook OAuth not configured")
+    redirect_uri = f"{settings.FRONTEND_URL}/auth/facebook/callback"
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        token_resp = await client.get(
+            "https://graph.facebook.com/v18.0/oauth/access_token",
+            params={
+                "client_id": settings.FACEBOOK_APP_ID,
+                "client_secret": settings.FACEBOOK_APP_SECRET,
+                "redirect_uri": redirect_uri,
+                "code": code,
+            },
+        )
+        token_resp.raise_for_status()
+        token = token_resp.json()["access_token"]
+
+        me_resp = await client.get(
+            "https://graph.facebook.com/me",
+            params={"fields": "id,name,email", "access_token": token},
+        )
+        me_resp.raise_for_status()
+        me = me_resp.json()
+
+    return {
+        "external_id": me["id"],
+        "handle": me.get("name"),
+        "email": me.get("email"),
+        "public": {"name": me.get("name")},
+    }

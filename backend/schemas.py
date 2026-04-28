@@ -87,19 +87,19 @@ class OAuthStartResponse(BaseModel):
 
 class OAuthFinishRequest(BaseModel):
     code: str
-    state: str
+    state: str | None = None  # Required for Twitter PKCE; unused by Google/Facebook/WhatsApp
 
 
 class OAuthSessionResponse(BaseModel):
     session_token: str
-    provider: Literal["x", "telegram", "manual", "email", "google", "whatsapp"]
+    provider: Literal["x", "telegram", "manual", "email", "google", "whatsapp", "facebook"]
     handle: str | None = None
 
 
 class AuthResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
-    provider: Literal["x", "telegram", "manual", "email", "google", "whatsapp"]
+    provider: Literal["x", "telegram", "manual", "email", "google", "whatsapp", "facebook"]
     handle: str | None = None
     session_token: str  # backwards compat
 

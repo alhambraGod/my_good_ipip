@@ -42,6 +42,9 @@ class Settings(BaseSettings):
     META_APP_SECRET: str = ""
     META_REDIRECT_URI: str = "http://localhost:3000/auth/whatsapp/callback"
 
+    FACEBOOK_APP_ID: str = ""
+    FACEBOOK_APP_SECRET: str = ""
+
     RAZORPAY_KEY_ID: str = ""
     RAZORPAY_KEY_SECRET: str = ""
     RAZORPAY_WEBHOOK_SECRET: str = ""
