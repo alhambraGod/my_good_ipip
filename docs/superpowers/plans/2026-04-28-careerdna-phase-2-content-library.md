@@ -1372,4 +1372,34 @@ Plan complete and saved to `docs/superpowers/plans/2026-04-28-careerdna-phase-2-
 1. **Subagent-Driven (recommended, same as Phase 1)** — I dispatch a fresh subagent per task, review between tasks, fast iteration.
 2. **Inline Execution** — Execute tasks in this session using executing-plans skill, batch execution with checkpoints.
 
-**Which approach?**
+---
+
+## Phase 2 — COMPLETED 2026-04-28
+
+All 8 tasks delivered via subagent-driven development with TDD + spec/code reviews per task.
+
+**Final state:**
+- 112 backend tests passing total (60 Phase 1 + 52 Phase 2)
+- 15+ implementation/polish commits on `main` (commit range: `c9466d5` → `0c70831`)
+- New packages: `backend/content/` (5 modules: models, cells, careers, validators, __init__) + `backend/services/milestone_copy.py`
+- Content data: 24 cell JSONs + 78-entry career library (real Indian companies + Devanagari + lakh-notation salary)
+- Hand-curated: 4 cell exemplars (IA/SE/EC/SC) + 8 career exemplars across industries
+- Cross-reference integrity: 0 orphans / 0 unknowns / 0 empty cells / 8 dormant entries (informational, by design)
+- All 24 cells × career integration data-complete (proven by E2E composition test)
+
+**All Phase 2 acceptance criteria verified by final code reviewer.**
+
+**Phase 3 prep follow-ups** (deferred, none blocking):
+- Add `__all__` to each public `content/` module to lock public surface
+- Add `clear_cache()` helpers to `cells.py` and `careers.py` for hot-reload support
+- Add `min_length=1` constraint to `why_match: dict[CellId, str]` (catches empty-dict edge case)
+- Document or implement `[link]` substitution helper before Phase 4 frontend
+- Decide `city_distribution` schema split (city pills vs descriptors) before Phase 4
+
+**Phase 2.5 prep** (out of band — content production sprint):
+- Author full content for 20 non-exemplar cells (replacing PLACEHOLDER core_insight + deep_description)
+- Author real why_match strings for 70 non-exemplar careers
+- Native Indian copywriter review pass on the 4+8 exemplars
+- All quality gates auto-apply via `_is_curated()` exemplar discovery — no test list maintenance
+
+**Next**: Phase 3 plan (API/auth/payment refactor) — separate writing-plans pass.
