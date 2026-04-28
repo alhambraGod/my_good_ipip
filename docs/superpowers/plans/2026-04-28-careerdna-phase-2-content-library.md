@@ -33,7 +33,7 @@ from content.models import CareerEntry, CellContent, OceanModifiers, SalaryRange
 def test_ocean_modifiers_construct():
     m = OceanModifiers(
         high_conscientiousness="Your high conscientiousness pulls IA toward execution.",
-        low_emotional_stability="Under stress you need to externalize the loop.",
+        high_neuroticism="Under stress you need to externalize the loop.",
     )
     assert m.high_conscientiousness.startswith("Your high")
     assert m.high_openness is None  # optional
@@ -46,29 +46,63 @@ def test_cell_content_minimal():
         label_hi="Sochne Wala",
         slogan_en="You overthink your overthinking. Also this sentence.",
         rarity_pct=4.3,
-        core_insight_en="You think a lot. Maybe too much.",
-        deep_description_en="A 300-500 word body...",
-        strengths=["Pattern recognition", "Synthesis", "Independent learning", "Comfort with ambiguity", "Strategic foresight"],
-        growth_tips=["Set timeboxes", "Ship 70%-ready", "Externalize loops", "Peer rubber-duck", "Daily small wins"],
-        career_directions=["data_scientist", "strategy_consultant"],
-        share_lines=["I'm IA. My personality is just Stack Overflow with trust issues."],
+        core_insight_en="You think a lot. Maybe too much, but also exactly the right amount.",
+        deep_description_en="A 300-500 word body that explains the archetype in depth, weaving stress signals, growth edges, and identity claims that resonate with Indian Gen Z context.",
+        strengths_en=["Pattern recognition", "Synthesis", "Independent learning", "Comfort with ambiguity", "Strategic foresight"],
+        growth_tips_en=["Set timeboxes", "Ship 70%-ready", "Externalize loops", "Peer rubber-duck", "Daily small wins"],
+        career_directions=["data_scientist", "strategy_consultant", "ai_research_engineer"],
+        share_lines_en=["I'm IA. My personality is just Stack Overflow with trust issues."],
         ocean_modifiers=OceanModifiers(),
     )
     assert c.cell == "IA"
-    assert len(c.strengths) == 5
-    assert len(c.growth_tips) == 5
+    assert len(c.strengths_en) == 5
+    assert len(c.growth_tips_en) == 5
 
 
 def test_cell_content_validates_cell_format():
-    """Cell must be exactly 2 uppercase letters."""
+    """Cell must be exactly 2 uppercase letters from RIASEC."""
     with pytest.raises(ValidationError):
         CellContent(
             cell="IAA",  # 3 chars, invalid
-            label_en="x", label_hi="x", slogan_en="x", rarity_pct=1.0,
-            core_insight_en="x", deep_description_en="x",
-            strengths=["a","b","c","d","e"], growth_tips=["a","b","c","d","e"],
-            career_directions=["x"], share_lines=["x"],
+            label_en="abc", label_hi="b", slogan_en="x" * 15, rarity_pct=1.0,
+            core_insight_en="x" * 25, deep_description_en="x" * 105,
+            strengths_en=["a","b","c","d","e"], growth_tips_en=["a","b","c","d","e"],
+            career_directions=["x", "y", "z"], share_lines_en=["x"],
             ocean_modifiers=OceanModifiers(),
+        )
+
+
+def test_cell_content_rejects_unknown_field():
+    """extra='forbid' should reject typo'd field names like 'strengths' (without _en suffix)."""
+    with pytest.raises(ValidationError):
+        CellContent(
+            cell="IA",
+            label_en="abc", label_hi="b", slogan_en="x" * 15, rarity_pct=1.0,
+            core_insight_en="x" * 25, deep_description_en="x" * 105,
+            strengths=["a","b","c","d","e"],  # WRONG: should be strengths_en
+            growth_tips_en=["a","b","c","d","e"],
+            career_directions=["x", "y", "z"], share_lines_en=["x"],
+            ocean_modifiers=OceanModifiers(),
+        )
+
+
+def test_ocean_modifiers_rejects_typo():
+    """extra='forbid' should reject typo'd field names like 'high_emotional_stability' (renamed to neuroticism)."""
+    with pytest.raises(ValidationError):
+        OceanModifiers(high_emotional_stability="x")  # OLD name; should now be high_neuroticism (inverted)
+
+
+def test_why_match_rejects_invalid_cell_id():
+    """why_match keys are CellId-validated; bad cell IDs fail at parse time."""
+    with pytest.raises(ValidationError):
+        CareerEntry(
+            career_id="data_scientist",
+            name_en="Data Scientist", name_hi="x",
+            tagline_en="Turn chaos into signal",
+            why_match={"XZ": "bogus cell id"},  # XZ is not a valid 2-letter RIASEC combo
+            indian_companies=["x", "y"],
+            salary_inr=SalaryRange(entry="6L", mid="12L", senior="30L"),
+            education_path=["x"], city_distribution=["x"],
         )
 
 
@@ -77,7 +111,7 @@ def test_career_entry_minimal():
         career_id="data_scientist",
         name_en="Data Scientist",
         name_hi="Aankde Vigyani",
-        tagline="Turn chaos into signal",
+        tagline_en="Turn chaos into signal",
         why_match={"IA": "You see patterns in noise.", "IC": "Numerical brain pays off."},
         indian_companies=["Razorpay", "Swiggy", "Flipkart"],
         salary_inr=SalaryRange(entry="6L", mid="12L–22L", senior="30L–80L"),
@@ -108,7 +142,7 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from pydantic import BaseModel, Field, StringConstraints
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 CellId = Annotated[str, StringConstraints(pattern=r"^[RIASEC]{2}$")]
 
@@ -119,7 +153,12 @@ class OceanModifiers(BaseModel):
     Each modifier is a 1-2 sentence override that the report generator
     weaves into the cell description when the corresponding OCEAN extreme
     is detected (e.g., percentile >= 80 for "high_*" or <= 20 for "low_*").
+
+    Naming uses `neuroticism` (NOT `emotional_stability`) for consistency with
+    services/scoring/archetype.py and the OCEAN percentile keys.
     """
+
+    model_config = ConfigDict(extra="forbid")
 
     high_openness: str | None = None
     low_openness: str | None = None
@@ -129,12 +168,18 @@ class OceanModifiers(BaseModel):
     low_extraversion: str | None = None
     high_agreeableness: str | None = None
     low_agreeableness: str | None = None
-    high_emotional_stability: str | None = None
-    low_emotional_stability: str | None = None
+    high_neuroticism: str | None = None
+    low_neuroticism: str | None = None
 
 
 class CellContent(BaseModel):
-    """Content for one of the 24 archetype cells (e.g., IA, RI, SE)."""
+    """Content for one of the 24 archetype cells (e.g., IA, RI, SE).
+
+    All English content fields use the `_en` suffix so Phase 4 can add
+    parallel `_hi` (Hindi) fields without schema migration.
+    """
+
+    model_config = ConfigDict(extra="forbid")
 
     cell: CellId
     label_en: str = Field(min_length=3, max_length=80)
@@ -143,27 +188,35 @@ class CellContent(BaseModel):
     rarity_pct: float = Field(ge=0.0, le=100.0)
     core_insight_en: str = Field(min_length=20, max_length=600)
     deep_description_en: str = Field(min_length=100, max_length=3000)
-    strengths: list[str] = Field(min_length=5, max_length=5)
-    growth_tips: list[str] = Field(min_length=5, max_length=5)
+    strengths_en: list[str] = Field(min_length=5, max_length=5)
+    growth_tips_en: list[str] = Field(min_length=5, max_length=5)
     career_directions: list[str] = Field(min_length=3, max_length=8)
-    share_lines: list[str] = Field(min_length=1, max_length=5)
+    share_lines_en: list[str] = Field(min_length=1, max_length=5)
     ocean_modifiers: OceanModifiers = Field(default_factory=OceanModifiers)
 
 
 class SalaryRange(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     entry: str         # e.g., "6L"
     mid: str           # e.g., "12L–22L"
     senior: str        # e.g., "30L–80L"
 
 
 class CareerEntry(BaseModel):
-    """Content for one career in the library (40 total)."""
+    """Content for one career in the library (40 total).
+
+    `why_match` keys are validated as RIASEC cell IDs (CellId regex) so
+    typo'd cell references fail at parse time, not at validator-run time.
+    """
+
+    model_config = ConfigDict(extra="forbid")
 
     career_id: str = Field(pattern=r"^[a-z][a-z0-9_]*$")
     name_en: str
     name_hi: str
-    tagline: str = Field(max_length=140)
-    why_match: dict[str, str]   # {cell_id: 1-line why}; covers cells that point to this career
+    tagline_en: str = Field(max_length=140)
+    why_match: dict[CellId, str]   # cell_id → 1-line why; CellId regex enforces 2-letter RIASEC
     indian_companies: list[str] = Field(min_length=2, max_length=8)
     salary_inr: SalaryRange
     education_path: list[str]
@@ -228,8 +281,8 @@ def test_all_cells_validate_against_schema():
 def test_get_cell_content_known_cell():
     c = get_cell_content("IA")
     assert c.cell == "IA"
-    assert len(c.strengths) == 5
-    assert len(c.growth_tips) == 5
+    assert len(c.strengths_en) == 5
+    assert len(c.growth_tips_en) == 5
 
 
 def test_get_cell_content_unknown_raises():
@@ -312,14 +365,14 @@ For example, `backend/content/data/cells/IA.json`:
   "rarity_pct": 4.3,
   "core_insight_en": "PLACEHOLDER — 80-120 word core insight goes here. Phase 2.5 content authoring will replace this with India-flavored copy describing the IA archetype: investigative-dominant + artistic-supporting, prone to overthinking, late-night philosopher mode, but capable of deep synthesis when finally focused.",
   "deep_description_en": "PLACEHOLDER — 300-500 word deep description goes here. To be authored by GPT-4o + native Indian copywriter review. Should incorporate Hinglish accents (Sharma ji, Aunty, EMI references) where appropriate, and balance the dark-humor IBTI tone with a temperature-of-warmth that the cell rewards (versus pure roast).",
-  "strengths": [
+  "strengths_en": [
     "Pattern recognition across disparate fields",
     "Strategic foresight under ambiguity",
     "Independent learning without external prompting",
     "Synthesis of mixed signals into coherent insight",
     "Comfort holding multiple competing hypotheses"
   ],
-  "growth_tips": [
+  "growth_tips_en": [
     "Set strict timeboxes for analysis to avoid analysis paralysis",
     "Ship 70%-ready outputs and iterate, instead of polishing in private",
     "Use peer rubber-ducking to externalize the overthink loop",
@@ -334,14 +387,14 @@ For example, `backend/content/data/cells/IA.json`:
     "policy_analyst",
     "quant_analyst"
   ],
-  "share_lines": [
+  "share_lines_en": [
     "I'm IA. My personality is just Stack Overflow with trust issues.",
     "I'm IA. I overthink my overthinking. Also this sentence.",
     "I'm IA. 4.3% rare. I'd celebrate but I'm too busy doubting myself."
   ],
   "ocean_modifiers": {
     "high_conscientiousness": "Your high conscientiousness pulls IA toward rigorous execution rather than pure theory.",
-    "low_emotional_stability": "Under stress, you need to externalize the loop — write it down or talk it out.",
+    "high_neuroticism": "Under stress, you need to externalize the loop — write it down or talk it out.",
     "high_openness": "Your novelty-seeking can pull you across fields; consider a meta-discipline as your home base."
   }
 }
@@ -382,10 +435,10 @@ For each stub:
 - `slogan_en`: 1-line placeholder ending in `[PLACEHOLDER — Phase 2.5]`
 - `rarity_pct`: starter value 4.0 (will be calibrated from real data later)
 - `core_insight_en` / `deep_description_en`: PLACEHOLDER strings noting Phase 2.5 ownership
-- `strengths`: 5 generic-but-cell-relevant items (same template adjusted by main type)
-- `growth_tips`: 5 generic items
+- `strengths_en`: 5 generic-but-cell-relevant items (same template adjusted by main type)
+- `growth_tips_en`: 5 generic items
 - `career_directions`: list of 5-6 career_ids that match the cell (use exemplar Phase 2 mapping in Task 5)
-- `share_lines`: 1-3 placeholder share copy lines
+- `share_lines_en`: 1-3 placeholder share copy lines
 - `ocean_modifiers`: at least 1 high/low pair populated for testability; rest can be omitted
 
 Author **all 24 stubs** in this step. Total file count: 24.
@@ -460,8 +513,8 @@ def test_exemplars_have_unique_share_lines():
     """Exemplars should have ≥3 unique share copy lines (gold standard)."""
     for cell_id in EXEMPLAR_CELLS:
         c = get_cell_content(cell_id)
-        assert len(c.share_lines) >= 3, f"{cell_id} has only {len(c.share_lines)} share_lines"
-        assert len(set(c.share_lines)) == len(c.share_lines), f"{cell_id} has duplicate share_lines"
+        assert len(c.share_lines_en) >= 3, f"{cell_id} has only {len(c.share_lines_en)} share_lines_en"
+        assert len(set(c.share_lines_en)) == len(c.share_lines_en), f"{cell_id} has duplicate share_lines_en"
 
 
 def test_exemplars_deep_description_min_length():
@@ -482,7 +535,7 @@ Replace `backend/content/data/cells/IA.json` with full hand-authored content. Th
 Required:
 - `core_insight_en`: 80-120 words, India-flavored, captures the IA archetype's essence (investigative + artistic, overthinker, philosopher of ordinary)
 - `deep_description_en`: 1500+ chars (≈ 250-400 words), mixes IBTI dark humor with warmth, references real Indian Gen Z context (3 AM Chrome tabs about past, IIT/IIM comparisons, Bangalore tech scene context)
-- `share_lines`: 3 distinct lines (at least one each of self-roast, surprise, challenge tone)
+- `share_lines_en`: 3 distinct lines (at least one each of self-roast, surprise, challenge tone)
 - `ocean_modifiers`: at least 4 of the 10 fields populated, each 1-2 sentences
 
 Use this content (you can refine wording but preserve the structure):
@@ -496,14 +549,14 @@ Use this content (you can refine wording but preserve the structure):
   "rarity_pct": 4.3,
   "core_insight_en": "Your brain is 87 Chrome tabs and 86 of them are about your past. You think more before breakfast than most people do all week — research papers, life decisions, weird connections between things nobody else is putting together. Sharma ji's beta got into IIM and you're still in bed mapping career trajectory #47. The world calls it overthinking. You call it staying loyal to the truth.",
   "deep_description_en": "You're the friend everyone calls at 3 AM when their world is ending — not because you fix it, but because you're already awake, already thinking, and you actually care enough to spiral with them. You read three books a month, none of them assigned. You've abandoned five different career plans in the last year and each one taught you something that's still rattling around in your head. Your LinkedIn says 'Software Engineer @ TCS' but your soul is a chai-shop philosopher with a Notion full of unfinished essays. India calls people like you 'over-educated,' 'too-emotional,' or 'na-laayak' — but the truth is you're the person who'd actually fix the things everyone else just complains about, IF you ever stopped doubting yourself long enough to ship. The IIT-or-IIM script your family wrote for you doesn't fit because the script doesn't have a column for 'sees patterns nobody asked you to see.' Your strength is the one nobody talks about in placement training: you can sit with ambiguity without flinching, hold three competing hypotheses without getting attached, and explain why a Bollywood plot is actually a microcosm of Indian middle-class anxiety in three sentences. The danger is the same thing in reverse — you'll spend three months of late-night research on whether to take a job, then take the job, then spend another three months researching whether the job was right. Strategy consulting, data science, academic research, and policy analysis are not just paychecks for you — they're the rare professions where 'thinking too much' is the actual job description. Stop apologizing. Find a manager who values depth over speed. And ship something every Friday, even if you don't think it's ready. You're never going to think it's ready. That's the price of being IA.",
-  "strengths": [
+  "strengths_en": [
     "Pattern recognition across disparate fields where others see only noise",
     "Strategic foresight under ambiguity — you can sit in 'I don't know' without panicking",
     "Independent learning without external prompts — you'll teach yourself anything that interests you",
     "Synthesis of mixed signals into a coherent thesis nobody else saw coming",
     "Holding multiple competing hypotheses simultaneously without forcing premature closure"
   ],
-  "growth_tips": [
+  "growth_tips_en": [
     "Set strict 30-minute timeboxes for any analysis; commit to a decision when timer rings",
     "Ship 70%-ready writing publicly each Friday — your bar is too high for first drafts",
     "Use peer rubber-ducking: schedule weekly 15-minute calls to externalize the overthink loop",
@@ -518,14 +571,14 @@ Use this content (you can refine wording but preserve the structure):
     "policy_analyst",
     "quant_analyst"
   ],
-  "share_lines": [
+  "share_lines_en": [
     "I'm IA. My personality is just Stack Overflow with trust issues.",
     "Got IA in this test. So apparently 4.3% of Indians are exactly this dramatic at 3 AM. Worth a try → [link]",
     "I'm IA. I overthink my overthinking. I overthought writing this caption."
   ],
   "ocean_modifiers": {
     "high_conscientiousness": "Your high conscientiousness pulls IA toward rigorous execution rather than pure theory — you'll actually finish the research paper, not just plan it for two months.",
-    "low_emotional_stability": "Under stress, you need to externalize the loop — write it down, talk it out, anything to stop your brain from running the same rehearsal at 3 AM.",
+    "high_neuroticism": "Under stress, you need to externalize the loop — write it down, talk it out, anything to stop your brain from running the same rehearsal at 3 AM.",
     "high_openness": "Your novelty-seeking can pull you across too many fields; consider committing to a 'meta-discipline' as your home base, then range freely.",
     "high_extraversion": "If you've got high extraversion mixed with IA, you're a teacher in disguise — you can translate complex ideas to non-experts in a way most analysts can't.",
     "low_agreeableness": "Low-A IAs make brutal critics; channel this into editing/peer-review work rather than client-facing roles where the same instinct burns bridges."
@@ -548,11 +601,11 @@ Sample minimum content (refine in implementation):
   "rarity_pct": 5.1,
   "core_insight_en": "Every team you've ever joined had a 'before you' and an 'after you.' You don't lead by command — you lead by lifting. You spot the kid in the corner with the spark before HR notices, and three years later that kid is running a department. People say 'Sharma uncle changed my life.' For most people, that's a compliment. For you, it's a job description.",
   "deep_description_en": "...250-400 words on Marwari Mentor archetype, mentor capital, building people not just businesses, balancing warmth with commercial discipline, the trap of losing your own career to lifting others, the Indian context of joint-family elder-mentor figures who become bosses, etc...",
-  "strengths": ["...5 strengths covering coaching, EQ, network depth, business pragmatism, retention/loyalty..."],
-  "growth_tips": ["...5 tips covering boundaries, own-career advocacy, written legacy, scaling beyond direct reports, mentor burnout..."],
+  "strengths_en": ["...5 strengths covering coaching, EQ, network depth, business pragmatism, retention/loyalty..."],
+  "growth_tips_en": ["...5 tips covering boundaries, own-career advocacy, written legacy, scaling beyond direct reports, mentor burnout..."],
   "career_directions": ["sales_manager", "hr_business_partner", "education_administrator", "founders_office", "executive_coach", "ngo_director"],
-  "share_lines": ["I'm SE. Half my team is now my competitor and I'm fine with that.", "...", "..."],
-  "ocean_modifiers": {"high_agreeableness": "...", "low_emotional_stability": "...", "high_extraversion": "...", "high_conscientiousness": "..."}
+  "share_lines_en": ["I'm SE. Half my team is now my competitor and I'm fine with that.", "...", "..."],
+  "ocean_modifiers": {"high_agreeableness": "...", "high_neuroticism": "...", "high_extraversion": "...", "high_conscientiousness": "..."}
 }
 ```
 
@@ -571,10 +624,10 @@ Replace `backend/content/data/cells/EC.json`. Theme: Enterprising-dominant + Con
   "rarity_pct": 3.1,
   "core_insight_en": "...80-120 words on Marwari mindset: portfolio thinking, Excel as a personality, multi-generational wealth building, pattern of compound returns, but also the loneliness of always optimizing...",
   "deep_description_en": "...250-400 words covering bania family business legacy, modern startup version, the difference between Marwari-mindset-EC and pure-E hustle-founder ER, when EC works (capital allocation, multi-business empires, family offices) and when it fails (creative work, deep tech R&D), the Indian context of business families across Rajasthan/Gujarat...",
-  "strengths": ["Capital allocation across volatile environments", "Multi-business mental model (portfolio, not single bet)", "Generational time horizon (compound returns)", "Risk-adjusted decision making", "Detail-orientation under scale"],
-  "growth_tips": ["Don't optimize all your relationships like spreadsheets", "Hire creative talent and resist the urge to micromanage their P&L", "Take six weeks off — your business won't collapse and you'll be a better owner", "Invest in technical advisors before you understand the field, not after", "Rotate between 'operator mode' and 'investor mode' deliberately"],
+  "strengths_en": ["Capital allocation across volatile environments", "Multi-business mental model (portfolio, not single bet)", "Generational time horizon (compound returns)", "Risk-adjusted decision making", "Detail-orientation under scale"],
+  "growth_tips_en": ["Don't optimize all your relationships like spreadsheets", "Hire creative talent and resist the urge to micromanage their P&L", "Take six weeks off — your business won't collapse and you'll be a better owner", "Invest in technical advisors before you understand the field, not after", "Rotate between 'operator mode' and 'investor mode' deliberately"],
   "career_directions": ["startup_founder", "investment_analyst", "family_office_principal", "private_equity_associate", "cross_border_ecommerce", "wealth_advisor"],
-  "share_lines": ["I'm EC. I don't have hobbies. I have portfolios.", "...", "..."],
+  "share_lines_en": ["I'm EC. I don't have hobbies. I have portfolios.", "...", "..."],
   "ocean_modifiers": {"high_conscientiousness": "...", "low_agreeableness": "...", "high_extraversion": "...", "low_openness": "..."}
 }
 ```
@@ -594,10 +647,10 @@ Replace `backend/content/data/cells/SC.json`. Theme: Social-dominant + Conventio
   "rarity_pct": 6.1,
   "core_insight_en": "...80-120 words: encyclopedic memory of who-married-whom, who-got-into-which-college, who-divorced-whom; the operating system of Indian middle-class community life; runs the WhatsApp groups; can find any kid a job; can find any kid a spouse; pre-Internet Google for the family network...",
   "deep_description_en": "...250-400 words covering aunty culture as actually-essential infrastructure, the difference between gossip-aunty and matriarch-aunty, the modern career version (HR, customer success, community management), how to lean into the strength without becoming the joke, the underrated commercial value of knowing-everyone-and-their-cousin in a country where networks beat resumes, etc...",
-  "strengths": ["Encyclopedic recall of names, roles, relationships, and timelines", "Network depth + active maintenance (you don't lose touch)", "Reading the room across generational and class lines", "Conflict de-escalation through 'I know everyone' soft power", "Community-scale information synthesis"],
-  "growth_tips": ["Channel the gossip instinct into structured writing (newsletters, reports)", "Build a digital CRM for your network — your memory is good, but it won't last forever", "Resist the urge to give unsolicited advice; offer it 1 in 5 times", "Find a domain (HR, partnerships, alumni) where 'aunty mode' is the actual job description", "Schedule alone-time deliberately; you'll burn out on always being 'on' for the network"],
+  "strengths_en": ["Encyclopedic recall of names, roles, relationships, and timelines", "Network depth + active maintenance (you don't lose touch)", "Reading the room across generational and class lines", "Conflict de-escalation through 'I know everyone' soft power", "Community-scale information synthesis"],
+  "growth_tips_en": ["Channel the gossip instinct into structured writing (newsletters, reports)", "Build a digital CRM for your network — your memory is good, but it won't last forever", "Resist the urge to give unsolicited advice; offer it 1 in 5 times", "Find a domain (HR, partnerships, alumni) where 'aunty mode' is the actual job description", "Schedule alone-time deliberately; you'll burn out on always being 'on' for the network"],
   "career_directions": ["hr_business_partner", "customer_success_manager", "alumni_engagement", "community_manager", "ngo_program_director", "wedding_planner"],
-  "share_lines": ["I'm SC. I know your salary. Your parents don't. Yet.", "...", "..."],
+  "share_lines_en": ["I'm SC. I know your salary. Your parents don't. Yet.", "...", "..."],
   "ocean_modifiers": {"high_extraversion": "...", "high_agreeableness": "...", "high_conscientiousness": "...", "low_openness": "..."}
 }
 ```
@@ -736,18 +789,23 @@ def get_careers_for_cell(cell_id: str) -> list[CareerEntry]:
 
 - [ ] **Step 3: Create `backend/content/data/careers/library.json` with 40 stub entries**
 
-The 40 careers cover this distribution (per spec Section 3.12):
+The career library covers ~75–78 careers — expanded from the spec's 40 because
+cell stubs (Task 2) reference broader RIASEC-thematic professions that better
+differentiate between cells. Distribution remains spec-aligned by industry but
+each industry has more roles:
 
-- **IT (12)**: data_scientist, software_engineer, devops_engineer, ai_research_engineer, data_engineer, backend_developer, mobile_developer, frontend_developer, qa_engineer, sre, security_engineer, ml_engineer
-- **Finance (6)**: financial_analyst, investment_analyst, quant_analyst, audit_associate, wealth_advisor, financial_planning_analyst
-- **Media/Arts (6)**: screenwriter, content_creator, brand_strategist, fashion_designer, indie_filmmaker, creative_director
-- **Education/Research (4)**: academic_researcher, education_administrator, edtech_curriculum_designer, school_teacher
-- **Sales/Ops (5)**: sales_manager, business_development, customer_success_manager, operations_manager, hr_business_partner
-- **Entrepreneurship (3)**: startup_founder, founders_office, family_office_principal
-- **Government (2)**: policy_analyst, public_administration
-- **Service (2)**: alumni_engagement, ngo_program_director
+- **IT (~14)**: data_scientist, software_engineer, devops_engineer, ai_research_engineer, data_engineer, backend_developer, mobile_developer, frontend_developer, qa_engineer, sre, security_engineer, ml_engineer, embedded_engineer, technician
+- **Engineering (hands-on, ~5)**: electrical_engineer, mechanical_engineer, maintenance_engineer, manufacturing_lead, site_supervisor
+- **Finance (~7)**: financial_analyst, investment_analyst, quant_analyst, audit_associate, wealth_advisor, risk_analyst, compliance_officer
+- **Media/Arts (~10)**: screenwriter, content_creator, brand_strategist, fashion_designer, indie_filmmaker, creative_director, photographer, animator, film_producer, kol_creator
+- **Education/Research (~8)**: academic_researcher, education_administrator, edtech_curriculum_designer, school_teacher, counseling_psychologist, clinical_psychologist, art_therapist, drama_teacher
+- **Sales/Ops (~10)**: sales_manager, business_development, customer_success_manager, operations_manager, hr_business_partner, project_manager, brand_manager, training_manager, public_relations, customer_success
+- **Entrepreneurship/Investing (~6)**: startup_founder, founders_office, family_office_principal, private_equity_associate, cross_border_ecommerce, product_manager
+- **Government/Public (~4)**: policy_analyst, public_administration, legal_associate, public_health_researcher
+- **Service/Community (~7)**: alumni_engagement, ngo_program_director, ngo_advisor, community_manager, wedding_planner, administrative_lead, child_psychologist
+- **Specialty cross-cutting (~6)**: strategy_consultant, executive_coach, media_manager, concept_artist, industrial_designer, product_designer, architect
 
-Plus a few cross-cutting: strategy_consultant, executive_coach, community_manager, wedding_planner, private_equity_associate, cross_border_ecommerce — bringing the total comfortably above 40.
+Total: ~75–78 careers. The exact set is enumerated by `find_orphan_career_references()` (Task 5) once Tasks 4 + 2 are both green.
 
 Each stub follows this template (example for `data_scientist`):
 
@@ -756,7 +814,7 @@ Each stub follows this template (example for `data_scientist`):
   "data_scientist": {
     "name_en": "Data Scientist",
     "name_hi": "Aankde Vigyani / डेटा साइंटिस्ट",
-    "tagline": "Turn chaos into signal",
+    "tagline_en": "Turn chaos into signal",
     "why_match": {
       "IA": "PLACEHOLDER — why IA matches data_scientist (1 line)",
       "IC": "PLACEHOLDER — why IC matches data_scientist (1 line)",
@@ -951,7 +1009,7 @@ def test_exemplars_have_no_placeholder():
         c = get_career(career_id)
         for cell_id, why in c.why_match.items():
             assert "PLACEHOLDER" not in why, f"{career_id}.why_match[{cell_id}] has PLACEHOLDER"
-        assert "PLACEHOLDER" not in c.tagline, f"{career_id} tagline still placeholder"
+        assert "PLACEHOLDER" not in c.tagline_en, f"{career_id} tagline_en still placeholder"
 
 
 def test_exemplars_have_realistic_companies():
@@ -991,7 +1049,7 @@ For each of the 8 careers, replace the stub in `library.json` with full hand-aut
 "data_scientist": {
   "name_en": "Data Scientist",
   "name_hi": "Aankde Vigyani / डेटा साइंटिस्ट",
-  "tagline": "Turn chaos into signal — India's fintech and consumer-internet sectors are on fire for this skill.",
+  "tagline_en": "Turn chaos into signal — India's fintech and consumer-internet sectors are on fire for this skill.",
   "why_match": {
     "IA": "Your pattern-recognition obsession plus tolerance for ambiguous data is the actual job description. Where others see noise, you see the model.",
     "IC": "Your numerical brain plus structured pipeline mindset means you'll go from analyst to ML engineer faster than your peers; comfort with rigor is the moat.",
@@ -1215,7 +1273,7 @@ def test_compose_report_for_synthetic_user():
 
     # Verify composition shape
     assert cell_content.cell == cell_id
-    assert len(cell_content.strengths) == 5
+    assert len(cell_content.strengths_en) == 5
     assert len(careers) >= 3
     assert all(c.salary_inr.entry for c in careers)
 
@@ -1288,7 +1346,7 @@ After all 8 tasks complete, the following must hold:
 
 ## Phase 2.5 — Out of Band
 
-The 20 non-exemplar cells (RI, RA, RE, RC, IR, IS, IC, AI, AR, AS, AE, SI, SA, ER, EA, ES, CI, CR, CS) and 32 non-exemplar careers are stubs after Phase 2. These get filled out in **Phase 2.5**, a content production sprint:
+The 20 non-exemplar cells (RI, RA, RE, RC, IR, IS, IC, AI, AR, AS, AE, SI, SA, ER, EA, ES, CI, CR, CS) and ~70 non-exemplar careers are stubs after Phase 2. These get filled out in **Phase 2.5**, a content production sprint:
 
 1. Antonio + GPT-4o run a batch generation script (`scripts/generate_content.py`, optional Task) using the 4 cell + 8 career exemplars as few-shot examples.
 2. Native Indian copywriter reviews the generated batch, edits for cultural authenticity.
@@ -1301,7 +1359,7 @@ This split keeps Phase 2 size bounded while ensuring the schemas + loaders + val
 
 ## Estimated Effort
 
-~10-14 hours of engineering for 1 engineer (similar to Phase 1 by structural complexity, but content authoring of the 4+8 exemplars adds 3-5 hours of writing time). Phase 2.5 (bulk content) is additional 6-10 hours mostly outside engineering.
+~10-14 hours of engineering for 1 engineer (similar to Phase 1 by structural complexity, but content authoring of the 4+8 exemplars adds 3-5 hours of writing time). Phase 2.5 (bulk content) is additional 12-18 hours mostly outside engineering.
 
 ---
 
