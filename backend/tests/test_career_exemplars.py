@@ -8,6 +8,21 @@ EXEMPLARS = [
 ]
 
 
+FORBIDDEN_SENTINELS = ("PLACEHOLDER", "TODO", "TBD", "FIXME", "REPLACE_ME", "[draft]", "Lorem ipsum")
+
+
+INDIAN_CONTEXT_MARKERS = (
+    "sharma", "gupta", "agarwal", "marwari", "bania", "aunty", "uncle", "beta", "bhaiya", "chacha",
+    "bangalore", "mumbai", "delhi", "kolkata", "chennai", "hyderabad", "pune", "gurugram",
+    "rajasthan", "gujarat", "kerala", "bihar",
+    "iit", "iim", "tcs", "infosys", "razorpay", "swiggy", "flipkart", "phonepe", "cred",
+    "ipu", "upsc", "niti aayog", "iiit", "iisc", "ftii", "lutyens",
+    "diwali", "baraat", "shaadi", "joint family", "chai", "dosa", "biryani", "bollywood",
+    "whatsapp", "hinglish", "emi", "lakh", "crore", "sarkari", "babu", "fintech",
+    "na-laayak", "kya", "haan", "nahi", "yaar", "anm",
+)
+
+
 def test_exemplars_have_no_placeholder():
     for career_id in EXEMPLARS:
         c = get_career(career_id)
@@ -61,3 +76,39 @@ def test_exemplars_have_quality_why_match():
             assert len(why) >= 40, (
                 f"{career_id}.why_match[{cell_id}] is only {len(why)} chars; need >=40 for real content"
             )
+
+
+def test_exemplars_have_no_sentinel_text():
+    """Exemplars must not contain any author-sentinel/draft markers in their content."""
+    for career_id in EXEMPLARS:
+        c = get_career(career_id)
+        text_fields = {
+            "tagline_en": c.tagline_en,
+            "name_en": c.name_en,
+            "name_hi": c.name_hi,
+        }
+        for field_name, text in text_fields.items():
+            for sentinel in FORBIDDEN_SENTINELS:
+                assert sentinel not in text, f"{career_id}.{field_name} contains forbidden sentinel '{sentinel}'"
+        for cell_id, why in c.why_match.items():
+            for sentinel in FORBIDDEN_SENTINELS:
+                assert sentinel not in why, f"{career_id}.why_match[{cell_id}] contains '{sentinel}'"
+        for i, company in enumerate(c.indian_companies):
+            for sentinel in FORBIDDEN_SENTINELS:
+                assert sentinel not in company, f"{career_id}.indian_companies[{i}] contains '{sentinel}'"
+
+
+def test_exemplars_have_indian_context_markers():
+    """Exemplars must reference at least 2 Indian-context markers across tagline + why_match values.
+
+    Cell exemplars use floor 3; career exemplars are shorter per-cell so floor 2 is realistic.
+    Generic 'Indian' copy without specific proper nouns fails.
+    """
+    for career_id in EXEMPLARS:
+        c = get_career(career_id)
+        text = c.tagline_en.lower() + " " + " ".join(why.lower() for why in c.why_match.values())
+        hits = sum(1 for marker in INDIAN_CONTEXT_MARKERS if marker in text)
+        assert hits >= 2, (
+            f"{career_id} has only {hits} Indian-context markers in tagline + why_match; "
+            f"needs >=2 specific proper nouns or culturally-specific terms"
+        )

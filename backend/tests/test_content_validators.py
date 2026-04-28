@@ -31,3 +31,16 @@ def test_validate_content_integrity_runs_clean():
     assert result["orphan_career_refs"] == []
     assert result["unknown_cells_in_why_match"] == []
     assert result["cells_with_zero_careers"] == []
+
+
+def test_find_dormant_why_match_entries_runs():
+    """Dormant entries are informational, not errors. Just verify the function works.
+
+    After Task 6, ~5 careers have why_match cells beyond their listing cells (one-way reference).
+    This is intentional dormant content for a future career-detail Path B page.
+    """
+    from content.validators import find_dormant_why_match_entries
+    dormant = find_dormant_why_match_entries()
+    assert isinstance(dormant, list)
+    for entry in dormant:
+        assert isinstance(entry, tuple) and len(entry) == 2

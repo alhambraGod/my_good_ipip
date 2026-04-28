@@ -774,7 +774,7 @@
     "why_match": {
       "IA": "Your pattern-recognition obsession plus tolerance for ambiguous data is the actual job description. Where others see noise, you see the model — and you'll defend that thesis through three-hour stakeholder reviews while quietly noting the sixteen edge cases nobody else thought to ask about.",
       "IC": "Your numerical brain plus structured-pipeline mindset is the moat in a field flooded by self-taught generalists. Comfort with notebooks AND data contracts is what gets you from analyst to ML engineer faster than peers who treat 'rigor' as an optional setting.",
-      "IR": "Your engineering-first instinct — load the data, profile it, automate it — makes you the rare data scientist who ships production code, not just notebooks. That's a 2x multiplier in Indian product companies where the line between DS and MLE keeps blurring."
+      "IR": "Your engineering-first instinct — load the data, profile it, automate it — makes you the rare data scientist who ships production code, not just notebooks. That's a 2x multiplier in Bangalore product companies (Razorpay, Swiggy, PhonePe) where the line between DS and MLE keeps blurring."
     },
     "indian_companies": [
       "Razorpay",
@@ -2435,8 +2435,8 @@
     "name_hi": "Ranniti Salahkar / रणनीति सलाहकार",
     "tagline_en": "Frameworks for the unframable — Tier-1 MBA pipelines exit here, and partner track is real if you survive years one through three.",
     "why_match": {
-      "IA": "The job is overthinking, monetised. Your tendency to map a problem until 3 AM is exactly what McKinsey-style stakeholder meetings reward — five hypothesis trees, one synthesis slide, and the calm authority that lets a CXO trust your structure over their gut.",
-      "AI": "Strategy decks are short stories with bullet points. Your auteur instinct for narrative arc and original framing is what separates the consultant who repackages two-by-twos from the one whose memo gets quoted in the boardroom six months later.",
+      "IA": "The job is overthinking, monetised. Your tendency to map a problem until 3 AM is exactly what McKinsey India stakeholder meetings reward — five hypothesis trees, one synthesis slide, and the calm authority that lets a Mumbai-listed CXO trust your structure over their gut.",
+      "AI": "Strategy decks are short stories with bullet points. Your auteur instinct for narrative arc and original framing is what separates the IIM-A grad who just repackages two-by-twos from the one whose memo gets quoted in the boardroom six months later.",
       "EC": "Top-tier consultants think in portfolios — three workstreams, four clients, six career bets. Your Marwari-style multi-business mental model means you'll naturally graduate from analyst to engagement manager to partner without losing track of any line item."
     },
     "indian_companies": [
