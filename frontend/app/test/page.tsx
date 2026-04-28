@@ -1,14 +1,16 @@
 "use client";
 
-import { Suspense, useEffect, useState, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  fetchQuestions,
-  submitAssessment,
-  submitAssessmentV2,
-  type Question,
-} from "@/lib/api";
+  getDemographicQuestions,
+  startV3Assessment,
+  submitV3Assessment,
+  getV3Milestone,
+  type V3Question,
+  type V3DemographicAnswers,
+} from "@/lib/v3-api";
 
 const LIKERT_OPTIONS = [
   { value: 1, label: "Strongly Disagree" },
@@ -18,216 +20,163 @@ const LIKERT_OPTIONS = [
   { value: 5, label: "Strongly Agree" },
 ];
 
-function TestContent() {
+const MILESTONE_THRESHOLDS = [10, 20, 30, 40];
+
+type Phase = "loading" | "demographic" | "main" | "milestone" | "submitting";
+
+export default function TestPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const assessmentId = searchParams.get("assessment_id");
-  const sessionToken = searchParams.get("session_token");
+  const [phase, setPhase] = useState<Phase>("loading");
+  const [demographicQs, setDemographicQs] = useState<V3Question[]>([]);
+  const [demographicAnswers, setDemographicAnswers] = useState<Partial<V3DemographicAnswers>>({});
+  const [demographicIdx, setDemographicIdx] = useState(0);
 
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [current, setCurrent] = useState(0);
+  const [assessmentId, setAssessmentId] = useState<string | null>(null);
+  const [seed, setSeed] = useState<string>("");
+  const [mainQs, setMainQs] = useState<V3Question[]>([]);
+  const [mainIdx, setMainIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [direction, setDirection] = useState(1);
-  const [submitting, setSubmitting] = useState(false);
-  const [loading, setLoading] = useState(true);
 
+  const [milestoneText, setMilestoneText] = useState<string>("");
+  const [pendingMilestone, setPendingMilestone] = useState<number | null>(null);
+
+  // Load demographic questions
   useEffect(() => {
-    async function loadQuestions() {
+    getDemographicQuestions()
+      .then((qs) => {
+        setDemographicQs(qs);
+        setPhase("demographic");
+      })
+      .catch(() => router.push("/"));
+  }, [router]);
+
+  const startMainPhase = useCallback(
+    async (dem: V3DemographicAnswers) => {
+      setPhase("loading");
       try {
-        if (assessmentId) {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/assessment/${assessmentId}/questions`
-          );
-          if (!res.ok) throw new Error("Failed personalized fetch");
-          const q = await res.json();
-          setQuestions(q);
-        } else {
-          const q = await fetchQuestions();
-          setQuestions(q);
-        }
-      } catch {
-        setQuestions([]);
-      } finally {
-        setLoading(false);
+        const start = await startV3Assessment(dem);
+        setAssessmentId(start.assessment_id);
+        setSeed(start.seed);
+        setMainQs(start.questions);
+        setPhase("main");
+      } catch (e) {
+        console.error(e);
+        router.push("/");
       }
-    }
-
-    loadQuestions();
-  }, [assessmentId]);
-
-  const question = questions[current];
-  const total = questions.length;
-  const answered = Object.keys(answers).length;
-  const progress = total > 0 ? (answered / total) * 100 : 0;
-  const allAnswered = answered >= total;
-
-  const findNextUnanswered = useCallback(
-    (from: number, newAnswers: Record<string, number>): number | null => {
-      for (let i = 1; i <= total; i++) {
-        const idx = (from + i) % total;
-        if (!(questions[idx].id in newAnswers)) return idx;
-      }
-      return null;
     },
-    [questions, total]
+    [router]
   );
 
-  const firstUnansweredIndex = useCallback((): number | null => {
-    for (let i = 0; i < total; i++) {
-      if (!(questions[i].id in answers)) return i;
+  const handleDemographicAnswer = (questionId: string, value: string) => {
+    const updated = { ...demographicAnswers, [questionId]: value };
+    setDemographicAnswers(updated);
+    if (demographicIdx + 1 < demographicQs.length) {
+      setDemographicIdx(demographicIdx + 1);
+    } else {
+      void startMainPhase(updated as V3DemographicAnswers);
     }
-    return null;
-  }, [questions, answers, total]);
+  };
 
-  const handleSubmit = useCallback(
-    async (finalAnswers: Record<string, number>) => {
-      setSubmitting(true);
+  const showMilestone = useCallback(
+    async (m: number) => {
+      setPhase("milestone");
+      setPendingMilestone(m);
       try {
-        const result = assessmentId
-          ? await submitAssessmentV2({
-              assessment_id: assessmentId,
-              session_token: sessionToken || undefined,
-              answers: finalAnswers,
-            })
-          : await submitAssessment(finalAnswers);
-        router.push(`/analyzing?id=${result.id}`);
+        const res = await getV3Milestone(m, seed);
+        setMilestoneText(res.text);
       } catch {
-        setSubmitting(false);
+        setMilestoneText("Keep going!");
       }
     },
-    [router, assessmentId, sessionToken]
+    [seed]
   );
 
-  const handleSelect = useCallback(
-    async (value: number) => {
-      if (!question || submitting) return;
-      const newAnswers = { ...answers, [question.id]: value };
-      setAnswers(newAnswers);
-
-      if (Object.keys(newAnswers).length >= total) {
-        setTimeout(() => handleSubmit(newAnswers), 300);
-        return;
-      }
-
-      const next = findNextUnanswered(current, newAnswers);
-      if (next !== null) {
-        setTimeout(() => {
-          setDirection(next > current ? 1 : -1);
-          setCurrent(next);
-        }, 300);
+  const submitAnswers = useCallback(
+    async (allAnswers: Record<string, number>) => {
+      if (!assessmentId) return;
+      setPhase("submitting");
+      try {
+        await submitV3Assessment(assessmentId, allAnswers);
+        router.push(`/results/${assessmentId}`);
+      } catch (e) {
+        console.error(e);
+        alert("Failed to submit. Please try again.");
+        setPhase("main");
       }
     },
-    [question, answers, current, total, submitting, findNextUnanswered, handleSubmit]
+    [assessmentId, router]
   );
 
-  const goBack = () => {
-    if (current > 0) {
-      setDirection(-1);
-      setCurrent((c) => c - 1);
+  const handleMainAnswer = (questionId: string, value: number) => {
+    const updated = { ...answers, [questionId]: value };
+    setAnswers(updated);
+
+    const totalAnswered = Object.keys(updated).length;
+    const milestone = MILESTONE_THRESHOLDS.find((m) => m === totalAnswered);
+
+    if (milestone) {
+      void showMilestone(milestone);
+      return;
+    }
+
+    if (mainIdx + 1 < mainQs.length) {
+      setMainIdx(mainIdx + 1);
+    } else {
+      void submitAnswers(updated);
     }
   };
 
-  const skip = () => {
-    if (current < total - 1) {
-      setDirection(1);
-      setCurrent((c) => c + 1);
+  const continueAfterMilestone = () => {
+    setPhase("main");
+    setPendingMilestone(null);
+    if (mainIdx + 1 < mainQs.length) {
+      setMainIdx(mainIdx + 1);
+    } else {
+      void submitAnswers(answers);
     }
   };
 
-  const goToStart = () => {
-    if (current !== 0) {
-      setDirection(-1);
-      setCurrent(0);
-    }
-  };
+  // ============= Render phases =============
 
-  const goToFirstUnanswered = () => {
-    const idx = firstUnansweredIndex();
-    if (idx !== null && idx !== current) {
-      setDirection(idx > current ? 1 : -1);
-      setCurrent(idx);
-    }
-  };
-
-  if (loading) {
+  if (phase === "loading") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-500">Loading questions...</p>
-        </div>
+      <main className="min-h-screen bg-india-radial flex items-center justify-center">
+        <p className="text-navy-text/70">🪔 Loading…</p>
       </main>
     );
   }
 
-  if (submitting) {
+  if (phase === "demographic") {
+    const q = demographicQs[demographicIdx];
+    if (!q) return null;
+    const progress = ((demographicIdx + 1) / 5) * 100;
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-500">Submitting your responses...</p>
+      <main className="min-h-screen bg-india-radial flex flex-col">
+        <div className="h-2 bg-saffron-100">
+          <div
+            className="h-full bg-gradient-to-r from-saffron-500 to-india-green-500 transition-all"
+            style={{ width: `${progress}%` }}
+          />
         </div>
-      </main>
-    );
-  }
-
-  if (!question) return null;
-
-  return (
-    <main className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Progress bar */}
-      <div className="bg-white border-b border-slate-100 px-4 py-3 sticky top-0 z-20">
-        <div className="max-w-lg mx-auto">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-slate-600">
-              Question {current + 1} of {total}
-            </span>
-            <span className="text-sm text-slate-400">
-              {answered}/{total} answered
-            </span>
-          </div>
-          <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full progress-fill"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Question area */}
-      <div className="flex-1 flex items-center justify-center px-4 py-8">
-        <div className="max-w-lg w-full">
-          <AnimatePresence mode="wait" custom={direction}>
+        <div className="flex-1 flex items-center justify-center px-6 py-12">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={question.id}
-              custom={direction}
-              initial={{ opacity: 0, x: direction * 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -60 }}
-              transition={{ duration: 0.25 }}
+              key={demographicIdx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="max-w-xl w-full"
             >
-              {/* Dimension badge */}
-              <div className="text-center mb-2">
-                <span className="inline-block text-xs font-medium text-indigo-500 bg-indigo-50 px-3 py-1 rounded-full capitalize">
-                  {question.dimension.replace("_", " ")}
-                </span>
+              <div className="text-saffron-700 text-xs font-semibold uppercase tracking-widest mb-3">
+                Question {demographicIdx + 1} of 5 · Quick start
               </div>
-
-              {/* Question text */}
-              <h2 className="text-xl md:text-2xl font-semibold text-slate-800 text-center mb-8 leading-relaxed">
-                {question.text}
-              </h2>
-
-              {/* Likert options */}
-              <div className="space-y-3">
-                {LIKERT_OPTIONS.map((opt) => (
+              <h2 className="text-2xl md:text-3xl font-bold text-navy-text mb-8">{q.text}</h2>
+              <div className="grid gap-3">
+                {q.options?.map((opt) => (
                   <button
                     key={opt.value}
-                    onClick={() => handleSelect(opt.value)}
-                    className={`likert-btn ${
-                      answers[question.id] === opt.value ? "selected" : ""
-                    }`}
+                    onClick={() => handleDemographicAnswer(q.id, opt.value)}
+                    className="text-left px-6 py-4 bg-white rounded-2xl border-2 border-saffron-200 hover:border-india-green-400 hover:bg-india-green-50 transition-all font-medium text-navy-text"
                   >
                     {opt.label}
                   </button>
@@ -235,68 +184,88 @@ function TestContent() {
               </div>
             </motion.div>
           </AnimatePresence>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-between mt-8">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={goToStart}
-                disabled={current === 0}
-                className="text-sm text-slate-400 hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                &#x21E4; Start
-              </button>
-              <button
-                onClick={goBack}
-                disabled={current === 0}
-                className="text-sm text-slate-400 hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                &larr; Back
-              </button>
-            </div>
-            <button
-              onClick={goToFirstUnanswered}
-              disabled={allAnswered}
-              className="text-sm font-medium text-indigo-500 hover:text-indigo-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              {allAnswered ? "All answered" : "Next unanswered"}
-            </button>
-            <button
-              onClick={skip}
-              disabled={current >= total - 1}
-              className="text-sm text-slate-400 hover:text-slate-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              Skip &rarr;
-            </button>
-          </div>
-
-          {/* Submit button when all answered */}
-          {allAnswered && (
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => handleSubmit(answers)}
-                className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all"
-              >
-                Submit All Answers
-              </button>
-            </div>
-          )}
         </div>
-      </div>
-    </main>
-  );
-}
+      </main>
+    );
+  }
 
-export default function TestPage() {
+  if (phase === "milestone") {
+    const m = pendingMilestone ?? 0;
+    return (
+      <main className="min-h-screen bg-india-hero flex flex-col items-center justify-center px-6 text-center">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="max-w-md"
+        >
+          <div className="text-6xl mb-6">🪔</div>
+          <div className="text-7xl font-bold text-saffron-700 mb-4">{m}</div>
+          <p className="text-xl text-navy-text font-medium mb-8">{milestoneText || "Keep going!"}</p>
+          <button
+            onClick={continueAfterMilestone}
+            className="bg-india-green-500 hover:bg-india-green-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg"
+          >
+            Continue
+          </button>
+        </motion.div>
+      </main>
+    );
+  }
+
+  if (phase === "main") {
+    const q = mainQs[mainIdx];
+    if (!q) return null;
+    const progress = ((5 + mainIdx + 1) / 45) * 100;
+    return (
+      <main className="min-h-screen bg-india-radial flex flex-col">
+        <div className="h-2 bg-saffron-100">
+          <div
+            className="h-full bg-gradient-to-r from-saffron-500 to-india-green-500 transition-all"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="flex-1 flex items-center justify-center px-6 py-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={mainIdx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="max-w-xl w-full"
+            >
+              <div className="text-saffron-700 text-xs font-semibold uppercase tracking-widest mb-3">
+                Question {5 + mainIdx + 1} of 45
+              </div>
+              <h2 className="text-xl md:text-2xl font-medium text-navy-text mb-8">{q.text}</h2>
+              <div className="grid gap-2">
+                {LIKERT_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => handleMainAnswer(q.id, opt.value)}
+                    className="text-left px-6 py-3 bg-white rounded-xl border-2 border-saffron-200 hover:border-india-green-400 hover:bg-india-green-50 transition-all font-medium text-navy-text"
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </main>
+    );
+  }
+
+  // submitting phase
   return (
-    <Suspense
-      fallback={
-        <main className="min-h-screen flex items-center justify-center bg-slate-50">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-        </main>
-      }
-    >
-      <TestContent />
-    </Suspense>
+    <main className="min-h-screen bg-india-radial flex items-center justify-center">
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        className="text-5xl"
+      >
+        🪔
+      </motion.div>
+      <p className="ml-4 text-navy-text font-medium">Decoding your archetype…</p>
+    </main>
   );
 }
