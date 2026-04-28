@@ -1,0 +1,38 @@
+{
+  "cell": "SA",
+  "label_en": "The Healing Performer",
+  "label_hi": "Chikitsak Kalakar",
+  "slogan_en": "Your art is the medicine. Your audience is the patient.",
+  "rarity_pct": 3.6,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Social-dominant + Artistic-supporting; uses craft as a healing modality, not a portfolio piece. This 80-120 word core insight will describe the SA archetype (The Healing Performer) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the SA cell (The Healing Performer). Theme: Social-dominant + Artistic-supporting; uses craft as a healing modality, not a portfolio piece. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably SA, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Empathic listening that surfaces unspoken needs",
+    "Coaching tone that grows others without micromanaging",
+    "Trust-building across cultural and generational gaps",
+    "Patient explanation under emotional intensity",
+    "Long-arc relationship maintenance over quick wins"
+  ],
+  "growth_tips_en": [
+    "Set sustainable boundaries so you can give without depleting reserves",
+    "Practice naming hard truths so support doesn't slide into avoidance",
+    "Track outcomes alongside relationships to keep work measurable",
+    "Take quarterly silent time to recharge from emotional labor",
+    "Develop a saying-no script that protects your highest-impact relationships"
+  ],
+  "career_directions": [
+    "art_therapist",
+    "drama_teacher",
+    "child_psychologist",
+    "edtech_curriculum_designer",
+    "creative_director"
+  ],
+  "share_lines_en": [
+    "I'm SA. The room exhales when I start playing.",
+    "I'm SA. 3.6% rare. The performance and the care are the same act."
+  ],
+  "ocean_modifiers": {
+    "high_agreeableness": "Your agreeableness lets the audience trust the work; protect your reserves with clear off-stage time.",
+    "high_openness": "Your openness lets you co-create with the room; pair it with a setlist so the form holds."
+  }
+}

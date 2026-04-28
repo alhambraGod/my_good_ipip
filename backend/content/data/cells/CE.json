@@ -1,0 +1,38 @@
+{
+  "cell": "CE",
+  "label_en": "The Sarkari Babu",
+  "label_hi": "Sarkari Babu",
+  "slogan_en": "Form 16-A in triplicate. Patience as a personal virtue.",
+  "rarity_pct": 6.8,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Conventional-dominant + Enterprising-supporting; institutional operator who navigates bureaucracy and policy as a lever, not a wall. This 80-120 word core insight will describe the CE archetype (The Sarkari Babu) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the CE cell (The Sarkari Babu). Theme: Conventional-dominant + Enterprising-supporting; institutional operator who navigates bureaucracy and policy as a lever, not a wall. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably CE, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Systematic process design for repeatable quality",
+    "Detail orientation that catches what others miss",
+    "Discipline to follow protocols even under time pressure",
+    "Numerical accuracy and audit-quality record-keeping",
+    "Rule-of-law thinking that protects teams from chaos"
+  ],
+  "growth_tips_en": [
+    "Schedule a weekly 'imperfect ship' practice to build comfort with ambiguity",
+    "Pair with a high-vision peer to balance precision with possibility",
+    "Convert checklists into automation wherever the work is repeated",
+    "Communicate risk in business terms, not just compliance terms",
+    "Build a stakeholder-empathy habit so process serves users, not the inverse"
+  ],
+  "career_directions": [
+    "public_administration",
+    "project_manager",
+    "operations_manager",
+    "founders_office",
+    "financial_analyst"
+  ],
+  "share_lines_en": [
+    "I'm CE. The file moved because I knew the right peon, the right form, and the right tone.",
+    "I'm CE. 6.8% rare. The form is right. The signature is right. We're done."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your conscientiousness is the discipline that keeps institutional work moving without drama.",
+    "low_neuroticism": "Lower neuroticism keeps you patient through long process loops; protect against learned helplessness when systems stall."
+  }
+}

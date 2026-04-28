@@ -1,0 +1,39 @@
+{
+  "cell": "SE",
+  "label_en": "The Marwari Mentor",
+  "label_hi": "Salah-Kar",
+  "slogan_en": "You don't run the business. You raise the people who do.",
+  "rarity_pct": 5.5,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Social-dominant + Enterprising-supporting; people-leader whose KPI is the next generation of operators they grow. This 80-120 word core insight will describe the SE archetype (The Marwari Mentor) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the SE cell (The Marwari Mentor). Theme: Social-dominant + Enterprising-supporting; people-leader whose KPI is the next generation of operators they grow. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably SE, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Empathic listening that surfaces unspoken needs",
+    "Coaching tone that grows others without micromanaging",
+    "Trust-building across cultural and generational gaps",
+    "Patient explanation under emotional intensity",
+    "Long-arc relationship maintenance over quick wins"
+  ],
+  "growth_tips_en": [
+    "Set sustainable boundaries so you can give without depleting reserves",
+    "Practice naming hard truths so support doesn't slide into avoidance",
+    "Track outcomes alongside relationships to keep work measurable",
+    "Take quarterly silent time to recharge from emotional labor",
+    "Develop a saying-no script that protects your highest-impact relationships"
+  ],
+  "career_directions": [
+    "sales_manager",
+    "hr_business_partner",
+    "education_administrator",
+    "founders_office",
+    "executive_coach",
+    "ngo_program_director"
+  ],
+  "share_lines_en": [
+    "I'm SE. The org chart is just my favorite people in different boxes.",
+    "I'm SE. 5.5% rare. I will remember your kid's exam date better than mine."
+  ],
+  "ocean_modifiers": {
+    "high_extraversion": "Your extraversion is the room-warmer; pair it with quiet 1:1 time so the deeper coaching happens.",
+    "high_agreeableness": "Your agreeableness is the trust layer; pair it with hard-call practice so feedback lands clean."
+  }
+}

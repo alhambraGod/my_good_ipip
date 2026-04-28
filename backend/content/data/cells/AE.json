@@ -1,0 +1,38 @@
+{
+  "cell": "AE",
+  "label_en": "The Brand Auteur",
+  "label_hi": "Brand Kalakaar",
+  "slogan_en": "Aesthetic IS the strategy. Mood-board first, P&L follows.",
+  "rarity_pct": 4.1,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Artistic-dominant + Enterprising-supporting; commercial creative who treats taste as defensible business advantage. This 80-120 word core insight will describe the AE archetype (The Brand Auteur) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the AE cell (The Brand Auteur). Theme: Artistic-dominant + Enterprising-supporting; commercial creative who treats taste as defensible business advantage. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably AE, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Aesthetic intuition that anchors creative direction",
+    "Original framing of familiar problems",
+    "Emotional resonance in storytelling and craft",
+    "Tolerance for messy, non-linear creative process",
+    "Cross-medium synthesis from disparate inspirations"
+  ],
+  "growth_tips_en": [
+    "Lock a weekly publishing cadence even when the work feels unfinished",
+    "Treat constraints (budget, brief, deadline) as creative inputs not threats",
+    "Form a peer-critique ring to balance solo intuition with outside eyes",
+    "Build a finance literacy habit so taste isn't held hostage to commerce",
+    "Schedule recovery time after intense creative sprints to avoid burnout"
+  ],
+  "career_directions": [
+    "brand_strategist",
+    "fashion_designer",
+    "kol_creator",
+    "creative_director",
+    "brand_manager"
+  ],
+  "share_lines_en": [
+    "I'm AE. The mood-board is the deck.",
+    "I'm AE. 4.1% rare. Your favourite brand probably hired me or someone like me."
+  ],
+  "ocean_modifiers": {
+    "high_openness": "Your openness keeps the brand from looking like everyone else's.",
+    "high_extraversion": "Your extraversion is the megaphone; pair it with a quieter editor before launch."
+  }
+}

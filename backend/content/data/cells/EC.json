@@ -1,0 +1,39 @@
+{
+  "cell": "EC",
+  "label_en": "The Marwari Mindset",
+  "label_hi": "Vyapari Akal",
+  "slogan_en": "You see arbitrage where others see Tuesday.",
+  "rarity_pct": 4.8,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Enterprising-dominant + Conventional-supporting; commercial mind that turns disciplined unit economics into compounding wealth. This 80-120 word core insight will describe the EC archetype (The Marwari Mindset) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the EC cell (The Marwari Mindset). Theme: Enterprising-dominant + Conventional-supporting; commercial mind that turns disciplined unit economics into compounding wealth. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably EC, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Conviction-led decisions under partial data",
+    "Persuasive framing that aligns diverse stakeholders",
+    "High energy across long sales and leadership cycles",
+    "Risk-tolerant bet-sizing on people and ideas",
+    "Charismatic recovery from setbacks and rejections"
+  ],
+  "growth_tips_en": [
+    "Slow down to listen before pitching when stakes feel highest",
+    "Pair with a detail-oriented operator to ground big visions in execution",
+    "Run post-mortems on losses to convert charisma into compounding wisdom",
+    "Schedule structured reflection time to balance constant action mode",
+    "Commit to a weekly numbers ritual so storytelling stays tied to data"
+  ],
+  "career_directions": [
+    "startup_founder",
+    "investment_analyst",
+    "family_office_principal",
+    "private_equity_associate",
+    "cross_border_ecommerce",
+    "wealth_advisor"
+  ],
+  "share_lines_en": [
+    "I'm EC. I priced your idea before you finished pitching.",
+    "I'm EC. 4.8% rare. The only person at the wedding asking about the venue's margin."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your conscientiousness keeps the deal terms honest when charisma alone could close it.",
+    "low_neuroticism": "Lower neuroticism lets you sit on positions; pair with a board that pushes you to take chips off when warranted."
+  }
+}

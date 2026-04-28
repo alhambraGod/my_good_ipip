@@ -1,0 +1,38 @@
+{
+  "cell": "AS",
+  "label_en": "The Bollywood Storyteller",
+  "label_hi": "Kahaani Kaar",
+  "slogan_en": "Every conversation becomes a screenplay in your head.",
+  "rarity_pct": 3.9,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Artistic-dominant + Social-supporting; storyteller whose work is calibrated to audience emotion in real time. This 80-120 word core insight will describe the AS archetype (The Bollywood Storyteller) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the AS cell (The Bollywood Storyteller). Theme: Artistic-dominant + Social-supporting; storyteller whose work is calibrated to audience emotion in real time. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably AS, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Aesthetic intuition that anchors creative direction",
+    "Original framing of familiar problems",
+    "Emotional resonance in storytelling and craft",
+    "Tolerance for messy, non-linear creative process",
+    "Cross-medium synthesis from disparate inspirations"
+  ],
+  "growth_tips_en": [
+    "Lock a weekly publishing cadence even when the work feels unfinished",
+    "Treat constraints (budget, brief, deadline) as creative inputs not threats",
+    "Form a peer-critique ring to balance solo intuition with outside eyes",
+    "Build a finance literacy habit so taste isn't held hostage to commerce",
+    "Schedule recovery time after intense creative sprints to avoid burnout"
+  ],
+  "career_directions": [
+    "screenwriter",
+    "art_therapist",
+    "drama_teacher",
+    "indie_filmmaker",
+    "content_creator"
+  ],
+  "share_lines_en": [
+    "I'm AS. Every Auto ride is a Netflix limited series in my head.",
+    "I'm AS. 3.9% rare. The reason the room laughs and then quietly cries."
+  ],
+  "ocean_modifiers": {
+    "high_extraversion": "Your extraversion is the interface; lean on it but don't let it become the whole craft.",
+    "high_agreeableness": "Your agreeableness builds an audience; pair it with editorial spine to keep the work honest."
+  }
+}

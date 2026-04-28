@@ -1,0 +1,39 @@
+{
+  "cell": "RI",
+  "label_en": "The Bangalore Engineer",
+  "label_hi": "Vyavhaarik Engineer",
+  "slogan_en": "You debug like Sharma ji solves family disputes — patient, methodical, occasionally angry.",
+  "rarity_pct": 5.2,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Realistic-dominant + Investigative-supporting; pragmatic problem-solver who treats theory as a tool, not a goal. This 80-120 word core insight will describe the RI archetype (The Bangalore Engineer) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the RI cell (The Bangalore Engineer). Theme: Realistic-dominant + Investigative-supporting; pragmatic problem-solver who treats theory as a tool, not a goal. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably RI, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Hands-on problem-solving under real-world constraints",
+    "Mechanical and spatial intuition under time pressure",
+    "Practical decision-making over theoretical debate",
+    "Calm execution in high-uncertainty physical environments",
+    "Comfort with material, mechanical, and field-based work"
+  ],
+  "growth_tips_en": [
+    "Document your tacit know-how so juniors can scale it without you",
+    "Practice articulating the 'why' so non-technical leaders can champion the work",
+    "Schedule deliberate rest before injury or burnout forces it",
+    "Volunteer for cross-functional work to balance shop-floor time",
+    "Adopt a daily small-decision habit to build leadership reps"
+  ],
+  "career_directions": [
+    "software_engineer",
+    "devops_engineer",
+    "embedded_engineer",
+    "qa_engineer",
+    "sre",
+    "data_engineer"
+  ],
+  "share_lines_en": [
+    "I'm RI. I treat production outages like Sharma ji treats family WhatsApp groups — calmly, methodically, with judgment.",
+    "I'm RI. 5.2% of Indians. I'd write a poem about it but I'd rather refactor it."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your high conscientiousness pulls RI toward production-grade craft and on-call reliability.",
+    "low_extraversion": "Lower extraversion means you ship more in deep-work blocks than in stand-ups; protect the calendar."
+  }
+}

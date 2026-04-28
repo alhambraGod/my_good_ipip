@@ -1,0 +1,38 @@
+{
+  "cell": "RA",
+  "label_en": "The Maker-Artisan",
+  "label_hi": "Hunarmand Karigar",
+  "slogan_en": "Your hands think faster than your mouth. The work speaks for you.",
+  "rarity_pct": 3.8,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Realistic-dominant + Artistic-supporting; tactile craftsperson who treats material as a co-author of the design. This 80-120 word core insight will describe the RA archetype (The Maker-Artisan) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the RA cell (The Maker-Artisan). Theme: Realistic-dominant + Artistic-supporting; tactile craftsperson who treats material as a co-author of the design. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably RA, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Hands-on problem-solving under real-world constraints",
+    "Mechanical and spatial intuition under time pressure",
+    "Practical decision-making over theoretical debate",
+    "Calm execution in high-uncertainty physical environments",
+    "Comfort with material, mechanical, and field-based work"
+  ],
+  "growth_tips_en": [
+    "Document your tacit know-how so juniors can scale it without you",
+    "Practice articulating the 'why' so non-technical leaders can champion the work",
+    "Schedule deliberate rest before injury or burnout forces it",
+    "Volunteer for cross-functional work to balance shop-floor time",
+    "Adopt a daily small-decision habit to build leadership reps"
+  ],
+  "career_directions": [
+    "industrial_designer",
+    "architect",
+    "product_designer",
+    "photographer",
+    "fashion_designer"
+  ],
+  "share_lines_en": [
+    "I'm RA. The work speaks. I just sand the edges until it does.",
+    "I'm RA. 3.8% rare. Probably building something right now instead of reading this."
+  ],
+  "ocean_modifiers": {
+    "high_openness": "Your high openness pulls RA toward unconventional materials and process experiments.",
+    "high_conscientiousness": "Your conscientiousness keeps craft from sliding into self-indulgent mess."
+  }
+}

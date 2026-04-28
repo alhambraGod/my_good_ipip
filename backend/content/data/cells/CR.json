@@ -1,0 +1,38 @@
+{
+  "cell": "CR",
+  "label_en": "The Operations Backbone",
+  "label_hi": "Sanchalan Reedh",
+  "slogan_en": "Things run because you're already three steps ahead of breaking.",
+  "rarity_pct": 6.0,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Conventional-dominant + Realistic-supporting; operator who builds the infrastructure other people perform on. This 80-120 word core insight will describe the CR archetype (The Operations Backbone) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the CR cell (The Operations Backbone). Theme: Conventional-dominant + Realistic-supporting; operator who builds the infrastructure other people perform on. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably CR, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Systematic process design for repeatable quality",
+    "Detail orientation that catches what others miss",
+    "Discipline to follow protocols even under time pressure",
+    "Numerical accuracy and audit-quality record-keeping",
+    "Rule-of-law thinking that protects teams from chaos"
+  ],
+  "growth_tips_en": [
+    "Schedule a weekly 'imperfect ship' practice to build comfort with ambiguity",
+    "Pair with a high-vision peer to balance precision with possibility",
+    "Convert checklists into automation wherever the work is repeated",
+    "Communicate risk in business terms, not just compliance terms",
+    "Build a stakeholder-empathy habit so process serves users, not the inverse"
+  ],
+  "career_directions": [
+    "operations_manager",
+    "production_manager",
+    "inventory_manager",
+    "logistics_coordinator",
+    "project_manager"
+  ],
+  "share_lines_en": [
+    "I'm CR. The reason your day didn't fall apart at 11 AM.",
+    "I'm CR. 6% rare. The dashboard everyone checks is the one I built quietly."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your conscientiousness is the backbone literally; guard it from being treated as infinite.",
+    "low_neuroticism": "Lower neuroticism keeps you steady through the supply-chain shocks; build escalation paths so it isn't always you."
+  }
+}

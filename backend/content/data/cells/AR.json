@@ -1,0 +1,38 @@
+{
+  "cell": "AR",
+  "label_en": "The Craft Maverick",
+  "label_hi": "Kalakaar Karigar",
+  "slogan_en": "You build what you can't yet name. The naming comes later.",
+  "rarity_pct": 3.4,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Artistic-dominant + Realistic-supporting; maker whose hands lead the design and whose materials shape the brief. This 80-120 word core insight will describe the AR archetype (The Craft Maverick) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the AR cell (The Craft Maverick). Theme: Artistic-dominant + Realistic-supporting; maker whose hands lead the design and whose materials shape the brief. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably AR, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Aesthetic intuition that anchors creative direction",
+    "Original framing of familiar problems",
+    "Emotional resonance in storytelling and craft",
+    "Tolerance for messy, non-linear creative process",
+    "Cross-medium synthesis from disparate inspirations"
+  ],
+  "growth_tips_en": [
+    "Lock a weekly publishing cadence even when the work feels unfinished",
+    "Treat constraints (budget, brief, deadline) as creative inputs not threats",
+    "Form a peer-critique ring to balance solo intuition with outside eyes",
+    "Build a finance literacy habit so taste isn't held hostage to commerce",
+    "Schedule recovery time after intense creative sprints to avoid burnout"
+  ],
+  "career_directions": [
+    "film_producer",
+    "photographer",
+    "industrial_designer",
+    "fashion_designer",
+    "animator"
+  ],
+  "share_lines_en": [
+    "I'm AR. The prototype is the brief. The brief is the prototype.",
+    "I'm AR. 3.4% rare. Probably elbow-deep in the work, not the meeting."
+  ],
+  "ocean_modifiers": {
+    "high_openness": "Your openness keeps the work fresh; conscientiousness keeps it shippable.",
+    "low_neuroticism": "Lower neuroticism helps you keep the studio calm when iteration cycles get long."
+  }
+}

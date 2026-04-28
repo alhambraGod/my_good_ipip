@@ -1,0 +1,41 @@
+{
+  "cell": "IA",
+  "label_en": "The 3AM Chai Philosopher",
+  "label_hi": "Sochne Wala",
+  "slogan_en": "You overthink your overthinking. Also this sentence.",
+  "rarity_pct": 4.3,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Investigative-dominant + Artistic-supporting; prone to overthinking, late-night philosopher mode, capable of deep synthesis when finally focused. This 80-120 word core insight will describe the IA archetype (The 3AM Chai Philosopher) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the IA cell (The 3AM Chai Philosopher). Theme: Investigative-dominant + Artistic-supporting; prone to overthinking, late-night philosopher mode, capable of deep synthesis when finally focused. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably IA, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Pattern recognition across disparate fields",
+    "Strategic foresight under ambiguity",
+    "Independent learning without external prompting",
+    "Synthesis of mixed signals into coherent insight",
+    "Comfort holding multiple competing hypotheses"
+  ],
+  "growth_tips_en": [
+    "Set strict timeboxes for analysis to avoid analysis paralysis",
+    "Ship 70%-ready outputs and iterate, instead of polishing in private",
+    "Use peer rubber-ducking to externalize the overthink loop",
+    "Adopt a daily one-thing-shipped ritual to build momentum",
+    "Externalize anxiety to a journal to reclaim cognitive bandwidth"
+  ],
+  "career_directions": [
+    "data_scientist",
+    "strategy_consultant",
+    "ai_research_engineer",
+    "academic_researcher",
+    "policy_analyst",
+    "quant_analyst"
+  ],
+  "share_lines_en": [
+    "I'm IA. My personality is just Stack Overflow with trust issues.",
+    "I'm IA. I overthink my overthinking. Also this sentence.",
+    "I'm IA. 4.3% rare. I'd celebrate but I'm too busy doubting myself."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your high conscientiousness pulls IA toward rigorous execution rather than pure theory.",
+    "high_neuroticism": "Under stress, you need to externalize the loop — write it down or talk it out.",
+    "high_openness": "Your novelty-seeking can pull you across fields; consider a meta-discipline as your home base."
+  }
+}

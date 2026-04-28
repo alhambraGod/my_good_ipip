@@ -1,0 +1,38 @@
+{
+  "cell": "CI",
+  "label_en": "The Compliance Brain",
+  "label_hi": "Niyaman Vishesgya",
+  "slogan_en": "Risk-adjusted, footnote-checked, signed in triplicate. Sleep well.",
+  "rarity_pct": 5.3,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Conventional-dominant + Investigative-supporting; risk and rules brain who sees three exposures ahead of the room. This 80-120 word core insight will describe the CI archetype (The Compliance Brain) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the CI cell (The Compliance Brain). Theme: Conventional-dominant + Investigative-supporting; risk and rules brain who sees three exposures ahead of the room. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably CI, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Systematic process design for repeatable quality",
+    "Detail orientation that catches what others miss",
+    "Discipline to follow protocols even under time pressure",
+    "Numerical accuracy and audit-quality record-keeping",
+    "Rule-of-law thinking that protects teams from chaos"
+  ],
+  "growth_tips_en": [
+    "Schedule a weekly 'imperfect ship' practice to build comfort with ambiguity",
+    "Pair with a high-vision peer to balance precision with possibility",
+    "Convert checklists into automation wherever the work is repeated",
+    "Communicate risk in business terms, not just compliance terms",
+    "Build a stakeholder-empathy habit so process serves users, not the inverse"
+  ],
+  "career_directions": [
+    "audit_associate",
+    "compliance_officer",
+    "financial_analyst",
+    "risk_analyst",
+    "legal_associate"
+  ],
+  "share_lines_en": [
+    "I'm CI. The flag I raised in 2019 became the headline in 2024.",
+    "I'm CI. 5.3% rare. The auditor that the auditors quietly respect."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your conscientiousness is the moat; build storytelling skill so the rest of the org can follow your reasoning.",
+    "low_extraversion": "Lower extraversion can be misread as obstruction; schedule explicit framing comms when raising flags."
+  }
+}

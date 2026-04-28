@@ -1,0 +1,38 @@
+{
+  "cell": "ER",
+  "label_en": "The Hustle Founder",
+  "label_hi": "Mehnat Karta",
+  "slogan_en": "You'd start a side hustle in the womb if the womb had wifi.",
+  "rarity_pct": 5.7,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Enterprising-dominant + Realistic-supporting; founder-operator who ships the MVP themselves while raising the seed round. This 80-120 word core insight will describe the ER archetype (The Hustle Founder) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the ER cell (The Hustle Founder). Theme: Enterprising-dominant + Realistic-supporting; founder-operator who ships the MVP themselves while raising the seed round. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably ER, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Conviction-led decisions under partial data",
+    "Persuasive framing that aligns diverse stakeholders",
+    "High energy across long sales and leadership cycles",
+    "Risk-tolerant bet-sizing on people and ideas",
+    "Charismatic recovery from setbacks and rejections"
+  ],
+  "growth_tips_en": [
+    "Slow down to listen before pitching when stakes feel highest",
+    "Pair with a detail-oriented operator to ground big visions in execution",
+    "Run post-mortems on losses to convert charisma into compounding wisdom",
+    "Schedule structured reflection time to balance constant action mode",
+    "Commit to a weekly numbers ritual so storytelling stays tied to data"
+  ],
+  "career_directions": [
+    "startup_founder",
+    "business_development",
+    "product_manager",
+    "founders_office",
+    "sales_manager"
+  ],
+  "share_lines_en": [
+    "I'm ER. Sleep is a Series A problem.",
+    "I'm ER. 5.7% rare. I will pitch you between bites of dosa."
+  ],
+  "ocean_modifiers": {
+    "high_extraversion": "Your extraversion is the sales engine; pair with a strong COO so execution doesn't lag pitch.",
+    "low_neuroticism": "Lower neuroticism is the gift that lets you keep going through the trough; protect the team that absorbs your volatility."
+  }
+}

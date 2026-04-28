@@ -1,0 +1,38 @@
+{
+  "cell": "AI",
+  "label_en": "The Indie Auteur",
+  "label_hi": "Swatantra Kalakaar",
+  "slogan_en": "You're not for everyone. The 4% who get it, get it.",
+  "rarity_pct": 3.2,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Artistic-dominant + Investigative-supporting; auteur who designs from a thesis, not a trend. This 80-120 word core insight will describe the AI archetype (The Indie Auteur) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the AI cell (The Indie Auteur). Theme: Artistic-dominant + Investigative-supporting; auteur who designs from a thesis, not a trend. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably AI, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Aesthetic intuition that anchors creative direction",
+    "Original framing of familiar problems",
+    "Emotional resonance in storytelling and craft",
+    "Tolerance for messy, non-linear creative process",
+    "Cross-medium synthesis from disparate inspirations"
+  ],
+  "growth_tips_en": [
+    "Lock a weekly publishing cadence even when the work feels unfinished",
+    "Treat constraints (budget, brief, deadline) as creative inputs not threats",
+    "Form a peer-critique ring to balance solo intuition with outside eyes",
+    "Build a finance literacy habit so taste isn't held hostage to commerce",
+    "Schedule recovery time after intense creative sprints to avoid burnout"
+  ],
+  "career_directions": [
+    "indie_filmmaker",
+    "concept_artist",
+    "content_creator",
+    "screenwriter",
+    "creative_director"
+  ],
+  "share_lines_en": [
+    "I'm AI. My stuff is for the four percent. I'm OK with that.",
+    "I'm AI. 3.2% rare. You'll find me in the credits, not the trailer."
+  ],
+  "ocean_modifiers": {
+    "high_openness": "Your openness is the engine; protect it from the algorithm-fed feed that flattens taste.",
+    "high_neuroticism": "High neuroticism can fuel the work; build a finishing ritual so it doesn't kill it."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "cell": "RE",
+  "label_en": "The Site Foreman",
+  "label_hi": "Karyakshetra Mukhiya",
+  "slogan_en": "You don't run the project. You're why the project runs.",
+  "rarity_pct": 4.5,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Realistic-dominant + Enterprising-supporting; hands-on operator who leads through the work, not the slide deck. This 80-120 word core insight will describe the RE archetype (The Site Foreman) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the RE cell (The Site Foreman). Theme: Realistic-dominant + Enterprising-supporting; hands-on operator who leads through the work, not the slide deck. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably RE, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Hands-on problem-solving under real-world constraints",
+    "Mechanical and spatial intuition under time pressure",
+    "Practical decision-making over theoretical debate",
+    "Calm execution in high-uncertainty physical environments",
+    "Comfort with material, mechanical, and field-based work"
+  ],
+  "growth_tips_en": [
+    "Document your tacit know-how so juniors can scale it without you",
+    "Practice articulating the 'why' so non-technical leaders can champion the work",
+    "Schedule deliberate rest before injury or burnout forces it",
+    "Volunteer for cross-functional work to balance shop-floor time",
+    "Adopt a daily small-decision habit to build leadership reps"
+  ],
+  "career_directions": [
+    "project_manager",
+    "manufacturing_lead",
+    "logistics_coordinator",
+    "operations_manager",
+    "site_supervisor"
+  ],
+  "share_lines_en": [
+    "I'm RE. The site stays on schedule because I'm louder than the chaos.",
+    "I'm RE. 4.5% rare. The deck made by someone else; the day made by me."
+  ],
+  "ocean_modifiers": {
+    "high_extraversion": "Your extraversion is the engine that keeps a 200-person site moving when systems alone wouldn't.",
+    "high_conscientiousness": "Your conscientiousness is what gets the punch list to zero before handover."
+  }
+}

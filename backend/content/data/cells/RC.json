@@ -1,0 +1,38 @@
+{
+  "cell": "RC",
+  "label_en": "The Disciplined Technician",
+  "label_hi": "Anushasit Technician",
+  "slogan_en": "Calibrated to spec. Reliable to the second decimal. The work explains itself.",
+  "rarity_pct": 5.8,
+  "core_insight_en": "PLACEHOLDER — Phase 2.5 will author this. Theme: Realistic-dominant + Conventional-supporting; methodical operator who treats discipline as an art form. This 80-120 word core insight will describe the RC archetype (The Disciplined Technician) with India-flavored copy, integrating Hinglish accents (Sharma ji, Aunty, EMI references) where they earn their place, and balancing the dark-humor IBTI tone with the temperature-of-warmth this cell rewards.",
+  "deep_description_en": "PLACEHOLDER — Phase 2.5 will author the 300-500 word body for the RC cell (The Disciplined Technician). Theme: Realistic-dominant + Conventional-supporting; methodical operator who treats discipline as an art form. To be drafted by GPT-4o with native Indian copywriter review. The body will weave stress signals, growth edges, and identity claims (\"I'm the kind of person who…\") in a way that feels recognisably RC, not generic. Hinglish accents (Sharma ji, Aunty, EMI culture) appear only when they earn their place, and the dark-humor IBTI roast is balanced with a warmth temperature appropriate to this archetype — sharper for cells like EC and CE, gentler for SI and IS.",
+  "strengths_en": [
+    "Hands-on problem-solving under real-world constraints",
+    "Mechanical and spatial intuition under time pressure",
+    "Practical decision-making over theoretical debate",
+    "Calm execution in high-uncertainty physical environments",
+    "Comfort with material, mechanical, and field-based work"
+  ],
+  "growth_tips_en": [
+    "Document your tacit know-how so juniors can scale it without you",
+    "Practice articulating the 'why' so non-technical leaders can champion the work",
+    "Schedule deliberate rest before injury or burnout forces it",
+    "Volunteer for cross-functional work to balance shop-floor time",
+    "Adopt a daily small-decision habit to build leadership reps"
+  ],
+  "career_directions": [
+    "electrical_engineer",
+    "mechanical_engineer",
+    "qa_engineer",
+    "technician",
+    "maintenance_engineer"
+  ],
+  "share_lines_en": [
+    "I'm RC. My toolbox is alphabetised. So is my brain.",
+    "I'm RC. 5.8% rare. The reason your equipment didn't fail today."
+  ],
+  "ocean_modifiers": {
+    "high_conscientiousness": "Your high conscientiousness is the dial RC is built around — protect it; don't burn it.",
+    "low_neuroticism": "Your low neuroticism keeps you steady when alarms go off at 2 AM."
+  }
+}
