@@ -103,7 +103,7 @@
   "alumni_engagement": {
     "career_id": "alumni_engagement",
     "name_en": "Alumni Engagement Manager",
-    "name_hi": "Alumni Sanlagn Prabandhak",
+    "name_hi": "Alumni Sanlagn Prabandhak / पूर्व छात्र संलग्न प्रबंधक",
     "tagline_en": "Keep the network compounding",
     "why_match": {
       "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches alumni_engagement"
@@ -668,7 +668,7 @@
   "cross_border_ecommerce": {
     "career_id": "cross_border_ecommerce",
     "name_en": "Cross-Border E-commerce Lead",
-    "name_hi": "Antarrashtriya E-commerce Pradhan",
+    "name_hi": "Antarrashtriya E-commerce Pradhan / अंतरराष्ट्रीय ई-कॉमर्स प्रधान",
     "tagline_en": "Sell India to the world",
     "why_match": {
       "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches cross_border_ecommerce"
@@ -700,7 +700,7 @@
   "customer_success_manager": {
     "career_id": "customer_success_manager",
     "name_en": "Customer Success Manager",
-    "name_hi": "Customer Success Prabandhak",
+    "name_hi": "Customer Success Prabandhak / कस्टमर सक्सेस प्रबंधक",
     "tagline_en": "Renewals are won post-sale",
     "why_match": {
       "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches customer_success_manager",
@@ -1035,7 +1035,7 @@
   "family_office_principal": {
     "career_id": "family_office_principal",
     "name_en": "Family Office Principal",
-    "name_hi": "Family Office Pradhan",
+    "name_hi": "Family Office Pradhan / फैमिली ऑफिस प्रधान",
     "tagline_en": "Steward generational wealth",
     "why_match": {
       "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches family_office_principal"
@@ -1167,7 +1167,7 @@
   "founders_office": {
     "career_id": "founders_office",
     "name_en": "Founder's Office Associate",
-    "name_hi": "Founder's Office",
+    "name_hi": "Sansthapak Karyalay / संस्थापक कार्यालय",
     "tagline_en": "CEO leverage at a startup",
     "why_match": {
       "CE": "PLACEHOLDER — Phase 2.5 will articulate why CE matches founders_office",
@@ -1201,7 +1201,7 @@
   "hr_business_partner": {
     "career_id": "hr_business_partner",
     "name_en": "HR Business Partner",
-    "name_hi": "HR Business Partner",
+    "name_hi": "HR Saajhedaar / एचआर साझेदार",
     "tagline_en": "People-strategy at the leadership table",
     "why_match": {
       "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches hr_business_partner",
@@ -1432,7 +1432,7 @@
   "logistics_coordinator": {
     "career_id": "logistics_coordinator",
     "name_en": "Logistics Coordinator",
-    "name_hi": "Logistics Samanvayak",
+    "name_hi": "Logistics Samanvayak / लॉजिस्टिक्स समन्वयक",
     "tagline_en": "Right thing, right place, right time",
     "why_match": {
       "CR": "PLACEHOLDER — Phase 2.5 will articulate why CR matches logistics_coordinator",
@@ -1500,7 +1500,7 @@
   "manufacturing_lead": {
     "career_id": "manufacturing_lead",
     "name_en": "Manufacturing Lead",
-    "name_hi": "Manufacturing Pradhan",
+    "name_hi": "Manufacturing Pradhan / मैन्युफैक्चरिंग प्रधान",
     "tagline_en": "Plant-floor leader, not desk-bound",
     "why_match": {
       "RE": "PLACEHOLDER — Phase 2.5 will articulate why RE matches manufacturing_lead"
@@ -1799,7 +1799,7 @@
   "private_equity_associate": {
     "career_id": "private_equity_associate",
     "name_en": "Private Equity Associate",
-    "name_hi": "Private Equity Associate",
+    "name_hi": "Niji Iqvuiti Sahyogi / निजी इक्विटी सहयोगी",
     "tagline_en": "Buy, build, exit",
     "why_match": {
       "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches private_equity_associate"
@@ -1994,7 +1994,7 @@
   "public_health_researcher": {
     "career_id": "public_health_researcher",
     "name_en": "Public Health Researcher",
-    "name_hi": "Sarvajanik Swasthya Anusandhanak",
+    "name_hi": "Sarvajanik Swasthya Anusandhanak / सार्वजनिक स्वास्थ्य अनुसंधानकर्ता",
     "tagline_en": "Population-level evidence, real impact",
     "why_match": {
       "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches public_health_researcher"
@@ -2360,7 +2360,7 @@
   "sre": {
     "career_id": "sre",
     "name_en": "Site Reliability Engineer",
-    "name_hi": "Site Reliability Engineer / SRE",
+    "name_hi": "Site Reliability Engineer / साइट रिलायबिलिटी इंजीनियर",
     "tagline_en": "Keep the lights on at scale",
     "why_match": {
       "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches sre"
@@ -2407,7 +2407,7 @@
       "Self-funded"
     ],
     "salary_inr": {
-      "entry": "0–6L (bootstrapped)",
+      "entry": "0L–6L (bootstrapped)",
       "mid": "15L–40L (Seed)",
       "senior": "1Cr+ (Series B+) or exit"
     },

@@ -2,11 +2,23 @@
 
 from __future__ import annotations
 
+import re
 from typing import Annotated
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
 
 CellId = Annotated[str, StringConstraints(pattern=r"^[RIASEC]{2}$")]
+
+# A salary string must either be a sentinel ("Variable" / "N/A") or contain at least
+# one lakh-/crore-notation token (e.g. "6L", "3.5L", "1.2Cr", "60L+", "5Cr+").
+# Surrounding range separators (–/-), parentheticals like "(Postdoc)", and trailing
+# descriptors like "per project" / "or exit" are allowed; bare numerals and free-form
+# prose without an L/Cr token are rejected. Adjusted from the original "L-only"
+# proposal so screenwriter/film/PE/quant ranges with Cr or "+" still validate.
+_SALARY_PATTERN = re.compile(
+    r"^(?:Variable|N/A|.*\d+(?:\.\d+)?(?:L|Cr)\+?.*)$",
+    re.IGNORECASE,
+)
 
 
 class OceanModifiers(BaseModel):
@@ -58,13 +70,32 @@ class CellContent(BaseModel):
 
 
 class SalaryRange(BaseModel):
-    """Indian salary bands (LPA shorthand, e.g. '6L', '12L–22L')."""
+    """INR salary in lakh-notation strings.
+
+    Format examples:
+      - ``"6L"`` (single point)
+      - ``"12L–22L"`` or ``"12L-22L"`` (range with en-dash or hyphen)
+      - ``"0L–6L"`` (zero entry for early stage)
+      - ``"30L–1Cr+ per project"`` / ``"15L–40L (Seed)"`` (descriptor-suffixed)
+      - ``"Variable"`` / ``"N/A"`` — sentinel values for atypical careers
+    """
 
     model_config = ConfigDict(extra="forbid")
 
-    entry: str
-    mid: str
-    senior: str
+    entry: str = Field(min_length=1, max_length=40)
+    mid: str = Field(min_length=1, max_length=40)
+    senior: str = Field(min_length=1, max_length=40)
+
+    @field_validator("entry", "mid", "senior")
+    @classmethod
+    def _validate_salary_format(cls, v: str) -> str:
+        if not _SALARY_PATTERN.match(v.strip()):
+            raise ValueError(
+                f"salary string {v!r} doesn't match lakh notation. "
+                f"Examples: '6L', '12L–22L', '30L–80L', 'Variable', '0L (bootstrapped)'. "
+                f"Did you forget the 'L' suffix?"
+            )
+        return v
 
 
 class CareerEntry(BaseModel):
