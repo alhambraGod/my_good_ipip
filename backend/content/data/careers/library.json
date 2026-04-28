@@ -1,0 +1,2588 @@
+{
+  "academic_researcher": {
+    "career_id": "academic_researcher",
+    "name_en": "Academic Researcher",
+    "name_hi": "Shaikshik Anusandhanak / शैक्षणिक अनुसंधानकर्ता",
+    "tagline_en": "Citations are your currency",
+    "why_match": {
+      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches academic_researcher",
+      "SI": "PLACEHOLDER — Phase 2.5 will articulate why SI matches academic_researcher"
+    },
+    "indian_companies": [
+      "IIT system",
+      "IISc Bangalore",
+      "TIFR",
+      "JNU",
+      "Ashoka University",
+      "ISI Kolkata"
+    ],
+    "salary_inr": {
+      "entry": "6L (Postdoc)",
+      "mid": "12L–22L (Asst Prof)",
+      "senior": "25L–50L (Full Prof)"
+    },
+    "education_path": [
+      "Master's + PhD (5-7 yrs)",
+      "Postdoc abroad helpful",
+      "Strong publication record"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Mumbai",
+      "Delhi NCR",
+      "Kolkata",
+      "Chennai"
+    ]
+  },
+  "administrative_lead": {
+    "career_id": "administrative_lead",
+    "name_en": "Administrative Lead",
+    "name_hi": "Prashasak Pradhan / प्रशासक प्रधान",
+    "tagline_en": "Make the office actually run",
+    "why_match": {
+      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches administrative_lead"
+    },
+    "indian_companies": [
+      "Reliance Industries",
+      "Tata Group",
+      "Infosys",
+      "Mahindra Group",
+      "ICICI Bank",
+      "HDFC Bank"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "6L–12L",
+      "senior": "15L–30L"
+    },
+    "education_path": [
+      "B.Com / BBA",
+      "MBA optional",
+      "Strong organization + tooling"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Delhi NCR",
+      "Pune"
+    ]
+  },
+  "ai_research_engineer": {
+    "career_id": "ai_research_engineer",
+    "name_en": "AI Research Engineer",
+    "name_hi": "AI Anusandhan Abhiyanta / AI रिसर्च इंजीनियर",
+    "tagline_en": "Push the frontier, then ship it",
+    "why_match": {
+      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches ai_research_engineer",
+      "IR": "PLACEHOLDER — Phase 2.5 will articulate why IR matches ai_research_engineer"
+    },
+    "indian_companies": [
+      "Microsoft IDC",
+      "Google India",
+      "Adobe Research",
+      "Krutrim",
+      "Sarvam AI",
+      "Ola Krutrim"
+    ],
+    "salary_inr": {
+      "entry": "12L",
+      "mid": "25L–50L",
+      "senior": "60L–1.5Cr"
+    },
+    "education_path": [
+      "B.Tech + Master's/PhD in CS/ML",
+      "Top-tier labs (IISc/IIIT)",
+      "Strong publication record"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Gurugram"
+    ]
+  },
+  "alumni_engagement": {
+    "career_id": "alumni_engagement",
+    "name_en": "Alumni Engagement Manager",
+    "name_hi": "Alumni Sanlagn Prabandhak",
+    "tagline_en": "Keep the network compounding",
+    "why_match": {
+      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches alumni_engagement"
+    },
+    "indian_companies": [
+      "IIM-A/B/C/L alumni offices",
+      "ISB",
+      "BITS Pilani",
+      "SRCC",
+      "Ashoka University",
+      "IIT alumni offices"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "8L–14L",
+      "senior": "16L–30L"
+    },
+    "education_path": [
+      "MBA / MA Communications",
+      "Event management exp",
+      "Strong CRM + writing"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Mumbai",
+      "Delhi NCR",
+      "Hyderabad"
+    ]
+  },
+  "animator": {
+    "career_id": "animator",
+    "name_en": "Animator",
+    "name_hi": "Animator / एनिमेटर",
+    "tagline_en": "12 frames a second, infinite worlds",
+    "why_match": {
+      "AR": "PLACEHOLDER — Phase 2.5 will articulate why AR matches animator"
+    },
+    "indian_companies": [
+      "DNEG India",
+      "Prime Focus",
+      "Technicolor India",
+      "Toonz Animation",
+      "Green Gold Animation",
+      "Disney India"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–15L",
+      "senior": "20L–45L"
+    },
+    "education_path": [
+      "MAAC/Arena/Pickle Jar",
+      "Strong reel/portfolio",
+      "Online: AnimSchool/iAnimate"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Hyderabad",
+      "Trivandrum"
+    ]
+  },
+  "architect": {
+    "career_id": "architect",
+    "name_en": "Architect",
+    "name_hi": "Vastukar / वास्तुकार",
+    "tagline_en": "Spaces shape behaviour",
+    "why_match": {
+      "RA": "PLACEHOLDER — Phase 2.5 will articulate why RA matches architect"
+    },
+    "indian_companies": [
+      "Hafeez Contractor Architects",
+      "Morphogenesis",
+      "Studio Lotus",
+      "Sanjay Puri Architects",
+      "RSP Architects",
+      "ECAD"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–15L",
+      "senior": "20L–60L+"
+    },
+    "education_path": [
+      "B.Arch (5 yrs)",
+      "M.Arch optional",
+      "Council of Architecture (COA) registration"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Delhi NCR",
+      "Pune"
+    ]
+  },
+  "art_therapist": {
+    "career_id": "art_therapist",
+    "name_en": "Art Therapist",
+    "name_hi": "Kala Chikitsak / कला चिकित्सक",
+    "tagline_en": "Healing through making",
+    "why_match": {
+      "AS": "PLACEHOLDER — Phase 2.5 will articulate why AS matches art_therapist",
+      "SA": "PLACEHOLDER — Phase 2.5 will articulate why SA matches art_therapist"
+    },
+    "indian_companies": [
+      "Pause for Perspective",
+      "Manas Foundation",
+      "Snehadhara Foundation",
+      "St. Stephen's Hospital",
+      "Independent practice",
+      "Schools (SEN)"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "5L–10L",
+      "senior": "12L–25L"
+    },
+    "education_path": [
+      "MA Psychology + Art Therapy diploma (UK/US)",
+      "St. Xavier's Mumbai cert",
+      "Apprenticeship with senior therapist"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Delhi NCR"
+    ]
+  },
+  "audit_associate": {
+    "career_id": "audit_associate",
+    "name_en": "Audit Associate",
+    "name_hi": "Audit Sahyogi / ऑडिट सहयोगी",
+    "tagline_en": "The books always balance — verify it",
+    "why_match": {
+      "CI": "PLACEHOLDER — Phase 2.5 will articulate why CI matches audit_associate",
+      "IC": "PLACEHOLDER — Phase 2.5 will articulate why IC matches audit_associate"
+    },
+    "indian_companies": [
+      "Deloitte India",
+      "PwC India",
+      "EY India",
+      "KPMG India",
+      "BDO India",
+      "Grant Thornton"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "8L–14L",
+      "senior": "20L–40L"
+    },
+    "education_path": [
+      "B.Com + CA Inter/Final",
+      "Articleship at Big 4",
+      "Soft skills: documentation"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Gurugram",
+      "Bangalore",
+      "Chennai"
+    ]
+  },
+  "backend_developer": {
+    "career_id": "backend_developer",
+    "name_en": "Backend Developer",
+    "name_hi": "Backend Developer / बैकएंड डेवलपर",
+    "tagline_en": "Build the engine, not the dashboard",
+    "why_match": {
+      "IR": "PLACEHOLDER — Phase 2.5 will articulate why IR matches backend_developer"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "PhonePe",
+      "Cred",
+      "Zerodha",
+      "Swiggy",
+      "Flipkart"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–22L",
+      "senior": "28L–70L"
+    },
+    "education_path": [
+      "B.Tech CSE",
+      "Bootcamps (Scaler/AlmaBetter)",
+      "Online: System Design/Go/Java"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "brand_manager": {
+    "career_id": "brand_manager",
+    "name_en": "Brand Manager",
+    "name_hi": "Brand Prabandhak / ब्रांड प्रबंधक",
+    "tagline_en": "Own the P&L of perception",
+    "why_match": {
+      "AE": "PLACEHOLDER — Phase 2.5 will articulate why AE matches brand_manager",
+      "EA": "PLACEHOLDER — Phase 2.5 will articulate why EA matches brand_manager",
+      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches brand_manager"
+    },
+    "indian_companies": [
+      "HUL",
+      "ITC",
+      "Nestle India",
+      "Mondelez India",
+      "Marico",
+      "Britannia"
+    ],
+    "salary_inr": {
+      "entry": "10L",
+      "mid": "20L–35L",
+      "senior": "45L–1Cr"
+    },
+    "education_path": [
+      "MBA Marketing (T15)",
+      "FMCG MT programs",
+      "Strong consumer insight + analytics"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Gurugram"
+    ]
+  },
+  "brand_strategist": {
+    "career_id": "brand_strategist",
+    "name_en": "Brand Strategist",
+    "name_hi": "Brand Ranneetikar / ब्रांड रणनीतिकार",
+    "tagline_en": "Why this brand, why now",
+    "why_match": {
+      "AE": "PLACEHOLDER — Phase 2.5 will articulate why AE matches brand_strategist",
+      "EA": "PLACEHOLDER — Phase 2.5 will articulate why EA matches brand_strategist"
+    },
+    "indian_companies": [
+      "Ogilvy India",
+      "Wieden+Kennedy India",
+      "Talented",
+      "Lowe Lintas",
+      "Leo Burnett India",
+      "BBDO India"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "14L–28L",
+      "senior": "35L–80L"
+    },
+    "education_path": [
+      "MICA/IIM/SCM-HR",
+      "MBA Marketing",
+      "Strong cultural insight + writing"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "business_development": {
+    "career_id": "business_development",
+    "name_en": "Business Development Manager",
+    "name_hi": "Vyavasaya Vikas Prabandhak / व्यवसाय विकास प्रबंधक",
+    "tagline_en": "Open doors, build pipeline",
+    "why_match": {
+      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches business_development",
+      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches business_development"
+    },
+    "indian_companies": [
+      "Salesforce India",
+      "Oracle India",
+      "AWS India",
+      "Razorpay",
+      "Freshworks",
+      "Postman"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–22L",
+      "senior": "28L–60L"
+    },
+    "education_path": [
+      "MBA optional",
+      "Strong outbound + qualification",
+      "Industry network"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Gurugram",
+      "Hyderabad"
+    ]
+  },
+  "child_psychologist": {
+    "career_id": "child_psychologist",
+    "name_en": "Child Psychologist",
+    "name_hi": "Bal Manovaigyanik / बाल मनोवैज्ञानिक",
+    "tagline_en": "Meet kids where they are",
+    "why_match": {
+      "SA": "PLACEHOLDER — Phase 2.5 will articulate why SA matches child_psychologist"
+    },
+    "indian_companies": [
+      "NIMHANS",
+      "Fortis Mental Health",
+      "Manas Foundation",
+      "Communicare",
+      "private clinics",
+      "international schools"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "7L–13L",
+      "senior": "16L–35L"
+    },
+    "education_path": [
+      "MA Psychology",
+      "M.Phil Clinical/Child specialization",
+      "Play-therapy training"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Delhi NCR",
+      "Mumbai",
+      "Chennai"
+    ]
+  },
+  "clinical_psychologist": {
+    "career_id": "clinical_psychologist",
+    "name_en": "Clinical Psychologist",
+    "name_hi": "Naidanik Manovaigyanik / नैदानिक मनोवैज्ञानिक",
+    "tagline_en": "Listen deep, intervene precisely",
+    "why_match": {
+      "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches clinical_psychologist"
+    },
+    "indian_companies": [
+      "NIMHANS",
+      "AIIMS Delhi",
+      "Fortis Hospitals",
+      "Manas Foundation",
+      "iCall (TISS)",
+      "Mpower"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "8L–15L",
+      "senior": "18L–40L"
+    },
+    "education_path": [
+      "MA Psychology",
+      "M.Phil Clinical (RCI registered)",
+      "PhD optional"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Delhi NCR",
+      "Mumbai",
+      "Chennai"
+    ]
+  },
+  "community_manager": {
+    "career_id": "community_manager",
+    "name_en": "Community Manager",
+    "name_hi": "Samuday Prabandhak / समुदाय प्रबंधक",
+    "tagline_en": "Turn fans into a movement",
+    "why_match": {
+      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches community_manager"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "PhonePe",
+      "GitLab India",
+      "Notion India",
+      "Hotstar",
+      "Discord communities"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "10L–18L",
+      "senior": "22L–45L"
+    },
+    "education_path": [
+      "BMM/Comms or any UG",
+      "Strong writing + facilitation",
+      "Power-user of relevant platforms"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Mumbai",
+      "Delhi NCR"
+    ]
+  },
+  "compliance_officer": {
+    "career_id": "compliance_officer",
+    "name_en": "Compliance Officer",
+    "name_hi": "Anupalan Adhikari / अनुपालन अधिकारी",
+    "tagline_en": "Guardrails for the business",
+    "why_match": {
+      "CI": "PLACEHOLDER — Phase 2.5 will articulate why CI matches compliance_officer"
+    },
+    "indian_companies": [
+      "HDFC Bank",
+      "ICICI Bank",
+      "Razorpay",
+      "PhonePe",
+      "Kotak",
+      "Axis Bank"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "22L–50L"
+    },
+    "education_path": [
+      "B.Com/LLB",
+      "CS / CFA / FRM helpful",
+      "RBI/SEBI regulation knowledge"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Gurugram",
+      "Bangalore"
+    ]
+  },
+  "concept_artist": {
+    "career_id": "concept_artist",
+    "name_en": "Concept Artist",
+    "name_hi": "Concept Kalakar / कॉन्सेप्ट कलाकार",
+    "tagline_en": "Worlds before they're filmed",
+    "why_match": {
+      "AI": "PLACEHOLDER — Phase 2.5 will articulate why AI matches concept_artist"
+    },
+    "indian_companies": [
+      "Prime Focus",
+      "DNEG India",
+      "Technicolor India",
+      "Red Chillies VFX",
+      "MPC India",
+      "Ubisoft India"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "10L–20L",
+      "senior": "25L–60L"
+    },
+    "education_path": [
+      "MAAC/Arena/NID",
+      "Strong portfolio (ArtStation)",
+      "Online: Schoolism/CGMA"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Pune",
+      "Hyderabad"
+    ]
+  },
+  "content_creator": {
+    "career_id": "content_creator",
+    "name_en": "Content Creator",
+    "name_hi": "Content Creator / कंटेंट क्रिएटर",
+    "tagline_en": "Camera, schedule, audience — own all three",
+    "why_match": {
+      "AI": "PLACEHOLDER — Phase 2.5 will articulate why AI matches content_creator",
+      "AS": "PLACEHOLDER — Phase 2.5 will articulate why AS matches content_creator"
+    },
+    "indian_companies": [
+      "YouTube India",
+      "Instagram India",
+      "Sharechat",
+      "Roposo",
+      "Hotstar Creators",
+      "Independent"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–25L",
+      "senior": "30L–5Cr+ (top creators)"
+    },
+    "education_path": [
+      "No specific degree required",
+      "Self-taught: editing, writing, on-camera",
+      "Workshops + community"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore",
+      "Pune"
+    ]
+  },
+  "counseling_psychologist": {
+    "career_id": "counseling_psychologist",
+    "name_en": "Counseling Psychologist",
+    "name_hi": "Salahkar Manovaigyanik / सलाहकार मनोवैज्ञानिक",
+    "tagline_en": "Steady people through hard transitions",
+    "why_match": {
+      "SI": "PLACEHOLDER — Phase 2.5 will articulate why SI matches counseling_psychologist"
+    },
+    "indian_companies": [
+      "YourDOST",
+      "Lissun",
+      "InnerHour",
+      "Mpower",
+      "Mindhouse",
+      "Independent practice"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "7L–12L",
+      "senior": "15L–30L"
+    },
+    "education_path": [
+      "MA Psychology",
+      "M.Phil/PG Diploma in Counseling",
+      "Supervised practice hours"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Delhi NCR",
+      "Mumbai",
+      "Pune"
+    ]
+  },
+  "creative_director": {
+    "career_id": "creative_director",
+    "name_en": "Creative Director",
+    "name_hi": "Creative Director / रचनात्मक निदेशक",
+    "tagline_en": "Vision, not just execution",
+    "why_match": {
+      "AE": "PLACEHOLDER — Phase 2.5 will articulate why AE matches creative_director",
+      "AI": "PLACEHOLDER — Phase 2.5 will articulate why AI matches creative_director",
+      "EA": "PLACEHOLDER — Phase 2.5 will articulate why EA matches creative_director",
+      "SA": "PLACEHOLDER — Phase 2.5 will articulate why SA matches creative_director"
+    },
+    "indian_companies": [
+      "Wieden+Kennedy India",
+      "Ogilvy India",
+      "Leo Burnett India",
+      "BBDO India",
+      "Talented",
+      "Animal"
+    ],
+    "salary_inr": {
+      "entry": "8L",
+      "mid": "20L–40L",
+      "senior": "50L–1.5Cr"
+    },
+    "education_path": [
+      "NID/MICA/Pearl Academy",
+      "10+ yrs portfolio in design or copy",
+      "Strong leadership + taste"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "cross_border_ecommerce": {
+    "career_id": "cross_border_ecommerce",
+    "name_en": "Cross-Border E-commerce Lead",
+    "name_hi": "Antarrashtriya E-commerce Pradhan",
+    "tagline_en": "Sell India to the world",
+    "why_match": {
+      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches cross_border_ecommerce"
+    },
+    "indian_companies": [
+      "Mensa Brands",
+      "Globalbees",
+      "GOAT Brand Labs",
+      "Power Gummies",
+      "boAt",
+      "Mamaearth"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "15L–28L",
+      "senior": "35L–80L"
+    },
+    "education_path": [
+      "MBA optional",
+      "Amazon/Shopify ops experience",
+      "International logistics + tax fluency"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Gurugram"
+    ]
+  },
+  "customer_success_manager": {
+    "career_id": "customer_success_manager",
+    "name_en": "Customer Success Manager",
+    "name_hi": "Customer Success Prabandhak",
+    "tagline_en": "Renewals are won post-sale",
+    "why_match": {
+      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches customer_success_manager",
+      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches customer_success_manager",
+      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches customer_success_manager"
+    },
+    "indian_companies": [
+      "Freshworks",
+      "Chargebee",
+      "Zoho",
+      "Postman",
+      "Atlassian India",
+      "Razorpay"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–20L",
+      "senior": "25L–55L"
+    },
+    "education_path": [
+      "Any UG + MBA optional",
+      "SaaS + product literacy",
+      "Strong communication"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Chennai",
+      "Hyderabad",
+      "Pune"
+    ]
+  },
+  "data_engineer": {
+    "career_id": "data_engineer",
+    "name_en": "Data Engineer",
+    "name_hi": "Data Engineer / डेटा इंजीनियर",
+    "tagline_en": "Pipelines that never break at 3am",
+    "why_match": {
+      "IR": "PLACEHOLDER — Phase 2.5 will articulate why IR matches data_engineer",
+      "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches data_engineer"
+    },
+    "indian_companies": [
+      "Flipkart",
+      "Swiggy",
+      "Razorpay",
+      "Walmart Labs",
+      "Mu Sigma",
+      "Tiger Analytics"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "14L–25L",
+      "senior": "30L–70L"
+    },
+    "education_path": [
+      "B.Tech CSE",
+      "Cloud certs (AWS/GCP)",
+      "Online: Spark/Airflow/dbt"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "data_scientist": {
+    "career_id": "data_scientist",
+    "name_en": "Data Scientist",
+    "name_hi": "Aankde Vigyani / डेटा साइंटिस्ट",
+    "tagline_en": "Turn chaos into signal",
+    "why_match": {
+      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches data_scientist"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "Swiggy",
+      "Flipkart",
+      "Mu Sigma",
+      "Fractal Analytics",
+      "TCS Research"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "12L–22L",
+      "senior": "30L–80L"
+    },
+    "education_path": [
+      "B.Tech CSE/Stats",
+      "Master's preferred for research roles",
+      "Online: Coursera/DataCamp"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "devops_engineer": {
+    "career_id": "devops_engineer",
+    "name_en": "DevOps Engineer",
+    "name_hi": "DevOps Abhiyanta / डेवऑप्स इंजीनियर",
+    "tagline_en": "Make deploys boring",
+    "why_match": {
+      "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches devops_engineer"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "Infosys",
+      "TCS",
+      "Flipkart",
+      "Cred",
+      "PhonePe"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "14L–24L",
+      "senior": "30L–70L"
+    },
+    "education_path": [
+      "B.Tech CSE/IT",
+      "Cloud certs (AWS/Azure/GCP)",
+      "Online: Kubernetes/Terraform"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "drama_teacher": {
+    "career_id": "drama_teacher",
+    "name_en": "Drama Teacher",
+    "name_hi": "Natya Adhyapak / नाट्य अध्यापक",
+    "tagline_en": "Confidence is taught on stage",
+    "why_match": {
+      "AS": "PLACEHOLDER — Phase 2.5 will articulate why AS matches drama_teacher",
+      "SA": "PLACEHOLDER — Phase 2.5 will articulate why SA matches drama_teacher"
+    },
+    "indian_companies": [
+      "Inventure Academy",
+      "Ecole Mondiale",
+      "DPS chain",
+      "Heritage Schools",
+      "NSD outreach",
+      "Ranga Shankara"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "5L–10L",
+      "senior": "12L–22L"
+    },
+    "education_path": [
+      "NSD / FTII or theatre training",
+      "B.Ed for school employment",
+      "Performance résumé"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Mumbai",
+      "Delhi NCR",
+      "Pune"
+    ]
+  },
+  "edtech_curriculum_designer": {
+    "career_id": "edtech_curriculum_designer",
+    "name_en": "EdTech Curriculum Designer",
+    "name_hi": "EdTech Pathykaram Designer / EdTech पाठ्यक्रम डिज़ाइनर",
+    "tagline_en": "Ship lessons that actually stick",
+    "why_match": {
+      "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches edtech_curriculum_designer",
+      "SA": "PLACEHOLDER — Phase 2.5 will articulate why SA matches edtech_curriculum_designer"
+    },
+    "indian_companies": [
+      "BYJU'S",
+      "Unacademy",
+      "Vedantu",
+      "Cuemath",
+      "PhysicsWallah",
+      "upGrad"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "22L–45L"
+    },
+    "education_path": [
+      "Subject Master's + B.Ed",
+      "Instructional Design certificate",
+      "Teaching experience 3+ yrs"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai",
+      "Hyderabad"
+    ]
+  },
+  "education_administrator": {
+    "career_id": "education_administrator",
+    "name_en": "Education Administrator",
+    "name_hi": "Shiksha Prashasak / शिक्षा प्रशासक",
+    "tagline_en": "Run the school, support the teachers",
+    "why_match": {
+      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches education_administrator"
+    },
+    "indian_companies": [
+      "DPS chain",
+      "Inventure Academy",
+      "Heritage Schools",
+      "Ashoka University admin",
+      "Manipal Group",
+      "Amity Education"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "8L–15L",
+      "senior": "20L–45L"
+    },
+    "education_path": [
+      "B.Ed + M.Ed / MBA Education",
+      "Operational management exp",
+      "Stakeholder management"
+    ],
+    "city_distribution": [
+      "Delhi NCR",
+      "Mumbai",
+      "Bangalore",
+      "Hyderabad"
+    ]
+  },
+  "electrical_engineer": {
+    "career_id": "electrical_engineer",
+    "name_en": "Electrical Engineer",
+    "name_hi": "Vidyut Abhiyanta / विद्युत अभियंता",
+    "tagline_en": "Power, signals, and safety",
+    "why_match": {
+      "RC": "PLACEHOLDER — Phase 2.5 will articulate why RC matches electrical_engineer"
+    },
+    "indian_companies": [
+      "Siemens India",
+      "ABB India",
+      "L&T",
+      "Bharat Heavy Electricals",
+      "Honeywell India",
+      "Schneider Electric"
+    ],
+    "salary_inr": {
+      "entry": "3.5L",
+      "mid": "7L–14L",
+      "senior": "18L–38L"
+    },
+    "education_path": [
+      "B.Tech EEE/ECE",
+      "M.Tech Power/Control optional",
+      "Industry-specific certs"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Pune",
+      "Hyderabad",
+      "Vadodara"
+    ]
+  },
+  "embedded_engineer": {
+    "career_id": "embedded_engineer",
+    "name_en": "Embedded Engineer",
+    "name_hi": "Embedded Engineer / एम्बेडेड इंजीनियर",
+    "tagline_en": "Code that lives inside hardware",
+    "why_match": {
+      "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches embedded_engineer"
+    },
+    "indian_companies": [
+      "Bosch India",
+      "Texas Instruments India",
+      "Qualcomm India",
+      "Tata Elxsi",
+      "Wipro",
+      "L&T Technology Services"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–20L",
+      "senior": "25L–50L"
+    },
+    "education_path": [
+      "B.Tech ECE/EEE/CSE",
+      "C/C++ + RTOS deep-dive",
+      "Online: ARM/STM32"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Pune",
+      "Chennai",
+      "Hyderabad"
+    ]
+  },
+  "executive_coach": {
+    "career_id": "executive_coach",
+    "name_en": "Executive Coach",
+    "name_hi": "Karyakari Coach / कार्यकारी कोच",
+    "tagline_en": "Help leaders see their blind spots",
+    "why_match": {
+      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches executive_coach",
+      "SI": "PLACEHOLDER — Phase 2.5 will articulate why SI matches executive_coach"
+    },
+    "indian_companies": [
+      "Heidrick Coaching",
+      "Korn Ferry India",
+      "Marshall Goldsmith Group",
+      "Coach For Life",
+      "Independent practice",
+      "Vati Consulting"
+    ],
+    "salary_inr": {
+      "entry": "8L",
+      "mid": "20L–40L",
+      "senior": "50L–1.5Cr+"
+    },
+    "education_path": [
+      "10-15 yrs senior leadership exp",
+      "ICF/EMCC certification",
+      "Strong reflective practice"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "family_office_principal": {
+    "career_id": "family_office_principal",
+    "name_en": "Family Office Principal",
+    "name_hi": "Family Office Pradhan",
+    "tagline_en": "Steward generational wealth",
+    "why_match": {
+      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches family_office_principal"
+    },
+    "indian_companies": [
+      "Premji Invest",
+      "Catamaran (Murthy)",
+      "RPG Group office",
+      "Burman Family Office",
+      "ASK Wealth",
+      "Independent SFOs"
+    ],
+    "salary_inr": {
+      "entry": "15L",
+      "mid": "30L–60L",
+      "senior": "80L–3Cr+"
+    },
+    "education_path": [
+      "IIM/HBS/Wharton MBA",
+      "PE/IB 5-8 yrs first",
+      "Multi-asset literacy"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "fashion_designer": {
+    "career_id": "fashion_designer",
+    "name_en": "Fashion Designer",
+    "name_hi": "Fashion Designer / फ़ैशन डिज़ाइनर",
+    "tagline_en": "Wearable point of view",
+    "why_match": {
+      "AE": "PLACEHOLDER — Phase 2.5 will articulate why AE matches fashion_designer",
+      "AR": "PLACEHOLDER — Phase 2.5 will articulate why AR matches fashion_designer",
+      "RA": "PLACEHOLDER — Phase 2.5 will articulate why RA matches fashion_designer"
+    },
+    "indian_companies": [
+      "Sabyasachi",
+      "Manish Malhotra",
+      "Anita Dongre",
+      "Ritu Kumar",
+      "Rohit Bal",
+      "FabIndia"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–18L",
+      "senior": "25L–80L+"
+    },
+    "education_path": [
+      "NIFT/Pearl Academy/NID",
+      "Internships at top labels",
+      "Own collection + buyer relationships"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "film_producer": {
+    "career_id": "film_producer",
+    "name_en": "Film Producer",
+    "name_hi": "Film Nirmata / फ़िल्म निर्माता",
+    "tagline_en": "Make it happen, on budget",
+    "why_match": {
+      "AR": "PLACEHOLDER — Phase 2.5 will articulate why AR matches film_producer"
+    },
+    "indian_companies": [
+      "Dharma Productions",
+      "Excel Entertainment",
+      "Yash Raj Films",
+      "Sikhya Entertainment",
+      "Roy Kapur Films",
+      "Tiger Baby Films"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–25L",
+      "senior": "30L–1Cr+ per project"
+    },
+    "education_path": [
+      "FTII/Whistling Woods",
+      "AD experience (3-5 yrs)",
+      "Producer's track record + network"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR"
+    ]
+  },
+  "financial_analyst": {
+    "career_id": "financial_analyst",
+    "name_en": "Financial Analyst",
+    "name_hi": "Vittiya Vishleshak / वित्तीय विश्लेषक",
+    "tagline_en": "Numbers tell the real story",
+    "why_match": {
+      "CE": "PLACEHOLDER — Phase 2.5 will articulate why CE matches financial_analyst",
+      "CI": "PLACEHOLDER — Phase 2.5 will articulate why CI matches financial_analyst",
+      "IC": "PLACEHOLDER — Phase 2.5 will articulate why IC matches financial_analyst"
+    },
+    "indian_companies": [
+      "JPMorgan India",
+      "Goldman Sachs India",
+      "Kotak",
+      "ICICI",
+      "HDFC Bank",
+      "Edelweiss"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "25L–60L"
+    },
+    "education_path": [
+      "B.Com/BBA/CA",
+      "MBA Finance (T15)",
+      "CFA Level I-III"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Gurugram",
+      "Pune"
+    ]
+  },
+  "founders_office": {
+    "career_id": "founders_office",
+    "name_en": "Founder's Office Associate",
+    "name_hi": "Founder's Office",
+    "tagline_en": "CEO leverage at a startup",
+    "why_match": {
+      "CE": "PLACEHOLDER — Phase 2.5 will articulate why CE matches founders_office",
+      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches founders_office",
+      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches founders_office"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "Cred",
+      "PhonePe",
+      "Swiggy",
+      "Meesho",
+      "Zepto"
+    ],
+    "salary_inr": {
+      "entry": "8L",
+      "mid": "18L–35L",
+      "senior": "40L–80L"
+    },
+    "education_path": [
+      "IIT/IIM/IIIT or top-tier UG",
+      "Consulting/IB 1-2 yrs ideal",
+      "Generalist + execution"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai"
+    ]
+  },
+  "hr_business_partner": {
+    "career_id": "hr_business_partner",
+    "name_en": "HR Business Partner",
+    "name_hi": "HR Business Partner",
+    "tagline_en": "People-strategy at the leadership table",
+    "why_match": {
+      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches hr_business_partner",
+      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches hr_business_partner",
+      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches hr_business_partner"
+    },
+    "indian_companies": [
+      "Infosys",
+      "TCS",
+      "Flipkart",
+      "Swiggy",
+      "Razorpay",
+      "PhonePe"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–22L",
+      "senior": "28L–70L"
+    },
+    "education_path": [
+      "MBA HR (XLRI/TISS/SCMHRD)",
+      "Generalist 3-5 yrs first",
+      "Strong stakeholder mgmt"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai",
+      "Hyderabad"
+    ]
+  },
+  "indie_filmmaker": {
+    "career_id": "indie_filmmaker",
+    "name_en": "Indie Filmmaker",
+    "name_hi": "Swatantra Filmkar / स्वतंत्र फ़िल्मकार",
+    "tagline_en": "Small budget, large vision",
+    "why_match": {
+      "AI": "PLACEHOLDER — Phase 2.5 will articulate why AI matches indie_filmmaker",
+      "AS": "PLACEHOLDER — Phase 2.5 will articulate why AS matches indie_filmmaker"
+    },
+    "indian_companies": [
+      "Sikhya Entertainment",
+      "Drishyam Films",
+      "Flipkart Studios",
+      "MUBI India",
+      "Independent"
+    ],
+    "salary_inr": {
+      "entry": "Variable",
+      "mid": "5L–15L per project",
+      "senior": "20L–1Cr+ per project"
+    },
+    "education_path": [
+      "FTII/SRFTI/Whistling Woods",
+      "Festival circuit + grants",
+      "Self-funded shorts → features"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Kolkata"
+    ]
+  },
+  "industrial_designer": {
+    "career_id": "industrial_designer",
+    "name_en": "Industrial Designer",
+    "name_hi": "Audyogik Designer / औद्योगिक डिज़ाइनर",
+    "tagline_en": "Function meets form, manufactured",
+    "why_match": {
+      "AR": "PLACEHOLDER — Phase 2.5 will articulate why AR matches industrial_designer",
+      "RA": "PLACEHOLDER — Phase 2.5 will articulate why RA matches industrial_designer"
+    },
+    "indian_companies": [
+      "Tata Elxsi",
+      "boAt",
+      "Onida",
+      "Whirlpool India",
+      "Mahindra & Mahindra",
+      "Titan Design"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "10L–18L",
+      "senior": "22L–50L"
+    },
+    "education_path": [
+      "NID/IIT-D IDC/MIT-ID",
+      "B.Des / M.Des",
+      "Portfolio: products from sketch to mfg"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Mumbai",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "inventory_manager": {
+    "career_id": "inventory_manager",
+    "name_en": "Inventory Manager",
+    "name_hi": "Bhandar Prabandhak / भंडार प्रबंधक",
+    "tagline_en": "Stock-outs and over-stocks both kill margin",
+    "why_match": {
+      "CR": "PLACEHOLDER — Phase 2.5 will articulate why CR matches inventory_manager"
+    },
+    "indian_companies": [
+      "Reliance Retail",
+      "DMart",
+      "Big Basket",
+      "Flipkart",
+      "Amazon India",
+      "Walmart India"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "6L–12L",
+      "senior": "15L–30L"
+    },
+    "education_path": [
+      "B.Com / BBA",
+      "ERP exposure (SAP)",
+      "Lean/Six Sigma certs"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Mumbai",
+      "Hyderabad",
+      "Gurugram"
+    ]
+  },
+  "investment_analyst": {
+    "career_id": "investment_analyst",
+    "name_en": "Investment Analyst",
+    "name_hi": "Nivesh Vishleshak / निवेश विश्लेषक",
+    "tagline_en": "Allocate capital, defend the thesis",
+    "why_match": {
+      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches investment_analyst",
+      "IC": "PLACEHOLDER — Phase 2.5 will articulate why IC matches investment_analyst"
+    },
+    "indian_companies": [
+      "Sequoia India (Peak XV)",
+      "Accel India",
+      "Kotak Investments",
+      "Avendus",
+      "Motilal Oswal"
+    ],
+    "salary_inr": {
+      "entry": "8L",
+      "mid": "18L–35L",
+      "senior": "50L–1.5Cr"
+    },
+    "education_path": [
+      "IIT/IIM or top-tier undergrad",
+      "MBA Finance / CFA",
+      "2+ yrs IB or PE experience"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Gurugram"
+    ]
+  },
+  "kol_creator": {
+    "career_id": "kol_creator",
+    "name_en": "KOL / Influencer-Creator",
+    "name_hi": "KOL / प्रभावक रचनाकार",
+    "tagline_en": "Audience as distribution",
+    "why_match": {
+      "AE": "PLACEHOLDER — Phase 2.5 will articulate why AE matches kol_creator",
+      "EA": "PLACEHOLDER — Phase 2.5 will articulate why EA matches kol_creator"
+    },
+    "indian_companies": [
+      "Independent",
+      "Monk Entertainment",
+      "OML",
+      "Collective Artists",
+      "Curly Tales",
+      "Pocket Aces"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "10L–30L",
+      "senior": "50L–10Cr+ (top tier)"
+    },
+    "education_path": [
+      "No specific degree required",
+      "Niche + consistency 2+ yrs",
+      "Brand-deal + IP playbook"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "legal_associate": {
+    "career_id": "legal_associate",
+    "name_en": "Legal Associate",
+    "name_hi": "Vidhi Sahyogi / विधि सहयोगी",
+    "tagline_en": "Read the contract everyone else skipped",
+    "why_match": {
+      "CI": "PLACEHOLDER — Phase 2.5 will articulate why CI matches legal_associate"
+    },
+    "indian_companies": [
+      "AZB & Partners",
+      "Cyril Amarchand Mangaldas",
+      "Khaitan & Co",
+      "Trilegal",
+      "Shardul Amarchand",
+      "Luthra & Luthra"
+    ],
+    "salary_inr": {
+      "entry": "10L",
+      "mid": "20L–35L",
+      "senior": "45L–1.2Cr"
+    },
+    "education_path": [
+      "3yr LLB / 5yr BA-LLB",
+      "NLU preferred",
+      "Bar Council enrolment"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "logistics_coordinator": {
+    "career_id": "logistics_coordinator",
+    "name_en": "Logistics Coordinator",
+    "name_hi": "Logistics Samanvayak",
+    "tagline_en": "Right thing, right place, right time",
+    "why_match": {
+      "CR": "PLACEHOLDER — Phase 2.5 will articulate why CR matches logistics_coordinator",
+      "RE": "PLACEHOLDER — Phase 2.5 will articulate why RE matches logistics_coordinator"
+    },
+    "indian_companies": [
+      "Delhivery",
+      "Blue Dart",
+      "DHL India",
+      "Maersk India",
+      "Flipkart Logistics",
+      "Amazon India"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "6L–12L",
+      "senior": "15L–30L"
+    },
+    "education_path": [
+      "B.Com / Diploma in Logistics",
+      "MBA Ops/SCM optional",
+      "Domain: warehousing + ERP"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Gurugram",
+      "Bangalore",
+      "Chennai",
+      "tier-2 hubs"
+    ]
+  },
+  "maintenance_engineer": {
+    "career_id": "maintenance_engineer",
+    "name_en": "Maintenance Engineer",
+    "name_hi": "Rakhrakhav Abhiyanta / रखरखाव अभियंता",
+    "tagline_en": "Keep production running",
+    "why_match": {
+      "RC": "PLACEHOLDER — Phase 2.5 will articulate why RC matches maintenance_engineer"
+    },
+    "indian_companies": [
+      "Tata Steel",
+      "JSW",
+      "Reliance Industries",
+      "BHEL",
+      "L&T",
+      "Mahindra & Mahindra"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "6L–12L",
+      "senior": "16L–32L"
+    },
+    "education_path": [
+      "Diploma / B.Tech Mech-Elec",
+      "Predictive maintenance certs",
+      "On-the-job 3-5 yrs"
+    ],
+    "city_distribution": [
+      "Jamshedpur",
+      "Pune",
+      "Vadodara",
+      "Chennai"
+    ]
+  },
+  "manufacturing_lead": {
+    "career_id": "manufacturing_lead",
+    "name_en": "Manufacturing Lead",
+    "name_hi": "Manufacturing Pradhan",
+    "tagline_en": "Plant-floor leader, not desk-bound",
+    "why_match": {
+      "RE": "PLACEHOLDER — Phase 2.5 will articulate why RE matches manufacturing_lead"
+    },
+    "indian_companies": [
+      "Tata Motors",
+      "Mahindra & Mahindra",
+      "Bajaj Auto",
+      "L&T",
+      "Bosch India",
+      "Foxconn India"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "22L–50L"
+    },
+    "education_path": [
+      "B.Tech Mech/Industrial",
+      "MBA Ops optional",
+      "5+ yrs shop-floor experience"
+    ],
+    "city_distribution": [
+      "Pune",
+      "Chennai",
+      "Sanand",
+      "Bangalore"
+    ]
+  },
+  "mechanical_engineer": {
+    "career_id": "mechanical_engineer",
+    "name_en": "Mechanical Engineer",
+    "name_hi": "Yantriki Abhiyanta / यांत्रिक अभियंता",
+    "tagline_en": "Build the things that move",
+    "why_match": {
+      "RC": "PLACEHOLDER — Phase 2.5 will articulate why RC matches mechanical_engineer"
+    },
+    "indian_companies": [
+      "L&T",
+      "Tata Motors",
+      "Mahindra",
+      "Bharat Forge",
+      "Cummins India",
+      "Bajaj Auto"
+    ],
+    "salary_inr": {
+      "entry": "3.5L",
+      "mid": "7L–14L",
+      "senior": "18L–40L"
+    },
+    "education_path": [
+      "B.Tech Mechanical",
+      "M.Tech for design/R&D",
+      "CAD/CAE proficiency"
+    ],
+    "city_distribution": [
+      "Pune",
+      "Chennai",
+      "Bangalore",
+      "Coimbatore"
+    ]
+  },
+  "media_manager": {
+    "career_id": "media_manager",
+    "name_en": "Media Manager",
+    "name_hi": "Media Prabandhak / मीडिया प्रबंधक",
+    "tagline_en": "The brand's mouthpiece in market",
+    "why_match": {
+      "EA": "PLACEHOLDER — Phase 2.5 will articulate why EA matches media_manager"
+    },
+    "indian_companies": [
+      "GroupM India",
+      "Madison World",
+      "Wavemaker India",
+      "Mindshare India",
+      "Dentsu India",
+      "Havas India"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "10L–18L",
+      "senior": "22L–50L"
+    },
+    "education_path": [
+      "BBA/BMM/MICA",
+      "MBA Marketing optional",
+      "Hands-on: Meta/Google ads certs"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "ml_engineer": {
+    "career_id": "ml_engineer",
+    "name_en": "ML Engineer",
+    "name_hi": "ML Abhiyanta / ML इंजीनियर",
+    "tagline_en": "Models in production, not notebooks",
+    "why_match": {
+      "IR": "PLACEHOLDER — Phase 2.5 will articulate why IR matches ml_engineer"
+    },
+    "indian_companies": [
+      "Flipkart",
+      "Swiggy",
+      "Razorpay",
+      "Microsoft IDC",
+      "Google India",
+      "Krutrim"
+    ],
+    "salary_inr": {
+      "entry": "8L",
+      "mid": "16L–30L",
+      "senior": "35L–90L"
+    },
+    "education_path": [
+      "B.Tech CSE",
+      "Master's in ML/Stats helpful",
+      "Online: fast.ai/Coursera"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "ngo_advisor": {
+    "career_id": "ngo_advisor",
+    "name_en": "NGO Advisor",
+    "name_hi": "NGO Salahkar / NGO सलाहकार",
+    "tagline_en": "Steer mission-orgs to outcomes",
+    "why_match": {
+      "SI": "PLACEHOLDER — Phase 2.5 will articulate why SI matches ngo_advisor"
+    },
+    "indian_companies": [
+      "Bridgespan India",
+      "Dasra",
+      "Sattva Consulting",
+      "FSG India",
+      "Intellecap",
+      "Independent consulting"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "14L–25L",
+      "senior": "30L–60L"
+    },
+    "education_path": [
+      "TISS/IRMA + MBA",
+      "Strategy consulting 2-3 yrs",
+      "Strong writing + facilitation"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "ngo_program_director": {
+    "career_id": "ngo_program_director",
+    "name_en": "NGO Program Director",
+    "name_hi": "NGO Karyakram Pradhan / NGO कार्यक्रम प्रधान",
+    "tagline_en": "Mission-driven, impact-measured",
+    "why_match": {
+      "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches ngo_program_director",
+      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches ngo_program_director",
+      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches ngo_program_director"
+    },
+    "indian_companies": [
+      "Pratham",
+      "Teach For India",
+      "Akshaya Patra",
+      "Magic Bus India",
+      "CRY",
+      "Goonj"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–22L",
+      "senior": "25L–60L"
+    },
+    "education_path": [
+      "TISS/IRMA/Azim Premji Univ",
+      "MBA (Social Sector)",
+      "Field experience 5+ yrs"
+    ],
+    "city_distribution": [
+      "Delhi NCR",
+      "Mumbai",
+      "Bangalore",
+      "Pan-India field"
+    ]
+  },
+  "operations_manager": {
+    "career_id": "operations_manager",
+    "name_en": "Operations Manager",
+    "name_hi": "Sanchalan Prabandhak / संचालन प्रबंधक",
+    "tagline_en": "Run the engine, every day",
+    "why_match": {
+      "CE": "PLACEHOLDER — Phase 2.5 will articulate why CE matches operations_manager",
+      "CR": "PLACEHOLDER — Phase 2.5 will articulate why CR matches operations_manager",
+      "RE": "PLACEHOLDER — Phase 2.5 will articulate why RE matches operations_manager"
+    },
+    "indian_companies": [
+      "Swiggy",
+      "Zomato",
+      "Amazon India",
+      "Flipkart",
+      "Reliance Retail",
+      "Big Basket"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–20L",
+      "senior": "25L–60L"
+    },
+    "education_path": [
+      "MBA Ops / IIT IE",
+      "On-the-floor 3-5 yrs",
+      "Lean/Six Sigma certs"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai",
+      "Hyderabad"
+    ]
+  },
+  "photographer": {
+    "career_id": "photographer",
+    "name_en": "Photographer",
+    "name_hi": "Chayakar / छायाकार",
+    "tagline_en": "Light, moment, frame",
+    "why_match": {
+      "AR": "PLACEHOLDER — Phase 2.5 will articulate why AR matches photographer",
+      "RA": "PLACEHOLDER — Phase 2.5 will articulate why RA matches photographer"
+    },
+    "indian_companies": [
+      "Vogue India",
+      "Conde Nast India",
+      "Independent studios",
+      "WeddingSutra",
+      "Vasu Studios",
+      "Stock agencies"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "6L–15L",
+      "senior": "20L–60L+"
+    },
+    "education_path": [
+      "Light & Life Academy",
+      "Self-taught + apprenticeship",
+      "Strong portfolio + niche"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore",
+      "Goa"
+    ]
+  },
+  "policy_analyst": {
+    "career_id": "policy_analyst",
+    "name_en": "Policy Analyst",
+    "name_hi": "Niti Vishleshak / नीति विश्लेषक",
+    "tagline_en": "Evidence shapes nation-building",
+    "why_match": {
+      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches policy_analyst"
+    },
+    "indian_companies": [
+      "NITI Aayog",
+      "PRS Legislative Research",
+      "IDFC Institute",
+      "Centre for Policy Research",
+      "ORF",
+      "Takshashila Institution"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–20L",
+      "senior": "25L–50L"
+    },
+    "education_path": [
+      "BA/BSc + Master's PP/Econ",
+      "PhD for senior research roles",
+      "Writing + quant skills"
+    ],
+    "city_distribution": [
+      "Delhi NCR",
+      "Mumbai",
+      "Bangalore"
+    ]
+  },
+  "private_equity_associate": {
+    "career_id": "private_equity_associate",
+    "name_en": "Private Equity Associate",
+    "name_hi": "Private Equity Associate",
+    "tagline_en": "Buy, build, exit",
+    "why_match": {
+      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches private_equity_associate"
+    },
+    "indian_companies": [
+      "ChrysCapital",
+      "True North",
+      "Kedaara Capital",
+      "Blackstone India",
+      "KKR India",
+      "Multiples PE"
+    ],
+    "salary_inr": {
+      "entry": "20L",
+      "mid": "40L–80L",
+      "senior": "1Cr–3Cr+"
+    },
+    "education_path": [
+      "IIT/IIM or top-tier undergrad",
+      "2-3yrs IB/consulting first",
+      "MBA from ISB/Wharton"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "product_designer": {
+    "career_id": "product_designer",
+    "name_en": "Product Designer",
+    "name_hi": "Product Designer / प्रोडक्ट डिज़ाइनर",
+    "tagline_en": "User pain, gone",
+    "why_match": {
+      "RA": "PLACEHOLDER — Phase 2.5 will articulate why RA matches product_designer"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "Cred",
+      "Swiggy",
+      "Flipkart",
+      "Zomato",
+      "Atlassian India"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "14L–28L",
+      "senior": "35L–80L"
+    },
+    "education_path": [
+      "NID/Srishti/Pearl Academy",
+      "Self-taught + portfolio",
+      "Online: IDF/Designlab"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai"
+    ]
+  },
+  "product_manager": {
+    "career_id": "product_manager",
+    "name_en": "Product Manager",
+    "name_hi": "Product Prabandhak / प्रोडक्ट प्रबंधक",
+    "tagline_en": "Solve the right problem, not the loudest",
+    "why_match": {
+      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches product_manager"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "Cred",
+      "Flipkart",
+      "Swiggy",
+      "Zomato",
+      "PhonePe"
+    ],
+    "salary_inr": {
+      "entry": "10L",
+      "mid": "20L–40L",
+      "senior": "50L–1.5Cr"
+    },
+    "education_path": [
+      "IIT/IIM or top-tier UG",
+      "MBA / 3-5 yrs in tech first",
+      "PM frameworks: JTBD/RICE"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai"
+    ]
+  },
+  "production_manager": {
+    "career_id": "production_manager",
+    "name_en": "Production Manager",
+    "name_hi": "Utpadan Prabandhak / उत्पादन प्रबंधक",
+    "tagline_en": "Throughput, quality, safety — every shift",
+    "why_match": {
+      "CR": "PLACEHOLDER — Phase 2.5 will articulate why CR matches production_manager"
+    },
+    "indian_companies": [
+      "Tata Motors",
+      "Mahindra & Mahindra",
+      "Bajaj Auto",
+      "Maruti Suzuki India",
+      "Hero MotoCorp",
+      "L&T"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "8L–15L",
+      "senior": "20L–45L"
+    },
+    "education_path": [
+      "B.Tech Mechanical/Industrial",
+      "MBA Ops optional",
+      "Lean/Six Sigma"
+    ],
+    "city_distribution": [
+      "Pune",
+      "Chennai",
+      "Bangalore",
+      "Gurugram",
+      "Sanand"
+    ]
+  },
+  "project_manager": {
+    "career_id": "project_manager",
+    "name_en": "Project Manager",
+    "name_hi": "Pariyojana Prabandhak / परियोजना प्रबंधक",
+    "tagline_en": "Scope, schedule, budget — all three",
+    "why_match": {
+      "CE": "PLACEHOLDER — Phase 2.5 will articulate why CE matches project_manager",
+      "CR": "PLACEHOLDER — Phase 2.5 will articulate why CR matches project_manager",
+      "RE": "PLACEHOLDER — Phase 2.5 will articulate why RE matches project_manager"
+    },
+    "indian_companies": [
+      "L&T",
+      "Infosys",
+      "TCS",
+      "Wipro",
+      "Capgemini India",
+      "Accenture India"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–22L",
+      "senior": "28L–60L"
+    },
+    "education_path": [
+      "Any UG + PMP/PRINCE2",
+      "MBA optional",
+      "Stakeholder mgmt + risk"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Pune",
+      "Mumbai",
+      "Hyderabad"
+    ]
+  },
+  "public_administration": {
+    "career_id": "public_administration",
+    "name_en": "Public Administration Officer",
+    "name_hi": "Lok Prashasan Adhikari / लोक प्रशासन अधिकारी",
+    "tagline_en": "Run the machinery of government",
+    "why_match": {
+      "CE": "PLACEHOLDER — Phase 2.5 will articulate why CE matches public_administration"
+    },
+    "indian_companies": [
+      "IAS/IPS/IFS cadre",
+      "State PSC services",
+      "Municipal bodies",
+      "NITI Aayog",
+      "PMO",
+      "Central PSUs"
+    ],
+    "salary_inr": {
+      "entry": "8L (7th CPC)",
+      "mid": "15L–25L",
+      "senior": "30L–50L+"
+    },
+    "education_path": [
+      "Any UG",
+      "UPSC CSE clearance",
+      "Foundation Course at LBSNAA"
+    ],
+    "city_distribution": [
+      "Pan-India + state HQs"
+    ]
+  },
+  "public_health_researcher": {
+    "career_id": "public_health_researcher",
+    "name_en": "Public Health Researcher",
+    "name_hi": "Sarvajanik Swasthya Anusandhanak",
+    "tagline_en": "Population-level evidence, real impact",
+    "why_match": {
+      "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches public_health_researcher"
+    },
+    "indian_companies": [
+      "PHFI",
+      "ICMR",
+      "AIIMS",
+      "WHO India",
+      "Bill & Melinda Gates Foundation India",
+      "Tata Trusts"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "22L–50L"
+    },
+    "education_path": [
+      "MPH/MSc Epidemiology",
+      "PhD for senior roles",
+      "Stats + writing chops"
+    ],
+    "city_distribution": [
+      "Delhi NCR",
+      "Bangalore",
+      "Mumbai",
+      "Chennai"
+    ]
+  },
+  "public_relations": {
+    "career_id": "public_relations",
+    "name_en": "Public Relations Specialist",
+    "name_hi": "Jansampark Visheshagya / जनसंपर्क विशेषज्ञ",
+    "tagline_en": "Shape the story before it shapes you",
+    "why_match": {
+      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches public_relations"
+    },
+    "indian_companies": [
+      "Adfactors PR",
+      "Edelman India",
+      "Weber Shandwick India",
+      "MSL India",
+      "Avian WE",
+      "The PRactice"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–15L",
+      "senior": "20L–45L"
+    },
+    "education_path": [
+      "BMM/Mass Comm/Journalism",
+      "MBA Comms optional",
+      "Pitch decks + media relationships"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "qa_engineer": {
+    "career_id": "qa_engineer",
+    "name_en": "QA Engineer",
+    "name_hi": "Quality Engineer / गुणवत्ता अभियंता",
+    "tagline_en": "Find what shipped should never",
+    "why_match": {
+      "RC": "PLACEHOLDER — Phase 2.5 will articulate why RC matches qa_engineer",
+      "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches qa_engineer"
+    },
+    "indian_companies": [
+      "Infosys",
+      "TCS",
+      "Wipro",
+      "Cognizant",
+      "Mindtree",
+      "Capgemini"
+    ],
+    "salary_inr": {
+      "entry": "4L",
+      "mid": "8L–16L",
+      "senior": "20L–40L"
+    },
+    "education_path": [
+      "B.Tech / B.Sc CS",
+      "ISTQB certification",
+      "Online: Selenium/Playwright"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Pune",
+      "Chennai",
+      "Hyderabad"
+    ]
+  },
+  "quant_analyst": {
+    "career_id": "quant_analyst",
+    "name_en": "Quant Analyst",
+    "name_hi": "Quant Vishleshak / क्वांट विश्लेषक",
+    "tagline_en": "Math meets markets",
+    "why_match": {
+      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches quant_analyst",
+      "IC": "PLACEHOLDER — Phase 2.5 will articulate why IC matches quant_analyst"
+    },
+    "indian_companies": [
+      "Tower Research India",
+      "WorldQuant India",
+      "Goldman Sachs India",
+      "JPMorgan India",
+      "Graviton Research"
+    ],
+    "salary_inr": {
+      "entry": "15L",
+      "mid": "30L–60L",
+      "senior": "80L–2Cr+"
+    },
+    "education_path": [
+      "IIT/ISI/CMI undergrad",
+      "Master's Math/Stats/CS",
+      "Strong DSA + probability"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Gurugram",
+      "Bangalore"
+    ]
+  },
+  "risk_analyst": {
+    "career_id": "risk_analyst",
+    "name_en": "Risk Analyst",
+    "name_hi": "Jokhim Vishleshak / जोखिम विश्लेषक",
+    "tagline_en": "See the downside before it bites",
+    "why_match": {
+      "CI": "PLACEHOLDER — Phase 2.5 will articulate why CI matches risk_analyst",
+      "IC": "PLACEHOLDER — Phase 2.5 will articulate why IC matches risk_analyst"
+    },
+    "indian_companies": [
+      "ICICI Bank",
+      "HDFC Bank",
+      "Kotak",
+      "Axis Bank",
+      "Deloitte",
+      "EY"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "22L–50L"
+    },
+    "education_path": [
+      "B.Com/BBA + FRM",
+      "MBA Finance (optional)",
+      "SAS/Python/SQL"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Gurugram",
+      "Pune"
+    ]
+  },
+  "sales_manager": {
+    "career_id": "sales_manager",
+    "name_en": "Sales Manager",
+    "name_hi": "Bikri Prabandhak / बिक्री प्रबंधक",
+    "tagline_en": "Close the deal, then the next one",
+    "why_match": {
+      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches sales_manager",
+      "ES": "PLACEHOLDER — Phase 2.5 will articulate why ES matches sales_manager",
+      "SE": "PLACEHOLDER — Phase 2.5 will articulate why SE matches sales_manager"
+    },
+    "indian_companies": [
+      "Salesforce India",
+      "Oracle India",
+      "Microsoft India",
+      "HDFC Bank",
+      "ICICI Bank",
+      "TCS"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–22L",
+      "senior": "30L–80L+ (with var)"
+    },
+    "education_path": [
+      "Any UG + MBA Marketing",
+      "Strong communication + targets",
+      "CRM tooling literacy"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Bangalore",
+      "Delhi NCR",
+      "Hyderabad"
+    ]
+  },
+  "school_teacher": {
+    "career_id": "school_teacher",
+    "name_en": "School Teacher",
+    "name_hi": "Adhyapak / अध्यापक",
+    "tagline_en": "Shape the next generation, daily",
+    "why_match": {
+      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches school_teacher",
+      "IS": "PLACEHOLDER — Phase 2.5 will articulate why IS matches school_teacher",
+      "SI": "PLACEHOLDER — Phase 2.5 will articulate why SI matches school_teacher"
+    },
+    "indian_companies": [
+      "DPS schools",
+      "Kendriya Vidyalaya",
+      "Ryan International",
+      "DAV schools",
+      "Heritage Schools",
+      "Inventure Academy"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "5L–10L",
+      "senior": "12L–25L"
+    },
+    "education_path": [
+      "B.Ed mandatory",
+      "Subject Master's preferred",
+      "TET/CTET certifications"
+    ],
+    "city_distribution": [
+      "All metro + tier-2 cities"
+    ]
+  },
+  "screenwriter": {
+    "career_id": "screenwriter",
+    "name_en": "Screenwriter",
+    "name_hi": "Patkatha Lekhak / पटकथा लेखक",
+    "tagline_en": "Stories that earn their runtime",
+    "why_match": {
+      "AI": "PLACEHOLDER — Phase 2.5 will articulate why AI matches screenwriter",
+      "AS": "PLACEHOLDER — Phase 2.5 will articulate why AS matches screenwriter"
+    },
+    "indian_companies": [
+      "Tiger Baby Films",
+      "Excel Entertainment",
+      "Dharma Productions",
+      "Yash Raj Films",
+      "Netflix India",
+      "Amazon Prime India"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–20L",
+      "senior": "30L–1Cr+ per project"
+    },
+    "education_path": [
+      "FTII/SRFTI/Whistling Woods",
+      "Self-taught + spec scripts",
+      "Workshops: John Truby/McKee"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR"
+    ]
+  },
+  "security_engineer": {
+    "career_id": "security_engineer",
+    "name_en": "Security Engineer",
+    "name_hi": "Suraksha Abhiyanta / सिक्योरिटी इंजीनियर",
+    "tagline_en": "Break it before attackers do",
+    "why_match": {
+      "IR": "PLACEHOLDER — Phase 2.5 will articulate why IR matches security_engineer"
+    },
+    "indian_companies": [
+      "Razorpay",
+      "PhonePe",
+      "Cred",
+      "Infosys",
+      "TCS",
+      "Wipro"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "14L–28L",
+      "senior": "32L–80L"
+    },
+    "education_path": [
+      "B.Tech CSE/IT",
+      "Certs: OSCP/CEH/CISSP",
+      "CTF practice + bug bounty"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Gurugram"
+    ]
+  },
+  "site_supervisor": {
+    "career_id": "site_supervisor",
+    "name_en": "Site Supervisor",
+    "name_hi": "Site Adhikshak / साइट अधीक्षक",
+    "tagline_en": "What ships gets shipped on-site",
+    "why_match": {
+      "RE": "PLACEHOLDER — Phase 2.5 will articulate why RE matches site_supervisor"
+    },
+    "indian_companies": [
+      "L&T",
+      "Shapoorji Pallonji",
+      "DLF",
+      "Godrej Properties",
+      "Tata Projects",
+      "Hindustan Construction"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "6L–12L",
+      "senior": "15L–28L"
+    },
+    "education_path": [
+      "Diploma Civil / B.E. Civil",
+      "MEP coordination knowledge",
+      "Strong on-site judgement"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Pune",
+      "Bangalore",
+      "Delhi NCR",
+      "Site-based"
+    ]
+  },
+  "software_engineer": {
+    "career_id": "software_engineer",
+    "name_en": "Software Engineer",
+    "name_hi": "Software Abhiyanta / सॉफ़्टवेयर इंजीनियर",
+    "tagline_en": "Ship code that scales",
+    "why_match": {
+      "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches software_engineer"
+    },
+    "indian_companies": [
+      "Infosys",
+      "TCS",
+      "Wipro",
+      "Flipkart",
+      "Razorpay",
+      "Cred",
+      "Zerodha"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "12L–25L",
+      "senior": "30L–80L"
+    },
+    "education_path": [
+      "B.Tech CSE/IT",
+      "Self-taught + portfolio",
+      "Online: NPTEL/LeetCode"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Pune",
+      "Chennai",
+      "Gurugram"
+    ]
+  },
+  "sre": {
+    "career_id": "sre",
+    "name_en": "Site Reliability Engineer",
+    "name_hi": "Site Reliability Engineer / SRE",
+    "tagline_en": "Keep the lights on at scale",
+    "why_match": {
+      "RI": "PLACEHOLDER — Phase 2.5 will articulate why RI matches sre"
+    },
+    "indian_companies": [
+      "Google India",
+      "Flipkart",
+      "Razorpay",
+      "Swiggy",
+      "Cred",
+      "Microsoft IDC"
+    ],
+    "salary_inr": {
+      "entry": "8L",
+      "mid": "18L–32L",
+      "senior": "40L–90L"
+    },
+    "education_path": [
+      "B.Tech CSE",
+      "Linux/networking deep-dive",
+      "Online: SRE handbook (Google)"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Hyderabad",
+      "Gurugram"
+    ]
+  },
+  "startup_founder": {
+    "career_id": "startup_founder",
+    "name_en": "Startup Founder",
+    "name_hi": "Startup Sansthapak / स्टार्टअप संस्थापक",
+    "tagline_en": "Conviction, capital, customers",
+    "why_match": {
+      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches startup_founder",
+      "ER": "PLACEHOLDER — Phase 2.5 will articulate why ER matches startup_founder"
+    },
+    "indian_companies": [
+      "Y Combinator alumni",
+      "Sequoia (Peak XV)",
+      "Accel India",
+      "Lightspeed India",
+      "Blume Ventures",
+      "Self-funded"
+    ],
+    "salary_inr": {
+      "entry": "0–6L (bootstrapped)",
+      "mid": "15L–40L (Seed)",
+      "senior": "1Cr+ (Series B+) or exit"
+    },
+    "education_path": [
+      "Any UG (often IIT/IIM)",
+      "Operator background helpful",
+      "Network + pitching ability"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Gurugram",
+      "Mumbai",
+      "Pune"
+    ]
+  },
+  "strategy_consultant": {
+    "career_id": "strategy_consultant",
+    "name_en": "Strategy Consultant",
+    "name_hi": "Ranniti Salahkar / रणनीति सलाहकार",
+    "tagline_en": "Frameworks for the unframable",
+    "why_match": {
+      "IA": "PLACEHOLDER — Phase 2.5 will articulate why IA matches strategy_consultant"
+    },
+    "indian_companies": [
+      "McKinsey India",
+      "BCG India",
+      "Bain India",
+      "Kearney",
+      "Deloitte S&O",
+      "EY-Parthenon"
+    ],
+    "salary_inr": {
+      "entry": "12L",
+      "mid": "25L–45L",
+      "senior": "60L–1.5Cr"
+    },
+    "education_path": [
+      "IIT/IIM/top-tier undergrad",
+      "MBA from ISB/IIM-A/HBS",
+      "Strong case + structured thinking"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Gurugram",
+      "Bangalore"
+    ]
+  },
+  "technician": {
+    "career_id": "technician",
+    "name_en": "Technician",
+    "name_hi": "Takneeshiyan / तकनीशियन",
+    "tagline_en": "Hands-on, problem-solved",
+    "why_match": {
+      "RC": "PLACEHOLDER — Phase 2.5 will articulate why RC matches technician"
+    },
+    "indian_companies": [
+      "Tata Motors",
+      "L&T",
+      "BHEL",
+      "Bharat Electronics",
+      "Indian Railways",
+      "ITI placements"
+    ],
+    "salary_inr": {
+      "entry": "2L",
+      "mid": "4L–8L",
+      "senior": "10L–18L"
+    },
+    "education_path": [
+      "ITI / Polytechnic Diploma",
+      "Apprenticeship under NAPS",
+      "Trade-specific certifications"
+    ],
+    "city_distribution": [
+      "Pan-India industrial belts"
+    ]
+  },
+  "training_manager": {
+    "career_id": "training_manager",
+    "name_en": "Training Manager",
+    "name_hi": "Prashikshan Prabandhak / प्रशिक्षण प्रबंधक",
+    "tagline_en": "Build skills at the org level",
+    "why_match": {
+      "CS": "PLACEHOLDER — Phase 2.5 will articulate why CS matches training_manager"
+    },
+    "indian_companies": [
+      "Infosys",
+      "TCS",
+      "Wipro",
+      "Accenture India",
+      "Deloitte India",
+      "HCLTech"
+    ],
+    "salary_inr": {
+      "entry": "5L",
+      "mid": "10L–18L",
+      "senior": "20L–45L"
+    },
+    "education_path": [
+      "MBA HR/L&D",
+      "Subject expertise + facilitation",
+      "Certs: ATD/CIPD"
+    ],
+    "city_distribution": [
+      "Bangalore",
+      "Pune",
+      "Hyderabad",
+      "Mumbai",
+      "Gurugram"
+    ]
+  },
+  "wealth_advisor": {
+    "career_id": "wealth_advisor",
+    "name_en": "Wealth Advisor",
+    "name_hi": "Wealth Advisor / धन सलाहकार",
+    "tagline_en": "Help families compound across generations",
+    "why_match": {
+      "EC": "PLACEHOLDER — Phase 2.5 will articulate why EC matches wealth_advisor"
+    },
+    "indian_companies": [
+      "IIFL Wealth",
+      "Kotak Wealth",
+      "ASK Wealth",
+      "Edelweiss Wealth",
+      "Julius Baer India",
+      "Centrum"
+    ],
+    "salary_inr": {
+      "entry": "6L",
+      "mid": "12L–25L",
+      "senior": "30L–80L+"
+    },
+    "education_path": [
+      "BBA/MBA Finance",
+      "CFP / CFA preferred",
+      "Relationship management track record"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Bangalore"
+    ]
+  },
+  "wedding_planner": {
+    "career_id": "wedding_planner",
+    "name_en": "Wedding Planner",
+    "name_hi": "Vivah Yojanakar / विवाह योजनाकार",
+    "tagline_en": "Run the biggest day of someone's life",
+    "why_match": {
+      "SC": "PLACEHOLDER — Phase 2.5 will articulate why SC matches wedding_planner"
+    },
+    "indian_companies": [
+      "WedMeGood",
+      "Vivaah Group",
+      "DreamzKraft",
+      "The A-Cube Project",
+      "Independent firms",
+      "Devika Sakhuja Events"
+    ],
+    "salary_inr": {
+      "entry": "3L",
+      "mid": "8L–18L",
+      "senior": "20L–60L+ per season"
+    },
+    "education_path": [
+      "Any UG",
+      "Event-planning diploma optional",
+      "2-3 yrs assistantship first"
+    ],
+    "city_distribution": [
+      "Mumbai",
+      "Delhi NCR",
+      "Jaipur",
+      "Goa",
+      "Udaipur"
+    ]
+  }
+}
