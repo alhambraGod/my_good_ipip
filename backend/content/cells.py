@@ -1,21 +1,31 @@
-"""Cell content loader — reads 24 JSON files from content/data/cells/, validates against schema."""
+"""Cell content loader — reads 24 JSON files from content/data/cells/, validates against schema.
+
+Stub-quality note (Phase 2):
+  Phase 2 ships stubs where ``strengths_en`` / ``growth_tips_en`` are deduped by RIASEC
+  main type (all I-* cells share 5 strengths, all R-* cells share 5 strengths, etc.).
+  Phase 2.5 content authoring will replace these with cell-specific copy. The 4 cell
+  exemplars (IA, SE, EC, SC) authored in Task 3 are the gold standard for this
+  refinement.
+"""
 
 from __future__ import annotations
 
 import json
 from functools import lru_cache
 from pathlib import Path
+from types import MappingProxyType
+from typing import Mapping
 
 from content.models import CellContent
 from services.scoring.archetype import VALID_CELLS_24
 
 _HERE = Path(__file__).resolve().parent
-_CELLS_DIR = _HERE / "data" / "cells"
+CELLS_DIR = _HERE / "data" / "cells"
 
 
 @lru_cache(maxsize=1)
-def load_all_cells() -> dict[str, CellContent]:
-    """Load all 24 cell JSON files into {cell_id: CellContent}.
+def _cells_cache() -> dict[str, CellContent]:
+    """Internal: load + cache all 24 cell JSON files. Use ``load_all_cells()`` externally.
 
     Raises:
       FileNotFoundError if any of the 24 expected files is missing.
@@ -23,13 +33,22 @@ def load_all_cells() -> dict[str, CellContent]:
     """
     cells: dict[str, CellContent] = {}
     for cell_id in VALID_CELLS_24:
-        path = _CELLS_DIR / f"{cell_id}.json"
+        path = CELLS_DIR / f"{cell_id}.json"
         if not path.exists():
             raise FileNotFoundError(f"missing cell content file: {path}")
         with open(path, encoding="utf-8") as f:
             raw = json.load(f)
         cells[cell_id] = CellContent.model_validate(raw)
     return cells
+
+
+def load_all_cells() -> Mapping[str, CellContent]:
+    """Return the read-only mapping of {cell_id: CellContent} for all 24 valid cells.
+
+    The underlying dict is cached process-lifetime; this returns a ``MappingProxyType``
+    view to prevent accidental mutation that would corrupt every subsequent caller.
+    """
+    return MappingProxyType(_cells_cache())
 
 
 def get_cell_content(cell_id: str) -> CellContent:

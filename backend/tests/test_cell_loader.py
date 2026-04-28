@@ -1,9 +1,7 @@
 """tests/test_cell_loader.py — verify all 24 cell content files load + validate."""
-import os
-
 import pytest
 
-from content.cells import get_cell_content, load_all_cells
+from content.cells import CELLS_DIR, get_cell_content, load_all_cells
 from content.models import CellContent
 from services.scoring.archetype import VALID_CELLS_24
 
@@ -36,6 +34,5 @@ def test_get_cell_content_unknown_raises():
 
 def test_no_orphan_cell_files():
     """No JSON file in data/cells/ that isn't one of the 24 valid cells."""
-    data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "content", "data", "cells")
-    files = {f.replace(".json", "") for f in os.listdir(data_dir) if f.endswith(".json")}
+    files = {p.stem for p in CELLS_DIR.glob("*.json")}
     assert files == set(VALID_CELLS_24), f"orphan or missing files: {files ^ set(VALID_CELLS_24)}"
