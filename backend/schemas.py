@@ -238,5 +238,6 @@ class V3MilestoneRequest(BaseModel):
 
 
 class V3MilestoneResponse(BaseModel):
+    """Renamed `copy` → `text` to avoid shadowing BaseModel.copy() method."""
     milestone: int
-    copy: str
+    text: str

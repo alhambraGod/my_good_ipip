@@ -67,5 +67,6 @@ def test_v3_payment_intent_response():
 
 
 def test_v3_milestone_response():
-    resp = V3MilestoneResponse(milestone=20, copy="Halfway there!")
+    resp = V3MilestoneResponse(milestone=20, text="Halfway there!")
     assert resp.milestone == 20
+    assert resp.text == "Halfway there!"

@@ -254,8 +254,9 @@ class V3MilestoneRequest(BaseModel):
 
 
 class V3MilestoneResponse(BaseModel):
+    """Renamed `copy` → `text` to avoid shadowing BaseModel.copy() method."""
     milestone: int
-    copy: str
+    text: str
 
 
 class V3ShareCardOgRequest(BaseModel):
@@ -701,7 +702,7 @@ def test_milestone_copy_endpoint():
     assert r.status_code == 200
     body = r.json()
     assert body["milestone"] == 20
-    assert isinstance(body["copy"], str) and len(body["copy"]) >= 10
+    assert isinstance(body["text"], str) and len(body["text"]) >= 10
 
 
 def test_milestone_copy_invalid_milestone_400():
@@ -910,7 +911,7 @@ def get_milestone_copy_endpoint(
             status_code=400,
             detail=f"Invalid milestone {milestone!r}; must be one of {MILESTONE_THRESHOLDS}",
         )
-    return V3MilestoneResponse(milestone=milestone, copy=get_copy_for_milestone(milestone, seed))
+    return V3MilestoneResponse(milestone=milestone, text=get_copy_for_milestone(milestone, seed))
 ```
 
 - [ ] **Step 3: Mount router in `backend/main.py`**
