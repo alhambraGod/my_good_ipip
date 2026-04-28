@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { createPaymentSession } from "@/lib/api";
-import { Suspense } from "react";
+import Link from "next/link";
+import { createV3PaymentIntent } from "@/lib/v3-api";
 
 function PaymentContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const assessmentId = searchParams.get("id");
+  const assessmentId =
+    searchParams.get("assessment_id") || searchParams.get("id");
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
 
@@ -22,102 +23,114 @@ function PaymentContent() {
     setError("");
 
     try {
-      const session = await createPaymentSession(assessmentId);
-      if (session.checkout_url) {
-        window.location.href = session.checkout_url;
+      const intent = await createV3PaymentIntent(assessmentId);
+      if (intent.payment_url) {
+        window.location.href = intent.payment_url;
+        return;
       }
-    } catch {
-      setError("Payment failed. Please try again.");
+      setError("No payment URL returned. Try again.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Payment failed. Please try again.");
+    } finally {
       setProcessing(false);
     }
   };
 
+  if (!assessmentId) {
+    return null;
+  }
+
   return (
-    <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
+    <main className="min-h-screen bg-india-radial flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
-        <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
-          {/* Header */}
-          <div className="gradient-bg text-white px-8 py-6 text-center">
-            <h1 className="text-xl font-bold mb-1">Unlock Your Report</h1>
-            <p className="text-indigo-200 text-sm">
-              One-time payment, instant access
+        <div className="bg-white rounded-3xl shadow-xl border border-saffron-700/15 overflow-hidden">
+          <div className="bg-india-hero text-navy-text px-8 py-6 text-center relative">
+            <div className="absolute top-3 right-4 text-2xl">🪔</div>
+            <h1 className="text-xl font-bold mb-1">Unlock full CareerDNA</h1>
+            <p className="text-navy-text/80 text-sm">
+              Holland + OCEAN deep report · one-time payment
             </p>
           </div>
 
           <div className="p-8">
-            {/* Product */}
-            <div className="flex items-center justify-between mb-6 pb-6 border-b border-slate-100">
+            <div className="flex items-center justify-between mb-6 pb-6 border-b border-saffron-700/10">
               <div>
-                <h2 className="font-semibold text-slate-800">
-                  MindIQ Personality Report
+                <h2 className="font-semibold text-navy-text">
+                  Detailed report pack
                 </h2>
-                <p className="text-sm text-slate-500">
-                  Complete AI-powered analysis
+                <p className="text-sm text-navy-text/60">
+                  Amount confirmed when you tap pay (promo pricing may apply)
                 </p>
               </div>
-              <div className="text-2xl font-bold gradient-text">$3.99</div>
+              <div className="text-right">
+                <div className="text-xs font-bold text-saffron-700 uppercase tracking-wider">
+                  INR
+                </div>
+                <div className="text-lg font-bold text-india-green-700">
+                  from ₹49*
+                </div>
+              </div>
             </div>
 
-            {/* What you get */}
             <div className="mb-6">
-              <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-3">
-                What&apos;s Included
+              <h3 className="text-xs font-bold text-saffron-700 uppercase tracking-wider mb-3">
+                What you get
               </h3>
               <ul className="space-y-2">
                 {[
-                  "Comprehensive Big Five personality analysis",
-                  "5-7 career path recommendations",
-                  "Personal strengths & growth strategies",
-                  "Team dynamics & communication insights",
-                  "Actionable next steps",
-                  "Downloadable PDF report",
+                  "Full archetype deep dive (India-relevant copy)",
+                  "OCEAN scores + percentiles",
+                  "5+ career matches with salary & city notes",
+                  "Strengths & growth tips",
+                  "Share-ready lines & rarity context",
                 ].map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2 text-sm text-slate-600"
+                    className="flex items-start gap-2 text-sm text-navy-text/75"
                   >
-                    <span className="text-green-500 mt-0.5">&#10003;</span>
+                    <span className="text-india-green-600 mt-0.5">✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
 
+            <p className="text-xs text-navy-text/45 mb-4">
+              *Early-bird promo while quota lasts; otherwise full price applies.
+            </p>
+
             {error && (
-              <p className="text-red-500 text-sm text-center mb-4">{error}</p>
+              <p className="text-red-600 text-sm text-center mb-4">{error}</p>
             )}
 
-            {/* Pay button */}
             <button
+              type="button"
               onClick={handlePay}
               disabled={processing}
-              className="w-full bg-indigo-600 text-white font-bold text-lg py-4 rounded-2xl hover:bg-indigo-700 transition-colors shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-india-green-600 to-india-green-700 text-white font-bold text-lg py-4 rounded-2xl hover:from-india-green-700 hover:to-india-green-800 transition-all shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {processing ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Processing...
+                  Opening checkout…
                 </span>
               ) : (
-                "Pay $3.99"
+                <>Pay with Razorpay (or instant mock in dev)</>
               )}
             </button>
 
-            {/* Trust */}
-            <div className="flex items-center justify-center gap-4 mt-4 text-xs text-slate-400">
-              <span>&#9740; Secure</span>
-              <span>&#9889; Instant</span>
-              <span>&#8634; Refundable</span>
+            <div className="flex items-center justify-center gap-4 mt-4 text-xs text-navy-text/40">
+              <span>Secure checkout</span>
+              <span>·</span>
+              <span>Instant unlock</span>
             </div>
 
-            <button
-              onClick={() =>
-                router.push(`/results?id=${assessmentId}`)
-              }
-              className="block w-full text-center mt-4 text-sm text-slate-400 hover:text-slate-600 transition-colors"
+            <Link
+              href={`/results/${assessmentId}`}
+              className="block w-full text-center mt-4 text-sm text-navy-text/50 hover:text-navy-text transition-colors"
             >
-              &larr; Back to results
-            </button>
+              ← Back to results
+            </Link>
           </div>
         </div>
       </div>
@@ -129,8 +142,8 @@ export default function PaymentPage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen flex items-center justify-center bg-slate-50">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+        <main className="min-h-screen flex items-center justify-center bg-india-radial">
+          <div className="w-12 h-12 border-4 border-saffron-200 border-t-saffron-600 rounded-full animate-spin" />
         </main>
       }
     >

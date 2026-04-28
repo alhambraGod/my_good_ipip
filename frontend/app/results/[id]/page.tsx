@@ -128,12 +128,21 @@ export default function ResultsPage() {
             text={`I'm ${data.cell_id}. ${data.slogan_en} → ${data.share_url}`}
             variant="white-outline"
           />
-          <Link
-            href={`/payment?assessment_id=${data.assessment_id}`}
-            className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg"
-          >
-            Unlock ₹49 →
-          </Link>
+          {data.is_paid ? (
+            <Link
+              href={`/report/${data.assessment_id}`}
+              className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
+            >
+              View full report →
+            </Link>
+          ) : (
+            <Link
+              href={`/payment?assessment_id=${data.assessment_id}`}
+              className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
+            >
+              Unlock full report →
+            </Link>
+          )}
         </div>
       </section>
     </main>

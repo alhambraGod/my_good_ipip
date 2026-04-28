@@ -2,18 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { getReport, type ReportData } from "@/lib/api";
+import { getV3Report, type V3ReportResponse } from "@/lib/v3-api";
 
-const DIMENSION_LABELS: Record<string, string> = {
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+const OCEAN_LABELS: Record<string, string> = {
   openness: "Openness",
   conscientiousness: "Conscientiousness",
   extraversion: "Extraversion",
   agreeableness: "Agreeableness",
-  neuroticism: "Emotional Stability",
+  neuroticism: "Neuroticism",
 };
 
-const DIMENSION_COLORS: Record<string, string> = {
+const OCEAN_COLORS: Record<string, string> = {
   openness: "from-violet-500 to-purple-500",
   conscientiousness: "from-blue-500 to-indigo-500",
   extraversion: "from-amber-500 to-orange-500",
@@ -25,18 +28,18 @@ export default function ReportPage() {
   const params = useParams();
   const router = useRouter();
   const assessmentId = params.id as string;
-  const [report, setReport] = useState<ReportData | null>(null);
+  const [report, setReport] = useState<V3ReportResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (!assessmentId) return;
-    getReport(assessmentId)
+    getV3Report(assessmentId)
       .then((data) => {
         setReport(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         setError(err.message);
         setLoading(false);
       });
@@ -44,10 +47,10 @@ export default function ReportPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <main className="min-h-screen bg-india-radial flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-slate-500">Loading your report...</p>
+          <div className="w-12 h-12 border-4 border-saffron-200 border-t-saffron-600 rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-navy-text/70">Loading your report…</p>
         </div>
       </main>
     );
@@ -55,19 +58,26 @@ export default function ReportPage() {
 
   if (error === "Payment required") {
     return (
-      <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-xl font-bold text-slate-800 mb-2">
-            Payment Required
+      <main className="min-h-screen bg-india-radial flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <h1 className="text-xl font-bold text-navy-text mb-2">
+            Unlock required
           </h1>
-          <p className="text-slate-500 mb-6">
-            You need to unlock this report before viewing.
+          <p className="text-navy-text/65 mb-6 text-sm">
+            Pay once to open your full CareerDNA report.
           </p>
-          <button
-            onClick={() => router.push(`/results?id=${assessmentId}`)}
-            className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-colors"
+          <Link
+            href={`/payment?assessment_id=${assessmentId}`}
+            className="inline-block bg-india-green-600 text-white px-6 py-2 rounded-full hover:bg-india-green-700 transition-colors font-bold"
           >
-            Go to Results
+            Unlock report
+          </Link>
+          <button
+            type="button"
+            onClick={() => router.push(`/results/${assessmentId}`)}
+            className="block mx-auto mt-4 text-sm text-navy-text/50 hover:text-navy-text"
+          >
+            ← Free results
           </button>
         </div>
       </main>
@@ -76,132 +86,245 @@ export default function ReportPage() {
 
   if (error || !report) {
     return (
-      <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="text-center">
-          <h1 className="text-xl font-bold text-slate-800 mb-2">
+      <main className="min-h-screen bg-india-radial flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <h1 className="text-xl font-bold text-navy-text mb-2">
             Something went wrong
           </h1>
-          <p className="text-slate-500 mb-6">{error || "Report not found"}</p>
+          <p className="text-navy-text/65 mb-6 text-sm">{error || "Report not found"}</p>
           <button
+            type="button"
             onClick={() => router.push("/")}
-            className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition-colors"
+            className="bg-india-green-600 text-white px-6 py-2 rounded-full hover:bg-india-green-700 transition-colors"
           >
-            Go Home
+            Go home
           </button>
         </div>
       </main>
     );
   }
 
-  const displayScore = (dim: string, score: number) =>
-    dim === "neuroticism" ? Math.round(100 - score) : Math.round(score);
-  const displayPercentile = (dim: string, pct: number) =>
-    dim === "neuroticism" ? 100 - pct : pct;
+  const pdfHref =
+    report.pdf_path &&
+    (report.pdf_path.startsWith("http")
+      ? report.pdf_path
+      : `${API_BASE.replace(/\/$/, "")}/${report.pdf_path.replace(/^\//, "")}`);
+
+  const descriptionParagraphs = report.deep_description_en
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <div className="gradient-bg text-white px-4 py-6 sticky top-0 z-20 shadow-lg">
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
+    <main className="min-h-screen bg-cream">
+      <header className="bg-india-hero text-navy-text px-4 py-5 sticky top-0 z-20 shadow-md border-b border-saffron-700/20">
+        <div className="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold">MindIQ Report</h1>
-            <p className="text-indigo-200 text-xs">
-              Your Personality Assessment
+            <div className="text-2xl mb-0.5">🪔</div>
+            <h1 className="text-lg font-black tracking-tight">CareerDNA · Full report</h1>
+            <p className="text-xs text-navy-text/70">
+              {report.cell_id} · {report.cell_label_en}
             </p>
           </div>
-          <button
-            onClick={() => router.push(`/report/${assessmentId}/preview`)}
-            className="bg-white/20 hover:bg-white/30 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors flex items-center gap-1.5"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Preview &amp; Download PDF
-          </button>
+          <div className="flex flex-wrap gap-2">
+            {pdfHref && (
+              <a
+                href={pdfHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold bg-india-green-600 text-white px-4 py-2 rounded-full hover:bg-india-green-700 transition-colors"
+              >
+                Download PDF
+              </a>
+            )}
+            <Link
+              href={`/results/${assessmentId}`}
+              className="text-sm font-medium text-navy-text/80 px-4 py-2 rounded-full border border-navy-text/20 hover:bg-white/50"
+            >
+              Summary
+            </Link>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        {/* Score Overview */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      <div className="max-w-3xl mx-auto px-4 py-8 space-y-8">
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 mb-8"
+          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8"
         >
-          <h2 className="text-lg font-bold text-slate-800 mb-5">
-            Score Overview
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {Object.entries(report.scores).map(([dim, score]) => (
+          <p className="text-saffron-700 text-xs font-bold uppercase tracking-widest mb-2">
+            Your code
+          </p>
+          <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-navy-text to-saffron-600 mb-2">
+            {report.cell_id}
+          </div>
+          <p className="text-lg font-semibold text-navy-text mb-1">
+            {report.cell_label_en}
+          </p>
+          <p className="text-navy-text/75 italic border-l-4 border-india-green-500 pl-4 py-1">
+            &ldquo;{report.slogan_en}&rdquo;
+          </p>
+          <p className="text-sm text-navy-text/55 mt-3">
+            Holland {report.holland_code} · ~{report.rarity_pct}% rarity band ·{" "}
+            {report.is_mast_trigger ? "MAST highlight" : "standard window"}
+          </p>
+        </motion.section>
+
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8"
+        >
+          <h2 className="text-lg font-bold text-navy-text mb-4">Deep dive</h2>
+          <div className="space-y-4 text-navy-text/85 text-sm leading-relaxed">
+            {descriptionParagraphs.map((para, idx) => (
+              <p key={idx}>{para}</p>
+            ))}
+          </div>
+        </motion.section>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.section
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6"
+          >
+            <h2 className="text-base font-bold text-navy-text mb-4">Strengths</h2>
+            <ul className="space-y-2">
+              {report.strengths_en.map((s) => (
+                <li
+                  key={s}
+                  className="text-sm text-navy-text/80 flex gap-2 items-start"
+                >
+                  <span className="text-india-green-600 shrink-0">★</span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </motion.section>
+          <motion.section
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.12 }}
+            className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6"
+          >
+            <h2 className="text-base font-bold text-navy-text mb-4">Growth tips</h2>
+            <ul className="space-y-2">
+              {report.growth_tips_en.map((s) => (
+                <li
+                  key={s}
+                  className="text-sm text-navy-text/80 flex gap-2 items-start"
+                >
+                  <span className="text-saffron-600 shrink-0">→</span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </motion.section>
+        </div>
+
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8"
+        >
+          <h2 className="text-lg font-bold text-navy-text mb-5">OCEAN profile</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {Object.entries(report.ocean_scores).map(([dim, score]) => (
               <div
                 key={dim}
-                className="bg-slate-50 rounded-xl p-4 border border-slate-100"
+                className="bg-cream rounded-xl p-4 border border-saffron-700/10"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold text-slate-700">
-                    {DIMENSION_LABELS[dim] || dim}
+                  <span className="text-sm font-semibold text-navy-text">
+                    {OCEAN_LABELS[dim] || dim}
                   </span>
-                  <span className="text-xs text-slate-500">
-                    {displayPercentile(dim, report.percentiles[dim])}th pct
-                  </span>
-                </div>
-                <div className="text-2xl font-bold text-slate-800 mb-2">
-                  {displayScore(dim, score)}
-                  <span className="text-sm text-slate-400 font-normal">
-                    /100
+                  <span className="text-xs text-navy-text/50">
+                    {report.ocean_percentiles[dim] ?? "—"}th pct
                   </span>
                 </div>
-                <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div className="text-xl font-bold text-navy-text mb-2">
+                  {Math.round(score)}
+                  <span className="text-sm text-navy-text/40 font-normal">/100</span>
+                </div>
+                <div className="h-2 bg-saffron-700/15 rounded-full overflow-hidden">
                   <motion.div
-                    className={`h-full rounded-full bg-gradient-to-r ${DIMENSION_COLORS[dim] || "from-indigo-500 to-purple-500"}`}
+                    className={`h-full rounded-full bg-gradient-to-r ${OCEAN_COLORS[dim] || "from-india-green-500 to-india-green-700"}`}
                     initial={{ width: 0 }}
-                    animate={{
-                      width: `${displayScore(dim, score)}%`,
-                    }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
+                    animate={{ width: `${Math.min(100, Math.max(0, score))}%` }}
+                    transition={{ duration: 0.7, delay: 0.2 }}
                   />
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </motion.section>
 
-        {/* Full Report */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 mb-8"
+          transition={{ delay: 0.18 }}
+          className="pb-16"
         >
-          <div
-            className="prose prose-slate max-w-none prose-headings:text-slate-800 prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-100 prose-h2:pb-2 prose-h3:text-lg prose-h4:text-indigo-600 prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-800"
-            dangerouslySetInnerHTML={{ __html: report.report_html }}
-          />
-        </motion.div>
+          <h2 className="text-lg font-bold text-navy-text mb-4">
+            Career matches ({report.careers.length})
+          </h2>
+          <div className="space-y-4">
+            {report.careers.map((c, i) => (
+              <motion.article
+                key={c.career_id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 * i }}
+                className="bg-white rounded-2xl border border-india-green-600/20 shadow-md p-5"
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+                  <h3 className="text-lg font-bold text-navy-text">{c.name_en}</h3>
+                  <span className="text-xs font-medium text-navy-text/50">
+                    {c.name_hi}
+                  </span>
+                </div>
+                {c.tagline_en && (
+                  <p className="text-sm text-india-green-700 font-medium mb-2">
+                    {c.tagline_en}
+                  </p>
+                )}
+                {c.why_match[report.cell_id] && (
+                  <p className="text-sm text-navy-text/75 mb-3">
+                    {c.why_match[report.cell_id]}
+                  </p>
+                )}
+                <div className="grid sm:grid-cols-2 gap-3 text-xs text-navy-text/70">
+                  <div>
+                    <span className="font-bold text-navy-text">Salary (INR)</span>
+                    <p>
+                      Entry {c.salary_inr.entry} · Mid {c.salary_inr.mid} · Sr{" "}
+                      {c.salary_inr.senior}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="font-bold text-navy-text">Hot cities</span>
+                    <p>{c.city_distribution.slice(0, 4).join(", ")}</p>
+                  </div>
+                </div>
+                {c.indian_companies.length > 0 && (
+                  <p className="text-xs text-navy-text/60 mt-2">
+                    <span className="font-semibold text-navy-text/80">Hiring:</span>{" "}
+                    {c.indian_companies.slice(0, 6).join(", ")}
+                  </p>
+                )}
+              </motion.article>
+            ))}
+          </div>
+        </motion.section>
 
-        {/* Floating PDF button (mobile) */}
-        <div className="fixed bottom-6 right-6 md:hidden z-30">
-          <button
-            onClick={() => router.push(`/report/${assessmentId}/preview`)}
-            className="w-14 h-14 bg-indigo-600 text-white rounded-full shadow-xl flex items-center justify-center hover:bg-indigo-700 transition-colors"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center text-xs text-slate-400 pb-12">
-          <p>
-            This report was generated by MindIQ using the IPIP-NEO Big Five
-            personality framework.
-          </p>
-          <p className="mt-1">
-            For informational purposes only. Not a clinical assessment.
-          </p>
-          <p className="mt-1">&copy; 2026 MindIQ. All rights reserved.</p>
-        </div>
+        <footer className="text-center text-xs text-navy-text/45 pb-8">
+          <p>CareerDNA — RIASEC + OCEAN for Indian urban youth. Not clinical.</p>
+        </footer>
       </div>
     </main>
   );
