@@ -179,6 +179,25 @@ export async function getV3Report(assessment_id: string): Promise<V3ReportRespon
   return r.json();
 }
 
+function v3AuthHeaders(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+  const token = localStorage.getItem("mindiq_token");
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+/** Associates the current JWT user with this assessment (optional; best-effort). */
+export async function attachV3ProfileToAssessment(assessment_id: string): Promise<void> {
+  const h = v3AuthHeaders();
+  if (!h.Authorization) return;
+  const r = await fetch(`${API_BASE}/api/v3/assessment/${assessment_id}/attach-profile`, {
+    method: "POST",
+    headers: h,
+  });
+  if (!r.ok) {
+    /* non-fatal: user may pay as guest */
+  }
+}
+
 export function getShareUrl(share_code: string): string {
   return `${API_BASE}/s/${share_code}`;
 }

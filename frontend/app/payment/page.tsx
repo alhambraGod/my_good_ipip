@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { createV3PaymentIntent } from "@/lib/v3-api";
+import { attachV3ProfileToAssessment, createV3PaymentIntent } from "@/lib/v3-api";
 
 function PaymentContent() {
   const router = useRouter();
@@ -16,6 +16,11 @@ function PaymentContent() {
   useEffect(() => {
     if (!assessmentId) router.push("/");
   }, [assessmentId, router]);
+
+  useEffect(() => {
+    if (!assessmentId) return;
+    void attachV3ProfileToAssessment(assessmentId);
+  }, [assessmentId]);
 
   const handlePay = async () => {
     if (!assessmentId || processing) return;

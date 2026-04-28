@@ -131,3 +131,52 @@ def test_milestone_copy_endpoint():
 def test_milestone_copy_invalid_milestone_400():
     r = client.get("/api/v3/assessment/milestone?milestone=15&seed=x")
     assert r.status_code == 400
+
+
+def test_attach_profile_with_jwt():
+    import uuid
+
+    email = f"u{uuid.uuid4().hex[:10]}@attach.example"
+    reg = client.post(
+        "/api/auth/register",
+        json={"email": email, "password": "secret12", "name": "T"},
+    )
+    assert reg.status_code == 200, reg.text
+    token = reg.json()["access_token"]
+    start = client.post(
+        "/api/v3/assessment/start",
+        json={
+            "demographic": {
+                "DEM_STAGE": "student",
+                "DEM_AGE": "20_24",
+                "DEM_GENDER": "female",
+                "DEM_CITY_TIER": "tier1",
+                "DEM_TOP_PRESSURE": "self_doubt",
+            }
+        },
+    ).json()
+    aid = start["assessment_id"]
+    r = client.post(
+        f"/api/v3/assessment/{aid}/attach-profile",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert r.status_code == 200, r.text
+    assert r.json()["ok"] is True
+
+
+def test_attach_profile_requires_auth():
+    start = client.post(
+        "/api/v3/assessment/start",
+        json={
+            "demographic": {
+                "DEM_STAGE": "student",
+                "DEM_AGE": "20_24",
+                "DEM_GENDER": "female",
+                "DEM_CITY_TIER": "tier1",
+                "DEM_TOP_PRESSURE": "self_doubt",
+            }
+        },
+    ).json()
+    aid = start["assessment_id"]
+    r = client.post(f"/api/v3/assessment/{aid}/attach-profile")
+    assert r.status_code == 401

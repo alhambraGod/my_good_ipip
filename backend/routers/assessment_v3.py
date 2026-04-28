@@ -11,7 +11,7 @@ from config import settings
 from content.careers import get_careers_for_cell
 from content.cells import get_cell_content
 from database import get_db
-from models import Assessment, ShortLink
+from models import Assessment, ShortLink, UserProfile
 from questions.demographic import DEMOGRAPHIC_QUESTIONS
 from questions.selector import select_45_questions
 from schemas import (
@@ -27,6 +27,7 @@ from services.scoring.archetype import check_mast_trigger, derive_archetype_cell
 from services.scoring.holland_code import compute_holland_code
 from services.scoring.ocean import compute_ocean_percentiles, compute_ocean_scores
 from services.scoring.riasec import compute_riasec_scores
+from services.jwt_service import get_current_user
 
 
 router = APIRouter(prefix="/api/v3/assessment", tags=["assessment_v3"])
@@ -125,6 +126,21 @@ def submit_assessment(payload: V3AnswerSubmission, db: Session = Depends(get_db)
     return _compose_results_response(assessment, mast)
 
 
+@router.post("/{assessment_id}/attach-profile")
+def attach_profile_to_assessment(
+    assessment_id: str,
+    db: Session = Depends(get_db),
+    user: UserProfile = Depends(get_current_user),
+):
+    """Link a logged-in user (JWT) to this assessment for dashboard / receipts."""
+    assessment = db.query(Assessment).filter(Assessment.id == assessment_id).first()
+    if not assessment:
+        raise HTTPException(status_code=404, detail="Assessment not found")
+    assessment.profile_session_token = user.session_token
+    db.commit()
+    return {"ok": True, "assessment_id": assessment_id}
+
+
 @router.get("/{assessment_id}/results", response_model=V3AssessmentResultResponse)
 def get_results(assessment_id: str, db: Session = Depends(get_db)):
     """GET endpoint for re-fetching results after submit. Free 5-screen data only."""
@@ -158,7 +174,11 @@ def _compose_results_response(assessment: Assessment, mast: bool) -> V3Assessmen
             "locked": i > 0,
         })
 
-    share_url = f"{settings.FRONTEND_URL}/s/{assessment.share_code}" if assessment.share_code else ""
+    share_url = (
+        f"{settings.API_PUBLIC_URL.rstrip('/')}/s/{assessment.share_code}"
+        if assessment.share_code
+        else ""
+    )
 
     return V3AssessmentResultResponse(
         assessment_id=assessment.id,

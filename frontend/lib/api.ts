@@ -196,6 +196,25 @@ export async function finishWhatsAppOAuth(payload: {
   return res.json();
 }
 
+export async function startFacebookOAuth(): Promise<OAuthStartResult> {
+  const res = await fetch(`${API_BASE}/api/auth/facebook/start`);
+  if (!res.ok) throw new Error("Failed to start Facebook OAuth");
+  return res.json();
+}
+
+export async function finishFacebookOAuth(payload: {
+  code: string;
+  state: string;
+}): Promise<AuthResponse> {
+  const res = await fetch(`${API_BASE}/api/auth/facebook/callback`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ code: payload.code, state: payload.state || null }),
+  });
+  if (!res.ok) throw new Error("Failed to finish Facebook OAuth");
+  return res.json();
+}
+
 export async function startTwitterOAuth(): Promise<OAuthStartResult> {
   const res = await fetch(`${API_BASE}/api/auth/twitter/start`);
   if (!res.ok) throw new Error("Failed to start Twitter OAuth");

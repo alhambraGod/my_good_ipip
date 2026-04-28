@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { isLoggedIn } from "@/lib/api";
+import { UnlockAuthModal } from "@/components/UnlockAuthModal";
 import {
   getV3Results,
+  attachV3ProfileToAssessment,
   type V3ResultsResponse,
   type V3CareerPreview,
 } from "@/lib/v3-api";
@@ -25,6 +28,7 @@ export default function ResultsPage() {
   const assessmentId = params?.id as string | undefined;
   const [data, setData] = useState<V3ResultsResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [unlockOpen, setUnlockOpen] = useState(false);
 
   useEffect(() => {
     if (!assessmentId) {
@@ -36,6 +40,15 @@ export default function ResultsPage() {
       .catch(() => router.push("/"))
       .finally(() => setLoading(false));
   }, [assessmentId, router]);
+
+  useEffect(() => {
+    if (!assessmentId || !data) return;
+    void attachV3ProfileToAssessment(assessmentId);
+  }, [assessmentId, data]);
+
+  const paymentHref = data
+    ? `/payment?assessment_id=${data.assessment_id}`
+    : "/payment";
 
   if (loading || !data) {
     return (
@@ -135,15 +148,28 @@ export default function ResultsPage() {
             >
               View full report →
             </Link>
-          ) : (
+          ) : isLoggedIn() ? (
             <Link
-              href={`/payment?assessment_id=${data.assessment_id}`}
+              href={paymentHref}
               className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
             >
               Unlock full report →
             </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setUnlockOpen(true)}
+              className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
+            >
+              Unlock full report →
+            </button>
           )}
         </div>
+        <UnlockAuthModal
+          open={unlockOpen}
+          onClose={() => setUnlockOpen(false)}
+          paymentPath={paymentHref}
+        />
       </section>
     </main>
   );

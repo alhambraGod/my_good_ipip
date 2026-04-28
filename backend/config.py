@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str = ""
     PAYMENT_MODE: str = "mock"  # "stripe" or "mock"
     FRONTEND_URL: str = "http://localhost:3000"
+    # Public base URL for API (short links /s/{code}, webhooks). Defaults to local backend.
+    API_PUBLIC_URL: str = "http://localhost:3001"
     REPORT_PRICE_CENTS: int = 399  # $3.99
     REPORT_CURRENCY: str = "usd"
 

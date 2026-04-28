@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { finishGoogleOAuth, setAuth } from "@/lib/api";
+import { consumeOAuthNextPath } from "@/lib/oauth-return";
 
 function GoogleCallbackContent() {
   const router = useRouter();
@@ -17,7 +18,7 @@ function GoogleCallbackContent() {
     finishGoogleOAuth({ code, state: state || "" })
       .then((res) => {
         setAuth(res);
-        router.replace("/profile");
+        router.replace(consumeOAuthNextPath("/profile"));
       })
       .catch(() => setError("Google login failed"));
   }, [router, code, state]);
