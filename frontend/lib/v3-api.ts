@@ -97,6 +97,31 @@ export interface V3MilestoneCopy {
   text: string;
 }
 
+export interface V3PriceInfo {
+  amount_inr: number;
+  promo_active: boolean;
+  promo_remaining: number;
+  price_full_inr: number;
+  price_promo_inr: number;
+  promo_cap: number;
+}
+
+export interface V3ArchetypeSummary {
+  cell_id: string;
+  label_en: string;
+  label_hi: string;
+  slogan_en: string;
+  rarity_pct: number;
+}
+
+export interface V3ArchetypeDetail extends V3ArchetypeSummary {
+  core_insight_en: string;
+  deep_description_en: string;
+  strengths_en: string[];
+  growth_tips_en: string[];
+  career_directions: string[];
+}
+
 // =========================================================================
 // Endpoints
 // =========================================================================
@@ -116,6 +141,37 @@ export async function startV3Assessment(
     body: JSON.stringify({ demographic }),
   });
   if (!r.ok) throw new Error(`Start failed: ${r.status}`);
+  return r.json();
+}
+
+export async function getV3AssessmentState(
+  assessment_id: string
+): Promise<V3StartResponse> {
+  const r = await fetch(`${API_BASE}/api/v3/assessment/${assessment_id}/state`);
+  if (!r.ok) throw new Error(`State fetch failed: ${r.status}`);
+  return r.json();
+}
+
+export async function getV3Price(): Promise<V3PriceInfo> {
+  const r = await fetch(`${API_BASE}/api/v3/payment/price`);
+  if (!r.ok) throw new Error("Price fetch failed");
+  return r.json();
+}
+
+export async function listArchetypes(): Promise<V3ArchetypeSummary[]> {
+  const r = await fetch(`${API_BASE}/api/v3/archetypes`, { next: { revalidate: 600 } });
+  if (!r.ok) throw new Error("Archetype list failed");
+  return r.json();
+}
+
+export async function getArchetypeDetail(cellId: string): Promise<V3ArchetypeDetail> {
+  const r = await fetch(`${API_BASE}/api/v3/archetypes/${cellId}`, {
+    next: { revalidate: 600 },
+  });
+  if (!r.ok) {
+    if (r.status === 404) throw new Error("Archetype not found");
+    throw new Error("Archetype fetch failed");
+  }
   return r.json();
 }
 

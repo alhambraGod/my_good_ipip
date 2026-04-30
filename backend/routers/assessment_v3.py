@@ -13,6 +13,9 @@ from content.cells import get_cell_content
 from database import get_db
 from models import Assessment, ShortLink, UserProfile
 from questions.demographic import DEMOGRAPHIC_QUESTIONS
+from questions.ipip_neo import load_ipip_questions
+from questions.holland_riasec import load_riasec_questions
+from questions.interest_pool import INTEREST_POOL
 from questions.selector import select_45_questions
 from schemas import (
     V3AnswerSubmission,
@@ -124,6 +127,29 @@ def submit_assessment(payload: V3AnswerSubmission, db: Session = Depends(get_db)
     db.refresh(assessment)
 
     return _compose_results_response(assessment, mast)
+
+
+@router.get("/{assessment_id}/state", response_model=V3AssessmentStartResponse)
+def get_assessment_state(assessment_id: str, db: Session = Depends(get_db)):
+    """Return the question set + seed for an in-progress assessment so the
+    frontend can resume after a page refresh without creating a new row.
+    Returns 400 if the assessment is already submitted (use /results instead).
+    """
+    assessment = db.query(Assessment).filter(Assessment.id == assessment_id).first()
+    if not assessment:
+        raise HTTPException(status_code=404, detail="Assessment not found")
+    if assessment.completed:
+        raise HTTPException(status_code=400, detail="Assessment already submitted")
+
+    qids = [qid for qid in (assessment.question_ids or []) if not qid.startswith("DEM_")]
+    by_id = {q.id: q for q in (*load_riasec_questions(), *load_ipip_questions(), *INTEREST_POOL)}
+    questions = [by_id[qid] for qid in qids if qid in by_id]
+
+    return V3AssessmentStartResponse(
+        assessment_id=assessment.id,
+        questions=[_question_to_payload(q) for q in questions],
+        seed=assessment.selection_seed or "",
+    )
 
 
 @router.post("/{assessment_id}/attach-profile")

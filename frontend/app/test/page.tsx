@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -8,16 +8,23 @@ import {
   startV3Assessment,
   submitV3Assessment,
   getV3Milestone,
+  getV3AssessmentState,
   type V3Question,
   type V3DemographicAnswers,
 } from "@/lib/v3-api";
+import { useToast } from "@/components/Toast";
+import {
+  useAssessmentProgress,
+  clearAssessmentProgress,
+} from "@/lib/hooks/useAssessmentProgress";
+import { useDigitKey } from "@/lib/hooks/useDigitKey";
 
 const LIKERT_OPTIONS = [
-  { value: 1, label: "Strongly Disagree" },
-  { value: 2, label: "Disagree" },
-  { value: 3, label: "Neutral" },
-  { value: 4, label: "Agree" },
-  { value: 5, label: "Strongly Agree" },
+  { value: 1, label: "Strongly Disagree", short: "1" },
+  { value: 2, label: "Disagree", short: "2" },
+  { value: 3, label: "Neutral", short: "3" },
+  { value: 4, label: "Agree", short: "4" },
+  { value: 5, label: "Strongly Agree", short: "5" },
 ];
 
 const MILESTONE_THRESHOLDS = [10, 20, 30, 40];
@@ -26,117 +33,210 @@ type Phase = "loading" | "demographic" | "main" | "milestone" | "submitting";
 
 export default function TestPage() {
   const router = useRouter();
+  const toast = useToast();
+  const { progress, update, reset } = useAssessmentProgress();
+
   const [phase, setPhase] = useState<Phase>("loading");
   const [demographicQs, setDemographicQs] = useState<V3Question[]>([]);
-  const [demographicAnswers, setDemographicAnswers] = useState<Partial<V3DemographicAnswers>>({});
-  const [demographicIdx, setDemographicIdx] = useState(0);
-
-  const [assessmentId, setAssessmentId] = useState<string | null>(null);
-  const [seed, setSeed] = useState<string>("");
   const [mainQs, setMainQs] = useState<V3Question[]>([]);
-  const [mainIdx, setMainIdx] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, number>>({});
-
   const [milestoneText, setMilestoneText] = useState<string>("");
   const [pendingMilestone, setPendingMilestone] = useState<number | null>(null);
+  const [resumeOffered, setResumeOffered] = useState(false);
 
-  // Load demographic questions
-  useEffect(() => {
-    getDemographicQuestions()
-      .then((qs) => {
-        setDemographicQs(qs);
-        setPhase("demographic");
-      })
-      .catch(() => router.push("/"));
-  }, [router]);
+  const totalDemographic = demographicQs.length || 5;
 
   const startMainPhase = useCallback(
     async (dem: V3DemographicAnswers) => {
       setPhase("loading");
       try {
         const start = await startV3Assessment(dem);
-        setAssessmentId(start.assessment_id);
-        setSeed(start.seed);
+        update({
+          assessmentId: start.assessment_id,
+          seed: start.seed,
+          mainIdx: 0,
+          mainAnswers: {},
+        });
         setMainQs(start.questions);
         setPhase("main");
       } catch (e) {
         console.error(e);
+        toast.push("Couldn't start the test. Try again.", "error");
         router.push("/");
       }
     },
-    [router]
+    [router, toast, update],
   );
 
-  const handleDemographicAnswer = (questionId: string, value: string) => {
-    const updated = { ...demographicAnswers, [questionId]: value };
-    setDemographicAnswers(updated);
-    if (demographicIdx + 1 < demographicQs.length) {
-      setDemographicIdx(demographicIdx + 1);
-    } else {
-      void startMainPhase(updated as V3DemographicAnswers);
-    }
-  };
+  useEffect(() => {
+    let cancelled = false;
+    getDemographicQuestions()
+      .then((qs) => {
+        if (cancelled) return;
+        setDemographicQs(qs);
+        const hasResumable =
+          progress.assessmentId !== null ||
+          Object.keys(progress.demographicAnswers).length > 0;
+        if (hasResumable && !resumeOffered) {
+          setResumeOffered(true);
+        }
+        if (progress.assessmentId !== null) {
+          (async () => {
+            try {
+              const state = await getV3AssessmentState(progress.assessmentId!);
+              update({ seed: state.seed });
+              setMainQs(state.questions);
+              setPhase("main");
+            } catch {
+              clearAssessmentProgress();
+              setMainQs([]);
+              setPhase("demographic");
+              toast.push("Couldn't resume; starting over.", "info");
+            }
+          })();
+          return;
+        }
+        setPhase("demographic");
+      })
+      .catch(() => {
+        toast.push("Network error. Please retry.", "error");
+        router.push("/");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [progress.assessmentId, progress.demographicAnswers, resumeOffered, router, toast, update]);
+
+  const handleDemographicAnswer = useCallback(
+    (questionId: string, value: string) => {
+      const updatedAnswers = { ...progress.demographicAnswers, [questionId]: value };
+      const nextIdx = progress.demographicIdx + 1;
+      update({
+        demographicAnswers: updatedAnswers,
+        demographicIdx: nextIdx < totalDemographic ? nextIdx : progress.demographicIdx,
+      });
+      if (nextIdx >= totalDemographic) {
+        void startMainPhase(updatedAnswers as unknown as V3DemographicAnswers);
+      }
+    },
+    [progress.demographicAnswers, progress.demographicIdx, totalDemographic, update, startMainPhase],
+  );
+
+  const goBackDemographic = useCallback(() => {
+    if (progress.demographicIdx === 0) return;
+    update({ demographicIdx: progress.demographicIdx - 1 });
+  }, [progress.demographicIdx, update]);
 
   const showMilestone = useCallback(
     async (m: number) => {
       setPhase("milestone");
       setPendingMilestone(m);
       try {
-        const res = await getV3Milestone(m, seed);
+        const res = await getV3Milestone(m, progress.seed);
         setMilestoneText(res.text);
       } catch {
         setMilestoneText("Keep going!");
       }
     },
-    [seed]
+    [progress.seed],
   );
 
   const submitAnswers = useCallback(
     async (allAnswers: Record<string, number>) => {
-      if (!assessmentId) return;
+      if (!progress.assessmentId) return;
       setPhase("submitting");
       try {
-        await submitV3Assessment(assessmentId, allAnswers);
-        router.push(`/results/${assessmentId}`);
+        await submitV3Assessment(progress.assessmentId, allAnswers);
+        const aid = progress.assessmentId;
+        clearAssessmentProgress();
+        router.push(`/results/${aid}`);
       } catch (e) {
         console.error(e);
-        alert("Failed to submit. Please try again.");
+        toast.push("Failed to submit. Please try again.", "error");
         setPhase("main");
       }
     },
-    [assessmentId, router]
+    [progress.assessmentId, router, toast],
   );
 
-  const handleMainAnswer = (questionId: string, value: number) => {
-    const updated = { ...answers, [questionId]: value };
-    setAnswers(updated);
+  const handleMainAnswer = useCallback(
+    (questionId: string, value: number) => {
+      const updatedAnswers = { ...progress.mainAnswers, [questionId]: value };
+      const nextIdx = progress.mainIdx + 1;
+      update({
+        mainAnswers: updatedAnswers,
+        mainIdx: nextIdx < mainQs.length ? nextIdx : progress.mainIdx,
+      });
 
-    const totalAnswered = Object.keys(updated).length;
-    const milestone = MILESTONE_THRESHOLDS.find((m) => m === totalAnswered);
+      const totalAnswered = Object.keys(updatedAnswers).length;
+      const milestone = MILESTONE_THRESHOLDS.find((m) => m === totalAnswered);
+      if (milestone) {
+        void showMilestone(milestone);
+        return;
+      }
+      if (nextIdx >= mainQs.length) {
+        void submitAnswers(updatedAnswers);
+      }
+    },
+    [progress.mainAnswers, progress.mainIdx, mainQs.length, update, showMilestone, submitAnswers],
+  );
 
-    if (milestone) {
-      void showMilestone(milestone);
-      return;
-    }
+  const goBackMain = useCallback(() => {
+    if (progress.mainIdx === 0) return;
+    const prevIdx = progress.mainIdx - 1;
+    const prevQId = mainQs[prevIdx]?.id;
+    if (!prevQId) return;
+    const updatedAnswers = { ...progress.mainAnswers };
+    delete updatedAnswers[prevQId];
+    update({ mainIdx: prevIdx, mainAnswers: updatedAnswers });
+  }, [progress.mainIdx, progress.mainAnswers, mainQs, update]);
 
-    if (mainIdx + 1 < mainQs.length) {
-      setMainIdx(mainIdx + 1);
-    } else {
-      void submitAnswers(updated);
-    }
-  };
-
-  const continueAfterMilestone = () => {
+  const continueAfterMilestone = useCallback(() => {
     setPhase("main");
     setPendingMilestone(null);
-    if (mainIdx + 1 < mainQs.length) {
-      setMainIdx(mainIdx + 1);
+    if (progress.mainIdx + 1 >= mainQs.length) {
+      void submitAnswers(progress.mainAnswers);
     } else {
-      void submitAnswers(answers);
+      update({ mainIdx: progress.mainIdx + 1 });
     }
-  };
+  }, [mainQs.length, progress.mainIdx, progress.mainAnswers, submitAnswers, update]);
 
-  // ============= Render phases =============
+  const currentDemographicQ = demographicQs[progress.demographicIdx];
+  const currentMainQ = mainQs[progress.mainIdx];
+
+  useDigitKey(
+    Math.max(currentDemographicQ?.options?.length ?? 0, 1),
+    (n) => {
+      if (phase !== "demographic" || !currentDemographicQ) return;
+      const opt = currentDemographicQ.options?.[n - 1];
+      if (opt) handleDemographicAnswer(currentDemographicQ.id, opt.value);
+    },
+    phase === "demographic",
+  );
+
+  useDigitKey(
+    5,
+    (n) => {
+      if (phase !== "main" || !currentMainQ) return;
+      handleMainAnswer(currentMainQ.id, n);
+    },
+    phase === "main",
+  );
+
+  const handleResetAndRestart = useCallback(() => {
+    reset();
+    setMainQs([]);
+    setPhase("demographic");
+    setResumeOffered(false);
+  }, [reset]);
+
+  const overallProgress = useMemo(() => {
+    if (phase === "demographic") return ((progress.demographicIdx + 1) / totalDemographic) * 100;
+    if (phase === "main") {
+      const answered = Object.keys(progress.mainAnswers).length;
+      return ((5 + answered) / 45) * 100;
+    }
+    return 100;
+  }, [phase, progress.demographicIdx, progress.mainAnswers, totalDemographic]);
 
   if (phase === "loading") {
     return (
@@ -147,41 +247,48 @@ export default function TestPage() {
   }
 
   if (phase === "demographic") {
-    const q = demographicQs[demographicIdx];
+    const q = currentDemographicQ;
     if (!q) return null;
-    const progress = ((demographicIdx + 1) / 5) * 100;
     return (
       <main className="min-h-screen bg-india-radial flex flex-col">
-        <div className="h-2 bg-saffron-100">
-          <div
-            className="h-full bg-gradient-to-r from-saffron-500 to-india-green-500 transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        <ProgressBar pct={overallProgress} />
         <div className="flex-1 flex items-center justify-center px-6 py-12">
           <AnimatePresence mode="wait">
             <motion.div
-              key={demographicIdx}
+              key={progress.demographicIdx}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="max-w-xl w-full"
             >
-              <div className="text-saffron-700 text-xs font-semibold uppercase tracking-widest mb-3">
-                Question {demographicIdx + 1} of 5 · Quick start
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-navy-text mb-8">{q.text}</h2>
+              <TopBar
+                left={`Question ${progress.demographicIdx + 1} of ${totalDemographic} · Quick start`}
+                onBack={progress.demographicIdx > 0 ? goBackDemographic : undefined}
+                onRestart={resumeOffered ? handleResetAndRestart : undefined}
+              />
+              <h2 className="text-2xl md:text-3xl font-bold text-navy-text mb-6">{q.text}</h2>
               <div className="grid gap-3">
-                {q.options?.map((opt) => (
+                {q.options?.map((opt, idx) => (
                   <button
                     key={opt.value}
+                    type="button"
                     onClick={() => handleDemographicAnswer(q.id, opt.value)}
-                    className="text-left px-6 py-4 bg-white rounded-2xl border-2 border-saffron-200 hover:border-india-green-400 hover:bg-india-green-50 transition-all font-medium text-navy-text"
+                    className={`text-left flex items-center gap-3 px-5 py-4 bg-white rounded-2xl border-2 transition-all font-medium text-navy-text ${
+                      progress.demographicAnswers[q.id] === opt.value
+                        ? "border-india-green-500 bg-india-green-50"
+                        : "border-saffron-200 hover:border-india-green-400 hover:bg-india-green-50"
+                    }`}
                   >
-                    {opt.label}
+                    <span className="hidden md:inline-flex w-7 h-7 rounded-md bg-saffron-100 text-saffron-700 text-xs font-bold items-center justify-center shrink-0">
+                      {idx + 1}
+                    </span>
+                    <span>{opt.label}</span>
                   </button>
                 ))}
               </div>
+              <p className="hidden md:block mt-4 text-xs text-navy-text/40">
+                Tip: press 1–{q.options?.length ?? 0} on your keyboard
+              </p>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -202,10 +309,11 @@ export default function TestPage() {
           <div className="text-7xl font-bold text-saffron-700 mb-4">{m}</div>
           <p className="text-xl text-navy-text font-medium mb-8">{milestoneText || "Keep going!"}</p>
           <button
+            type="button"
             onClick={continueAfterMilestone}
             className="bg-india-green-500 hover:bg-india-green-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg"
           >
-            Continue
+            Continue (Enter)
           </button>
         </motion.div>
       </main>
@@ -213,41 +321,49 @@ export default function TestPage() {
   }
 
   if (phase === "main") {
-    const q = mainQs[mainIdx];
+    const q = currentMainQ;
     if (!q) return null;
-    const progress = ((5 + mainIdx + 1) / 45) * 100;
+    const selected = progress.mainAnswers[q.id];
     return (
       <main className="min-h-screen bg-india-radial flex flex-col">
-        <div className="h-2 bg-saffron-100">
-          <div
-            className="h-full bg-gradient-to-r from-saffron-500 to-india-green-500 transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        <ProgressBar pct={overallProgress} />
         <div className="flex-1 flex items-center justify-center px-6 py-12">
           <AnimatePresence mode="wait">
             <motion.div
-              key={mainIdx}
+              key={progress.mainIdx}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="max-w-xl w-full"
             >
-              <div className="text-saffron-700 text-xs font-semibold uppercase tracking-widest mb-3">
-                Question {5 + mainIdx + 1} of 45
-              </div>
-              <h2 className="text-xl md:text-2xl font-medium text-navy-text mb-8">{q.text}</h2>
+              <TopBar
+                left={`Question ${5 + progress.mainIdx + 1} of 45`}
+                onBack={progress.mainIdx > 0 ? goBackMain : undefined}
+                onRestart={handleResetAndRestart}
+              />
+              <h2 className="text-xl md:text-2xl font-medium text-navy-text mb-6">{q.text}</h2>
               <div className="grid gap-2">
                 {LIKERT_OPTIONS.map((opt) => (
                   <button
                     key={opt.value}
+                    type="button"
                     onClick={() => handleMainAnswer(q.id, opt.value)}
-                    className="text-left px-6 py-3 bg-white rounded-xl border-2 border-saffron-200 hover:border-india-green-400 hover:bg-india-green-50 transition-all font-medium text-navy-text"
+                    className={`text-left flex items-center gap-3 px-5 py-3 bg-white rounded-xl border-2 transition-all font-medium text-navy-text ${
+                      selected === opt.value
+                        ? "border-india-green-500 bg-india-green-50"
+                        : "border-saffron-200 hover:border-india-green-400 hover:bg-india-green-50"
+                    }`}
                   >
-                    {opt.label}
+                    <span className="hidden md:inline-flex w-7 h-7 rounded-md bg-saffron-100 text-saffron-700 text-xs font-bold items-center justify-center shrink-0">
+                      {opt.short}
+                    </span>
+                    <span>{opt.label}</span>
                   </button>
                 ))}
               </div>
+              <p className="hidden md:block mt-4 text-xs text-navy-text/40">
+                Tip: press 1–5 to answer · Backspace not yet supported, use Back button
+              </p>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -255,7 +371,6 @@ export default function TestPage() {
     );
   }
 
-  // submitting phase
   return (
     <main className="min-h-screen bg-india-radial flex items-center justify-center">
       <motion.div
@@ -267,5 +382,54 @@ export default function TestPage() {
       </motion.div>
       <p className="ml-4 text-navy-text font-medium">Decoding your archetype…</p>
     </main>
+  );
+}
+
+function ProgressBar({ pct }: { pct: number }) {
+  return (
+    <div className="h-2 bg-saffron-100">
+      <div
+        className="h-full bg-gradient-to-r from-saffron-500 to-india-green-500 transition-all"
+        style={{ width: `${Math.min(100, Math.max(0, pct))}%` }}
+      />
+    </div>
+  );
+}
+
+function TopBar({
+  left,
+  onBack,
+  onRestart,
+}: {
+  left: string;
+  onBack?: () => void;
+  onRestart?: () => void;
+}) {
+  return (
+    <div className="flex items-center justify-between mb-4 gap-3">
+      <div className="text-saffron-700 text-xs font-semibold uppercase tracking-widest">
+        {left}
+      </div>
+      <div className="flex gap-2">
+        {onBack && (
+          <button
+            type="button"
+            onClick={onBack}
+            className="text-xs font-semibold text-navy-text/60 hover:text-navy-text px-3 py-1 rounded-full border border-navy-text/15 hover:bg-white"
+          >
+            ← Back
+          </button>
+        )}
+        {onRestart && (
+          <button
+            type="button"
+            onClick={onRestart}
+            className="text-xs font-semibold text-navy-text/45 hover:text-red-600 px-3 py-1 rounded-full border border-navy-text/10 hover:bg-white"
+          >
+            Restart
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

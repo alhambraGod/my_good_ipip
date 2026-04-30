@@ -17,12 +17,31 @@ from services.payment.factory import get_payment_driver
 router = APIRouter(prefix="/api/v3/payment", tags=["payment_v3"])
 
 
-def _current_price(db: Session) -> tuple[int, bool]:
-    """Return (amount_inr, promo_active) based on confirmed-paid count vs cap."""
+def _current_price(db: Session) -> tuple[int, bool, int]:
+    """Return (amount_inr, promo_active, promo_remaining) based on confirmed-paid count vs cap."""
     paid_count = db.query(Assessment).filter(Assessment.payment_status == "confirmed").count()
-    if paid_count < config.settings.PROMO_MAX_REDEMPTIONS:
-        return config.settings.PRICE_PROMO_INR, True
-    return config.settings.PRICE_FULL_INR, False
+    cap = config.settings.PROMO_MAX_REDEMPTIONS
+    remaining = max(cap - paid_count, 0)
+    if paid_count < cap:
+        return config.settings.PRICE_PROMO_INR, True, remaining
+    return config.settings.PRICE_FULL_INR, False, 0
+
+
+@router.get("/price")
+def get_price(db: Session = Depends(get_db)):
+    """Public price preview: current INR amount + promo metadata.
+
+    Used by the payment page to render real numbers BEFORE the user clicks pay.
+    """
+    amount_inr, promo_active, promo_remaining = _current_price(db)
+    return {
+        "amount_inr": amount_inr,
+        "promo_active": promo_active,
+        "promo_remaining": promo_remaining,
+        "price_full_inr": config.settings.PRICE_FULL_INR,
+        "price_promo_inr": config.settings.PRICE_PROMO_INR,
+        "promo_cap": config.settings.PROMO_MAX_REDEMPTIONS,
+    }
 
 
 @router.post("/create-intent", response_model=V3PaymentIntentResponse)
@@ -40,7 +59,7 @@ def create_intent(payload: V3PaymentIntentRequest, db: Session = Depends(get_db)
     if assessment.paid:
         raise HTTPException(status_code=400, detail="Already paid")
 
-    amount_inr, promo_active = _current_price(db)
+    amount_inr, promo_active, _remaining = _current_price(db)
     driver = get_payment_driver()
     intent = driver.create_payment_intent(assessment.id, amount_inr=amount_inr)
 

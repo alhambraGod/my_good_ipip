@@ -42,6 +42,22 @@ def test_create_payment_intent_unknown_assessment_404():
     assert r.status_code == 404
 
 
+def test_get_price_public_endpoint():
+    r = client.get("/api/v3/payment/price")
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["amount_inr"] in (49, 99)
+    assert body["price_full_inr"] == 99
+    assert body["price_promo_inr"] == 49
+    assert isinstance(body["promo_active"], bool)
+    assert body["promo_remaining"] >= 0
+    assert body["promo_cap"] >= 1
+    if body["promo_active"]:
+        assert body["amount_inr"] == body["price_promo_inr"]
+    else:
+        assert body["amount_inr"] == body["price_full_inr"]
+
+
 def test_create_payment_intent_incomplete_assessment_400():
     db = SessionLocal()
     a = Assessment(completed=False, paid=False)

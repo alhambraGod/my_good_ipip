@@ -5,7 +5,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from config import settings
 from database import init_db
-from routers import assessment, assessment_v3, auth, payment, payment_v3, report, report_v3, share
+from routers import (
+    archetypes,
+    assessment,
+    assessment_v3,
+    auth,
+    payment,
+    payment_v3,
+    report,
+    report_v3,
+    share,
+)
 
 app = FastAPI(
     title="MindIQ API",
@@ -21,6 +31,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(archetypes.router)
 app.include_router(assessment.router)
 app.include_router(assessment_v3.router)
 app.include_router(auth.router)

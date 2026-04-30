@@ -12,6 +12,8 @@ import {
   type V3ResultsResponse,
   type V3CareerPreview,
 } from "@/lib/v3-api";
+import { RadarChart } from "@/components/RadarChart";
+import { useToast } from "@/components/Toast";
 
 const RIASEC_LABELS: Record<string, string> = {
   R: "Realistic",
@@ -184,24 +186,33 @@ function ShareButton({
   text: string;
   variant?: string;
 }) {
+  const toast = useToast();
   const handleShare = async () => {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({ text, url: shareUrl });
         return;
       } catch {
-        /* fall through to wa.me */
+        /* fall through to wa.me / clipboard */
       }
     }
     const wa = `https://wa.me/?text=${encodeURIComponent(text)}`;
-    window.open(wa, "_blank");
+    const opened = window.open(wa, "_blank");
+    if (!opened && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(`${text}`);
+        toast.push("Copied share text to clipboard", "success");
+      } catch {
+        toast.push("Couldn't open WhatsApp; copy the URL manually.", "error");
+      }
+    }
   };
   const cls =
     variant === "white-outline"
       ? "flex-1 bg-white/10 border border-white text-white font-bold py-3 px-6 rounded-full hover:bg-white/20 transition-all"
       : "mt-8 bg-india-green-500 hover:bg-india-green-600 text-white font-bold px-6 py-3 rounded-full transition-all shadow-lg";
   return (
-    <button onClick={handleShare} className={cls}>
+    <button type="button" onClick={handleShare} className={cls}>
       📤 Share to WhatsApp
     </button>
   );
@@ -238,53 +249,3 @@ function CareerCard({ career, index }: { career: V3CareerPreview; index: number 
   );
 }
 
-function RadarChart({ scores }: { scores: Record<string, number> }) {
-  const types = ["R", "I", "A", "S", "E", "C"];
-  const max = 20;
-  const cx = 100;
-  const cy = 100;
-  const r = 80;
-  const points = types.map((t, i) => {
-    const angle = (i * Math.PI) / 3 - Math.PI / 2;
-    const score = scores[t] ?? 0;
-    const ratio = score / max;
-    return [cx + Math.cos(angle) * r * ratio, cy + Math.sin(angle) * r * ratio];
-  });
-  const grid = [0.25, 0.5, 0.75, 1.0].map((g) => {
-    const gridPoints = types.map((_, i) => {
-      const angle = (i * Math.PI) / 3 - Math.PI / 2;
-      return [cx + Math.cos(angle) * r * g, cy + Math.sin(angle) * r * g];
-    });
-    return gridPoints.map(([x, y]) => `${x},${y}`).join(" ");
-  });
-  return (
-    <svg viewBox="0 0 200 200" className="w-full">
-      {grid.map((pts, i) => (
-        <polygon key={i} points={pts} fill="none" stroke="#FFD58F" strokeWidth="0.5" />
-      ))}
-      <polygon
-        points={points.map(([x, y]) => `${x},${y}`).join(" ")}
-        fill="rgba(255, 153, 51, 0.3)"
-        stroke="#FF9933"
-        strokeWidth="2"
-      />
-      {types.map((t, i) => {
-        const angle = (i * Math.PI) / 3 - Math.PI / 2;
-        return (
-          <text
-            key={t}
-            x={cx + Math.cos(angle) * (r + 10)}
-            y={cy + Math.sin(angle) * (r + 10)}
-            textAnchor="middle"
-            fill="#1A202C"
-            fontSize="10"
-            fontWeight="bold"
-            dy="3"
-          >
-            {t}
-          </text>
-        );
-      })}
-    </svg>
-  );
-}
