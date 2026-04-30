@@ -13,6 +13,8 @@ import {
   type V3DemographicAnswers,
 } from "@/lib/v3-api";
 import { useToast } from "@/components/Toast";
+import { useLang } from "@/lib/i18n/LangContext";
+import { fmt } from "@/lib/i18n/strings";
 import {
   useAssessmentProgress,
   clearAssessmentProgress,
@@ -34,6 +36,7 @@ type Phase = "loading" | "demographic" | "main" | "milestone" | "submitting";
 export default function TestPage() {
   const router = useRouter();
   const toast = useToast();
+  const { t } = useLang();
   const { progress, update, reset } = useAssessmentProgress();
 
   const [phase, setPhase] = useState<Phase>("loading");
@@ -60,11 +63,11 @@ export default function TestPage() {
         setPhase("main");
       } catch (e) {
         console.error(e);
-        toast.push("Couldn't start the test. Try again.", "error");
+        toast.push(t.test.cantStart, "error");
         router.push("/");
       }
     },
-    [router, toast, update],
+    [router, toast, update, t.test.cantStart],
   );
 
   useEffect(() => {
@@ -90,7 +93,7 @@ export default function TestPage() {
               clearAssessmentProgress();
               setMainQs([]);
               setPhase("demographic");
-              toast.push("Couldn't resume; starting over.", "info");
+              toast.push(t.test.resumeFailed, "info");
             }
           })();
           return;
@@ -98,13 +101,13 @@ export default function TestPage() {
         setPhase("demographic");
       })
       .catch(() => {
-        toast.push("Network error. Please retry.", "error");
+        toast.push(t.test.networkErr, "error");
         router.push("/");
       });
     return () => {
       cancelled = true;
     };
-  }, [progress.assessmentId, progress.demographicAnswers, resumeOffered, router, toast, update]);
+  }, [progress.assessmentId, progress.demographicAnswers, resumeOffered, router, toast, update, t.test.networkErr, t.test.resumeFailed]);
 
   const handleDemographicAnswer = useCallback(
     (questionId: string, value: string) => {
@@ -151,11 +154,11 @@ export default function TestPage() {
         router.push(`/results/${aid}`);
       } catch (e) {
         console.error(e);
-        toast.push("Failed to submit. Please try again.", "error");
+        toast.push(t.test.submitFailed, "error");
         setPhase("main");
       }
     },
-    [progress.assessmentId, router, toast],
+    [progress.assessmentId, router, toast, t.test.submitFailed],
   );
 
   const handleMainAnswer = useCallback(
@@ -287,7 +290,7 @@ export default function TestPage() {
                 ))}
               </div>
               <p className="hidden md:block mt-4 text-xs text-navy-text/40">
-                Tip: press 1–{q.options?.length ?? 0} on your keyboard
+                {fmt(t.test.tipKeyboard, { n: q.options?.length ?? 0 })}
               </p>
             </motion.div>
           </AnimatePresence>
@@ -313,7 +316,7 @@ export default function TestPage() {
             onClick={continueAfterMilestone}
             className="bg-india-green-500 hover:bg-india-green-600 text-white font-bold px-8 py-3 rounded-full transition-all shadow-lg"
           >
-            Continue (Enter)
+            {t.test.continue}
           </button>
         </motion.div>
       </main>
@@ -362,7 +365,7 @@ export default function TestPage() {
                 ))}
               </div>
               <p className="hidden md:block mt-4 text-xs text-navy-text/40">
-                Tip: press 1–5 to answer · Backspace not yet supported, use Back button
+                {t.test.tipKeyboardLikert}
               </p>
             </motion.div>
           </AnimatePresence>
@@ -380,7 +383,7 @@ export default function TestPage() {
       >
         🪔
       </motion.div>
-      <p className="ml-4 text-navy-text font-medium">Decoding your archetype…</p>
+      <p className="ml-4 text-navy-text font-medium">{t.test.decoding}</p>
     </main>
   );
 }
@@ -405,6 +408,7 @@ function TopBar({
   onBack?: () => void;
   onRestart?: () => void;
 }) {
+  const { t } = useLang();
   return (
     <div className="flex items-center justify-between mb-4 gap-3">
       <div className="text-saffron-700 text-xs font-semibold uppercase tracking-widest">
@@ -417,7 +421,7 @@ function TopBar({
             onClick={onBack}
             className="text-xs font-semibold text-navy-text/60 hover:text-navy-text px-3 py-1 rounded-full border border-navy-text/15 hover:bg-white"
           >
-            ← Back
+            {t.test.back}
           </button>
         )}
         {onRestart && (
@@ -426,7 +430,7 @@ function TopBar({
             onClick={onRestart}
             className="text-xs font-semibold text-navy-text/45 hover:text-red-600 px-3 py-1 rounded-full border border-navy-text/10 hover:bg-white"
           >
-            Restart
+            {t.test.restart}
           </button>
         )}
       </div>

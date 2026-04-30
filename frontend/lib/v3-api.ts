@@ -158,6 +158,49 @@ export async function getV3Price(): Promise<V3PriceInfo> {
   return r.json();
 }
 
+export interface V3RazorpayOrder {
+  assessment_id: string;
+  provider: "razorpay" | "mock";
+  order_id: string | null;
+  amount_inr: number;
+  amount_paise: number;
+  currency: string;
+  key_id: string | null;
+  promo_active: boolean;
+  mock_redirect_url: string | null;
+}
+
+export async function createV3RazorpayOrder(assessment_id: string): Promise<V3RazorpayOrder> {
+  const r = await fetch(`${API_BASE}/api/v3/payment/razorpay/order`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ assessment_id }),
+  });
+  if (!r.ok) {
+    const body = await r.json().catch(() => ({}));
+    throw new Error(body.detail || "Razorpay order failed");
+  }
+  return r.json();
+}
+
+export async function verifyV3RazorpayCheckout(payload: {
+  assessment_id: string;
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+}): Promise<{ assessment_id: string; paid: boolean; status: string }> {
+  const r = await fetch(`${API_BASE}/api/v3/payment/razorpay/verify`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!r.ok) {
+    const body = await r.json().catch(() => ({}));
+    throw new Error(body.detail || "Razorpay verify failed");
+  }
+  return r.json();
+}
+
 export async function listArchetypes(): Promise<V3ArchetypeSummary[]> {
   const r = await fetch(`${API_BASE}/api/v3/archetypes`, { next: { revalidate: 600 } });
   if (!r.ok) throw new Error("Archetype list failed");

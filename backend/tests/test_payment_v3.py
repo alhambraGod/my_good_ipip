@@ -58,6 +58,62 @@ def test_get_price_public_endpoint():
         assert body["amount_inr"] == body["price_full_inr"]
 
 
+def test_razorpay_order_in_mock_mode_returns_fallback(monkeypatch):
+    """When PAYMENT_MODE=mock, /razorpay/order falls back to mock redirect URL."""
+    monkeypatch.setenv("PAYMENT_MODE", "mock")
+    import importlib, config
+    importlib.reload(config)
+    aid = _create_completed_assessment()
+    r = client.post("/api/v3/payment/razorpay/order", json={"assessment_id": aid})
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["provider"] == "mock"
+    assert body["order_id"] is None
+    assert body["mock_redirect_url"] and "mock=true" in body["mock_redirect_url"]
+    assert body["amount_paise"] == body["amount_inr"] * 100
+
+
+def test_razorpay_verify_signature_rejects_bogus(monkeypatch):
+    """Mock mode rejects /razorpay/verify because assessment.payment_provider != razorpay."""
+    monkeypatch.setenv("PAYMENT_MODE", "mock")
+    import importlib, config
+    importlib.reload(config)
+    aid = _create_completed_assessment()
+    client.post("/api/v3/payment/razorpay/order", json={"assessment_id": aid})
+    r = client.post(
+        "/api/v3/payment/razorpay/verify",
+        json={
+            "assessment_id": aid,
+            "razorpay_order_id": "order_X",
+            "razorpay_payment_id": "pay_X",
+            "razorpay_signature": "deadbeef",
+        },
+    )
+    assert r.status_code == 400
+
+
+def test_razorpay_signature_acceptance_with_real_secret(monkeypatch):
+    """Direct unit-style: valid HMAC against RAZORPAY_KEY_SECRET passes."""
+    import hashlib
+    import hmac
+    import importlib
+
+    monkeypatch.setenv("PAYMENT_MODE", "razorpay")
+    monkeypatch.setenv("RAZORPAY_KEY_ID", "rzp_test_xyz")
+    monkeypatch.setenv("RAZORPAY_KEY_SECRET", "test_secret_abc")
+    import config
+    importlib.reload(config)
+
+    from services.payment.razorpay_driver import RazorpayDriver
+
+    driver = RazorpayDriver()
+    order_id, payment_id = "order_TEST", "pay_TEST"
+    body = f"{order_id}|{payment_id}".encode()
+    sig = hmac.new(b"test_secret_abc", body, hashlib.sha256).hexdigest()
+    assert driver.verify_checkout_signature(order_id, payment_id, sig)
+    assert not driver.verify_checkout_signature(order_id, payment_id, "wrong")
+
+
 def test_create_payment_intent_incomplete_assessment_400():
     db = SessionLocal()
     a = Assessment(completed=False, paid=False)

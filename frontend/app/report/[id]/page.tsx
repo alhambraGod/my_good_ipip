@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getV3Report, type V3ReportResponse } from "@/lib/v3-api";
+import { TableOfContents, type TocItem } from "@/components/TableOfContents";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -147,11 +148,24 @@ export default function ReportPage() {
         </div>
       </header>
 
-      <div className="max-w-3xl mx-auto px-4 py-8 space-y-8">
+      <div className="max-w-6xl mx-auto px-4 py-8 lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-10">
+        <TableOfContents
+          items={
+            [
+              { id: "overview", label: "Overview", emoji: "🎯" },
+              { id: "deep-dive", label: "Deep dive", emoji: "🧠" },
+              { id: "strengths-growth", label: "Strengths & growth", emoji: "★" },
+              { id: "ocean", label: "OCEAN profile", emoji: "🌊" },
+              { id: "careers", label: `Careers (${report.careers.length})`, emoji: "💼" },
+            ] satisfies TocItem[]
+          }
+        />
+        <div className="space-y-8 lg:max-w-3xl">
         <motion.section
+          id="overview"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8"
+          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8 scroll-mt-32"
         >
           <p className="text-saffron-700 text-xs font-bold uppercase tracking-widest mb-2">
             Your code
@@ -172,10 +186,11 @@ export default function ReportPage() {
         </motion.section>
 
         <motion.section
+          id="deep-dive"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8"
+          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8 scroll-mt-32"
         >
           <h2 className="text-lg font-bold text-navy-text mb-4">Deep dive</h2>
           <div className="space-y-4 text-navy-text/85 text-sm leading-relaxed">
@@ -185,7 +200,7 @@ export default function ReportPage() {
           </div>
         </motion.section>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div id="strengths-growth" className="grid md:grid-cols-2 gap-6 scroll-mt-32">
           <motion.section
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -227,10 +242,11 @@ export default function ReportPage() {
         </div>
 
         <motion.section
+          id="ocean"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8"
+          className="bg-white rounded-3xl border border-saffron-700/15 shadow-lg p-6 md:p-8 scroll-mt-32"
         >
           <h2 className="text-lg font-bold text-navy-text mb-5">OCEAN profile</h2>
           <div className="grid sm:grid-cols-2 gap-4">
@@ -265,10 +281,11 @@ export default function ReportPage() {
         </motion.section>
 
         <motion.section
+          id="careers"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.18 }}
-          className="pb-16"
+          className="pb-16 scroll-mt-32"
         >
           <h2 className="text-lg font-bold text-navy-text mb-4">
             Career matches ({report.careers.length})
@@ -322,9 +339,10 @@ export default function ReportPage() {
           </div>
         </motion.section>
 
-        <footer className="text-center text-xs text-navy-text/45 pb-8">
-          <p>CareerDNA — RIASEC + OCEAN for Indian urban youth. Not clinical.</p>
-        </footer>
+          <footer className="text-center text-xs text-navy-text/45 pb-8">
+            <p>CareerDNA — RIASEC + OCEAN for Indian urban youth. Not clinical.</p>
+          </footer>
+        </div>
       </div>
     </main>
   );

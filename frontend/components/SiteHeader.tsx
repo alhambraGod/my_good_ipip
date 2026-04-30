@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const NAV: { href: string; label: string }[] = [
-  { href: "/archetypes", label: "Archetypes" },
-  { href: "/test", label: "Take the test" },
-];
+import { useLang } from "@/lib/i18n/LangContext";
+import { LangToggle } from "@/components/LangToggle";
 
 export function SiteHeader({ minimal = false }: { minimal?: boolean }) {
   const pathname = usePathname();
+  const { t } = useLang();
+  const NAV: { href: string; label: string }[] = [
+    { href: "/archetypes", label: t.nav.archetypes },
+    { href: "/test", label: t.nav.takeTest },
+  ];
   return (
     <header className="w-full sticky top-0 z-30 backdrop-blur bg-cream/80 border-b border-saffron-700/10">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -39,12 +41,15 @@ export function SiteHeader({ minimal = false }: { minimal?: boolean }) {
             })}
           </nav>
         )}
-        <Link
-          href="/test"
-          className="hidden md:inline-flex bg-india-green-500 hover:bg-india-green-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-md transition-all"
-        >
-          Start free →
-        </Link>
+        <div className="flex items-center gap-3">
+          <LangToggle className="hidden sm:inline-flex" />
+          <Link
+            href="/test"
+            className="hidden md:inline-flex bg-india-green-500 hover:bg-india-green-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-md transition-all"
+          >
+            {t.nav.startFree}
+          </Link>
+        </div>
       </div>
     </header>
   );

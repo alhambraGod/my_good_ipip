@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+from dataclasses import dataclass
 
 import httpx
 
@@ -11,6 +12,16 @@ import config  # late-binding access to config.settings (survives importlib.relo
 from services.payment.base import PaymentIntent
 
 _RAZORPAY_BASE = "https://api.razorpay.com/v1"
+
+
+@dataclass(frozen=True)
+class RazorpayOrder:
+    """Result of creating a Razorpay Order, used by the in-page Checkout SDK."""
+    order_id: str
+    amount_paise: int
+    currency: str
+    key_id: str
+    raw_response: dict | None = None
 
 
 class RazorpayDriver:
@@ -80,3 +91,52 @@ class RazorpayDriver:
             hashlib.sha256,
         ).hexdigest()
         return hmac.compare_digest(expected, signature)
+
+    # -------------------------------------------------------------------------
+    # Razorpay Standard Checkout (in-page modal) — alternative to payment_links.
+    # Frontend opens checkout.razorpay.com SDK with the returned order_id +
+    # public key_id; on success, the SDK calls back with the signed handle that
+    # we verify via verify_checkout_signature().
+    # -------------------------------------------------------------------------
+
+    def create_order(self, assessment_id: str, amount_inr: int) -> RazorpayOrder:
+        """Create a Razorpay Order for use with the Checkout JS SDK.
+
+        Note: amounts must be sent in paise (INR × 100).
+        """
+        amount_paise = amount_inr * 100
+        payload = {
+            "amount": amount_paise,
+            "currency": "INR",
+            "receipt": assessment_id[:40],
+            "notes": {"assessment_id": assessment_id},
+            "payment_capture": 1,
+        }
+        with httpx.Client(timeout=15.0) as client:
+            r = client.post(f"{_RAZORPAY_BASE}/orders", auth=self._auth(), json=payload)
+            r.raise_for_status()
+            data = r.json()
+        return RazorpayOrder(
+            order_id=data["id"],
+            amount_paise=amount_paise,
+            currency="INR",
+            key_id=config.settings.RAZORPAY_KEY_ID,
+            raw_response=data,
+        )
+
+    def verify_checkout_signature(
+        self,
+        razorpay_order_id: str,
+        razorpay_payment_id: str,
+        razorpay_signature: str,
+    ) -> bool:
+        """Verify the HMAC-SHA256 signature returned by the Razorpay Checkout SDK.
+
+        Spec: signature = HMAC_SHA256(order_id + "|" + payment_id, key_secret)
+        """
+        secret = config.settings.RAZORPAY_KEY_SECRET
+        if not secret or not razorpay_order_id or not razorpay_payment_id or not razorpay_signature:
+            return False
+        body = f"{razorpay_order_id}|{razorpay_payment_id}".encode()
+        expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+        return hmac.compare_digest(expected, razorpay_signature)

@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import json
+from typing import Literal
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 import config
@@ -12,6 +14,28 @@ from database import get_db
 from models import Assessment
 from schemas import V3PaymentIntentRequest, V3PaymentIntentResponse
 from services.payment.factory import get_payment_driver
+from services.payment.razorpay_driver import RazorpayDriver
+
+
+class RazorpayCheckoutOrderResponse(BaseModel):
+    assessment_id: str
+    provider: Literal["razorpay", "mock"]
+    order_id: str | None
+    amount_inr: int
+    amount_paise: int
+    currency: str
+    key_id: str | None
+    promo_active: bool
+    # Mock-only convenience: the same redirect URL that create-intent returns,
+    # so the frontend can fall back when Razorpay isn't configured.
+    mock_redirect_url: str | None = None
+
+
+class RazorpayCheckoutVerifyRequest(BaseModel):
+    assessment_id: str
+    razorpay_order_id: str
+    razorpay_payment_id: str
+    razorpay_signature: str
 
 
 router = APIRouter(prefix="/api/v3/payment", tags=["payment_v3"])
@@ -76,6 +100,98 @@ def create_intent(payload: V3PaymentIntentRequest, db: Session = Depends(get_db)
         amount_inr=amount_inr,
         promo_active=promo_active,
     )
+
+
+@router.post("/razorpay/order", response_model=RazorpayCheckoutOrderResponse)
+def create_razorpay_order(
+    payload: V3PaymentIntentRequest,
+    db: Session = Depends(get_db),
+):
+    """Create a Razorpay Order suitable for the in-page Checkout JS SDK.
+
+    When PAYMENT_MODE=mock, returns a stub response with a redirect URL the
+    frontend can use as fallback (matching the existing /payment/success flow).
+    """
+    assessment = db.query(Assessment).filter(Assessment.id == payload.assessment_id).first()
+    if not assessment:
+        raise HTTPException(status_code=404, detail="Assessment not found")
+    if not assessment.completed:
+        raise HTTPException(status_code=400, detail="Assessment not yet completed")
+    if assessment.paid:
+        raise HTTPException(status_code=400, detail="Already paid")
+
+    amount_inr, promo_active, _remaining = _current_price(db)
+
+    if config.settings.PAYMENT_MODE != "razorpay":
+        # Re-use mock driver to get a redirect URL
+        driver = get_payment_driver()
+        intent = driver.create_payment_intent(assessment.id, amount_inr=amount_inr)
+        assessment.payment_provider = intent.provider
+        assessment.payment_txn_id = intent.txn_id
+        assessment.payment_amount_inr = amount_inr
+        assessment.payment_status = "pending"
+        db.commit()
+        return RazorpayCheckoutOrderResponse(
+            assessment_id=assessment.id,
+            provider="mock",
+            order_id=None,
+            amount_inr=amount_inr,
+            amount_paise=amount_inr * 100,
+            currency="INR",
+            key_id=None,
+            promo_active=promo_active,
+            mock_redirect_url=intent.payment_url,
+        )
+
+    rzp = RazorpayDriver()
+    order = rzp.create_order(assessment.id, amount_inr=amount_inr)
+    assessment.payment_provider = "razorpay"
+    assessment.payment_txn_id = order.order_id
+    assessment.payment_amount_inr = amount_inr
+    assessment.payment_status = "pending"
+    db.commit()
+
+    return RazorpayCheckoutOrderResponse(
+        assessment_id=assessment.id,
+        provider="razorpay",
+        order_id=order.order_id,
+        amount_inr=amount_inr,
+        amount_paise=order.amount_paise,
+        currency=order.currency,
+        key_id=order.key_id,
+        promo_active=promo_active,
+    )
+
+
+@router.post("/razorpay/verify")
+def verify_razorpay_checkout(
+    payload: RazorpayCheckoutVerifyRequest,
+    db: Session = Depends(get_db),
+):
+    """Verify the HMAC signature returned by the Razorpay Checkout SDK on success.
+
+    Marks the assessment as paid + confirmed when the signature matches.
+    """
+    assessment = db.query(Assessment).filter(Assessment.id == payload.assessment_id).first()
+    if not assessment:
+        raise HTTPException(status_code=404, detail="Assessment not found")
+    if assessment.payment_provider != "razorpay" or assessment.payment_txn_id != payload.razorpay_order_id:
+        raise HTTPException(status_code=400, detail="Order does not match assessment")
+
+    rzp = RazorpayDriver()
+    if not rzp.verify_checkout_signature(
+        razorpay_order_id=payload.razorpay_order_id,
+        razorpay_payment_id=payload.razorpay_payment_id,
+        razorpay_signature=payload.razorpay_signature,
+    ):
+        raise HTTPException(status_code=401, detail="Invalid Razorpay signature")
+
+    if not assessment.paid:
+        assessment.paid = True
+        assessment.payment_status = "confirmed"
+        db.commit()
+
+    return {"assessment_id": assessment.id, "paid": True, "status": "confirmed"}
 
 
 @router.post("/webhook/razorpay")
