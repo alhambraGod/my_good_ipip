@@ -1,8 +1,8 @@
 # MindPrism — Product Document
 
 > Product, positioning, and full user-journey description. Source of truth
-> for what MindPrism *is* (separate from `ARCHITECTURE.md` for what it
-> looks like in code, and `ROADMAP.md` for what's next).
+> for what MindPrism *is* (separate from `architecture.md` for what it
+> looks like in code, and `roadmap.md` for what's next).
 >
 > _Brand history: launched as **MindIQ** (Big-Five-only assessment, 2025),
 > renamed **CareerDNA** during the IPIP-NEO + Holland RIASEC redesign

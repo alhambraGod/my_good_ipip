@@ -2,8 +2,8 @@
 
 > How nginx, the frontend pool, and the backend pool fit together —
 > and how to grow each pool from 1 → N without rewriting the world.
-> Pair with **DEPLOYMENT_digitalocean.md** for the sized cost recipes
-> and **DEPLOYMENT_docker.md** for the run-a-container details.
+> Pair with **deployment-digitalocean.md** for the sized cost recipes
+> and **deployment-docker.md** for the run-a-container details.
 
 ---
 
@@ -134,7 +134,7 @@ each region runs its own DOKS cluster (or Droplet pool). DB layer:
 Managed MySQL primary in BLR1 + read-replica in SGP1. Razorpay webhook
 endpoint is single-region (BLR1) to avoid duplicate-confirm races.
 
-This is **Tier 3** and is documented in `DEPLOYMENT_digitalocean.md`.
+This is **Tier 3** and is documented in `deployment-digitalocean.md`.
 
 ---
 

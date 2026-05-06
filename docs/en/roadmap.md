@@ -94,5 +94,5 @@ SKU (Career Plan ₹499) targeting 5–10% upsell.
 
 - Each quarter: 1-page memo retro + reset of north-star metric.
 - Items move quarters with a date stamp; nothing rots silently.
-- Decisions that change PRODUCT.md or ARCHITECTURE.md must include a
+- Decisions that change product.md or architecture.md must include a
   doc-update PR.

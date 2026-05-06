@@ -5,8 +5,8 @@
 > All tiers ship with the **same code** — the difference is *how many*
 > containers, on *how many* hosts, behind nginx.
 >
-> See **DEPLOYMENT_docker.md** for the container-by-container spec
-> (`docker-compose.{dev,prod}.yml`, Dockerfiles, env), and **INFRASTRUCTURE.md**
+> See **deployment-docker.md** for the container-by-container spec
+> (`docker-compose.{dev,prod}.yml`, Dockerfiles, env), and **infrastructure.md**
 > for the cross-tier nginx + scale-out story.
 
 ---
@@ -133,7 +133,7 @@ curl -s http://localhost/api/health   # → {"status":"ok",...}
 ### Operational
 - **Backups.** DO automated backups (image-level) + a nightly cron
   that does `mysqldump > /var/MindPrism/prod/logs/db-$(date).sql.gz`
-  (set this up via the runbook in DEPLOYMENT_docker.md).
+  (set this up via the runbook in deployment-docker.md).
 - **Monitoring.** Free DO Monitoring + Uptime check. Alert on
   Droplet CPU > 75% / disk > 80% / 5xx rate > 1%.
 - **TLS.** `sudo bash deploy/install_letsencrypt.sh www.mindprism.in`

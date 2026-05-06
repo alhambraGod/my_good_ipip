@@ -1,7 +1,7 @@
 # MindPrism — Architecture
 
 > System design, runtime topology, code layout, and the decisions that
-> got us here. Read **PRODUCT.md** first if you don't know what
+> got us here. Read **product.md** first if you don't know what
 > MindPrism does.
 
 ```
@@ -118,11 +118,11 @@ my_good_ipip/                       (legacy repo name; conda env: my_good_ipip)
 │   └── package.json                npm scripts: lint, test, test:e2e, lighthouse
 │
 ├── docs/
-│   ├── PRODUCT.md                  user-facing description (this dir)
-│   ├── ARCHITECTURE.md             you are here
-│   ├── ROADMAP.md                  what's next
-│   ├── DEPLOYMENT_digitalocean.md  100/1000/10000 QPS plans
-│   ├── RUNBOOK_payments.md         Razorpay test → live operator guide
+│   ├── product.md                  user-facing description (this dir)
+│   ├── architecture.md             you are here
+│   ├── roadmap.md                  what's next
+│   ├── deployment-digitalocean.md  100/1000/10000 QPS plans
+│   ├── runbook-payments.md         Razorpay test → live operator guide
 │   └── superpowers/                phase plans + design spec (history)
 │
 ├── env/                            dev.env / stage.env / prod.env (central source)
@@ -292,7 +292,7 @@ back on `/payment` (not `/profile`).
 - Where the Hindi label exists in content (cell `label_hi`, career
   `name_hi`) the UI prefers it when `lang === "hi"`. Where there is no
   Hindi (e.g. `cell.deep_description_en`) we fall back to English —
-  documented in PRODUCT.md.
+  documented in product.md.
 
 ## 8. Testing pyramid
 
@@ -312,7 +312,7 @@ auto PR comments.
 
 ## 9. Deployment topology
 
-See **DEPLOYMENT_digitalocean.md** for sized recipes (100 / 1000 /
+See **deployment-digitalocean.md** for sized recipes (100 / 1000 /
 10000 QPS).
 
 Summary:

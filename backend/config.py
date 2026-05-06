@@ -55,7 +55,7 @@ class Settings(BaseSettings):
     RAZORPAY_WEBHOOK_SECRET: str = ""
 
     # ── Payment provider registry ──────────────────────────────────────
-    # See docs/PAYMENT_PROVIDERS.md for the full landscape. PAYMENT_MODE
+    # See docs/en/payment-providers.md for the full landscape. PAYMENT_MODE
     # is kept for back-compat (it picks the single default driver).
     PAYMENT_DEFAULT_DRIVER: str = ""           # explicit override; if empty, falls back to PAYMENT_MODE
     PAYMENT_DRIVERS_ENABLED: str = ""          # comma list, e.g. "razorpay,upi,cashfree,mock"

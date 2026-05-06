@@ -4,9 +4,9 @@ End-to-end recipes for running MindPrism in Docker (the recommended
 path) **and** without Docker (native install). Two environments: `dev`
 and `prod`.
 
-> Pair this with **DEPLOYMENT_digitalocean.md** for sized recipes,
-> **INFRASTRUCTURE.md** for the nginx + scale-out story, and
-> **RUNBOOK_payments.md** for going live with Razorpay.
+> Pair this with **deployment-digitalocean.md** for sized recipes,
+> **infrastructure.md** for the nginx + scale-out story, and
+> **runbook-payments.md** for going live with Razorpay.
 
 ---
 

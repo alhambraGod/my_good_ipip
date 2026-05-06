@@ -4,7 +4,7 @@ Every concrete driver (Razorpay, Cashfree, PayU, UPI Intent, Mock,
 Stripe) implements this Protocol so the rest of the app can swap
 providers without code changes.
 
-See `docs/PAYMENT_PROVIDERS.md` for the full landscape research and
+See `docs/en/payment-providers.md` for the full landscape research and
 selection rubric. See `factory.py` for the registry / selector.
 """
 

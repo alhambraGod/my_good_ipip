@@ -8,21 +8,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Documentation index
 
-Operator + design docs live under `docs/`. Read these BEFORE making non-obvious changes:
+Operator + design docs live under `docs/` (English in `docs/en/`, 中文在 `docs/zh/`).
+Start with [`docs/README.md`](docs/README.md) for the bilingual index.
+
+Read these BEFORE making non-obvious changes:
 
 **Living docs (always current):**
 
 | File | When to read |
 | --- | --- |
-| [`docs/PRODUCT.md`](docs/PRODUCT.md) | What MindPrism is, who it's for, the user journey, free vs. paid scope, archetype catalog. |
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | System topology, repo layout, data model, payment + auth + i18n + testing pyramid, decisions ledger. |
-| [`docs/INFRASTRUCTURE.md`](docs/INFRASTRUCTURE.md) | nginx + scale-out: same-host replicas → multi-host → multi-region; logging at scale; common mistakes. |
-| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Quarter-by-quarter forward plan + explicit non-goals. |
-| [`docs/DEPLOYMENT_digitalocean.md`](docs/DEPLOYMENT_digitalocean.md) | Sized deploy recipes for 10 / 100 / 1,000 / 10,000 QPS on DigitalOcean (Bootstrap tier ≤ $20/mo). |
-| [`docs/DEPLOYMENT_docker.md`](docs/DEPLOYMENT_docker.md) | Container-by-container deploy: dev (in-container MySQL), prod (host MySQL), native fallback, env reference, backup recipes. |
-| [`docs/PAYMENT_PROVIDERS.md`](docs/PAYMENT_PROVIDERS.md) | India payment landscape research; Razorpay / Cashfree / PayU / UPI Intent integration spec. |
-| [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md) | Mock → Razorpay test → live; webhook + smoke + rollback. |
-| [`docs/CI_CD_SETUP.md`](docs/CI_CD_SETUP.md) | GitHub Actions: required status checks, LHCI app token, secret list, deploy-staging job sketch. |
+| [`docs/en/product.md`](docs/en/product.md) | What MindPrism is, who it's for, the user journey, free vs. paid scope, archetype catalog. |
+| [`docs/en/architecture.md`](docs/en/architecture.md) | System topology, repo layout, data model, payment + auth + i18n + testing pyramid, decisions ledger. |
+| [`docs/en/infrastructure.md`](docs/en/infrastructure.md) | nginx + scale-out: same-host replicas → multi-host → multi-region; logging at scale; common mistakes. |
+| [`docs/en/roadmap.md`](docs/en/roadmap.md) | Quarter-by-quarter forward plan + explicit non-goals. |
+| [`docs/en/deployment-digitalocean.md`](docs/en/deployment-digitalocean.md) | Sized deploy recipes for 10 / 100 / 1,000 / 10,000 QPS on DigitalOcean (Bootstrap tier ≤ $20/mo). |
+| [`docs/en/deployment-docker.md`](docs/en/deployment-docker.md) | Container-by-container deploy: dev (in-container MySQL), prod (host MySQL), native fallback, env reference, backup recipes. |
+| [`docs/en/payment-providers.md`](docs/en/payment-providers.md) | India payment landscape research; Razorpay / Cashfree / PayU / UPI Intent integration spec. |
+| [`docs/en/runbook-payments.md`](docs/en/runbook-payments.md) | Mock → Razorpay test → live; webhook + smoke + rollback. |
+| [`docs/en/ci-cd-setup.md`](docs/en/ci-cd-setup.md) | GitHub Actions: required status checks, LHCI app token, secret list, deploy-staging job sketch. |
 
 **History (point-in-time snapshots, do not edit):**
 
@@ -89,7 +92,7 @@ cd frontend && npm run build && npm run start
 
 ### Tests
 
-Backend (pytest + coverage, in-memory SQLite). Coverage threshold: **85%**, currently **87.2%**:
+Backend (pytest + coverage, in-memory SQLite). Coverage threshold: **80%**, currently **83.3%**:
 ```bash
 conda activate my_good_ipip
 cd backend && pytest -q                    # default: with coverage + threshold
@@ -177,7 +180,7 @@ free results → optional Razorpay → paid report (cell deep dive + careers).
   - v3: `assessment_v3`, `payment_v3`, `report_v3`, `archetypes`, `share`, `auth`
 - **Services**:
   - `services/scoring/` — `riasec`, `ocean`, `holland_code`, `archetype` (MAST trigger)
-  - `services/payment/` — `base.PaymentDriver` Protocol; `MockDriver` + `RazorpayDriver` (Order + Checkout SDK + payment-link); factory selects via `PAYMENT_MODE`
+  - `services/payment/` — `base.PaymentDriver` Protocol; `MockDriver` / `RazorpayDriver` / `CashfreeDriver` / `PayUDriver` / `UPIIntentDriver`; multi-driver registry in `factory.py` selected via `PAYMENT_DRIVERS_ENABLED` + `PAYMENT_DEFAULT_DRIVER` (back-compat `PAYMENT_MODE`)
   - `services/oauth_service.py` — Google / Facebook / WhatsApp / Twitter / Telegram
   - `services/milestone_copy.py` — Q10/20/30/40 copy pools, `lang=en/hi`
   - `services/jwt_service.py` — `get_current_user` Bearer / `?token=` dependency
@@ -213,13 +216,13 @@ Dimension keys used throughout both frontend and backend: `openness`, `conscient
 ## Important Notes
 
 - Next.js 16.2.2 has breaking changes from earlier versions (e.g. `set-state-in-effect` lint rule under React 19). Read `node_modules/next/dist/docs/` before non-trivial frontend changes.
-- **Payment provider registry** (multi-driver): `PAYMENT_DRIVERS_ENABLED=razorpay,upi,cashfree,mock` lights up all four for the UI picker. `PAYMENT_DEFAULT_DRIVER` (or back-compat `PAYMENT_MODE`) is the recommended one. See [`docs/PAYMENT_PROVIDERS.md`](docs/PAYMENT_PROVIDERS.md) for the per-driver integration spec.
+- **Payment provider registry** (multi-driver): `PAYMENT_DRIVERS_ENABLED=razorpay,upi,cashfree,mock` lights up all four for the UI picker. `PAYMENT_DEFAULT_DRIVER` (or back-compat `PAYMENT_MODE`) is the recommended one. See [`docs/en/payment-providers.md`](docs/en/payment-providers.md) for the per-driver integration spec.
 - **dev vs prod paywall**: `ALLOW_FREE_REPORT=true` (dev default) makes `/api/v3/report/{id}` return the deep report unpaid with `is_preview=true` so the UI can watermark. `false` (prod default) returns 402 — strictly pay-to-read.
 - **GET `/api/v3/payment/providers`** lists the enabled drivers + their UI metadata (label, description, recommended). Frontend `<PaymentMethodPicker />` reads it.
 - No Alembic migrations yet — `init_db()` creates tables, then `_ensure_columns()` / `_ensure_indexes()` add new columns idempotently on startup. Both **SQLite** (dev/CI) and **MySQL** (stage/prod) are supported via SQLAlchemy URL switching.
 - **Logs** land in `/var/MindPrism/<env>/logs/{app,access,error}.log`, rotate nightly into `logs/history/<file>.YYYY-MM-DD`. Configured by `services/logging_setup.py`.
 - Test baselines to match before merging:
-  - **Backend pytest**: 179 passing, **coverage ≥ 85%** (`pytest.ini` enforces `--cov-fail-under=85`; current: 87.2%). Coverage omits OAuth/legacy/external-IO modules — see `.coveragerc`.
+  - **Backend pytest**: 197 passing, **coverage ≥ 80%** (`pytest.ini` enforces `--cov-fail-under=80`; current: 83.3%). Coverage omits OAuth/legacy/external-IO modules — see `.coveragerc`.
   - **Frontend Vitest**: 45 passing across 8 files (hooks + i18n + components + landing client).
   - **Playwright e2e smoke**: 6 passing (`frontend/e2e/smoke.spec.ts`) — backend-free.
   - **Playwright a11y (axe)**: 4 passing (`frontend/e2e/a11y.spec.ts`), zero WCAG 2.1 AA violations on landing / archetypes / 404 / Hindi-toggled landing.

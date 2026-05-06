@@ -147,7 +147,7 @@ This job:
 3. Verifies the health endpoint, rolls back if it fails.
 
 Wire it after the bootstrap-tier Droplet is alive — see
-`DEPLOYMENT_digitalocean.md` Tier 0.
+`deployment-digitalocean.md` Tier 0.
 
 ---
 

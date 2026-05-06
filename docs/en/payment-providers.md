@@ -1,8 +1,8 @@
 # MindPrism — Payment Providers Research & Integration
 
 > Decision document + integration spec for the **Indian** payment
-> landscape. Pair with **RUNBOOK_payments.md** (going live with each
-> driver) and **ARCHITECTURE.md §4** (driver abstraction).
+> landscape. Pair with **runbook-payments.md** (going live with each
+> driver) and **architecture.md §4** (driver abstraction).
 
 Last reviewed: **May 2026**.
 
@@ -97,7 +97,7 @@ behaves identically to before.
 - Webhook: `X-Razorpay-Signature` = `HMAC_SHA256(body, webhook_secret)`.
 - Events to handle: `order.paid`, `payment.captured`, `payment_link.paid` (legacy).
 - See `backend/services/payment/razorpay_driver.py` and
-  `RUNBOOK_payments.md`.
+  `runbook-payments.md`.
 
 ### 4.2 Cashfree
 
@@ -248,7 +248,7 @@ OTP for sandbox: `1234` (Razorpay), `123456` (Cashfree), `123` (PayU).
   line (Razorpay et al will retry up to 24h on non-2xx).
 - **Razorpay friend-KYC v1 cap.** Don't cross **₹5L cumulative GMV**
   on a friend's personal KYC (Razorpay TOS). Move to a Pvt Ltd before
-  that — see `ROADMAP.md` 1.8.
+  that — see `roadmap.md` 1.8.
 
 ---
 
