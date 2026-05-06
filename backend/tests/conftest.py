@@ -1,4 +1,5 @@
 """Shared pytest fixtures."""
+import importlib
 import os
 import sys
 import tempfile
@@ -15,3 +16,22 @@ os.environ.setdefault(
 )
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _reset_config_after_test():
+    """Some tests `monkeypatch.setenv(...)` then `importlib.reload(config)`.
+
+    monkeypatch's teardown undoes the env var but does NOT re-import config,
+    leaving `config.settings` in the wrong state for subsequent tests
+    (typically with stale RAZORPAY_KEY_ID and PAYMENT_MODE=razorpay,
+    which causes the next test to make a real HTTPS request to Razorpay).
+    This fixture forces a clean reload after every test, restoring the
+    test-default settings derived from the env vars set above.
+    """
+    yield
+    import config  # late import; module exists by now
+    importlib.reload(config)

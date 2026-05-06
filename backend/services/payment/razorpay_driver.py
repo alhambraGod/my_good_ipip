@@ -9,7 +9,7 @@ from dataclasses import dataclass
 import httpx
 
 import config  # late-binding access to config.settings (survives importlib.reload in tests)
-from services.payment.base import PaymentIntent
+from services.payment.base import PaymentIntent, ProviderInfo
 
 _RAZORPAY_BASE = "https://api.razorpay.com/v1"
 
@@ -32,6 +32,19 @@ class RazorpayDriver:
     """
 
     provider_name = "razorpay"
+
+    @property
+    def info(self) -> ProviderInfo:
+        return ProviderInfo(
+            id="razorpay",
+            label_en="UPI / Card / NetBanking (Razorpay)",
+            label_hi="UPI / Card / NetBanking (Razorpay)",
+            description_en="Recommended. UPI, cards, netbanking, wallets — all in one in-page modal. Trusted by Razorpay-backed Indian SaaS.",
+            supports_methods=("UPI", "Card", "NetBanking", "Wallet"),
+            requires_redirect=False,
+            recommended=True,
+            enabled=True,
+        )
 
     def __init__(self) -> None:
         s = config.settings

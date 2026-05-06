@@ -116,19 +116,48 @@ export default function ReportPage() {
     .map((p) => p.trim())
     .filter(Boolean);
 
+  const isPreview = !!report.is_preview;
+
   return (
-    <main className="min-h-screen bg-cream">
+    <main className="min-h-screen bg-cream relative">
+      {/* Diagonal "PREVIEW" watermark — only when serving an unpaid report in dev. */}
+      {isPreview && (
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-30 overflow-hidden select-none"
+        >
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ transform: "rotate(-30deg)" }}
+          >
+            <p className="text-saffron-700/20 font-black text-[15vw] leading-none whitespace-nowrap tracking-widest">
+              PREVIEW · DEV
+            </p>
+          </div>
+        </div>
+      )}
+
       <header className="bg-india-hero text-navy-text px-4 py-5 sticky top-0 z-20 shadow-md border-b border-saffron-700/20">
         <div className="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="text-2xl mb-0.5">🪔</div>
-            <h1 className="text-lg font-black tracking-tight">MindPrism · Full report</h1>
+            <h1 className="text-lg font-black tracking-tight">
+              MindPrism · {isPreview ? "Preview report (unpaid)" : "Full report"}
+            </h1>
             <p className="text-xs text-navy-text/70">
               {report.cell_id} · {report.cell_label_en}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {pdfHref && (
+            {isPreview && (
+              <Link
+                href={`/payment?assessment_id=${assessmentId}`}
+                className="text-sm font-bold bg-saffron-600 hover:bg-saffron-700 text-white px-4 py-2 rounded-full transition-colors"
+              >
+                Unlock the real report →
+              </Link>
+            )}
+            {!isPreview && pdfHref && (
               <a
                 href={pdfHref}
                 target="_blank"

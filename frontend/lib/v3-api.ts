@@ -82,14 +82,18 @@ export interface V3ReportResponse {
   is_mast_trigger: boolean;
   careers: V3CareerFull[];
   pdf_path: string | null;
+  is_preview?: boolean;       // true when shown to an unpaid assessment in dev
 }
 
 export interface V3PaymentIntent {
   assessment_id: string;
-  provider: "mock" | "razorpay" | "wechat" | "stripe";
+  provider: "mock" | "razorpay" | "cashfree" | "payu" | "upi" | "wechat" | "stripe";
   payment_url: string;
   amount_inr: number;
   promo_active: boolean;
+  txn_id?: string | null;
+  client_payload?: Record<string, unknown> | null;
+  qr_code_data_url?: string | null;
 }
 
 export interface V3MilestoneCopy {
@@ -255,15 +259,57 @@ export async function getV3Milestone(
   return r.json();
 }
 
-export async function createV3PaymentIntent(assessment_id: string): Promise<V3PaymentIntent> {
+export async function createV3PaymentIntent(
+  assessment_id: string,
+  provider?: string,
+): Promise<V3PaymentIntent> {
   const r = await fetch(`${API_BASE}/api/v3/payment/create-intent`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ assessment_id }),
+    body: JSON.stringify({ assessment_id, provider }),
   });
   if (!r.ok) {
     const body = await r.json().catch(() => ({}));
     throw new Error(body.detail || "Payment intent failed");
+  }
+  return r.json();
+}
+
+export interface V3PaymentProvider {
+  id: "mock" | "razorpay" | "cashfree" | "payu" | "upi" | "stripe";
+  label_en: string;
+  label_hi: string;
+  description_en: string;
+  supports_methods: string[];
+  requires_redirect: boolean;
+  recommended: boolean;
+  enabled: boolean;
+}
+
+export interface V3PaymentProvidersResponse {
+  default: string;
+  providers: V3PaymentProvider[];
+}
+
+export async function getV3PaymentProviders(): Promise<V3PaymentProvidersResponse> {
+  const r = await fetch(`${API_BASE}/api/v3/payment/providers`);
+  if (!r.ok) throw new Error("Providers fetch failed");
+  return r.json();
+}
+
+export async function confirmV3UPIPayment(payload: {
+  assessment_id: string;
+  txn_ref?: string;
+  user_remark?: string;
+}): Promise<{ assessment_id: string; paid: boolean; status: string; message?: string }> {
+  const r = await fetch(`${API_BASE}/api/v3/payment/upi/confirm`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!r.ok) {
+    const body = await r.json().catch(() => ({}));
+    throw new Error(body.detail || "UPI confirm failed");
   }
   return r.json();
 }

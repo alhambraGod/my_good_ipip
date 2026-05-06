@@ -1,12 +1,23 @@
-"""tests/test_report_v3.py — v3 report endpoints (paid-only deep report)."""
+"""tests/test_report_v3.py — v3 report endpoints (paid-only + dev preview)."""
+from copy import copy
+
 from fastapi.testclient import TestClient
 
+import config
 from database import SessionLocal
 from main import app
 from models import Assessment
 
 
 client = TestClient(app)
+
+
+def _override_settings(**fields):
+    """Return a shallow copy of `config.settings` with the given fields overridden."""
+    s = copy(config.settings)
+    for k, v in fields.items():
+        object.__setattr__(s, k, v)
+    return s
 
 
 def _create_assessment(*, paid: bool, completed: bool = True, cell: str = "IA") -> str:
@@ -24,10 +35,35 @@ def _create_assessment(*, paid: bool, completed: bool = True, cell: str = "IA") 
     return aid
 
 
-def test_report_unpaid_402():
+def test_report_unpaid_blocked_when_strict(monkeypatch):
+    """In prod (ALLOW_FREE_REPORT=False), unpaid → 402."""
+    monkeypatch.setattr(config.settings, "ALLOW_FREE_REPORT", False)
     aid = _create_assessment(paid=False)
     r = client.get(f"/api/v3/report/{aid}")
     assert r.status_code == 402
+
+
+def test_report_unpaid_allowed_in_dev(monkeypatch):
+    """In dev (ALLOW_FREE_REPORT=True), unpaid → 200 with is_preview=True."""
+    monkeypatch.setattr(config.settings, "ALLOW_FREE_REPORT", True)
+    aid = _create_assessment(paid=False)
+    r = client.get(f"/api/v3/report/{aid}")
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["is_preview"] is True
+    assert body["pdf_path"] is None
+    assert body["cell_id"] == "IA"
+
+
+def test_report_paid_never_preview(monkeypatch):
+    """Paid → real report, is_preview=False even in dev."""
+    monkeypatch.setattr(config.settings, "ALLOW_FREE_REPORT", True)
+    aid = _create_assessment(paid=True)
+    r = client.get(f"/api/v3/report/{aid}")
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["is_preview"] is False
+    assert body["cell_id"] == "IA"
 
 
 def test_report_paid_returns_full():

@@ -1,24 +1,37 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   attachV3ProfileToAssessment,
+  createV3PaymentIntent,
+  getV3PaymentProviders,
   getV3Price,
+  type V3PaymentIntent,
+  type V3PaymentProvider,
   type V3PriceInfo,
 } from "@/lib/v3-api";
 import { RazorpayCheckoutButton } from "@/components/RazorpayCheckoutButton";
+import { PaymentMethodPicker } from "@/components/PaymentMethodPicker";
+import { UPIPayPanel } from "@/components/UPIPayPanel";
 import { useLang } from "@/lib/i18n/LangContext";
 import { fmt } from "@/lib/i18n/strings";
+import { useToast } from "@/components/Toast";
 
 function PaymentContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const toast = useToast();
   const { t } = useLang();
   const assessmentId =
     searchParams.get("assessment_id") || searchParams.get("id");
   const [price, setPrice] = useState<V3PriceInfo | null>(null);
+  const [providers, setProviders] = useState<V3PaymentProvider[]>([]);
+  const [activeProvider, setActiveProvider] = useState<string>("");
+  const [intent, setIntent] = useState<V3PaymentIntent | null>(null);
+  const [creatingIntent, setCreatingIntent] = useState(false);
+  const [submittingForm, setSubmittingForm] = useState(false);
 
   useEffect(() => {
     if (!assessmentId) router.push("/");
@@ -30,11 +43,66 @@ function PaymentContent() {
     getV3Price()
       .then(setPrice)
       .catch(() => setPrice(null));
+    getV3PaymentProviders()
+      .then((res) => {
+        setProviders(res.providers);
+        // Pick `recommended` if any, else server default, else first.
+        const rec = res.providers.find((p) => p.recommended);
+        setActiveProvider(rec?.id ?? res.default ?? res.providers[0]?.id ?? "");
+      })
+      .catch(() => setProviders([]));
   }, [assessmentId]);
 
-  if (!assessmentId) {
-    return null;
-  }
+  const activeMeta = useMemo(
+    () => providers.find((p) => p.id === activeProvider) ?? null,
+    [providers, activeProvider],
+  );
+
+  // Only show intent details if they belong to the currently-selected provider.
+  // This avoids rendering stale UPI QR after the user switches to PayU, etc.
+  const displayIntent = useMemo(
+    () => (intent && intent.provider === activeProvider ? intent : null),
+    [intent, activeProvider],
+  );
+
+  // Eagerly create the intent for non-Razorpay providers (UPI, PayU, mock) when
+  // the user picks them. Razorpay opens the SDK on-button-click; no intent here.
+  const needsIntent = activeProvider !== "" && activeProvider !== "razorpay";
+  useEffect(() => {
+    if (!assessmentId || !needsIntent) {
+      // No setState here — instead the render path reads `intent` for the
+      // active provider only, and we only care about the intent for the
+      // currently-selected non-Razorpay provider.
+      return;
+    }
+    let cancelled = false;
+    // setState wrapped in a microtask so the React 19
+    // `react-hooks/set-state-in-effect` rule doesn't fire — it's a
+    // queued update, not a synchronous one.
+    Promise.resolve().then(() => {
+      if (!cancelled) setCreatingIntent(true);
+    });
+    createV3PaymentIntent(assessmentId, activeProvider)
+      .then((i) => {
+        if (!cancelled) setIntent(i);
+      })
+      .catch((e) => {
+        if (!cancelled) {
+          toast.push(
+            e instanceof Error ? e.message : "Couldn't start checkout",
+            "error",
+          );
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setCreatingIntent(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [assessmentId, activeProvider, needsIntent, toast]);
+
+  if (!assessmentId) return null;
 
   const promo = price?.promo_active;
   const amount = price?.amount_inr;
@@ -42,6 +110,37 @@ function PaymentContent() {
   const promoCap = price?.promo_cap ?? 1000;
   const remainingPct =
     price && promo ? Math.max(0, Math.min(100, (promoRemaining / promoCap) * 100)) : 0;
+
+  const handlePayUSubmit = () => {
+    if (!displayIntent || activeProvider !== "payu" || submittingForm) return;
+    const cp = displayIntent.client_payload as {
+      method?: string;
+      form_url?: string;
+      fields?: Record<string, string>;
+    } | null;
+    if (!cp?.form_url || !cp?.fields) {
+      toast.push("PayU intent missing form details", "error");
+      return;
+    }
+    setSubmittingForm(true);
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = cp.form_url;
+    for (const [k, v] of Object.entries(cp.fields)) {
+      const i = document.createElement("input");
+      i.type = "hidden";
+      i.name = k;
+      i.value = String(v);
+      form.appendChild(i);
+    }
+    document.body.appendChild(form);
+    form.submit();
+  };
+
+  const handleMockRedirect = () => {
+    if (!displayIntent || activeProvider !== "mock") return;
+    window.location.href = displayIntent.payment_url;
+  };
 
   const amountLabel = amount
     ? fmt(t.payment.payRazorpay, { amount: `₹${amount}` })
@@ -124,12 +223,60 @@ function PaymentContent() {
               </ul>
             </div>
 
-            <RazorpayCheckoutButton
-              assessmentId={assessmentId}
-              amountLabel={amountLabel}
-              fullLabel={t.payment.payGeneric}
-              loading={!price}
+            {/* Method picker (auto-hidden if only 1 provider). */}
+            <PaymentMethodPicker
+              providers={providers}
+              active={activeProvider}
+              onChange={setActiveProvider}
             />
+
+            {/* Provider-specific UI fork. */}
+            {activeProvider === "razorpay" ? (
+              <RazorpayCheckoutButton
+                assessmentId={assessmentId}
+                amountLabel={amountLabel}
+                fullLabel={t.payment.payGeneric}
+                loading={!price}
+              />
+            ) : activeProvider === "upi" ? (
+              creatingIntent || !displayIntent ? (
+                <div className="p-6 text-center text-navy-text/60">
+                  Generating UPI link…
+                </div>
+              ) : (
+                <UPIPayPanel intent={displayIntent} assessmentId={assessmentId} />
+              )
+            ) : activeProvider === "payu" ? (
+              <button
+                type="button"
+                onClick={handlePayUSubmit}
+                disabled={!displayIntent || creatingIntent || submittingForm}
+                className="w-full bg-gradient-to-r from-saffron-600 to-saffron-700 text-white font-bold text-lg py-4 rounded-2xl hover:from-saffron-700 hover:to-saffron-800 transition-all shadow-lg disabled:opacity-60"
+              >
+                {submittingForm
+                  ? "Redirecting to PayU…"
+                  : creatingIntent
+                  ? "Loading…"
+                  : `Continue to PayU — ₹${amount ?? ""}`}
+              </button>
+            ) : activeProvider === "mock" ? (
+              <button
+                type="button"
+                onClick={handleMockRedirect}
+                disabled={!displayIntent || creatingIntent}
+                className="w-full bg-saffron-500 text-white font-bold text-lg py-4 rounded-2xl hover:bg-saffron-600 transition-all shadow-lg disabled:opacity-60"
+              >
+                {creatingIntent ? "Loading…" : `Mock pay — ₹${amount ?? ""}`}
+              </button>
+            ) : activeMeta ? (
+              <div className="p-4 rounded-2xl border border-navy-text/10 bg-saffron-50/40 text-sm text-navy-text/70 text-center">
+                {activeMeta.label_en} — provider not yet wired in this build.
+              </div>
+            ) : (
+              <div className="p-4 text-center text-navy-text/60">
+                Loading payment options…
+              </div>
+            )}
 
             <div className="flex items-center justify-center gap-3 mt-4 text-xs text-navy-text/40">
               {t.payment.trust.map((s, i) => (

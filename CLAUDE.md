@@ -20,6 +20,7 @@ Operator + design docs live under `docs/`. Read these BEFORE making non-obvious 
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Quarter-by-quarter forward plan + explicit non-goals. |
 | [`docs/DEPLOYMENT_digitalocean.md`](docs/DEPLOYMENT_digitalocean.md) | Sized deploy recipes for 10 / 100 / 1,000 / 10,000 QPS on DigitalOcean (Bootstrap tier ≤ $20/mo). |
 | [`docs/DEPLOYMENT_docker.md`](docs/DEPLOYMENT_docker.md) | Container-by-container deploy: dev (in-container MySQL), prod (host MySQL), native fallback, env reference, backup recipes. |
+| [`docs/PAYMENT_PROVIDERS.md`](docs/PAYMENT_PROVIDERS.md) | India payment landscape research; Razorpay / Cashfree / PayU / UPI Intent integration spec. |
 | [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md) | Mock → Razorpay test → live; webhook + smoke + rollback. |
 | [`docs/CI_CD_SETUP.md`](docs/CI_CD_SETUP.md) | GitHub Actions: required status checks, LHCI app token, secret list, deploy-staging job sketch. |
 
@@ -212,7 +213,9 @@ Dimension keys used throughout both frontend and backend: `openness`, `conscient
 ## Important Notes
 
 - Next.js 16.2.2 has breaking changes from earlier versions (e.g. `set-state-in-effect` lint rule under React 19). Read `node_modules/next/dist/docs/` before non-trivial frontend changes.
-- `PAYMENT_MODE=mock` bypasses Razorpay (and legacy Stripe) in dev. Set to `razorpay` with real keys for production — see [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md).
+- **Payment provider registry** (multi-driver): `PAYMENT_DRIVERS_ENABLED=razorpay,upi,cashfree,mock` lights up all four for the UI picker. `PAYMENT_DEFAULT_DRIVER` (or back-compat `PAYMENT_MODE`) is the recommended one. See [`docs/PAYMENT_PROVIDERS.md`](docs/PAYMENT_PROVIDERS.md) for the per-driver integration spec.
+- **dev vs prod paywall**: `ALLOW_FREE_REPORT=true` (dev default) makes `/api/v3/report/{id}` return the deep report unpaid with `is_preview=true` so the UI can watermark. `false` (prod default) returns 402 — strictly pay-to-read.
+- **GET `/api/v3/payment/providers`** lists the enabled drivers + their UI metadata (label, description, recommended). Frontend `<PaymentMethodPicker />` reads it.
 - No Alembic migrations yet — `init_db()` creates tables, then `_ensure_columns()` / `_ensure_indexes()` add new columns idempotently on startup. Both **SQLite** (dev/CI) and **MySQL** (stage/prod) are supported via SQLAlchemy URL switching.
 - **Logs** land in `/var/MindPrism/<env>/logs/{app,access,error}.log`, rotate nightly into `logs/history/<file>.YYYY-MM-DD`. Configured by `services/logging_setup.py`.
 - Test baselines to match before merging:

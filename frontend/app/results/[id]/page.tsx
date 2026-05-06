@@ -9,11 +9,15 @@ import { UnlockAuthModal } from "@/components/UnlockAuthModal";
 import {
   getV3Results,
   attachV3ProfileToAssessment,
+  getV3Price,
   type V3ResultsResponse,
   type V3CareerPreview,
+  type V3PriceInfo,
 } from "@/lib/v3-api";
 import { RadarChart } from "@/components/RadarChart";
 import { useToast } from "@/components/Toast";
+import { useLang } from "@/lib/i18n/LangContext";
+import { fmt } from "@/lib/i18n/strings";
 
 const RIASEC_LABELS: Record<string, string> = {
   R: "Realistic",
@@ -28,7 +32,9 @@ export default function ResultsPage() {
   const params = useParams();
   const router = useRouter();
   const assessmentId = params?.id as string | undefined;
+  const { t } = useLang();
   const [data, setData] = useState<V3ResultsResponse | null>(null);
+  const [price, setPrice] = useState<V3PriceInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [unlockOpen, setUnlockOpen] = useState(false);
 
@@ -41,6 +47,9 @@ export default function ResultsPage() {
       .then(setData)
       .catch(() => router.push("/"))
       .finally(() => setLoading(false));
+    getV3Price()
+      .then(setPrice)
+      .catch(() => setPrice(null));
   }, [assessmentId, router]);
 
   useEffect(() => {
@@ -131,12 +140,41 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      {/* Screen 5: Dual CTA */}
+      {/* Screen 5: Dual CTA — promo bar + clear value summary */}
       <section className="bg-gradient-to-br from-india-green-500 to-india-green-700 text-white py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-4">Want the full report?</h2>
-        <p className="text-india-green-50 mb-8 max-w-md mx-auto">
-          Unlock all 5+ careers, OCEAN analysis, strengths, growth tips, and PDF download.
+        <h2 className="text-3xl font-bold mb-4">{t.results.cta1}</h2>
+        <p className="text-india-green-50 mb-6 max-w-md mx-auto">
+          {t.results.ctaSubtitle}
         </p>
+
+        {/* Promo strip — only when promo is live AND there's quota left. */}
+        {price && price.promo_active && price.promo_remaining > 0 && !data.is_paid && (
+          <div className="max-w-md mx-auto mb-6 bg-white/10 backdrop-blur border border-white/30 rounded-2xl px-4 py-3 text-sm">
+            <div className="flex items-center justify-between mb-2 text-india-green-50/95">
+              <span className="font-bold">
+                {fmt(t.results.promoLeftLine, {
+                  remaining: price.promo_remaining.toLocaleString("en-IN"),
+                  cap: price.promo_cap.toLocaleString("en-IN"),
+                  promo: price.price_promo_inr,
+                })}
+              </span>
+            </div>
+            <div className="h-1 bg-white/30 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-saffron-300"
+                style={{
+                  width: `${Math.max(2, Math.min(100, (price.promo_remaining / price.promo_cap) * 100))}%`,
+                }}
+              />
+            </div>
+          </div>
+        )}
+        {price && !price.promo_active && !data.is_paid && (
+          <p className="max-w-md mx-auto mb-6 text-india-green-50/85 text-sm">
+            {fmt(t.results.promoOver, { full: price.price_full_inr })}
+          </p>
+        )}
+
         <div className="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
           <ShareButton
             shareUrl={data.share_url}
@@ -148,14 +186,14 @@ export default function ResultsPage() {
               href={`/report/${data.assessment_id}`}
               className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
             >
-              View full report →
+              {t.results.ctaPrimaryView}
             </Link>
           ) : isLoggedIn() ? (
             <Link
               href={paymentHref}
               className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
             >
-              Unlock full report →
+              {fmt(t.results.ctaPrimaryUnlock, { amount: price?.amount_inr ?? "" })}
             </Link>
           ) : (
             <button
@@ -163,7 +201,7 @@ export default function ResultsPage() {
               onClick={() => setUnlockOpen(true)}
               className="flex-1 bg-saffron-500 hover:bg-saffron-600 text-navy-text font-bold py-3 px-6 rounded-full transition-all shadow-lg text-center"
             >
-              Unlock full report →
+              {fmt(t.results.ctaPrimaryUnlock, { amount: price?.amount_inr ?? "" })}
             </button>
           )}
         </div>

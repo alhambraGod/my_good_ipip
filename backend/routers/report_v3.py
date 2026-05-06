@@ -1,10 +1,27 @@
-"""v3 Report router — paid-only full report composing cell + careers + OCEAN."""
+"""v3 Report router — paid-only deep report, with dev preview gating.
+
+Behaviour matrix:
+
+  ┌────────────────────────┬──────────────────────────┬──────────────────────────┐
+  │ assessment.paid        │  ALLOW_FREE_REPORT=False │  ALLOW_FREE_REPORT=True   │
+  │                        │  (prod default)          │  (dev default)            │
+  ├────────────────────────┼──────────────────────────┼──────────────────────────┤
+  │ True                   │  200 + full report       │  200 + full report        │
+  │ False                  │  402 Payment Required    │  200 + is_preview=True    │
+  │                        │                          │  (no PDF, watermark)      │
+  └────────────────────────┴──────────────────────────┴──────────────────────────┘
+
+This lets QA in dev see the report without configuring Razorpay test
+creds, while prod always strictly requires payment. Operator override
+either way via `ALLOW_FREE_REPORT=true|false` env var.
+"""
 
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+import config  # late-binding so monkeypatch tests can override `settings`
 from content.careers import get_careers_for_cell
 from content.cells import get_cell_content
 from database import get_db
@@ -15,20 +32,24 @@ from schemas import V3ReportResponse
 router = APIRouter(prefix="/api/v3/report", tags=["report_v3"])
 
 
-def _require_paid(assessment: Assessment) -> None:
-    if not assessment.paid:
-        raise HTTPException(status_code=402, detail="Payment required")
-
-
 @router.get("/{assessment_id}", response_model=V3ReportResponse)
 def get_report(assessment_id: str, db: Session = Depends(get_db)):
-    """Full paid report: deep description + strengths + growth tips + OCEAN + 5+ careers."""
+    """Full report.
+
+    * If `assessment.paid` is True → real report.
+    * Else if `ALLOW_FREE_REPORT` is True → preview with `is_preview=True`,
+      `pdf_path=None`, and the rendered cell content (so dev can see the
+      experience without paying).
+    * Else (prod default) → 402 Payment Required.
+    """
     assessment = db.query(Assessment).filter(Assessment.id == assessment_id).first()
     if not assessment:
         raise HTTPException(status_code=404, detail="Assessment not found")
     if not assessment.completed:
         raise HTTPException(status_code=400, detail="Assessment not yet completed")
-    _require_paid(assessment)
+
+    if not assessment.paid and not config.settings.ALLOW_FREE_REPORT:
+        raise HTTPException(status_code=402, detail="Payment required")
 
     cell = get_cell_content(assessment.archetype_cell)
     careers_full = get_careers_for_cell(assessment.archetype_cell)
@@ -51,6 +72,8 @@ def get_report(assessment_id: str, db: Session = Depends(get_db)):
         for c in careers_full
     ]
 
+    is_preview = (not assessment.paid) and config.settings.ALLOW_FREE_REPORT
+
     return V3ReportResponse(
         assessment_id=assessment.id,
         cell_id=assessment.archetype_cell,
@@ -65,7 +88,8 @@ def get_report(assessment_id: str, db: Session = Depends(get_db)):
         holland_code=assessment.holland_code or "",
         riasec_scores=assessment.riasec_scores or {},
         rarity_pct=cell.rarity_pct,
-        is_mast_trigger=False,  # MAST trigger evaluated at submit; future enhancement to persist this on the assessment row
+        is_mast_trigger=False,
         careers=careers_dump,
-        pdf_path=assessment.pdf_path,
+        pdf_path=None if is_preview else assessment.pdf_path,
+        is_preview=is_preview,
     )

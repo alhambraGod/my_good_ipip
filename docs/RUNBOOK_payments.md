@@ -140,6 +140,80 @@ redirect URL — users still get the full flow in dev, but no charges.
 
 ---
 
+## 6b. Multi-provider runbook (May 2026 onwards)
+
+MindPrism now supports multiple payment drivers concurrently, so the
+operator can offer Razorpay + UPI Intent (or PayU as a fallback) on the
+same `/payment` page. Each driver has its own onboarding section:
+
+### Razorpay (default)
+See sections 1–5 above. **No change.**
+
+### Cashfree (alternate aggregator)
+
+1. Sign up at <https://merchant.cashfree.com>; activate test mode.
+2. Settings → API Keys → copy `App ID` + `Secret Key`.
+3. Settings → Webhooks → add `https://api.mindprism.in/api/v3/payment/webhook/cashfree`.
+4. Add to `env/prod.env`:
+   ```dotenv
+   CASHFREE_CLIENT_ID=...
+   CASHFREE_CLIENT_SECRET=...
+   CASHFREE_WEBHOOK_SECRET=...
+   CASHFREE_API_BASE=https://api.cashfree.com   # sandbox: https://sandbox.cashfree.com
+   PAYMENT_DRIVERS_ENABLED=razorpay,cashfree,upi,mock
+   ```
+5. Restart. The picker shows Cashfree as a non-recommended option.
+
+### PayU India (form-POST fallback)
+
+1. Sign up at <https://payu.in/business>; complete merchant onboarding.
+2. Dashboard → Integration → copy `Merchant Key` + `Salt`.
+3. Add to env:
+   ```dotenv
+   PAYU_MERCHANT_KEY=...
+   PAYU_MERCHANT_SALT=...
+   PAYU_API_BASE=https://test.payu.in       # production: https://secure.payu.in
+   PAYMENT_DRIVERS_ENABLED=razorpay,payu,mock
+   ```
+4. Restart. PayU users are redirected to PayU's hosted page (not modal).
+
+### UPI Intent (no aggregator)
+
+1. Get a business UPI VPA from your bank (HDFC / ICICI / Axis SmartBiz).
+   You can also use a personal VPA for the first ₹X of GMV — see TOS.
+2. Add to env:
+   ```dotenv
+   UPI_VPA=mindprism@hdfcbank
+   UPI_DISPLAY_NAME=MindPrism
+   PAYMENT_DRIVERS_ENABLED=razorpay,upi,mock
+   ```
+3. Restart. UPI shows up as "UPI Pay (PhonePe / GPay / Paytm)".
+4. **Manual reconciliation.** When a user clicks "I've paid", their
+   assessment goes to `payment_status="awaiting_review"`. Ops dashboard
+   matches the txn ref (e.g. `MIND12AB`) against the bank statement and
+   flips `paid=True` via:
+   ```sql
+   UPDATE assessments
+     SET paid = 1, payment_status = 'confirmed'
+     WHERE id = '<assessment_id>';
+   ```
+   (or use the future admin endpoint when you build it).
+
+### Switching the default
+- `PAYMENT_DEFAULT_DRIVER=razorpay` (or any enabled id) — the picker
+  shows it as **Recommended**.
+- Empty → falls back to `PAYMENT_MODE` (legacy single-driver mode).
+
+### dev/prod paywall
+- **dev** ships with `ALLOW_FREE_REPORT=true` so QA can read the deep
+  report without configuring a payment driver. The UI shows a giant
+  diagonal `PREVIEW · DEV` watermark + an "Unlock the real report" CTA.
+- **prod** ships with `ALLOW_FREE_REPORT=false`. `/api/v3/report/{id}`
+  returns `402 Payment Required` until the assessment is paid.
+- Override either way via `ALLOW_FREE_REPORT=true|false` in env.
+
+---
+
 ## 7. Reference
 
 * Razorpay Orders API: https://razorpay.com/docs/api/orders/

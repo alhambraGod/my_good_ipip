@@ -73,7 +73,9 @@ def test_full_v3_journey_mock_payment(monkeypatch):
         assert careers_preview[1]["locked"] is True
         assert careers_preview[1]["tagline_en"] is None  # locked careers hide tagline
 
-    # 5. Try to fetch report — should 402 (unpaid)
+    # 5. Try to fetch report — strict (no dev preview) → 402.
+    import config as _cfg
+    monkeypatch.setattr(_cfg.settings, "ALLOW_FREE_REPORT", False)
     r = client.get(f"/api/v3/report/{assessment_id}")
     assert r.status_code == 402
 

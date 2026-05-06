@@ -214,6 +214,7 @@ class V3ReportResponse(BaseModel):
     is_mast_trigger: bool
     careers: list[dict]
     pdf_path: str | None
+    is_preview: bool = False           # True when shown to an unpaid assessment in dev
 
 
 class V3PaymentIntentRequest(BaseModel):
@@ -222,10 +223,13 @@ class V3PaymentIntentRequest(BaseModel):
 
 class V3PaymentIntentResponse(BaseModel):
     assessment_id: str
-    provider: Literal["mock", "razorpay", "wechat", "stripe"]
+    provider: Literal["mock", "razorpay", "cashfree", "payu", "upi", "wechat", "stripe"]
     payment_url: str
     amount_inr: int
     promo_active: bool
+    txn_id: str | None = None
+    client_payload: dict | None = None
+    qr_code_data_url: str | None = None
 
 
 class V3FacebookCallbackRequest(BaseModel):

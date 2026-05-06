@@ -53,13 +53,41 @@ class Settings(BaseSettings):
     RAZORPAY_KEY_ID: str = ""
     RAZORPAY_KEY_SECRET: str = ""
     RAZORPAY_WEBHOOK_SECRET: str = ""
+
+    # ── Payment provider registry ──────────────────────────────────────
+    # See docs/PAYMENT_PROVIDERS.md for the full landscape. PAYMENT_MODE
+    # is kept for back-compat (it picks the single default driver).
+    PAYMENT_DEFAULT_DRIVER: str = ""           # explicit override; if empty, falls back to PAYMENT_MODE
+    PAYMENT_DRIVERS_ENABLED: str = ""          # comma list, e.g. "razorpay,upi,cashfree,mock"
+
+    # Cashfree
+    CASHFREE_CLIENT_ID: str = ""
+    CASHFREE_CLIENT_SECRET: str = ""
+    CASHFREE_WEBHOOK_SECRET: str = ""
+    CASHFREE_API_BASE: str = "https://sandbox.cashfree.com"
+
+    # PayU India
+    PAYU_MERCHANT_KEY: str = ""
+    PAYU_MERCHANT_SALT: str = ""
+    PAYU_API_BASE: str = "https://test.payu.in"
+
+    # Direct UPI Intent (no aggregator)
+    UPI_VPA: str = ""                          # e.g. "mindprism@hdfcbank"
+    UPI_DISPLAY_NAME: str = "MindPrism"
+
+    # ── dev/prod paywall gating ────────────────────────────────────────
+    # When True, GET /api/v3/report/{id} returns the deep report even if
+    # the assessment is unpaid (with `is_preview: true` so the UI watermarks).
+    # Default: True in dev, False in prod (computed below in __init__-style).
+    ALLOW_FREE_REPORT: bool = False            # overridden per-env in `_finalize()`
+
     PROMO_MAX_REDEMPTIONS: int = 1000
     PRICE_FULL_INR: int = 99
     PRICE_PROMO_INR: int = 49
 
     @property
     def is_dev(self) -> bool:
-        return self.APP_ENV == "dev"
+        return self.APP_ENV in ("dev", "test")
 
     @property
     def is_prod(self) -> bool:
@@ -69,4 +97,14 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 
-settings = Settings()
+def _finalize_settings(s: "Settings") -> "Settings":
+    """Apply env-aware defaults the dataclass can't express directly."""
+    # ALLOW_FREE_REPORT default: True in dev/test, False in prod/stage.
+    # If the env var is explicitly set, BaseSettings already applied it.
+    import os
+    if os.environ.get("ALLOW_FREE_REPORT") is None:
+        s.ALLOW_FREE_REPORT = s.is_dev
+    return s
+
+
+settings = _finalize_settings(Settings())
