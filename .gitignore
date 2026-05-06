@@ -104,3 +104,8 @@ temp/
 
 # Brainstorming companion
 .superpowers/
+
+# Playwright
+frontend/playwright-report/
+frontend/test-results/
+frontend/blob-report/
