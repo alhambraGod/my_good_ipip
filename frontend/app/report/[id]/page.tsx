@@ -65,7 +65,7 @@ export default function ReportPage() {
             Unlock required
           </h1>
           <p className="text-navy-text/65 mb-6 text-sm">
-            Pay once to open your full CareerDNA report.
+            Pay once to open your full MindPrism report.
           </p>
           <Link
             href={`/payment?assessment_id=${assessmentId}`}
@@ -122,7 +122,7 @@ export default function ReportPage() {
         <div className="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div>
             <div className="text-2xl mb-0.5">🪔</div>
-            <h1 className="text-lg font-black tracking-tight">CareerDNA · Full report</h1>
+            <h1 className="text-lg font-black tracking-tight">MindPrism · Full report</h1>
             <p className="text-xs text-navy-text/70">
               {report.cell_id} · {report.cell_label_en}
             </p>
@@ -340,7 +340,7 @@ export default function ReportPage() {
         </motion.section>
 
           <footer className="text-center text-xs text-navy-text/45 pb-8">
-            <p>CareerDNA — RIASEC + OCEAN for Indian urban youth. Not clinical.</p>
+            <p>MindPrism — RIASEC + OCEAN for Indian urban youth. Not clinical.</p>
           </footer>
         </div>
       </div>

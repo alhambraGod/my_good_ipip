@@ -19,8 +19,8 @@ const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").r
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "CareerDNA India — Find your archetype in 5 minutes",
-    template: "%s | CareerDNA India",
+    default: "MindPrism India — Find your archetype in 5 minutes",
+    template: "%s | MindPrism India",
   },
   description:
     "Holland RIASEC + Big Five (OCEAN) career mapping built for Indian Gen-Z. 45 questions, 5 minutes, archetype + career match in lakh-based salary ranges.",
@@ -34,16 +34,16 @@ export const metadata: Metadata = {
     "WhatsApp share quiz",
   ],
   openGraph: {
-    title: "CareerDNA India — Find your archetype in 5 minutes",
+    title: "MindPrism India — Find your archetype in 5 minutes",
     description:
       "Holland + OCEAN, India-tuned. Archetype + careers + share lines, in 45 questions.",
     url: SITE_URL,
     type: "website",
-    siteName: "CareerDNA India",
+    siteName: "MindPrism India",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CareerDNA India",
+    title: "MindPrism India",
     description: "Holland + OCEAN, India-tuned. Find your archetype in 5 minutes.",
   },
 };

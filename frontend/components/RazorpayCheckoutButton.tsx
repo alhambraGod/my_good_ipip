@@ -64,7 +64,7 @@ export function RazorpayCheckoutButton({
         amount: order.amount_paise,
         currency: order.currency,
         order_id: order.order_id,
-        name: "CareerDNA India",
+        name: "MindPrism India",
         description: "Full personality + career report",
         theme: { color: "#138808" },
         notes: { assessment_id: assessmentId },

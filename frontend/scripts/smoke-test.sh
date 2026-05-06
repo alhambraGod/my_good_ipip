@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# CareerDNA Phase 4 smoke runner: v3 backend E2E (pytest) + frontend lint/build.
+# MindPrism Phase 4 smoke runner: v3 backend E2E (pytest) + frontend lint/build.
 # Full browser walkthrough (landing → test → results → pay → report) needs
 #   start_all.sh dev or two terminals; see printed checklist below.
 set -euo pipefail

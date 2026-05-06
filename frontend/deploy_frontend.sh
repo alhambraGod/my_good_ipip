@@ -1,5 +1,5 @@
 #!/bin/bash
-# MindIQ Frontend - One-click deployment script
+# MindPrism Frontend - One-click deployment script
 # Usage: bash deploy_frontend.sh [dev|stage|prod]
 #   default: dev
 
@@ -23,7 +23,7 @@ if [ ! -f "$ENV_FILE" ]; then
 fi
 
 echo "=================================="
-echo "  MindIQ Frontend [$APP_ENV]"
+echo "  MindPrism Frontend [$APP_ENV]"
 echo "=================================="
 
 # Check node/npm

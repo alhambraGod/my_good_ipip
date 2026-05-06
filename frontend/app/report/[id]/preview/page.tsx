@@ -25,7 +25,7 @@ export default function PdfPreviewPage() {
           </button>
           <div className="h-5 w-px bg-slate-700" />
           <h1 className="text-white font-semibold text-sm">
-            MindIQ Report Preview
+            MindPrism Report Preview
           </h1>
         </div>
         <a
@@ -45,7 +45,7 @@ export default function PdfPreviewPage() {
         <iframe
           src={pdfUrl}
           className="w-full max-w-4xl h-[calc(100vh-80px)] rounded-lg shadow-2xl bg-white"
-          title="MindIQ Report PDF Preview"
+          title="MindPrism Report PDF Preview"
         />
       </div>
     </main>

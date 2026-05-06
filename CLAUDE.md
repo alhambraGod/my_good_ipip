@@ -4,17 +4,28 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-CareerDNA India (codename MindIQ) — Holland RIASEC + Big Five (IPIP-NEO) hybrid career assessment built for the Indian market. FastAPI backend + Next.js 16 frontend.
+**MindPrism** (formerly MindIQ / CareerDNA, Apr 2026) — Holland RIASEC + Big Five (IPIP-NEO) hybrid personality + career assessment, India-tuned. FastAPI backend + Next.js 16 frontend.
 
 ## Documentation index
 
 Operator + design docs live under `docs/`. Read these BEFORE making non-obvious changes:
 
+**Living docs (always current):**
+
 | File | When to read |
 | --- | --- |
-| [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md) | Going from `mock` → Razorpay test mode → live; webhook + smoke + rollback. |
-| `docs/superpowers/specs/2026-04-27-careerdna-india-redesign-design.md` | Authoritative product spec for the v3 redesign (24 archetypes, 5 + 40 question flow, paywall, sharing, OAuth, payments). |
-| `docs/superpowers/plans/2026-04-27-careerdna-phase-1-backend-foundation.md` | Phase 1 — question infra, scoring, archetypes. |
+| [`docs/PRODUCT.md`](docs/PRODUCT.md) | What MindPrism is, who it's for, the user journey, free vs. paid scope, archetype catalog. |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | System topology, repo layout, data model, payment + auth + i18n + testing pyramid, decisions ledger. |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Quarter-by-quarter forward plan + explicit non-goals. |
+| [`docs/DEPLOYMENT_digitalocean.md`](docs/DEPLOYMENT_digitalocean.md) | Sized deploy recipes for 100 / 1,000 / 10,000 QPS on DigitalOcean. |
+| [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md) | Mock → Razorpay test → live; webhook + smoke + rollback. |
+
+**History (point-in-time snapshots, do not edit):**
+
+| File | What it captures |
+| --- | --- |
+| `docs/superpowers/specs/2026-04-27-careerdna-india-redesign-design.md` | Apr 2026 product spec — referenced by phase plans. |
+| `docs/superpowers/plans/2026-04-27-careerdna-phase-1-backend-foundation.md` | Phase 1 implementation plan + completion notes. |
 | `docs/superpowers/plans/2026-04-28-careerdna-phase-2-content-library.md` | Phase 2 — Pydantic content schemas + 24 cells + careers. |
 | `docs/superpowers/plans/2026-04-28-careerdna-phase-3-api-payment-auth.md` | Phase 3 — v3 API surface, Razorpay, OAuth, share. |
 | `docs/superpowers/plans/2026-04-28-careerdna-phase-4-frontend-mvp.md` | Phase 4 — Next.js MVP frontend wiring. |

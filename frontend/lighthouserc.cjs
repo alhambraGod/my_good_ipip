@@ -1,5 +1,5 @@
 /**
- * Lighthouse CI config for CareerDNA marketing surfaces.
+ * Lighthouse CI config for MindPrism marketing surfaces.
  *
  * Run locally:
  *   npm run lighthouse           # build + start + collect + assert

@@ -15,14 +15,14 @@ export async function generateMetadata({
       next: { revalidate: 300 },
     });
     if (!r.ok) {
-      return { title: "CareerDNA · Results" };
+      return { title: "MindPrism · Results" };
     }
     const d = (await r.json()) as {
       cell_id: string;
       cell_label_en: string;
       slogan_en: string;
     };
-    const title = `${d.cell_id} · ${d.cell_label_en} | CareerDNA India`;
+    const title = `${d.cell_id} · ${d.cell_label_en} | MindPrism India`;
     const description =
       typeof d.slogan_en === "string" && d.slogan_en.length > 0
         ? d.slogan_en.slice(0, 200)
@@ -44,7 +44,7 @@ export async function generateMetadata({
       },
     };
   } catch {
-    return { title: "CareerDNA · Results" };
+    return { title: "MindPrism · Results" };
   }
 }
 

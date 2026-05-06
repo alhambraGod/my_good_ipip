@@ -1,4 +1,4 @@
-"""MindIQ Backend — FastAPI Application."""
+"""MindPrism Backend — FastAPI Application."""
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -18,7 +18,7 @@ from routers import (
 )
 
 app = FastAPI(
-    title="MindIQ API",
+    title="MindPrism API",
     description="Big Five Personality Assessment API for the Indian Market",
     version="1.0.0",
 )

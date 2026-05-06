@@ -18,7 +18,7 @@ export function SiteHeader({ minimal = false }: { minimal?: boolean }) {
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-xl">🪔</span>
           <span className="font-black text-navy-text tracking-tight group-hover:text-saffron-700 transition-colors">
-            CareerDNA <span className="text-saffron-700">India</span>
+            MindPrism <span className="text-saffron-700">India</span>
           </span>
         </Link>
         {!minimal && (

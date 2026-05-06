@@ -42,7 +42,7 @@ export const STRINGS = {
       resumeFailed: "Couldn't resume; starting over.",
     },
     payment: {
-      title: "Unlock full CareerDNA",
+      title: "Unlock full MindPrism",
       sub: "Holland + OCEAN deep report · one-time payment",
       detail: "Detailed report pack",
       promoOn: "Early-bird promo applied — locked in until checkout.",
@@ -114,7 +114,7 @@ export const STRINGS = {
       resumeFailed: "Resume fail; shuru se shuru karte hain.",
     },
     payment: {
-      title: "Full CareerDNA unlock karo",
+      title: "Full MindPrism unlock karo",
       sub: "Holland + OCEAN deep report · ek baar payment",
       detail: "Detailed report pack",
       promoOn: "Early-bird promo lag gayi — checkout tak locked.",

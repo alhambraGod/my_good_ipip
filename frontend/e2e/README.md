@@ -1,6 +1,6 @@
 # Playwright e2e
 
-End-to-end smoke checks for the CareerDNA frontend chrome (Next.js 16). The
+End-to-end smoke checks for the MindPrism frontend chrome (Next.js 16). The
 Playwright runner builds the app and serves it on port 3100 by default,
 pointed at a deliberately-unreachable backend so we exercise the
 "backend down" graceful-degradation path. This is enough to catch:

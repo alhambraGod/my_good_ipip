@@ -1,6 +1,6 @@
 # Razorpay Runbook
 
-End-to-end checklist for taking the CareerDNA payment flow from `mock`
+End-to-end checklist for taking the MindPrism payment flow from `mock`
 to a real **test-mode** account, then to **live**.
 
 > **Scope:** dev-laptop verification. Going live (prod) requires a Razorpay

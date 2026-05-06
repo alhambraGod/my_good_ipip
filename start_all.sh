@@ -1,5 +1,5 @@
 #!/bin/bash
-# MindIQ - One-click start all services
+# MindPrism - One-click start all services
 # Usage: bash start_all.sh [dev|stage|prod]
 #   default: dev
 
@@ -23,7 +23,7 @@ if [ ! -f "$ENV_FILE" ]; then
 fi
 
 echo "======================================"
-echo "  MindIQ - Starting All Services"
+echo "  MindPrism - Starting All Services"
 echo "  Environment: $APP_ENV"
 echo "======================================"
 echo ""

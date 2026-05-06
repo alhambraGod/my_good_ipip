@@ -51,7 +51,7 @@ class RazorpayDriver:
             "amount": amount_paise,
             "currency": "INR",
             "accept_partial": False,
-            "description": "CareerDNA Personality Report",
+            "description": "MindPrism Personality Report",
             "notify": {"email": True, "sms": True},
             "reminder_enable": True,
             "callback_url": f"{config.settings.FRONTEND_URL}/payment/success?assessment_id={assessment_id}",

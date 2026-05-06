@@ -11,7 +11,7 @@ export async function GET(
   const { id } = await context.params;
 
   let cellId = "DNA";
-  let label = "CareerDNA India";
+  let label = "MindPrism India";
   let slogan = "Holland RIASEC + OCEAN · Built for Indian Gen-Z";
 
   try {
@@ -94,7 +94,7 @@ export async function GET(
             letterSpacing: "0.2em",
           }}
         >
-          CareerDNA India
+          MindPrism India
         </div>
       </div>
     ),

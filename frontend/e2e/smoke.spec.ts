@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("CareerDNA smoke (no backend required)", () => {
+test.describe("MindPrism smoke (no backend required)", () => {
   test("landing page renders hero + CTAs + feature cards", async ({ page }) => {
     await page.goto("/");
 
@@ -56,7 +56,7 @@ test.describe("CareerDNA smoke (no backend required)", () => {
   test("/archetypes renders gracefully when backend is unreachable", async ({ page }) => {
     await page.goto("/archetypes");
     await expect(
-      page.getByRole("heading", { name: /24 CareerDNA archetypes/i }),
+      page.getByRole("heading", { name: /24 MindPrism archetypes/i }),
     ).toBeVisible();
     // With backend unreachable, the empty-state copy is shown; no crash.
     await expect(

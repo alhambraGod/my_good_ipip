@@ -84,7 +84,7 @@ function SuccessContent() {
 
         <h1 className="text-2xl font-bold text-navy-text mb-2">You&apos;re in</h1>
         <p className="text-navy-text/70 mb-8 text-sm">
-          Your full CareerDNA report is unlocked — OCEAN, careers, and deep
+          Your full MindPrism report is unlocked — OCEAN, careers, and deep
           archetype notes.
         </p>
 

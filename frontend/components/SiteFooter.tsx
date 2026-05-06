@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
         <div className="col-span-2">
           <div className="text-saffron-100 font-black text-lg flex items-center gap-2">
-            <span>🪔</span> CareerDNA India
+            <span>🪔</span> MindPrism India
           </div>
           <p className="mt-2 max-w-md text-saffron-100/85 leading-relaxed">
             Holland RIASEC + Big Five (OCEAN). Built for Indian Gen-Z reality.
@@ -60,7 +60,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="max-w-6xl mx-auto mt-8 pt-6 border-t border-white/10 text-xs text-saffron-100/75 flex flex-col sm:flex-row gap-2 justify-between">
-        <p>&copy; 2026 CareerDNA India · For Indian Gen-Z, by Indians.</p>
+        <p>&copy; 2026 MindPrism India · For Indian Gen-Z, by Indians.</p>
         <p>Built on IPIP-NEO Big Five + Holland RIASEC personality science.</p>
       </div>
     </footer>

@@ -24,7 +24,7 @@ def create_checkout_session(assessment_id: str) -> dict:
                 "price_data": {
                     "currency": settings.REPORT_CURRENCY,
                     "product_data": {
-                        "name": "MindIQ Personality Report",
+                        "name": "MindPrism Personality Report",
                         "description": "Comprehensive AI-powered Big Five personality assessment report with career recommendations",
                     },
                     "unit_amount": settings.REPORT_PRICE_CENTS,

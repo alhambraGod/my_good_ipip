@@ -6,7 +6,7 @@ export default function StartPage() {
       <div className="max-w-lg w-full">
         <div className="bg-white rounded-3xl shadow-xl p-8 md:p-10 border border-slate-100">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold gradient-text mb-2">MindIQ</h1>
+            <h1 className="text-3xl font-bold gradient-text mb-2">MindPrism</h1>
             <p className="text-slate-500 text-sm">
               Personality Assessment
             </p>

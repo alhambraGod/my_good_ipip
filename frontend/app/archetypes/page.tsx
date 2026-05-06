@@ -7,7 +7,7 @@ import { listArchetypes, type V3ArchetypeSummary } from "@/lib/v3-api";
 export const metadata: Metadata = {
   title: "All 24 archetypes",
   description:
-    "Browse the 24 CareerDNA India archetypes — Holland RIASEC double-letter codes with India-flavored slogans.",
+    "Browse the 24 MindPrism India archetypes — Holland RIASEC double-letter codes with India-flavored slogans.",
 };
 
 export const revalidate = 600;
@@ -44,7 +44,7 @@ export default async function ArchetypesIndex() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="text-3xl mb-3">🪔</div>
             <h1 className="text-3xl md:text-5xl font-black text-navy-text mb-3">
-              The 24 CareerDNA archetypes
+              The 24 MindPrism archetypes
             </h1>
             <p className="text-navy-text/80 max-w-2xl mx-auto">
               Holland&apos;s 6 RIASEC types form a hexagon. Pair the dominant

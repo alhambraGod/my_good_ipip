@@ -1,5 +1,5 @@
 #!/bin/bash
-# MindIQ Backend - One-click deployment script
+# MindPrism Backend - One-click deployment script
 # Usage: bash deploy_backend.sh [dev|stage|prod]
 #   default: dev
 
@@ -24,7 +24,7 @@ if [ ! -f "$ENV_FILE" ]; then
 fi
 
 echo "=================================="
-echo "  MindIQ Backend [$APP_ENV]"
+echo "  MindPrism Backend [$APP_ENV]"
 echo "=================================="
 
 # --- Conda setup ---

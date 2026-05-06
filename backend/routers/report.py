@@ -72,5 +72,5 @@ async def download_pdf(assessment_id: str, db: Session = Depends(get_db)):
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",
-        headers={"Content-Disposition": f"attachment; filename=MindIQ_Report_{assessment_id[:8]}.pdf"},
+        headers={"Content-Disposition": f"attachment; filename=MindPrism_Report_{assessment_id[:8]}.pdf"},
     )
