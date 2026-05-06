@@ -229,10 +229,15 @@ def _compose_results_response(assessment: Assessment, mast: bool) -> V3Assessmen
 def get_milestone_copy_endpoint(
     milestone: int = Query(..., description="Q10 / Q20 / Q30 / Q40"),
     seed: str = Query(..., description="Per-user seed (assessment_id or seed token)"),
+    lang: str = Query("en", description="Locale (en / hi)"),
 ):
     if milestone not in MILESTONE_THRESHOLDS:
         raise HTTPException(
             status_code=400,
             detail=f"Invalid milestone {milestone!r}; must be one of {MILESTONE_THRESHOLDS}",
         )
-    return V3MilestoneResponse(milestone=milestone, text=get_copy_for_milestone(milestone, seed))
+    chosen_lang = "hi" if lang.lower().startswith("hi") else "en"
+    return V3MilestoneResponse(
+        milestone=milestone,
+        text=get_copy_for_milestone(milestone, seed, lang=chosen_lang),
+    )

@@ -54,7 +54,41 @@ def test_get_copy_negative_milestone_raises():
 
 def test_each_milestone_has_pool_of_at_least_three():
     """Each milestone needs a pool of multiple lines so test_get_copy_varies_across_seeds passes."""
-    from services.milestone_copy import _COPY_POOL
-    for m in MILESTONE_THRESHOLDS:
-        assert m in _COPY_POOL, f"milestone {m} missing from _COPY_POOL"
-        assert 4 <= len(_COPY_POOL[m]) <= 6, f"milestone {m} has {len(_COPY_POOL[m])} copy lines; need 4-6 per spec §3.6"
+    from services.milestone_copy import _COPY_POOL_EN, _COPY_POOL_HI
+    for pool in (_COPY_POOL_EN, _COPY_POOL_HI):
+        for m in MILESTONE_THRESHOLDS:
+            assert m in pool, f"milestone {m} missing from pool"
+            assert 4 <= len(pool[m]) <= 6, (
+                f"milestone {m} has {len(pool[m])} copy lines; need 4-6 per spec §3.6"
+            )
+
+
+def test_get_copy_hi_locale_returns_hindi_pool_strings():
+    """Lang=hi should produce strings from the Hindi pool, never the English pool."""
+    from services.milestone_copy import _COPY_POOL_EN, _COPY_POOL_HI
+    en_set = set(s for tup in _COPY_POOL_EN.values() for s in tup)
+    hi_set = set(s for tup in _COPY_POOL_HI.values() for s in tup)
+    assert en_set.isdisjoint(hi_set), "Hindi pool overlaps English pool"
+
+    for milestone in MILESTONE_THRESHOLDS:
+        for seed in ("a", "b", "c", "x"):
+            copy_hi = get_copy_for_milestone(milestone, seed=seed, lang="hi")
+            assert copy_hi in hi_set
+            copy_en = get_copy_for_milestone(milestone, seed=seed, lang="en")
+            assert copy_en in en_set
+
+
+def test_get_copy_unknown_lang_falls_back_to_english():
+    from services.milestone_copy import _COPY_POOL_EN
+    en_set = set(s for tup in _COPY_POOL_EN.values() for s in tup)
+    out = get_copy_for_milestone(20, seed="test", lang="ta")  # type: ignore[arg-type]
+    assert out in en_set
+
+
+def test_get_copy_deterministic_within_lang():
+    """Same (milestone, seed, lang) repeats; switching lang produces a different deterministic value."""
+    a = get_copy_for_milestone(20, seed="X", lang="en")
+    b = get_copy_for_milestone(20, seed="X", lang="en")
+    c = get_copy_for_milestone(20, seed="X", lang="hi")
+    assert a == b
+    assert a != c

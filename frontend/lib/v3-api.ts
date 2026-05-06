@@ -240,10 +240,17 @@ export async function getV3Results(assessment_id: string): Promise<V3ResultsResp
   return r.json();
 }
 
-export async function getV3Milestone(milestone: number, seed: string): Promise<V3MilestoneCopy> {
-  const r = await fetch(
-    `${API_BASE}/api/v3/assessment/milestone?milestone=${milestone}&seed=${encodeURIComponent(seed)}`
-  );
+export async function getV3Milestone(
+  milestone: number,
+  seed: string,
+  lang: "en" | "hi" = "en",
+): Promise<V3MilestoneCopy> {
+  const params = new URLSearchParams({
+    milestone: String(milestone),
+    seed,
+    lang,
+  });
+  const r = await fetch(`${API_BASE}/api/v3/assessment/milestone?${params}`);
   if (!r.ok) throw new Error(`Milestone fetch failed: ${r.status}`);
   return r.json();
 }

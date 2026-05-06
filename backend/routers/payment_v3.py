@@ -194,13 +194,36 @@ def verify_razorpay_checkout(
     return {"assessment_id": assessment.id, "paid": True, "status": "confirmed"}
 
 
+def _mark_paid_by_txn_id(db: Session, txn_id: str | None) -> bool:
+    """Look up an assessment by stored payment_txn_id and confirm it. Returns True if updated."""
+    if not txn_id:
+        return False
+    assessment = db.query(Assessment).filter(Assessment.payment_txn_id == txn_id).first()
+    if assessment and assessment.payment_status != "confirmed":
+        assessment.paid = True
+        assessment.payment_status = "confirmed"
+        db.commit()
+        return True
+    return False
+
+
 @router.post("/webhook/razorpay")
 async def razorpay_webhook(
     request: Request,
     x_razorpay_signature: str = Header(default=""),
     db: Session = Depends(get_db),
 ):
-    """Razorpay webhook handler — verifies signature, marks assessment paid on payment_link.paid."""
+    """Razorpay webhook handler — verifies signature and marks the assessment paid.
+
+    Supports BOTH payment-link flow (legacy) and Order/Checkout-SDK flow:
+
+    * ``payment_link.paid``      — payload.payment_link.entity.id matches stored txn_id
+    * ``order.paid``             — payload.order.entity.id        matches stored txn_id
+    * ``payment.captured``       — payload.payment.entity.order_id matches stored txn_id
+                                  (also payload.payment.entity.payment_link_id, if present)
+
+    Other events are accepted (200) but ignored — Razorpay otherwise retries them aggressively.
+    """
     raw_body = await request.body()
     driver = get_payment_driver()
     if not driver.verify_webhook_signature(raw_body, x_razorpay_signature):
@@ -212,19 +235,30 @@ async def razorpay_webhook(
         raise HTTPException(status_code=400, detail="Invalid JSON payload")
 
     event_name = event.get("event", "")
-    if event_name == "payment_link.paid":
-        try:
-            link_id = event["payload"]["payment_link"]["entity"]["id"]
-        except (KeyError, TypeError):
-            raise HTTPException(status_code=400, detail="Malformed payment_link.paid payload")
+    payload_root = event.get("payload", {}) or {}
+    matched = False
 
-        assessment = db.query(Assessment).filter(Assessment.payment_txn_id == link_id).first()
-        if assessment and assessment.payment_status != "confirmed":
-            assessment.paid = True
-            assessment.payment_status = "confirmed"
-            db.commit()
+    try:
+        if event_name == "payment_link.paid":
+            link_id = payload_root["payment_link"]["entity"]["id"]
+            matched = _mark_paid_by_txn_id(db, link_id)
 
-    return {"received": True, "event": event_name}
+        elif event_name == "order.paid":
+            order_id = payload_root["order"]["entity"]["id"]
+            matched = _mark_paid_by_txn_id(db, order_id)
+
+        elif event_name == "payment.captured":
+            payment_entity = payload_root["payment"]["entity"]
+            order_id = payment_entity.get("order_id")
+            link_id = payment_entity.get("payment_link_id")
+            for txn_id in (order_id, link_id):
+                if _mark_paid_by_txn_id(db, txn_id):
+                    matched = True
+                    break
+    except (KeyError, TypeError):
+        raise HTTPException(status_code=400, detail=f"Malformed {event_name} payload")
+
+    return {"received": True, "event": event_name, "matched": matched}
 
 
 @router.get("/verify/{assessment_id}")

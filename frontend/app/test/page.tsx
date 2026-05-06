@@ -36,7 +36,7 @@ type Phase = "loading" | "demographic" | "main" | "milestone" | "submitting";
 export default function TestPage() {
   const router = useRouter();
   const toast = useToast();
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const { progress, update, reset } = useAssessmentProgress();
 
   const [phase, setPhase] = useState<Phase>("loading");
@@ -134,13 +134,13 @@ export default function TestPage() {
       setPhase("milestone");
       setPendingMilestone(m);
       try {
-        const res = await getV3Milestone(m, progress.seed);
+        const res = await getV3Milestone(m, progress.seed, lang);
         setMilestoneText(res.text);
       } catch {
         setMilestoneText("Keep going!");
       }
     },
-    [progress.seed],
+    [progress.seed, lang],
   );
 
   const submitAnswers = useCallback(

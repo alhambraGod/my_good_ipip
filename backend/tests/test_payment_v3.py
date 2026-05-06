@@ -1,4 +1,6 @@
 """tests/test_payment_v3.py — v3 payment endpoints."""
+import json
+
 from fastapi.testclient import TestClient
 
 from database import SessionLocal
@@ -89,6 +91,101 @@ def test_razorpay_verify_signature_rejects_bogus(monkeypatch):
             "razorpay_signature": "deadbeef",
         },
     )
+    assert r.status_code == 400
+
+
+def _make_assessment_with_txn(txn_id: str) -> str:
+    """Create a completed assessment whose payment_txn_id matches txn_id (pending)."""
+    db = SessionLocal()
+    a = Assessment(
+        completed=True,
+        paid=False,
+        archetype_cell="IA",
+        riasec_scores={"R": 10, "I": 18, "A": 15, "S": 8, "E": 11, "C": 13},
+        ocean_scores={"openness": 80},
+        payment_provider="razorpay",
+        payment_status="pending",
+        payment_txn_id=txn_id,
+        payment_amount_inr=49,
+    )
+    db.add(a); db.commit(); db.refresh(a)
+    aid = a.id
+    db.close()
+    return aid
+
+
+def _post_razorpay_webhook(body: dict, monkeypatch):
+    """Helper: post a JSON body to /webhook/razorpay; mock mode bypasses signature."""
+    monkeypatch.setenv("PAYMENT_MODE", "mock")  # mock driver passes any signature
+    import importlib, config
+    importlib.reload(config)
+    return client.post(
+        "/api/v3/payment/webhook/razorpay",
+        content=json.dumps(body).encode(),
+        headers={"X-Razorpay-Signature": "any", "Content-Type": "application/json"},
+    )
+
+
+def test_webhook_payment_link_paid(monkeypatch):
+    aid = _make_assessment_with_txn("plink_TEST_1")
+    body = {
+        "event": "payment_link.paid",
+        "payload": {"payment_link": {"entity": {"id": "plink_TEST_1"}}},
+    }
+    r = _post_razorpay_webhook(body, monkeypatch)
+    assert r.status_code == 200, r.text
+    assert r.json()["matched"] is True
+    db = SessionLocal()
+    assert db.query(Assessment).filter(Assessment.id == aid).first().paid
+    db.close()
+
+
+def test_webhook_order_paid(monkeypatch):
+    aid = _make_assessment_with_txn("order_TEST_2")
+    body = {
+        "event": "order.paid",
+        "payload": {"order": {"entity": {"id": "order_TEST_2"}}},
+    }
+    r = _post_razorpay_webhook(body, monkeypatch)
+    assert r.status_code == 200, r.text
+    assert r.json()["matched"] is True
+    db = SessionLocal()
+    assert db.query(Assessment).filter(Assessment.id == aid).first().paid
+    db.close()
+
+
+def test_webhook_payment_captured(monkeypatch):
+    aid = _make_assessment_with_txn("order_TEST_3")
+    body = {
+        "event": "payment.captured",
+        "payload": {
+            "payment": {
+                "entity": {
+                    "id": "pay_real_id",
+                    "order_id": "order_TEST_3",
+                    "payment_link_id": None,
+                }
+            }
+        },
+    }
+    r = _post_razorpay_webhook(body, monkeypatch)
+    assert r.status_code == 200, r.text
+    assert r.json()["matched"] is True
+    db = SessionLocal()
+    assert db.query(Assessment).filter(Assessment.id == aid).first().paid
+    db.close()
+
+
+def test_webhook_unknown_event_returns_200(monkeypatch):
+    body = {"event": "subscription.charged", "payload": {}}
+    r = _post_razorpay_webhook(body, monkeypatch)
+    assert r.status_code == 200, r.text
+    assert r.json()["matched"] is False
+
+
+def test_webhook_malformed_payload_400(monkeypatch):
+    body = {"event": "order.paid", "payload": {"order": {}}}  # missing entity.id
+    r = _post_razorpay_webhook(body, monkeypatch)
     assert r.status_code == 400
 
 
