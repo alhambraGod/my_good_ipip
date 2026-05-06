@@ -109,3 +109,9 @@ temp/
 frontend/playwright-report/
 frontend/test-results/
 frontend/blob-report/
+
+# Coverage / Lighthouse
+backend/htmlcov/
+backend/.coverage
+backend/coverage.xml
+frontend/.lighthouseci/

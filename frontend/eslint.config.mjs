@@ -12,6 +12,15 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Test artefacts (Playwright + LHCI generate these on-the-fly).
+    "test-results/**",
+    "playwright-report/**",
+    "blob-report/**",
+    ".lighthouseci/**",
+    "coverage/**",
+    // Tooling configs (CommonJS) — require()s are intentional.
+    "*.cjs",
+    "lighthouserc.cjs",
   ]),
 ]);
 

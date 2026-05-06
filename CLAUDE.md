@@ -53,24 +53,41 @@ cd frontend && npm run build && npm run start
 
 ### Tests
 
-Backend (pytest, in-memory SQLite):
+Backend (pytest + coverage, in-memory SQLite). Coverage threshold: **85%**, currently **87.2%**:
 ```bash
 conda activate my_good_ipip
-cd backend && pytest -q
+cd backend && pytest -q                    # default: with coverage + threshold
+cd backend && pytest --no-cov -q           # faster inner-loop, no coverage
+cd backend && pytest --cov-report=html     # also write htmlcov/index.html
 ```
 
 Frontend (Vitest, happy-dom):
 ```bash
-cd frontend && npm test           # run once
+cd frontend && npm test           # run once (45 tests across 8 files)
 cd frontend && npm run test:watch # watch mode
 cd frontend && npm run test:ui    # browser UI
 ```
 
-Frontend E2E (Playwright; needs both servers running):
+Frontend E2E (Playwright). Smoke is **backend-free** (uses an unreachable
+mock URL); a11y suite checks WCAG 2.1 AA via axe-core:
+```bash
+cd frontend && npm run test:e2e        # headless: smoke (6) + a11y (4)
+cd frontend && npm run test:e2e:ui     # Playwright UI runner
+```
+
+For full data-flow e2e (will need backend up):
 ```bash
 # in another shell: bash start_all.sh dev
-cd frontend && npm run test:e2e        # headless
-cd frontend && npm run test:e2e:ui     # Playwright UI runner
+cd frontend && E2E_NO_WEBSERVER=1 \
+  E2E_BASE_URL=http://localhost:3000 \
+  E2E_API_URL=http://localhost:3001 \
+  npm run test:e2e
+```
+
+Lighthouse / perf budget (Lighthouse CI; spawns its own server):
+```bash
+cd frontend && npm run lighthouse           # build + start + collect + assert
+cd frontend && npm run lighthouse:collect   # collect only, against running server
 ```
 
 Razorpay sandbox smoke (verifies test-mode credentials + signing):
@@ -156,8 +173,10 @@ Dimension keys used throughout both frontend and backend: `openness`, `conscient
 - Next.js 16.2.2 has breaking changes from earlier versions (e.g. `set-state-in-effect` lint rule under React 19). Read `node_modules/next/dist/docs/` before non-trivial frontend changes.
 - `PAYMENT_MODE=mock` bypasses Razorpay (and legacy Stripe) in dev. Set to `razorpay` with real keys for production — see [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md).
 - No Alembic migrations — `init_db()` creates tables, then `_ensure_assessment_columns()` / `_ensure_assessment_indexes()` add new columns idempotently on startup.
-- Test counts to match before merging:
-  - Backend pytest: **179 passing** at last run (`backend/tests/`)
-  - Frontend Vitest: **45 passing** (`frontend/lib/**/__tests__`, `frontend/components/__tests__`, `frontend/app/__tests__`)
-  - Playwright e2e: **6 passing** (`frontend/e2e/`) — `npm run test:e2e` self-builds + serves on port 3100 with an unreachable mock backend; for full data flow, set `E2E_NO_WEBSERVER=1 E2E_BASE_URL=http://localhost:3000 E2E_API_URL=http://localhost:3001` and run with `bash start_all.sh dev` already up.
+- Test baselines to match before merging:
+  - **Backend pytest**: 179 passing, **coverage ≥ 85%** (`pytest.ini` enforces `--cov-fail-under=85`; current: 87.2%). Coverage omits OAuth/legacy/external-IO modules — see `.coveragerc`.
+  - **Frontend Vitest**: 45 passing across 8 files (hooks + i18n + components + landing client).
+  - **Playwright e2e smoke**: 6 passing (`frontend/e2e/smoke.spec.ts`) — backend-free.
+  - **Playwright a11y (axe)**: 4 passing (`frontend/e2e/a11y.spec.ts`), zero WCAG 2.1 AA violations on landing / archetypes / 404 / Hindi-toggled landing.
+  - **Lighthouse CI**: `npm run lighthouse` enforces categories — accessibility ≥ 0.9 (error), best-practices ≥ 0.85 / SEO ≥ 0.9 / performance ≥ 0.7 (warn). See `lighthouserc.cjs`.
 - The legacy `services/scoring.py` was renamed to `services/scoring_legacy.py`; `questions/question_bank.py` is now a deprecation shim around the modular loaders. Both will be deleted in Phase 5.

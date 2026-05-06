@@ -254,7 +254,7 @@ export function LandingClient({ featured }: { featured: V3ArchetypeSummary[] }) 
           </div>
           <p
             id="privacy"
-            className="text-xs text-navy-text/50 mt-8 text-center max-w-md mx-auto"
+            className="text-xs text-navy-text/70 mt-8 text-center max-w-md mx-auto"
           >
             {t.landing.privacy}
           </p>

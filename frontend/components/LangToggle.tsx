@@ -16,8 +16,8 @@ export function LangToggle({ className = "" }: { className?: string }) {
         aria-pressed={lang === "en"}
         className={`px-3 py-1 rounded-full transition-colors ${
           lang === "en"
-            ? "bg-saffron-500 text-white"
-            : "text-navy-text/65 hover:text-navy-text"
+            ? "bg-saffron-700 text-white"
+            : "text-navy-text/70 hover:text-navy-text"
         }`}
       >
         EN
@@ -28,8 +28,8 @@ export function LangToggle({ className = "" }: { className?: string }) {
         aria-pressed={lang === "hi"}
         className={`px-3 py-1 rounded-full transition-colors ${
           lang === "hi"
-            ? "bg-india-green-600 text-white"
-            : "text-navy-text/65 hover:text-navy-text"
+            ? "bg-india-green-700 text-white"
+            : "text-navy-text/70 hover:text-navy-text"
         }`}
       >
         हि

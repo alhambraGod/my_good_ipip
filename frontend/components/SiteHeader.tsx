@@ -31,8 +31,8 @@ export function SiteHeader({ minimal = false }: { minimal?: boolean }) {
                   href={item.href}
                   className={`px-3 py-1.5 rounded-full transition-colors ${
                     active
-                      ? "bg-saffron-100 text-saffron-700"
-                      : "text-navy-text/70 hover:text-navy-text hover:bg-white"
+                      ? "bg-saffron-200 text-saffron-900 font-semibold"
+                      : "text-navy-text/75 hover:text-navy-text hover:bg-white"
                   }`}
                 >
                   {item.label}

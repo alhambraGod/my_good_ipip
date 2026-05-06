@@ -56,7 +56,7 @@ export default async function ArchetypesIndex() {
 
         <section className="max-w-6xl mx-auto px-6 py-12 space-y-12">
           {archetypes.length === 0 ? (
-            <p className="text-center text-navy-text/60">
+            <p className="text-center text-navy-text/75">
               Couldn&apos;t load archetypes. Make sure the backend is running.
             </p>
           ) : (

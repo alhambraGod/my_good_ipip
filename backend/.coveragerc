@@ -1,0 +1,32 @@
+[run]
+source = .
+branch = True
+parallel = False
+omit =
+    tests/*
+    scripts/*
+    services/scoring_legacy.py
+    services/payment_service.py
+    services/ai_report.py
+    services/pdf_generator.py
+    services/personalization.py
+    questions/question_bank.py
+    routers/assessment.py
+    routers/payment.py
+    routers/report.py
+    routers/auth.py
+    services/oauth_service.py
+
+[report]
+precision = 1
+skip_empty = True
+show_missing = True
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    \.\.\.\s*$
+
+[html]
+directory = htmlcov

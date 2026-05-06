@@ -88,8 +88,8 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
                 onClick={handleClick(item.id)}
                 className={`shrink-0 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${
                   active
-                    ? "bg-saffron-600 text-white"
-                    : "bg-white text-navy-text/65 border border-saffron-700/10 hover:text-navy-text"
+                    ? "bg-saffron-700 text-white"
+                    : "bg-white text-navy-text/70 border border-saffron-700/10 hover:text-navy-text"
                 }`}
               >
                 {item.emoji && <span className="mr-1">{item.emoji}</span>}
