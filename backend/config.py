@@ -5,6 +5,9 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     APP_ENV: str = "dev"  # "dev", "stage", or "prod"
+    LOG_ROOT: str = "/var/MindPrism"           # base dir for centralised logs
+    LOG_FALLBACK_ROOT: str = "./logs"          # used when LOG_ROOT is unwritable
+    LOG_RETENTION_DAYS: int = 30
     DATABASE_URL: str = "sqlite:///./mindiq.db"
     STRIPE_SECRET_KEY: str = ""
     STRIPE_WEBHOOK_SECRET: str = ""

@@ -1,0 +1,83 @@
+# MindPrism — production environment.
+# MySQL runs on the HOST (installed via deploy/install_mysql_prod.sh) and is
+# reached via host.docker.internal (Linux: requires `--add-host`, see service).
+# Logs persist on the host at /var/MindPrism/prod/logs.
+#
+# Bring up:    bash deploy/start_docker.sh prod
+# Bring down:  bash deploy/stop_docker.sh prod
+#
+# Horizontal scale-out:
+#   docker compose -f docker-compose.prod.yml up -d --scale backend=3 --scale frontend=2
+# Then update nginx/conf.d/mindprism.prod.conf upstream blocks accordingly.
+
+name: mindprism-prod
+
+services:
+  backend:
+    image: mindprism-backend:${VERSION:-latest}
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      APP_ENV: prod
+      DATABASE_URL: "${DATABASE_URL}"           # ← required, e.g. mysql+pymysql://user:pass@host.docker.internal:3306/mindprism_prod?charset=utf8mb4
+      PAYMENT_MODE: "${PAYMENT_MODE:-razorpay}"
+      RAZORPAY_KEY_ID: "${RAZORPAY_KEY_ID}"
+      RAZORPAY_KEY_SECRET: "${RAZORPAY_KEY_SECRET}"
+      RAZORPAY_WEBHOOK_SECRET: "${RAZORPAY_WEBHOOK_SECRET}"
+      FRONTEND_URL: "${FRONTEND_URL}"
+      API_PUBLIC_URL: "${API_PUBLIC_URL}"
+      JWT_SECRET: "${JWT_SECRET}"
+      OAUTH_STATE_SECRET: "${OAUTH_STATE_SECRET}"
+      LOG_ROOT: /var/MindPrism
+      LOG_RETENTION_DAYS: "30"
+      GUNICORN_WORKERS: "${GUNICORN_WORKERS:-2}"
+    expose: ["3001"]
+    volumes:
+      - /var/MindPrism/prod:/var/MindPrism/prod
+    networks: [mindprism]
+    deploy:
+      resources:
+        limits:
+          memory: 768m
+          cpus: "1.0"
+
+  frontend:
+    image: mindprism-frontend:${VERSION:-latest}
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: "${NEXT_PUBLIC_API_URL}"
+        NEXT_PUBLIC_SITE_URL: "${NEXT_PUBLIC_SITE_URL}"
+    restart: unless-stopped
+    depends_on:
+      backend: { condition: service_started }
+    expose: ["3000"]
+    networks: [mindprism]
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+          cpus: "0.5"
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on: [frontend, backend]
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d/mindprism.prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/MindPrism/prod/logs/nginx:/var/log/nginx
+    networks: [mindprism]
+
+networks:
+  mindprism:
+    name: mindprism-prod

@@ -16,9 +16,12 @@ Operator + design docs live under `docs/`. Read these BEFORE making non-obvious 
 | --- | --- |
 | [`docs/PRODUCT.md`](docs/PRODUCT.md) | What MindPrism is, who it's for, the user journey, free vs. paid scope, archetype catalog. |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | System topology, repo layout, data model, payment + auth + i18n + testing pyramid, decisions ledger. |
+| [`docs/INFRASTRUCTURE.md`](docs/INFRASTRUCTURE.md) | nginx + scale-out: same-host replicas → multi-host → multi-region; logging at scale; common mistakes. |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Quarter-by-quarter forward plan + explicit non-goals. |
-| [`docs/DEPLOYMENT_digitalocean.md`](docs/DEPLOYMENT_digitalocean.md) | Sized deploy recipes for 100 / 1,000 / 10,000 QPS on DigitalOcean. |
+| [`docs/DEPLOYMENT_digitalocean.md`](docs/DEPLOYMENT_digitalocean.md) | Sized deploy recipes for 10 / 100 / 1,000 / 10,000 QPS on DigitalOcean (Bootstrap tier ≤ $20/mo). |
+| [`docs/DEPLOYMENT_docker.md`](docs/DEPLOYMENT_docker.md) | Container-by-container deploy: dev (in-container MySQL), prod (host MySQL), native fallback, env reference, backup recipes. |
 | [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md) | Mock → Razorpay test → live; webhook + smoke + rollback. |
+| [`docs/CI_CD_SETUP.md`](docs/CI_CD_SETUP.md) | GitHub Actions: required status checks, LHCI app token, secret list, deploy-staging job sketch. |
 
 **History (point-in-time snapshots, do not edit):**
 
@@ -37,7 +40,21 @@ Operator + design docs live under `docs/`. Read these BEFORE making non-obvious 
 bash start_all.sh [dev|stage|prod]   # default: dev
 ```
 
-### Backend only
+### Docker (recommended for any deploy ≥ Bootstrap tier)
+```bash
+sudo bash deploy/start_docker.sh dev          # dev:  nginx + frontend + backend + mysql
+sudo bash deploy/start_docker.sh prod         # prod: nginx + frontend + backend (host MySQL)
+sudo bash deploy/scale.sh    prod backend=3 frontend=2     # scale replicas
+sudo bash deploy/stop_docker.sh prod          # graceful stop
+```
+
+### Native (no Docker — laptops + small VMs)
+```bash
+bash deploy/start_native.sh dev               # SQLite fallback if MySQL absent
+bash deploy/start_native.sh prod              # requires DATABASE_URL pointing at host MySQL
+```
+
+### Backend only (legacy, kept for compat)
 ```bash
 bash backend/deploy_backend.sh [dev|stage|prod]
 # Or manually:
@@ -45,11 +62,18 @@ conda activate my_good_ipip
 cd backend && uvicorn main:app --host 0.0.0.0 --port 3001 --reload
 ```
 
-### Frontend only
+### Frontend only (legacy, kept for compat)
 ```bash
 bash frontend/deploy_frontend.sh [dev|stage|prod]
 # Or manually:
 cd frontend && npm install && npm run dev
+```
+
+### Host-level installs (run once on each host)
+```bash
+sudo bash deploy/install_mysql_prod.sh        # MySQL 8 + utf8mb4 + db user
+sudo bash deploy/install_nginx.sh prod        # native nginx (skip if using Docker)
+sudo bash deploy/install_letsencrypt.sh DOMAIN  # TLS via certbot --nginx
 ```
 
 ### Frontend lint
@@ -123,12 +147,18 @@ Key vars (full list in `.env.example`):
 
 | Var | Purpose |
 | --- | --- |
+| `APP_ENV` | `dev` / `stage` / `prod` |
+| `DATABASE_URL` | SQLAlchemy URL (sqlite for dev/CI; `mysql+pymysql://...` for stage/prod) |
+| `LOG_ROOT` | Log root, default `/var/MindPrism` |
+| `LOG_RETENTION_DAYS` | History archive retention (default 30) |
 | `PAYMENT_MODE` | `mock` (dev default) / `razorpay` |
 | `RAZORPAY_KEY_ID` / `_SECRET` / `_WEBHOOK_SECRET` | Razorpay creds — see RUNBOOK |
 | `FRONTEND_URL` | Browser-facing site root (CORS, callback URLs) |
 | `API_PUBLIC_URL` | Browser-facing API root (used in `/s/{code}` short links) |
 | `NEXT_PUBLIC_SITE_URL` | Frontend self-URL for OG metadata + sitemap |
 | `NEXT_PUBLIC_API_URL` | Frontend → backend base URL |
+| `JWT_SECRET` | JWT signing key — **must override in prod** |
+| `GUNICORN_WORKERS` | Backend worker count for `gunicorn` (Docker prod default 2) |
 
 ## Architecture
 
@@ -183,7 +213,8 @@ Dimension keys used throughout both frontend and backend: `openness`, `conscient
 
 - Next.js 16.2.2 has breaking changes from earlier versions (e.g. `set-state-in-effect` lint rule under React 19). Read `node_modules/next/dist/docs/` before non-trivial frontend changes.
 - `PAYMENT_MODE=mock` bypasses Razorpay (and legacy Stripe) in dev. Set to `razorpay` with real keys for production — see [`docs/RUNBOOK_payments.md`](docs/RUNBOOK_payments.md).
-- No Alembic migrations — `init_db()` creates tables, then `_ensure_assessment_columns()` / `_ensure_assessment_indexes()` add new columns idempotently on startup.
+- No Alembic migrations yet — `init_db()` creates tables, then `_ensure_columns()` / `_ensure_indexes()` add new columns idempotently on startup. Both **SQLite** (dev/CI) and **MySQL** (stage/prod) are supported via SQLAlchemy URL switching.
+- **Logs** land in `/var/MindPrism/<env>/logs/{app,access,error}.log`, rotate nightly into `logs/history/<file>.YYYY-MM-DD`. Configured by `services/logging_setup.py`.
 - Test baselines to match before merging:
   - **Backend pytest**: 179 passing, **coverage ≥ 85%** (`pytest.ini` enforces `--cov-fail-under=85`; current: 87.2%). Coverage omits OAuth/legacy/external-IO modules — see `.coveragerc`.
   - **Frontend Vitest**: 45 passing across 8 files (hooks + i18n + components + landing client).

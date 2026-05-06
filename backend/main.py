@@ -1,10 +1,13 @@
 """MindPrism Backend — FastAPI Application."""
 
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import settings
 from database import init_db
+from services.logging_setup import setup_logging
 from routers import (
     archetypes,
     assessment,
@@ -15,6 +18,12 @@ from routers import (
     report,
     report_v3,
     share,
+)
+
+_log_summary = setup_logging(settings.APP_ENV, level=logging.INFO)
+logging.getLogger("mindprism").info(
+    "Logging initialised: env=%s dir=%s retention=%s",
+    _log_summary["env"], _log_summary["log_dir"], _log_summary["retention_days"],
 )
 
 app = FastAPI(
